@@ -39,7 +39,7 @@ class m_notifications extends CI_Model {
         $this->db->where('id!=', $id);
         
         $query = $this->db->get();
-        if($query->num_rows() == 0){
+//         if($query->num_rows() == 0){
             if($role_id != 'Section'){
                 $class_id = '';
                 $sections_id= '';
@@ -57,10 +57,14 @@ class m_notifications extends CI_Model {
                 "updated_date"=>date('Y-m-d'),
                 "updated_by"=>$this->session->userdata['id'],
             );   
-    	    $this->db->where(array( 'id' => $id));
-    		$this->db->update('notification', $target);
+    	    //$this->db->where(array( 'id' => $id));
+    		//$this->db->update('notification', $target);
+    		
+            
+            $this->db->insert('notification', $target);
+            
     		return true; 
-        }
+//         }
     }
     function notifications_show(){  
 		$this->db->select('f.*,c.class,sec.sections,s.student_name');

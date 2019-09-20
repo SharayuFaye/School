@@ -75,7 +75,7 @@
 						<td><?php echo $row->message;?></td> 
 						<td><?php echo $row->datetime;?></td>  
 					        <td class="actions"> 
-								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->roles_id;?>','<?php echo $row->class_id;?>','<?php echo $row->sections_id;?>','<?php echo $row->sections;?>','<?php echo $row->students_id;?>','<?php echo $row->title;?>','<?php echo $row->message;?>','<?php echo $row->datetime;?>' )"></i></a>
+								<a href="#" class="on-default edit-row"><i class="fa fa-upload" onclick="edit('<?php echo $row->id;?>','<?php echo $row->roles_id;?>','<?php echo $row->class_id;?>','<?php echo $row->sections_id;?>','<?php echo $row->sections;?>','<?php echo $row->students_id;?>','<?php echo $row->title;?>','<?php echo $row->message;?>','<?php echo $row->datetime;?>' )"></i></a>
 								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 							</td>
 						</tr>
