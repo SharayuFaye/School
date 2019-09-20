@@ -17,24 +17,29 @@ class m_bus extends CI_Model {
 		     $this->db->insert('bus', $target);
 		     $bus_id = $this->db->insert_id(); 
 		     if($bus_id){ 
-			    $target = array(
-			        "school_id"=>$school,
-			        "bus_id"=>$bus_id,
-			        "route_id"=>$route, 
-			        "created_date"=>date('Y-m-d'),
-			        "created_by"=>$this->session->userdata['id'],
-			    ); 
-			     $this->db->insert('route_map', $target);
-			    
-			    $target = array(
-			        "school_id"=>$school,
-			        "bus_id"=>$bus_id, 
-			        "drivers_id"=>$drivers,
-			        "created_date"=>date('Y-m-d'),
-			        "created_by"=>$this->session->userdata['id'],
-			    ); 
-			    $this->db->insert('driver_map', $target);
-			    
+		         $r = explode(',',$route);
+		         foreach($r as $id){
+    			    $target = array(
+    			        "school_id"=>$school,
+    			        "bus_id"=>$bus_id,
+    			        "route_id"=>$id, 
+    			        "created_date"=>date('Y-m-d'),
+    			        "created_by"=>$this->session->userdata['id'],
+    			    ); 
+    			     $this->db->insert('route_map', $target);
+		         }
+		         
+		         $d = explode(',',$drivers);
+		         foreach($d as $id){
+    			    $target = array(
+    			        "school_id"=>$school,
+    			        "bus_id"=>$bus_id, 
+    			        "drivers_id"=>$id,
+    			        "created_date"=>date('Y-m-d'),
+    			        "created_by"=>$this->session->userdata['id'],
+    			    ); 
+    			    $this->db->insert('driver_map', $target);
+		         }
 			    
 			     return true;
 			}
@@ -105,13 +110,11 @@ class m_bus extends CI_Model {
     } 
 
     function bus_show_id(){
-        $this->db->select('s.school_name,b.*,route.route_id,r.route_name,driver.drivers_id');
-        $this->db->from('bus b');
-        $this->db->join('route_map route', 'b.id=route.bus_id', 'left');
-        $this->db->join('driver_map driver', 'b.id=driver.bus_id', 'left');  
-        $this->db->join('school s', 'b.school_id=s.id', 'left');
-        $this->db->join('route r', 'route.route_id=r.id', 'left');   
-	    $this->db->where(array( 'b.school_id' => $this->session->userdata['school']));
+        $this->db->select('s.school_name,b.id,b.bus_number,b.student_strength');
+        $this->db->from('bus b'); 
+        $this->db->join('school s', 'b.school_id=s.id', 'left'); 
+        $this->db->where(array( 'b.school_id' => $this->session->userdata['school']));
+        $this->db->distinct('b.id');
 		$query = $this->db->get();   
 		if($query)
 	    {
@@ -119,7 +122,19 @@ class m_bus extends CI_Model {
 	    } 
     }
 
-
+    
+    function route_map($bus_id){
+        $this->db->select('*,r.route_name');
+        $this->db->from('route_map rm');
+        $this->db->join('route r', 'r.id=rm.route_id', 'left'); 
+        $this->db->where(array( 'rm.bus_id' => $bus_id)); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
      function bus_fetch($class_id){ 
 	    $this->db->select("*"); 
 		$this->db->from('bus'); 

@@ -854,6 +854,16 @@ class Welcome extends CI_Controller {
         }
     }
     
+    
+    
+    public function route_map()
+    {
+        $bus_id = $this->input->post('id') ;
+        $this->load->model('m_bus');
+        $route_map = $this->m_bus->route_map($bus_id);
+        echo json_encode($route_map);
+    }
+    
     public function bus()
     {	
     	if(!isset($this->session->userdata['username']) ){
