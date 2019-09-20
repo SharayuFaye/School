@@ -72,7 +72,7 @@ class m_notifications extends CI_Model {
 		$this->db->join('students s', 'f.students_id=s.id', 'left');
 		$this->db->join('class c', 'f.class_id=c.id', 'left');
 		$this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
-		$this->db->where(array( 'f.school_id' => $this->session->userdata['school']));
+		$this->db->where(array( 'f.school_id' => $this->session->userdata['school'])); 
 		
 		$query = $this->db->get(); 
 		
@@ -127,7 +127,8 @@ class m_notifications extends CI_Model {
         $this->db->join('school s', 'u.school_id=s.id', 'left');
         $this->db->where(array( 'u.token' =>$token)); 
         $this->db->or_where(array( 'n.sections_id' =>$sections_id));
-        $this->db->or_where(array( 'n.roles_id' =>'Student')); 
+        $this->db->or_where(array( 'n.roles_id' =>'Student'));
+        $this->db->order_by('datetime','asc');
         
         $this->db->distinct();
         
@@ -143,13 +144,14 @@ class m_notifications extends CI_Model {
     
     function notifications_show_id_app($token,$user_id){
         
-        $this->db->select('n.*,s.school_name,u.school_id');
+        $this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
         $this->db->from('notification n');
         $this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
         $this->db->join('users u', 'stud.users_id=u.id', 'left');
         $this->db->join('school s', 'u.school_id=s.id', 'left');
         $this->db->where(array( 'u.token' =>$token));
         $this->db->where(array( 'u.id' =>$user_id));
+        $this->db->order_by('n.datetime','asc');
         
         $query = $this->db->get();
         
