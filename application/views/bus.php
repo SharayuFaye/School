@@ -98,7 +98,19 @@
 										<tr data-item-id="1">
 											<td><?php echo $i;?></td>
 											<td><?php echo $row->bus_number;?></td>
-											<td><?php echo $row->route_name;?></td>
+											<td><?php  
+											
+											$pick ='';
+											$route = explode(',',$row->route_id);
+											for($i=0;$i<count($route);$i++){
+											    foreach ($route_show as $row1) {
+											        if($route[$i] == $row1->id){
+											            $pick .=  $row1->route_name;
+											        }
+											    }$pick .= ' , ';
+											}
+											echo rtrim($pick,' , '); 
+											?></td>
 											<td><?php echo $row->student_strength;?></td> 
 											<td><?php 
 											$pick ='';
@@ -185,6 +197,32 @@ function edit($id,$bus_no,$bus_routes,$student_strength,$drivers){
 	$('#bus_routes').val($bus_routes); 
 	$('#student_strength').val($student_strength);  
 
+	var bus_routes = $bus_routes; 
+	var strArray = bus_routes.split(","); 
+
+	var my_html ='';
+    for(var i = 0; i < strArray.length; i++){  
+        my_html +='<div id="rowR'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
+        my_html +='<label class="col-sm-4 text-sm-right"></label>';
+        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<select  name="route[]" id="rE'+i+'" class="form-control">'; 
+        my_html +='<option></option>';
+        my_html +='<?php  foreach ($route_show as $row) { ?>';
+        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> ';
+        my_html +='<?php } ?> ';
+        my_html +='</select>'; 
+        my_html +='</div>';
+        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<button type="button" id="R'+i+'" class="btn btn-danger btn_remove rt" >Remove</button>';
+        my_html +='</div></div>'; 
+    }
+
+    $('#routeE').html(my_html);
+    for(var i = 0; i < strArray.length; i++){ 
+    	$('#rE'+i).val(strArray[i]);  
+        }
+
+    
 	var drivers = $drivers; 
 	var strArray = drivers.split(","); 
 
@@ -201,7 +239,7 @@ function edit($id,$bus_no,$bus_routes,$student_strength,$drivers){
         my_html +='</select>'; 
         my_html +='</div>';
         my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
+        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove drv" >Remove</button>';
         my_html +='</div></div>'; 
     }
 
@@ -238,7 +276,7 @@ function edit_driver(){
         my_html +='</select>';
         my_html +='</div>';
         my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
+        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove drv" >Remove</button>';
         my_html +='</div></div>'; 
       $('#driverE').append(my_html);  
  } 
@@ -257,11 +295,55 @@ function add_driver(){
         my_html +='</select>';
         my_html +='</div>';
         my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove" >Remove</button>';
+        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove drv" >Remove</button>';
         my_html +='</div></div>'; 
       $('#driver').append(my_html);  
  }  
-$(document).on('click', '.btn_remove', function(){  
+$(document).on('click', '.drv', function(){  
+   var button_id = $(this).attr("id");   
+   $('#row'+button_id+'').remove();  
+});  
+
+
+
+
+function edit_route(){ 
+      i++;  
+      var my_html ='<div id="rowR'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
+        my_html +='<label class="col-sm-4 text-sm-right"></label>';
+        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<select  name="route[]" class="form-control">';
+        my_html +='<option></option>';
+        my_html +='<?php  foreach ($route_show as $row) { ?>';
+        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> ';
+        my_html +='<?php } ?> ';
+        my_html +='</select>';
+        my_html +='</div>';
+        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<button type="button" id="R'+i+'" class="btn btn-danger btn_remove rt" >Remove</button>';
+        my_html +='</div></div>'; 
+      $('#routeE').append(my_html);  
+ } 
+
+var i=2; 
+function add_route(){ 
+      i++;  
+      var my_html ='<div id="rowR'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
+        my_html +='<label class="col-sm-4 text-sm-right"></label>';
+        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<select  name="route[]" class="form-control">';
+        my_html +='<option></option>';
+        my_html +='<?php  foreach ($route_show as $row) { ?>';
+        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> ';
+        my_html +='<?php } ?> ';
+        my_html +='</select>';
+        my_html +='</div>';
+        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+        my_html +='<button type="button" id="R'+i+'" class="btn btn-danger btn_remove rt" >Remove</button>';
+        my_html +='</div></div>'; 
+      $('#route1').append(my_html);  
+ }  
+$(document).on('click', '.rt', function(){  
    var button_id = $(this).attr("id");   
    $('#row'+button_id+'').remove();  
 });  
@@ -289,10 +371,22 @@ $(document).on('click', '.btn_remove', function(){
 					<input type="text" maxlength="100" required name="bus_number" class="form-control">
 				</div>
 			</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Routes:</label>
+	        <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label>
 				<div class="col-sm-8">
-					<select  name="route" class="form-control">
+					<input type="number" min="1" name="student_strength" class="form-control">
+				</div>
+			</div>
+			
+			
+	    	
+			<div id="route1">
+				<div id="r1"  class="form-group row" >
+				<div  style="padding: 10px;" class="col-sm-4 text-sm-right"> 
+					<button onclick="add_route()" type="button" class="btn btn-primary">Add New Route</button>
+				</div> 
+				<div  style="padding: 10px;" class="col-sm-4">
+					<select  name="route[]" class="form-control">
 						<option></option>
 				 		<?php  foreach ($route_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> 
@@ -300,12 +394,8 @@ $(document).on('click', '.btn_remove', function(){
 					</select>
 				</div>
 			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label>
-				<div class="col-sm-8">
-					<input type="number" min="1" name="student_strength" class="form-control">
-				</div>
 			</div>
+			
 			<div id="driver">
 				<div id="row1"  class="form-group row" >
 				<div  style="padding: 10px;" class="col-sm-4 text-sm-right"> 
@@ -358,17 +448,6 @@ $(document).on('click', '.btn_remove', function(){
 					<input type="text"  maxlength="100" id="bus_no" name="bus_number" class="form-control">
 				</div>
 			</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Routes:</label>
-				<div class="col-sm-8">
-					<select id="bus_routes" name="route" class="form-control"> 
-						<option></option>
-				 		<?php  foreach ($route_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> 
-						<?php } ?> 
-					</select>
-				</div>
-			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label>
 				<div class="col-sm-8">
@@ -376,6 +455,18 @@ $(document).on('click', '.btn_remove', function(){
 				</div>
 			</div>
 	    
+	    
+	    
+	    	<div class="form-group row">  
+	    		<div   class="col-sm-4 text-sm-right"> 
+					<button onclick="edit_route()" type="button" class="btn btn-primary">Add New Routes</button>
+ 				</div>	
+				<label class="col-sm-4 control-label text-sm-left pt-2">Routes</label> 
+				<label class="col-sm-4 control-label text-sm-left pt-2">Action</label>  
+			</div>
+			
+	    	<div id="routeE"> 
+			</div> 
 			<div class="form-group row">
 	    		<div   class="col-sm-4 text-sm-right"> 
 					<button onclick="edit_driver()" type="button" class="btn btn-primary">Add New  Driver</button>

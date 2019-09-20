@@ -867,9 +867,16 @@ class Welcome extends CI_Controller {
 	  		
 	        if($this->input->post('save_bus')){
 	            $bus_number = $this->input->post('bus_number') ;
-	            $route = $this->input->post('route') ;
+	           // $route = $this->input->post('route') ;
 	            $student_strength = $this->input->post('student_strength') ;
 	            
+	            
+	            if($this->input->post('route')){
+	                $checkbox = $this->input->post('route') ;
+	                $route  = implode(",", $checkbox);
+	            }else{
+	                $route ='0';
+	            }
 	            
 	            if($this->input->post('drivers')){
     	            $checkbox = $this->input->post('drivers') ;
@@ -890,9 +897,16 @@ class Welcome extends CI_Controller {
 	        if($this->input->post('edit_bus')){
 	            $id = $this->input->post('id') ;
 	            $bus_number = $this->input->post('bus_number') ;
-	            $route = $this->input->post('route') ;
+	           // $route = $this->input->post('route') ;
 	            $student_strength = $this->input->post('student_strength') ;
 	            
+	            
+	            if($this->input->post('route')){
+	                $checkbox = $this->input->post('route') ;
+	                $route  = implode(",", $checkbox);
+	            }else{
+	                $route ='0';
+	            }
 	            if($this->input->post('drivers')){
 	            $checkbox = $this->input->post('drivers') ;
 	            $drivers  = implode(",", $checkbox);
