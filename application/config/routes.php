@@ -109,6 +109,11 @@ $route['homework_add'] = 'welcome/homework_add';
 $route['activity_add'] = 'welcome/activity_add';
 
 
+
+$route['route_map'] = 'welcome/route_map';
+$route['bus_route_show'] = 'welcome/bus_route_show';
+
+
 //App Routes-----------------------
 $route['login'] = 'api/login';
 $route['set_gcm'] = 'api/set_gcm';
