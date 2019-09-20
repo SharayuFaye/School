@@ -94,7 +94,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php  $i=1; foreach ($bus_show as $row) { ?>
+										<?php if($bus_show){ $i=1; foreach ($bus_show as $row) { ?>
 										<tr data-item-id="1">
 											<td><?php echo $i;?></td>
 											<td><?php echo $row->bus_number;?></td>
@@ -116,7 +116,7 @@
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)"></i></a>
 											</td>
 										</tr>
-										<?php $i++;} ?>  
+										<?php $i++;} }?>  
 									</tbody>
 								</table>
 							</div>
