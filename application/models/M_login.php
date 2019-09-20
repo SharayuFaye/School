@@ -144,7 +144,8 @@ class m_login extends CI_Model {
     
     function logout($token){
         $target = array(
-            "token" => ''
+            "token" => '',
+            "fcm_token" => ''
         );
         $this->db->where(array( 'token' => $token));
         $this->db->update('users', $target);
