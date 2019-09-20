@@ -63,7 +63,7 @@
 											<td><?php echo $i;?></td> 
 											<td><?php echo $row->route_name;?></td> 
 											<td><?php $pick ='';
-											$pickup = explode(',',$row->pickup_point_id);
+											$pickup = json_decode($row->pickup_point_id);
 											for($i=0;$i<count($pickup);$i++){
 											    foreach ($pickup_show as $row1) {  
     											    if($pickup[$i] == $row1->id){
@@ -75,7 +75,7 @@
 											echo rtrim($pick,' , ');?>
 											</td>  
 									        <td class="actions"> 
-												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>', '<?php echo $row->route_name;?>', '<?php echo $row->pickup_point_id;?>')"></i></a>
+												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick='edit("<?php echo $row->id;?>", "<?php echo $row->route_name;?>", "<?php echo $row->pickup_point_id;?>")' ></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 											</td>
 										</tr>
@@ -154,7 +154,7 @@ function edit($id,$route,$pickup_point){
 	$('#id').val($id);      
 	$('#routee').val($route);  
  	var pickup_point = $pickup_point; 
-	var strArray = pickup_point.split(","); 
+	var strArray = JSON.parse(pickup_point); 
 	var my_html ='';
     for(var i = 0; i < strArray.length; i++){ 
 

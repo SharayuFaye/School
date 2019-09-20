@@ -808,7 +808,7 @@ class Welcome extends CI_Controller {
                 $route = $this->input->post('route') ; 
                 
                 if($this->input->post('pickup_point')){
-                    $pickup_point =  implode(",", $this->input->post('pickup_point'));
+                    $pickup_point =  json_encode($this->input->post('pickup_point'));
                 }else{
                     $pickup_point =  '';
                 }
@@ -826,7 +826,7 @@ class Welcome extends CI_Controller {
                 $id = $this->input->post('id') ;  ;
                 $route = $this->input->post('route') ;
                 if($this->input->post('pickup_point')){
-                $pickup_point =  implode(",", $this->input->post('pickup_point')); 
+                    $pickup_point = json_encode($this->input->post('pickup_point'));
                 }else{
                     $pickup_point =  '';
                 }
