@@ -858,10 +858,18 @@ class Welcome extends CI_Controller {
     
     public function route_map()
     {
-        $bus_id = $this->input->post('id') ;
+        $bus_id = $this->input->get('id') ;
         $this->load->model('m_bus');
-        $route_map = $this->m_bus->route_map($bus_id);
-        echo json_encode($route_map);
+        $route  = $this->m_bus->route_map($bus_id);
+        echo json_encode($route);
+    }
+    
+    public function driver_map()
+    {
+        $bus_id = $this->input->get('id') ;
+        $this->load->model('m_bus');
+        $driver  = $this->m_bus->driver_map($bus_id);
+        echo json_encode($driver);
     }
     
     public function bus()
@@ -1104,12 +1112,19 @@ class Welcome extends CI_Controller {
  
     public function transportation_fetch()
     {
-    	$bus_sel = $this->input->get('bus_sel') ;
+        $route_id = $this->input->get('route') ;
 	  	$this->load->model('m_sel_route');
-	  	$transportation_data = $this->m_sel_route->transportation_fetch($bus_sel);  
+	  	$transportation_data = $this->m_sel_route->transportation_fetch($route_id);  
     	echo json_encode($transportation_data);
+    }
+    public function bus_route_show()
+    {
+        $bus_sel = $this->input->get('bus_sel') ;
+        $this->load->model('m_bus');
+        $bus_route_show = $this->m_bus->route_map($bus_sel);
+        echo json_encode($bus_route_show);
     }	
-  
+    
     public function students_fetch()
     {
         $roll_no = $this->input->get('roll_no') ;
@@ -1276,11 +1291,12 @@ class Welcome extends CI_Controller {
 	            $password = $this->input->post('password') ;
 // 	            $teacher = $this->input->post('teacher') ;
 	            $bus = $this->input->post('bus') ;
+	            $route = $this->input->post('route') ;
 	            $pickup_point = $this->input->post('pickup_point') ;
 	            $join_date = $this->input->post('join_date') ; 
 	            $school = $this->session->userdata['school'] ;   
 
-	            $data = $this->m_students->students_add($class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$pickup_point,$join_date,$school );
+	            $data = $this->m_students->students_add($class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$route,$pickup_point,$join_date,$school );
 	            
 	            
 	            if($data != 'true'){
@@ -1334,11 +1350,12 @@ class Welcome extends CI_Controller {
 	            $password = $this->input->post('password') ;
 // 	            $teacher = $this->input->post('teacher') ;
 	            $bus = $this->input->post('bus') ;
+	            $route = $this->input->post('route') ;
 	            $pickup_point = $this->input->post('pickup_point') ;
 	            $join_date = $this->input->post('join_date') ; 
 	            $school = $this->session->userdata['school'] ;   
 
-	            $data = $this->m_students->students_edit($id,$users_id,$class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$pickup_point,$join_date,$school );
+	            $data = $this->m_students->students_edit($id,$users_id,$class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$route,$pickup_point,$join_date,$school );
 	            
 	            if($data != 'true'){
 	                $this->data['error_msg'] ='Error in updation!';
@@ -1382,6 +1399,7 @@ class Welcome extends CI_Controller {
 	        $this->data['students_show'] =$this->m_students->students_show();
 	        $this->data['class_show'] =$this->m_class->class_show_id();
 	        $this->data['bus_show'] =$this->m_bus->bus_show_id();
+	        $this->data['transportation_show'] =$this->m_sel_route->route_show(); 
 	        $this->data['route_show'] =$this->m_route->route_show(); 
 	        $this->data['sections_show'] =$this->m_sections->sections_show_id();
 	        $this->data['teachers_show'] =$this->m_teachers->teachers_show_id(); 

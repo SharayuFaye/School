@@ -139,8 +139,11 @@
 												'<?php echo $row->password;?>','<?php echo $row->parent_name;?>',
     											'<?php echo $row->parent_mob;?>','<?php echo $row->mother_name;?>', 
     											'<?php echo $row->mother_mail;?>', '<?php echo $row->mother_mob;?>',
-    											'<?php echo $row->parent_scan_id;?>','<?php echo $row->bus_id;?>' ,
-												'<?php echo $row->transportation_id;?>' ,'<?php echo $row->join_date;?>' )"></i></a>
+    											'<?php echo $row->parent_scan_id;?>',
+    											'<?php echo $row->bus_id;?>' ,'<?php echo $row->bus_number;?>' ,
+												'<?php echo $row->route_id;?>' ,'<?php echo $row->route_name;?>' ,
+												'<?php echo $row->trans_id;?>' ,'<?php echo $row->pickup_point;?>' ,
+												'<?php echo $row->join_date;?>' )"></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 											</td>
 										</tr> 
@@ -193,7 +196,7 @@ d.className += " nav-active";
 var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
 
-function edit($id,$users_id ,$class_id ,$section,$sections_id ,$student_name,$dob , $adhar ,$profile,  $roll_number ,$batch ,$username ,$password,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_scan_id, $bus_id ,$transportation_id ,$join_date){  
+function edit($id,$users_id ,$class_id ,$section,$sections_id ,$student_name,$dob , $adhar ,$profile,  $roll_number ,$batch ,$username ,$password,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_scan_id, $bus_id , $bus_number,$rt,$route_name,$transportation_id ,$pickup,$join_date){  
 	$('#id').val($id); 
 	$('#users_id').val($users_id);
 	$('#class').val($class_id);
@@ -220,9 +223,24 @@ function edit($id,$users_id ,$class_id ,$section,$sections_id ,$student_name,$do
 	$('#mother_mail').val($mother_mail);
 	$('#mother_mob').val($mother_mob);
 	$('#parent_id').val($parent_scan_id);
-	   
-	$('#bus').val($bus_id );
-	$('#pickup_point').val($transportation_id); 
+	     
+//     var opt = $('<option />');  
+// 	 opt.val($bus_id);
+// 	 opt.text($bus_number);
+// 	 $('#bus1').append(opt); 
+
+		$('#bus1').val($bus_id);
+		
+    var opt = $('<option />');  
+	 opt.val($rt);
+	 opt.text($route_name);
+	 $('#rt').append(opt); 
+	  
+    var opt = $('<option />');  
+	 opt.val($transportation_id);
+	 opt.text($pickup);
+	 $('#pickup_point').append(opt); 
+	 
 	$('#join_date').val($join_date);
 	$('#editrow').modal('show'); 
 }
@@ -429,43 +447,64 @@ function validateImageE(id) {
  });
 
 
- $('#bus_sel').change(function(){  
- $("#pickup_point_sel > option").remove();  
+ $('#bus_sel').change(function(){   
+ $("#route_sel > option").remove();  
  var bus_sel = $('#bus_sel').val();  
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/transportation_fetch", 
+		 url: "<?php echo base_url(); ?>index.php/bus_route_show", 
 		 data: 'bus_sel='+bus_sel,
          datatype : "json",
 		 success: function(classD)  
 		 {   
 			 var obj = $.parseJSON(classD);
+			 var my_html1 =  '<option></option>';
                 $.each(obj, function (index, object) { 
                 	console.log(object); 
-
-                 	var pickup_point = object['pickup_point_id']; 
-                	var strArray = pickup_point.split(","); 
-                 
-                    for(var i = 0; i < strArray.length; i++){ 
-
-                        var my_html =  '<?php  foreach ($route_show as $row) { ?>';
-                        if(strArray[i] == <?php echo $row->id; ?>){
-                            my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
-                        }
-                            my_html +='<?php } ?> '; 
-                        
-                        $('#pickup_point_sel').append(my_html);
-	
-
-                    	//$('#pickE'+i).val(strArray[i]);  
-                    }
-                    	 
+                	 my_html1 +='<option value="'+object['route_id']+'">'+object['route_name']+'</option> ';  
+                       
                 }) 
+                $('#route_sel').append(my_html1);
 		 } 
 	 }); 
  });
+ $('#route_sel').change(function(){  
+	 $("#pickup_point_sel > option").remove();  
+	 var route_id = $('#route_sel').val();  
+		 $.ajax({
+			 type: "GET",
+			 url: "<?php echo base_url(); ?>index.php/transportation_fetch", 
+			 data:  'route='+route_id,
+	         datatype : "json",
+			 success: function(classD)  
+			 {   
+				 var obj = $.parseJSON(classD);
+				    $.each(obj, function (index, object) { 
+	                	console.log(object); 
+	                 	var pickup_point = object['pickup_point_id']; 
+	                	var strArray = pickup_point.split(","); 
+	                 
+	                    for(var i = 0; i < strArray.length; i++){ 
 
+	                        var my_html =  '<?php  foreach ($route_show as $row) { ?>';
+	                        if(strArray[i] == <?php echo $row->id; ?>){
+	                            my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
+	                        }
+	                            my_html +='<?php } ?> '; 
+	                        
+	                        $('#pickup_point_sel').append(my_html);
+		
 
+	                    	//$('#pickE'+i).val(strArray[i]);  
+	                    }
+	                    	 
+	                })  
+			 } 
+		 }); 
+
+ 
+	 });
+ 
  $('#class').change(function(){  
  $("#section > option").remove();  
  var class1 = $('#class').val();  
@@ -490,23 +529,50 @@ function validateImageE(id) {
  });
 
 
- $('#bus').change(function(){  
- $("#pickup_point > option").remove();  
- var bus = $('#bus').val();  
+ $('#bus1').change(function(){   
+ $("#rt > option").remove();  
+ var bus_sel = $('#bus1').val();  
+	console.log(bus_sel); 
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/transportation_fetch", 
-		 data: 'bus_sel='+bus,
+		 url: "<?php echo base_url(); ?>index.php/bus_route_show", 
+		 data: 'bus_sel='+bus_sel,
          datatype : "json",
 		 success: function(classD)  
 		 {   
 			 var obj = $.parseJSON(classD);
+         	console.log(obj); 
+			 var my_html1 =  '<option></option>';
                 $.each(obj, function (index, object) { 
-                	console.log(object);
+                	console.log(object); 
+                	 my_html1 +='<option value="'+object['route_id']+'">'+object['route_name']+'</option> ';  
+                       
+                }) 
+                $('#rt').append(my_html1);
+		 } 
+	 }); 
+ });
+
+ $('#rt').change(function(){  
+ $("#pickup_point > option").remove();  
+ var route_id = $('#rt').val();  
+	console.log(route_id); 
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/transportation_fetch", 
+		 data: 'route='+route_id,
+         datatype : "json",
+		 success: function(classD)  
+		 {   
+			 var obj = $.parseJSON(classD); 
+
+         	console.log(obj); 
+                $.each(obj, function (index, object) { 
+                	console.log(object); 
                 	var pickup_point = object['pickup_point_id']; 
                 	var strArray = pickup_point.split(","); 
                  
-                    for(var i = 0; i < strArray.length; i++){ 
+                    for(var i = 0; i < strArray.length; i++){  
 
                         var my_html =  '<?php  foreach ($route_show as $row) { ?>';
                         if(strArray[i] == <?php echo $row->id; ?>){
@@ -519,12 +585,13 @@ function validateImageE(id) {
 
                     	//$('#pickE'+i).val(strArray[i]);  
                     }
-                }) 
+                })  
+            
 		 } 
 	 }); 
+   
  });
-
-
+ 
  $('#mail_id').change(function(){    
 	 $('#msg').html('');
      $('#parent_scn').val(''); 
@@ -712,6 +779,16 @@ function validateImageE(id) {
 						</select>
 					</div>
 				</div>
+				
+				<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2">Route:</label>
+					<div class="col-sm-8">
+						<select  name="route" id="route_sel" class="form-control">
+							 
+						</select>
+					</div>
+				</div>
+				
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Pickup Point:</label>
 					<div class="col-sm-8">
@@ -869,21 +946,27 @@ function validateImageE(id) {
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Bus:</label>
 				<div class="col-sm-8">
-					<select  name="bus" id="bus" class="form-control">
-					<option></option>
+					<select  name="bus" id="bus1" class="form-control"> 
 						<?php  foreach ($bus_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->bus_number;?></option> 
 					<?php } ?> 
 					</select>
 				</div>
 			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Route:</label>
+				<div class="col-sm-8">
+					<select  name="route" id="rt" class="form-control">   
+					</select>
+				</div>
+			</div>
+			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Pickup Point:</label>
 				<div class="col-sm-8">
 					<select  name="pickup_point" id="pickup_point" class="form-control">
-						<?php  foreach ($route_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> 
-					<?php } ?> 
+						 
 					</select>
 				</div>
 			</div>

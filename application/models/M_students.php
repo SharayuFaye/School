@@ -1,6 +1,6 @@
 <?php
 class m_students extends CI_Model { 
-    function students_add($class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$pickup_point,$join_date,$school ){ 
+    function students_add($class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,	$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$route,$pickup_point,$join_date,$school ){ 
 		
 	    $this->db->select("*");
 	    $this->db->from('users');
@@ -23,17 +23,17 @@ class m_students extends CI_Model {
 	        $query = $this->db->get();
 	        if($query->num_rows() > 0 ){
 	             
-	            $userData = $query->result();
+	             $userData = $query->result();
 	                         
-        	    $this->db->select("*"); 
-        		$this->db->from('students'); 
-        		$this->db->where(array( 'student_name' => $student_name));
-        		$query = $this->db->get(); 
+//         	    $this->db->select("*"); 
+//         		$this->db->from('students'); 
+//         		$this->db->where(array( 'student_name' => $student_name));
+//         		$query = $this->db->get(); 
         		
-//         		print_r($userData[0]->id); 
+// //         		print_r($userData[0]->id); 
         		
         		
-        		if($query->num_rows() == 0){
+//         		if($query->num_rows() == 0){
         		    $targetS = array(
           		        "users_id" => $userData[0]->id ,
         				"class_id" => $class ,
@@ -53,30 +53,31 @@ class m_students extends CI_Model {
         		        "username"=>  $username,
         		        "password"=>  $password,
 //         				"teachers_id" => $teacher,
-        				"bus_id" => $bus,
+        		        "bus_id" => $bus,
+        		        "route_id" => $route,
         				"transportation_id" => $pickup_point,
         				"join_date" => $join_date,
         		        "school_id"=>  $school,
         		        "created_date"=>date('Y-m-d'),
         		        "created_by"=>$this->session->userdata['id'], 
         
-        				);    
-//             		    print_r($targetS); 
+        		    );
+//         		    print_r($targetS);exit();
         		    $query =   $this->db->insert('students', $targetS);
-        		    //          			print_r($q);exit();
+//         		    print_r($query);exit();
         		    if($query){ return true;  }else{ return false; }
         		}
 
-	    }
+// 	    }
     }
-    function students_edit($id,$user_id,$class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$pickup_point,$join_date,$school ){ 
+    function students_edit($id,$user_id,$class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$route,$pickup_point,$join_date,$school ){ 
         
-        $this->db->select("*");
-        $this->db->from('students');
-        $this->db->where(array( 'student_name' => $student_name));
-        $this->db->where('id!=', $id);
-        $query = $this->db->get();
-        if($query->num_rows() == 0){ 
+//         $this->db->select("*");
+//         $this->db->from('students');
+//         $this->db->where(array( 'student_name' => $student_name));
+//         $this->db->where('id!=', $id);
+//         $query = $this->db->get();
+//         if($query->num_rows() == 0){ 
             $target = array(  	
     				"class_id" => $class ,
     				"sections_id" => $section,
@@ -95,7 +96,8 @@ class m_students extends CI_Model {
         	        "username"=>  $username,
         	        "password"=>  $password,
     // 				"teachers_id" => $teacher,
-    				"bus_id" => $bus,
+                "bus_id" => $bus,
+                "route_id" => $route,
     				"transportation_id" => $pickup_point,
     				"join_date" => $join_date,
         	       "school_id"=>  $school ,
@@ -120,18 +122,20 @@ class m_students extends CI_Model {
     	       $this->db->update('users', $target);
     	   }
     	   if($query1){ return true;  }else{ return false; }
-        }
+//         }
     }
     function students_show(){  
 
-	    $this->db->select('st.*,u.password as password_user,s.school_name,c.class,sec.sections,t.teacher_name,trans.pickup_point,b.bus_number');
+	    $this->db->select('st.*,u.password as password_user,s.school_name,c.class,sec.sections,t.teacher_name,trans.pickup_point,b.bus_number,r.route_name,rm.route_id,trans.id as trans_id');
 		$this->db->from('students st'); 
 	    $this->db->join('school s', 'st.school_id=s.id', 'left');  
 	    $this->db->join('class c', 'st.class_id=c.id', 'left');  
 	    $this->db->join('sections sec', 'st.sections_id=sec.id', 'left');  
 	    $this->db->join('teachers t', 'st.teachers_id=t.id', 'left');  
-	    $this->db->join('pickup_point trans', 'st.transportation_id=trans.id', 'left');   
+	    $this->db->join('pickup_point trans', 'st.transportation_id=trans.id', 'left');
 	    $this->db->join('bus b', 'st.bus_id=b.id', 'left');
+	    $this->db->join('route_map rm', 'st.route_id=rm.route_id', 'left');
+	    $this->db->join('route r', 'st.route_id=r.id', 'left');
 	    $this->db->join('users u', 'st.users_id=u.id', 'left');  
 	    $this->db->where(array( 'st.school_id' => $this->session->userdata['school']));
 	    $this->db->where(array( 'st.active' => 1));

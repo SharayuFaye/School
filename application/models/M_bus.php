@@ -124,10 +124,22 @@ class m_bus extends CI_Model {
 
     
     function route_map($bus_id){
-        $this->db->select('*,r.route_name');
+        $this->db->select('rm.*,r.route_name');
         $this->db->from('route_map rm');
         $this->db->join('route r', 'r.id=rm.route_id', 'left'); 
         $this->db->where(array( 'rm.bus_id' => $bus_id)); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    function driver_map($bus_id){
+        $this->db->select('rm.*,r.driver_name');
+        $this->db->from('driver_map rm');
+        $this->db->join('driver r', 'r.id=rm.drivers_id', 'left');
+        $this->db->where(array( 'rm.bus_id' => $bus_id));
         $query = $this->db->get();
         if($query)
         {

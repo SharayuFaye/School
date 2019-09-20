@@ -94,18 +94,18 @@ class m_sel_route extends CI_Model {
     } 
     
     
-    function transportation_fetch($bus_id){
+    function transportation_fetch($route_id){
         
         $this->db->select("r.*");
-        $this->db->from('route r'); 
-        $this->db->join('bus b', 'b.route_id=r.id', 'left');
-        $this->db->where(array( 'b.id' =>$bus_id));
+        $this->db->from('route r');  
+        $this->db->where(array( 'r.id' =>$route_id));
         $query = $this->db->get(); 
         if($query)
         {
             return $query->result();
         }
-    } 
+    }
+     
     
 }
 ?>

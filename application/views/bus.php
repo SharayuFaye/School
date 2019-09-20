@@ -99,31 +99,7 @@
 											<td><?php echo $i;?></td>
 											<td><?php echo $row->bus_number;?></td>
 											<td><?php echo $row->student_strength;?></td>
-										<!-- -<td><?php  
-											
-											$pick ='';
-											$route = explode(',',$row->route_id);
-											for($i=0;$i<count($route);$i++){
-											    foreach ($route_show as $row1) {
-											        if($route[$i] == $row1->id){
-											            $pick .=  $row1->route_name;
-											        }
-											    }$pick .= ' , ';
-											}
-											echo rtrim($pick,' , '); 
-											?></td> 
-											<td><?php 
-											$pick ='';
-											$driver = explode(',',$row->drivers_id);
-											for($i=0;$i<count($driver);$i++){
-											    foreach ($drivers_show as $row1) {
-											        if($driver[$i] == $row1->id){
-											            $pick .=  $row1->drivers_name;
-											        }
-											    }$pick .= ' , ';
-											} 
-											echo rtrim($pick,' , '); ?></td>  -->	
-											<td class="actions"> 
+									<td>
 												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->bus_number;?>','<?php echo $row->student_strength;?>')"></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)"></i></a>
 											</td>
@@ -190,84 +166,83 @@ d.className += " nav-active";
 var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
 
-function edit($id,$bus_no,$bus_routes,$student_strength,$drivers){ 
+
+$(document).ready(function(){
+
+ });
+function edit($id,$bus_no,$student_strength){ 
  
 	$('#id').val($id);      
 	$('#bus_no').val($bus_no);
-	$('#bus_routes').val($bus_routes); 
+	//$('#bus_routes').val($bus_routes); 
 	$('#student_strength').val($student_strength);  
-
-
-
+	var id = $id;  
 	var my_html ='';
-// 	   $.ajax({
-		     url:'<?=base_url()?>index.php/route_map',
-// 		     method: 'post',
-// 		     data: {bus_id: $id},
-// 		     dataType: 'json',
-// 		     success: function(response){
-// 		    	 var obj = $.parseJSON(classD);
-// 		      var len = response.length;
-// 		      if(len > 0){
 
-// 			      $.each(obj, function (index, object) { 
-// 		       // Read values
-// 		    	  my_html +='<div id="rowR'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
-// 		          my_html +='<label class="col-sm-4 text-sm-right"></label>';
-// 		          my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-// 		          my_html +='<select  name="route[]" id="rE'+i+'" class="form-control">'; 
-// 		          my_html +='<option></option>';
-		          my_html +='<?php  foreach ($route_show as $row) { ?>';
-		          my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->route_name;?></option> ';
-		          my_html +='<?php } ?> ';
-// 		          my_html +='</select>'; 
-// 		          my_html +='</div>';
-// 		          my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-// 		          my_html +='<button type="button" id="R'+i+'" class="btn btn-danger btn_remove rt" >Remove</button>';
-// 		          my_html +='</div></div>'; 
-		          
-// 			      }
-// 		      }
-		 
-// 		     }
- 
-// 		     $('#routeE').html(my_html);  
-// 		     for(var i = 0; i < strArray.length; i++){ 
-// 		    		$('#rE'+i).val(strArray[i]);  
-// 		     }
-		     
-// 		   });
+	 console.log(id)
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/route_map", 
+		 data: 'id='+id,
+	     datatype : "json",
+		 success: function(classD)  
+		 {   
+	     	 console.log(classD)
+			 var obj = $.parseJSON(classD);
+	     	 console.log(obj)
+	            $.each(obj, function (index, object) { 
+	            	console.log(object); 
 
+	            	  my_html +='<div id="rowR'+index+'"   class="form-group row"  style="padding: 10px;"> '; 
+			          my_html +='<label class="col-sm-4 text-sm-right"></label>';
+			          my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+			          my_html +='<select  name="route[]" class="form-control">';  
+	    		      my_html +='<option value="'+object.id+'">'+object.route_name+'</option> '; 
+			          my_html +='</select>'; 
+			          my_html +='</div>';
+			          my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+			          my_html +='<button type="button" id="R'+index+'" class="btn btn-danger btn_remove rt" >Remove</button>';
+			          my_html +='</div></div>'; 
+	                	 
+	            }) 
+
+	            $('#routeE').append(my_html);  
+		 } 
 	 
-    for(var i = 0; i < strArray.length; i++){ 
-    	$('#rE'+i).val(strArray[i]);  
-        }
+	 
+	 }); 
 
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/driver_map", 
+		 data: 'id='+id,
+	     datatype : "json",
+		 success: function(classD)  
+		 {   
+	     	 console.log(classD)
+			 var obj = $.parseJSON(classD);
+	     	 console.log(obj)
+	            $.each(obj, function (index, object) { 
+	            	console.log(object); 
+
+	            	  my_html +='<div id="rowR'+index+'"   class="form-group row"  style="padding: 10px;"> '; 
+			          my_html +='<label class="col-sm-4 text-sm-right"></label>';
+			          my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+			          my_html +='<select  name="driver[]"  class="form-control">';  
+	    		      my_html +='<option value="'+object.id+'">'+object.driver_name+'</option> '; 
+			          my_html +='</select>'; 
+			          my_html +='</div>';
+			          my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+			          my_html +='<button type="button" id="'+index+'" class="btn btn-danger btn_remove drv" >Remove</button>';
+			          my_html +='</div></div>'; 
+	                	 
+	            })  
+	            $('#driverE').append(my_html);  
+		 }  
+	 }); 
+	 
     
-	var drivers = $drivers; 
-	var strArray = drivers.split(","); 
-
-	var my_html ='';
-    for(var i = 0; i < strArray.length; i++){  
-        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
-        my_html +='<label class="col-sm-4 text-sm-right"></label>';
-        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<select  name="drivers[]" id="pickE'+i+'" class="form-control">'; 
-        my_html +='<option></option>';
-        my_html +='<?php  foreach ($drivers_show as $row) { ?>';
-        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->drivers_name;?></option> ';
-        my_html +='<?php } ?> ';
-        my_html +='</select>'; 
-        my_html +='</div>';
-        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove drv" >Remove</button>';
-        my_html +='</div></div>'; 
-    }
-
-    $('#driverE').html(my_html);
-    for(var i = 0; i < strArray.length; i++){ 
-	$('#pickE'+i).val(strArray[i]);  
-    }
+	
 	$('#editrow').modal('show');  
 }
 function add(){
