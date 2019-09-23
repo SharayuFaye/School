@@ -128,7 +128,7 @@ class m_notifications extends CI_Model {
         $this->db->where(array( 'u.token' =>$token)); 
         $this->db->or_where(array( 'n.sections_id' =>$sections_id));
         $this->db->or_where(array( 'n.roles_id' =>'Student'));
-        $this->db->order_by('datetime','asc');
+        $this->db->order_by('datetime','desc');
         
         $this->db->distinct();
         
