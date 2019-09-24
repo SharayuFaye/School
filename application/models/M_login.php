@@ -15,7 +15,7 @@ class m_login extends CI_Model {
 		    $data = $query->result() ;
 			return $query->result();
 		} 
-    } 
+    }  
     
     //App Functions
     
