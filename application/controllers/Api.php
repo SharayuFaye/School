@@ -90,7 +90,7 @@ class Api extends CI_Controller
                      'status' => 'expired'
                  ));
              }
-             else {
+             else { 
                 $rand = rand(10001, 99999);
                 $date = date('Y/m/d-H:m:s') ;
                 $random = $rand .'_'.  $date ; 
