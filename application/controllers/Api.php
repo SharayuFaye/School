@@ -82,9 +82,9 @@ class Api extends CI_Controller
 	 $fcm_token = $request['fcm_token'];
         
         if ($username != '' && $password!='') { 
-            $data = $this->m_login->check($username,$password);
+            $data = $this->m_login->check_token($username,$password);
              if($data == 'False'){
-                 $msg = "Login credentials are  Incorrect.Please,try again!";
+                 $msg = "Login credentials are  Incorrect or already logged in.Please,try again!";
          		 $this->response(array(
                      'msg' => $msg,
                      'status' => 'expired'
