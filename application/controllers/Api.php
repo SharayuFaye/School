@@ -1389,4 +1389,32 @@ class Api extends CI_Controller
 		$this->m_location->update_location($lat, $lon, $bus_id[0]->id);
 	}
 
+	/*Get the pickup points for the student. Called from bus.page.ts*/
+	function get_student_route_post(){
+		$this->load->model('m_route');
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		log_message("debug","Token ::::: " . $token);
+		
+		$route = $this->m_route->get_student_route($token);
+
+		$this->response(array(
+			'route'=> $route
+		));
+	}
+
+	/*Get the current location of the bus for a student. Called from bus.page.ts*/
+	function get_bus_location_post(){
+		$this->load->model('m_route');
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$location = $this->m_route->get_bus_location($token);
+		$this->response(array(
+			'location' => $location
+		));
+	}
+		
+
 }
