@@ -111,6 +111,7 @@ $route['activity_add'] = 'welcome/activity_add';
 
 
 $route['route_map'] = 'welcome/route_map';
+$route['driver_map'] = 'welcome/driver_map';
 $route['bus_route_show'] = 'welcome/bus_route_show';
 
 

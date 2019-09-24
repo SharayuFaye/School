@@ -86,10 +86,10 @@
 									<thead>
 										<tr>
 											<th>Sr No</th>
-											<th>Bus No</th>
-<!-- 											<th>Routes</th>  -->
-											<th>Student Strength</th> 
-<!-- 										    <th>Drivers</th>  -->
+											<th>Bus No</th> 
+											<th>Student Strength</th> 		
+											<th>Routes</th>  
+  										    <th>Drivers</th>  
 											<th class="myclass" style=" background: none !important;">Actions</th>
 										</tr>
 									</thead>
@@ -99,6 +99,21 @@
 											<td><?php echo $i;?></td>
 											<td><?php echo $row->bus_number;?></td>
 											<td><?php echo $row->student_strength;?></td>
+											<td>
+											<?php $pick ='';
+											if($route_map_show){  foreach ($route_map_show as $drv) {
+											    if($drv->bus_id == $row->id){?>
+											<?php $pick .=  $drv->route_name; $pick .=' , ';  ?>
+											<?php } }  echo rtrim($pick,' , '); } ?>
+											</td>
+											<td>
+											<?php $pick ='';
+											if($driver_map_show){  foreach ($driver_map_show as $drv) {
+											    if($drv->bus_id == $row->id){?>
+											<?php $pick .=  $drv->drivers_name; $pick .=' , ';  ?>
+											<?php } }  echo rtrim($pick,' , '); } ?>
+											</td>
+											
 									<td>
 												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->bus_number;?>','<?php echo $row->student_strength;?>')"></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)"></i></a>
@@ -165,11 +180,7 @@ var d = document.getElementById("bus");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
-
-
-$(document).ready(function(){
-
- });
+ 
 function edit($id,$bus_no,$student_strength){ 
  
 	$('#id').val($id);      
@@ -177,7 +188,6 @@ function edit($id,$bus_no,$student_strength){
 	//$('#bus_routes').val($bus_routes); 
 	$('#student_strength').val($student_strength);  
 	var id = $id;  
-	var my_html ='';
 
 	 console.log(id)
 	 $.ajax({
@@ -187,9 +197,10 @@ function edit($id,$bus_no,$student_strength){
 	     datatype : "json",
 		 success: function(classD)  
 		 {   
-	     	 console.log(classD)
+	     	 //console.log(classD)
+	     	var my_html ='';
 			 var obj = $.parseJSON(classD);
-	     	 console.log(obj)
+	     	// console.log(obj)
 	            $.each(obj, function (index, object) { 
 	            	console.log(object); 
 
@@ -197,7 +208,7 @@ function edit($id,$bus_no,$student_strength){
 			          my_html +='<label class="col-sm-4 text-sm-right"></label>';
 			          my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
 			          my_html +='<select  name="route[]" class="form-control">';  
-	    		      my_html +='<option value="'+object.id+'">'+object.route_name+'</option> '; 
+	    		      my_html +='<option value="'+object.route_id+'">'+object.route_name+'</option> '; 
 			          my_html +='</select>'; 
 			          my_html +='</div>';
 			          my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
@@ -206,7 +217,7 @@ function edit($id,$bus_no,$student_strength){
 	                	 
 	            }) 
 
-	            $('#routeE').append(my_html);  
+	            $('#routeE').html(my_html);  
 		 } 
 	 
 	 
@@ -219,17 +230,18 @@ function edit($id,$bus_no,$student_strength){
 	     datatype : "json",
 		 success: function(classD)  
 		 {   
-	     	 console.log(classD)
-			 var obj = $.parseJSON(classD);
-	     	 console.log(obj)
-	            $.each(obj, function (index, object) { 
+	     	 //console.log(classD)
+	     	var my_html ='';
+			 var obj1 = $.parseJSON(classD);
+	     	// console.log(obj)
+	            $.each(obj1, function (index, object) { 
 	            	console.log(object); 
 
-	            	  my_html +='<div id="rowR'+index+'"   class="form-group row"  style="padding: 10px;"> '; 
+	            	  my_html +='<div id="row'+index+'"   class="form-group row"  style="padding: 10px;"> '; 
 			          my_html +='<label class="col-sm-4 text-sm-right"></label>';
 			          my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-			          my_html +='<select  name="driver[]"  class="form-control">';  
-	    		      my_html +='<option value="'+object.id+'">'+object.driver_name+'</option> '; 
+			          my_html +='<select  name="drivers[]"  class="form-control">';  
+	    		      my_html +='<option value="'+object.drivers_id+'">'+object.drivers_name+'</option> '; 
 			          my_html +='</select>'; 
 			          my_html +='</div>';
 			          my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
@@ -237,7 +249,7 @@ function edit($id,$bus_no,$student_strength){
 			          my_html +='</div></div>'; 
 	                	 
 	            })  
-	            $('#driverE').append(my_html);  
+	            $('#driverE').html(my_html);  
 		 }  
 	 }); 
 	 

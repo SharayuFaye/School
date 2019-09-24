@@ -64,27 +64,40 @@ class m_bus extends CI_Model {
     		$this->db->update('bus', $target);
     		
     		
-    		$target = array(
-    		    "school_id"=>$school, 
-    		    "route_id"=>$route,
-    		    "updated_date"=>date('Y-m-d'),
-    		    "updated_by"=>$this->session->userdata['id'],
-    		);
-    		$this->db->where(array( 'bus_id' => $id));
-    		$this->db->update('route_map', $target);
     		
-    		$target = array(
-    		    "school_id"=>$school, 
-    		    "drivers_id"=>$drivers,
-    		    "updated_date"=>date('Y-m-d'),
-    		    "updated_by"=>$this->session->userdata['id'],
-    		);
-    		$this->db->where(array( 'bus_id' => $id));
-    		$this->db->update('driver_map', $target);
-    		
-    		
-    		
-    		return true; 
+    		if($id){
+    		    $this->db->where(array( 'bus_id' =>$id));
+    		    $query = $this->db->delete('route_map');
+    		    
+    		    $r = explode(',',$route);
+    		    foreach($r as $Rid){
+    		        $target = array(
+    		            "school_id"=>$school,
+    		            "bus_id"=>$id,
+    		            "route_id"=>$Rid,
+    		            "created_date"=>date('Y-m-d'),
+    		            "created_by"=>$this->session->userdata['id'],
+    		        );
+    		        $this->db->insert('route_map', $target);
+    		    }
+    		    
+    		    $this->db->where(array( 'bus_id' =>$id));
+    		    $query = $this->db->delete('driver_map');
+    		    $d = explode(',',$drivers);
+    		    foreach($d as $Did){
+    		        $target = array(
+    		            "school_id"=>$school,
+    		            "bus_id"=>$id,
+    		            "drivers_id"=>$Did,
+    		            "created_date"=>date('Y-m-d'),
+    		            "created_by"=>$this->session->userdata['id'],
+    		        );
+    		        $this->db->insert('driver_map', $target);
+    		    }
+    		    
+    		    return true;
+    		}
+    		 
         }
     }
     function bus_show(){ 
@@ -101,6 +114,15 @@ class m_bus extends CI_Model {
 	    } 
     } 
     function bus_delete($id){ 
+        
+        
+        $this->db->where(array( 'bus_id' =>$id));
+        $query = $this->db->delete('route_map');
+        
+        $this->db->where(array( 'bus_id' =>$id));
+        $query = $this->db->delete('driver_map');
+        
+        
 		$this->db->where(array( 'id' =>$id));
 		$query = $this->db->delete('bus');
 		if($query)
@@ -136,9 +158,9 @@ class m_bus extends CI_Model {
     }
     
     function driver_map($bus_id){
-        $this->db->select('rm.*,r.driver_name');
+        $this->db->select('rm.*,r.drivers_name');
         $this->db->from('driver_map rm');
-        $this->db->join('driver r', 'r.id=rm.drivers_id', 'left');
+        $this->db->join('drivers r', 'r.id=rm.drivers_id', 'left');
         $this->db->where(array( 'rm.bus_id' => $bus_id));
         $query = $this->db->get();
         if($query)
@@ -146,6 +168,30 @@ class m_bus extends CI_Model {
             return $query->result();
         }
     }
+    
+    
+    function route_map_show(){
+        $this->db->select('rm.*,r.route_name');
+        $this->db->from('route_map rm');
+        $this->db->join('route r', 'r.id=rm.route_id', 'left'); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    function driver_map_show(){
+        $this->db->select('rm.*,r.drivers_name');
+        $this->db->from('driver_map rm');
+        $this->db->join('drivers r', 'r.id=rm.drivers_id', 'left'); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
     
      function bus_fetch($class_id){ 
 	    $this->db->select("*"); 

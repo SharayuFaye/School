@@ -880,9 +880,7 @@ class Welcome extends CI_Controller {
 	  		$this->load->model('m_bus');
 	  		$this->load->model('m_sel_route');
 	  		$this->load->model('m_drivers'); 
-
-	  		 
-	  		
+ 
 	        if($this->input->post('save_bus')){
 	            $bus_number = $this->input->post('bus_number') ;
 	           // $route = $this->input->post('route') ;
@@ -952,6 +950,8 @@ class Welcome extends CI_Controller {
 	            }
 	        }
 	        
+	        $this->data['route_map_show'] =$this->m_bus->route_map_show();
+	        $this->data['driver_map_show'] =$this->m_bus->driver_map_show(); 
 	        $this->data['route_show'] =$this->m_sel_route->route_show_id(); 
 	        $this->data['drivers_show'] =$this->m_drivers->drivers_show();     
 	        $this->data['bus_show'] =$this->m_bus->bus_show_id(); 
