@@ -69,13 +69,13 @@
     											    if($pickup[$i] == $row1->id){
     											        $pick .=  $row1->pickup_point;
     											    }
-											    }$pick .= ' , ';
+											    }$pick .= ',';
 											} 
 											
-											echo rtrim($pick,' , ');?>
+											echo rtrim($pick,',');?>
 											</td>  
 									        <td class="actions"> 
-												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick='edit("<?php echo $row->id;?>", "<?php echo $row->route_name;?>", "<?php echo $row->pickup_point_id;?>")' ></i></a>
+												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick='edit("<?php echo $row->id;?>", "<?php echo $row->route_name;?>")' ></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 											</td>
 										</tr>
@@ -88,54 +88,46 @@
 					<!-- end: page -->
 				</section>
 
-<?php include('include/footer.php');?>			
+<?php include('include/footer.php');?>	 
+<!-- Vendor -->
+<script src="<?php echo base_url(); ?>vendor/jquery/jquery.js"></script>
+<script src="<?php echo base_url(); ?>vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+<script src="<?php echo base_url(); ?>vendor/popper/umd/popper.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/bootstrap/js/bootstrap.js"></script>
+<script src="<?php echo base_url(); ?>vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo base_url(); ?>vendor/common/common.js"></script>
+<script src="<?php echo base_url(); ?>vendor/nanoscroller/nanoscroller.js"></script>
+<script src="<?php echo base_url(); ?>vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="<?php echo base_url(); ?>vendor/jquery-placeholder/jquery-placeholder.js"></script>
 
-		<!-- Vendor -->
-		<script src="<?php echo base_url(); ?>vendor/jquery/jquery.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/popper/umd/popper.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/bootstrap/js/bootstrap.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/common/common.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/nanoscroller/nanoscroller.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/magnific-popup/jquery.magnific-popup.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/jquery-placeholder/jquery-placeholder.js"></script>
-		
-		<!-- Specific Page Vendor -->
-		<script src="<?php echo base_url(); ?>vendor/select2/js/select2.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/dataTables.buttons.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.bootstrap4.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-		<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
-		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
-		
-		<!-- Theme Base, Components and Settings -->
-		<script src="<?php echo base_url(); ?>js/theme.js"></script>
-		
-		<!-- Theme Custom -->
-		<script src="<?php echo base_url(); ?>js/custom.js"></script>
-		
-		<!-- Theme Initialization Files -->
-		<script src="<?php echo base_url(); ?>js/theme.init.js"></script>
-
-		<!-- Examples<?php echo base_url(); ?> -->
-		<script src="js/examples/examples.datatables.default.js"></script>
-		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
-		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
-	
-		
-
+<!-- Specific Page Vendor -->
+<script src="<?php echo base_url(); ?>vendor/select2/js/select2.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.bootstrap4.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
+<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script> 
+<!-- Theme Base, Components and Settings -->
+<script src="<?php echo base_url(); ?>js/theme.js"></script> 
+<!-- Theme Custom -->
+<script src="<?php echo base_url(); ?>js/custom.js"></script> 
+<!-- Theme Initialization Files -->
+<script src="<?php echo base_url(); ?>js/theme.init.js"></script> 
+<!-- Examples<?php echo base_url(); ?> -->
+<script src="js/examples/examples.datatables.default.js"></script>
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
+	 
 <script type="text/javascript">
 var d = document.getElementById("sel_route");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
- 
-
+  
 function add(){
 	$('#addrow').modal('show'); 
 }
@@ -149,35 +141,54 @@ $(document).on('click', '.E', function(){
    $('#row'+button_id+'').remove();  
 })
 
-function edit($id,$route,$pickup_point){ 
+function edit($id,$route){ 
 
 	$('#id').val($id);      
 	$('#routee').val($route);  
- 	var pickup_point = $pickup_point; 
-	var strArray = JSON.parse(pickup_point); 
-	var my_html ='';
-    for(var i = 0; i < strArray.length; i++){ 
 
-        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
-        my_html +='<label class="col-sm-4 text-sm-right"></label>';
-        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control">'; 
-        my_html +='<option></option>';
-        my_html +='<?php  foreach ($pickup_show as $row) { ?>';
-        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
-        my_html +='<?php } ?> ';
-        my_html +='</select>'; 
-        my_html +='</div>';
-        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
-        my_html +='</div></div>'; 
-    }
+	var id =$id;
+	
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/transportation_fetch", 
+		 data: 'route='+id,
+	     datatype : "json",
+		 success: function(classD)  
+		 {    
+	         var my_html ='';
+			 var obj = $.parseJSON(classD);
+	     	 // console.log(obj)  
+	           // 	console.log(obj[0].pickup_point_id);   
+	         var pickup_point =   obj[0].pickup_point_id ;  
+    		 console.log(pickup_point); 
+    		var strArray = JSON.parse(pickup_point); 
+    		var my_html ='';
+    	    for(var i = 0; i < strArray.length; i++){  
+    	        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
+    	        my_html +='<label class="col-sm-4 text-sm-right"></label>';
+    	        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+    	        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control">';   
+    	        my_html +='<?php  foreach ($pickup_show as $row) { ?>';
+    	        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> '; 
+    	        my_html +='<?php } ?> ';
+    	        my_html +='</select>'; 
+    	        my_html +='</div>';
+    	        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+    	        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
+    	        my_html +='</div></div>'; 
+    	    }
+    
+    	    $('#pickupE').html(my_html);
+    	    for(var i = 0; i < strArray.length; i++){ 
+    			$('#pickE'+i).val(strArray[i]);  
+    			console.log(strArray[i])  
+    	    }
+    		$('#editrow').modal('show'); 
 
-    $('#pickupE').html(my_html);
-    for(var i = 0; i < strArray.length; i++){ 
-	$('#pickE'+i).val(strArray[i]);  
-    }
-	$('#editrow').modal('show'); 
+		 }  
+	 }); 
+
+ 	
 }
  
 function edit_pickup(){ 
