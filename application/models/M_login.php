@@ -19,6 +19,25 @@ class m_login extends CI_Model {
     
     //App Functions
     
+    function check_token($username,$password){
+        $this->db->select("*");
+        $this->db->from('users');
+        $this->db->where(array( 'username' => $username));
+        $this->db->where(array( 'password' => $password));
+        $this->db->where( array( 'token' => '' ));  
+        $this->db->where( array( 'fcm_token' => '' ));   
+        $query = $this->db->get();
+        
+        if($query->num_rows() == 0){
+            $data = 'False';
+            return $data;
+        }
+        else{
+            $data = $query->result() ;
+            return $query->result();
+        }
+    }
+    
     
     function set_gcm($token,$gcm){
         $this->db->select("*");
