@@ -20,12 +20,13 @@ class m_login extends CI_Model {
     //App Functions
     
     function check_token($username,$password){
-        $this->db->select("*");
-        $this->db->from('users');
-        $this->db->where(array( 'username' => $username));
-        $this->db->where(array( 'password' => $password));
-        $this->db->where( array( 'token' => '' ));  
-        $this->db->where( array( 'fcm_token' => '' ));   
+        $this->db->select("u.*");
+        $this->db->from('users u');
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left'); 
+        $this->db->where(array( 'u.username' => $username));
+        $this->db->where(array( 'u.password' => $password));
+        $this->db->where( array( 'ut.token' => '' ));  
+        $this->db->where( array( 'ut.fcm_token' => '' ));   
         $query = $this->db->get();
         
         if($query->num_rows() == 0){
@@ -72,12 +73,13 @@ class m_login extends CI_Model {
 //             $this->db->insert('users', $target);
 //             return true;
 //         }else{
-            $target = array(
+        $target = array(
+                "user_id" => $id,
                 "token" => $token,
                 "fcm_token" => $fcm_token
             );
-            $this->db->where(array( 'id' => $id));
-            $this->db->update('users', $target);
+             
+            $this->db->insert('tokens', $target);
             return true; 
 //         }
     }
@@ -98,9 +100,15 @@ class m_login extends CI_Model {
     
     
     function get_users($token){
-        $this->db->select("*");
-        $this->db->from('users');
-        $this->db->where(array( 'token' => $token)); 
+        
+        
+        $this->db->select('u.*,ut.token,ut.fcm_token');
+        $this->db->from('users u');
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        $this->db->where(array( 'ut.token' => $token));  
+//         $this->db->select("*");
+//         $this->db->from('users');
+//         $this->db->where(array( 'token' => $token)); 
         $query = $this->db->get();
         if($query->num_rows() == 0){
             $data = 'False';
@@ -114,8 +122,9 @@ class m_login extends CI_Model {
     
     function check_password($token,$old_password){
         $this->db->select("*");
-        $this->db->from('users');
-        $this->db->where(array( 'token' => $token));
+        $this->db->from('users u');
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        $this->db->where(array( 'ut.token' => $token)); 
         $this->db->where(array( 'password' => $old_password));
         $query = $this->db->get();
         if($query->num_rows() == 1){
@@ -143,10 +152,19 @@ class m_login extends CI_Model {
         } 
     }
     function set_password($token,$password){ 
+        
+        
+        $this->db->select("u.*");
+        $this->db->from('users u');
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        $this->db->where(array( 'ut.token' => $token)); 
+        $query = $this->db->get();
+        $data = $query->result() ;
+        
         $target = array(
             "password" => $password
         );
-        $this->db->where(array( 'token' => $token));
+        $this->db->where(array( 'id' => $data[0]->id));
         $this->db->update('users', $target);
         return true; 
     }
@@ -167,7 +185,7 @@ class m_login extends CI_Model {
             "fcm_token" => ''
         );
         $this->db->where(array( 'token' => $token));
-        $this->db->update('users', $target);
+        $this->db->update('tokens', $target);
         return true;
     }
 }
