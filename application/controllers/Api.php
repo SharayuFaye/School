@@ -83,14 +83,14 @@ class Api extends CI_Controller
         
         if ($username != '' && $password!='') { 
             
-            $dataCheck = $this->m_login->check_token($username,$password);
-            if($dataCheck == 'False'){
-                $msg = "User already logged in !";
-                $this->response(array(
-                    'msg' => $msg,
-                    'status' => 'expired'
-                ));
-            } 
+//             $dataCheck = $this->m_login->check_token($username,$password);
+//             if($dataCheck == 'False'){
+//                 $msg = "User already logged in !";
+//                 $this->response(array(
+//                     'msg' => $msg,
+//                     'status' => 'expired'
+//                 ));
+//             } 
             
             $data = $this->m_login->check($username,$password);
              if($data == 'False'){
