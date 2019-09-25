@@ -311,7 +311,8 @@ class m_students extends CI_Model {
         $this->db->join('school s', 'st.school_id=s.id', 'left');
         $this->db->join('sections sec', 'st.sections_id=sec.id', 'left');
         $this->db->join('users u', 'st.users_id=u.id', 'left');
-        $this->db->where(array( 'u.token' =>$token));
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        $this->db->where(array( 'ut.token' => $token)); 
         
         $query = $this->db->get();
         if($query)
@@ -325,7 +326,8 @@ class m_students extends CI_Model {
         $this->db->from('students st');
         $this->db->join('school s', 'st.school_id=s.id', 'left');
         $this->db->join('users u', 'st.users_id=u.id', 'left');
-        $this->db->where(array( 'u.token' =>$token));
+        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        $this->db->where(array( 'ut.token' => $token)); 
         $this->db->where(array( 'st.id' =>$id));
         
         $query = $this->db->get();
