@@ -160,6 +160,7 @@ class m_sections extends CI_Model {
         $this->db->select("id,sections,subject"); 
 		$this->db->from('sections'); 
 		$this->db->where(array( 'class_id' => $class_id ));
+		$this->db->where(array( 'school_id' => $this->session->userdata['school']));
 		$this->db->order_by('sections','asc');
 		$query = $this->db->get(); 
 		if($query)
