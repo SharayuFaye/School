@@ -758,14 +758,14 @@ class Api extends CI_Controller
             
             $students = $this->m_students->students_show_app($token,$student_id); 
             
-            
+           log_message('debug',print_r($students, true)); 
 //         $student_id = $request['student_id'];
 //         if ($token != '') {
 //             $users = $this->m_login->get_users($token);
 //             $students = $this->m_students->students_show_app_id($token,$student_id);
              
             $timetable = $this->m_timetables->timetables_show_app($students[0]->class_id,$students[0]->sections_id); 
-            
+           log_message('debug',print_r($timetable, true)); 
             $d = explode('_',$token);
              $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             if($d[1] <   $endDay){
