@@ -69,6 +69,18 @@ class Welcome extends CI_Controller {
 		if(!isset($this->session->userdata['username']) ){
 			$this->load->view('login'); 
 		} else{
+		    
+		    
+		    $this->db->select('stud.student_name,stud.roll_number,a.*,t.teacher_name');
+		    $this->db->from('attendance a');
+		    $this->db->join('students stud', 'stud.id=a.students_id' ,'left');
+		    $this->db->join('sections s', 's.id=stud.sections_id', 'left');
+		    $this->db->join('teacher t', 't.id=s.teachers_id', 'left');
+		    $this->db->where(array( 'stud.users_id' => 114 ));
+		    $query = $this->db->get(); 
+		    print_r($query->result());exit();
+		    
+		    
 		    $this->load->model('m_school');
 		    $this->load->model('m_students');
 		    $this->load->model('m_teachers');
