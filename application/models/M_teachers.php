@@ -215,6 +215,20 @@ class m_teachers extends CI_Model {
         }
     }
     
+    function teachers_show_section_app($sections){
+        
+        $this->db->select('t.*,s.sections,c.class');
+        $this->db->from('teachers t');
+        $this->db->join('sections s', 's.teachers_id=t.id', 'left');
+        $this->db->join('class c', 'c.id=s.class_id', 'left');
+        $this->db->where(array( 's.id' => $sections));
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+    }
     
     function teachers_show_user_app($teachers_id){
         

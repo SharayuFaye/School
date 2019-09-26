@@ -38,7 +38,7 @@ class m_attendances extends CI_Model {
     
     function attendances_show_app($user_id){
         
-        $this->db->select('stud.student_name,stud.roll_number,a.*');
+        $this->db->select('stud.student_name,stud.roll_number,a.*,t.teacher_name');
         $this->db->from('attendance a');
         $this->db->join('students stud', 'stud.id=a.students_id' ,'left');
         $this->db->join('sections s', 's.id=stud.sections_id', 'left');
