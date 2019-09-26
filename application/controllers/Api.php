@@ -397,7 +397,8 @@ class Api extends CI_Controller
             if($d[1] <   $endDay){
                 $this->response(array(
                     'users' => $users,
-                    'students' => $students, 
+                    'students' => $students,
+                    'teachers' => $teachers, 
                     'attendances' => $attendances, 
                     'status' => 'live'
                 ));
