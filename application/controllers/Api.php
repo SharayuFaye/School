@@ -423,6 +423,7 @@ class Api extends CI_Controller
         $this->load->model('m_login');
         $this->load->model('m_students'); ;
         $this->load->model('m_attendances');
+        $this->load->model('m_teachers'); 
         
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
@@ -435,12 +436,15 @@ class Api extends CI_Controller
             
             $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
             
+            $teachers = $this->m_teachers->teachers_show_section_app($students[0]->sections_id);
+            
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             if($d[1] <   $endDay){
                 $this->response(array(
                     'users' => $users,
                     'students' => $students,
+                    'teachers' => $teachers, 
                     'attendances' => $attendances,
                     'status' => 'live'
                 ));
