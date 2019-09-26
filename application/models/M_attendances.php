@@ -41,6 +41,8 @@ class m_attendances extends CI_Model {
         $this->db->select('stud.student_name,stud.roll_number,a.*');
         $this->db->from('attendance a');
         $this->db->join('students stud', 'stud.id=a.students_id' ,'left');
+        $this->db->join('sections s', 's.id=stud.sections_id', 'left');
+        $this->db->join('teacher t', 't.id=s.teachers_id', 'left');
         $this->db->where(array( 'stud.users_id' => $user_id )); 
         $query = $this->db->get();
         
