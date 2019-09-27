@@ -482,16 +482,19 @@ function validateImageE(id) {
 				    $.each(obj, function (index, object) { 
 	                	console.log(object); 
 	                 	var pickup_point = object['pickup_point_id']; 
-	                	var strArray = pickup_point.split(","); 
+// 	                 	console.log($.parseJSON(pickup_point)); 
+	                	var strArray = $.parseJSON(pickup_point); 
 	                 
 	                    for(var i = 0; i < strArray.length; i++){ 
-
-	                        var my_html =  '<?php  foreach ($route_show as $row) { ?>';
+	                    	 
+//                             console.log(strArray[i]); 
+	                        var my_html =  '<?php  foreach ($route_show as $row) { ?>';  
 	                        if(strArray[i] == <?php echo $row->id; ?>){
+	                     //       console.log(<?php echo $row->id; ?>); 
 	                            my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
 	                        }
 	                            my_html +='<?php } ?> '; 
-	                        
+	                            console.log(my_html); 
 	                        $('#pickup_point_sel').append(my_html);
 		
 
@@ -570,7 +573,7 @@ function validateImageE(id) {
                 $.each(obj, function (index, object) { 
                 	console.log(object); 
                 	var pickup_point = object['pickup_point_id']; 
-                	var strArray = pickup_point.split(","); 
+                	var strArray = $.parseJSON(pickup_point); 
                  
                     for(var i = 0; i < strArray.length; i++){  
 
