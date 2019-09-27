@@ -126,21 +126,21 @@ class m_students extends CI_Model {
     }
     function students_show(){  
 
-	    $this->db->select('st.*,u.password as password_user,s.school_name,c.class,sec.sections,t.teacher_name,trans.pickup_point,b.bus_number,r.route_name,rm.route_id,trans.id as trans_id');
+	    $this->db->select('st.*,u.password as password_user,s.school_name,c.class,sec.sections,t.teacher_name,trans.pickup_point,b.bus_number,r.route_name,r.id as route_id,trans.id as trans_id');
 		$this->db->from('students st'); 
 	    $this->db->join('school s', 'st.school_id=s.id', 'left');  
 	    $this->db->join('class c', 'st.class_id=c.id', 'left');  
 	    $this->db->join('sections sec', 'st.sections_id=sec.id', 'left');  
 	    $this->db->join('teachers t', 'st.teachers_id=t.id', 'left');  
 	    $this->db->join('pickup_point trans', 'st.transportation_id=trans.id', 'left');
-	    $this->db->join('bus b', 'st.bus_id=b.id', 'left');
-	    $this->db->join('route_map rm', 'st.route_id=rm.route_id', 'left');
+	    $this->db->join('bus b', 'st.bus_id=b.id', 'left'); 
 	    $this->db->join('route r', 'st.route_id=r.id', 'left');
 	    $this->db->join('users u', 'st.users_id=u.id', 'left');  
 	    $this->db->where(array( 'st.school_id' => $this->session->userdata['school']));
 	    $this->db->where(array( 'st.active' => 1));
 
 		$query = $this->db->get(); 
+		 
 		if($query)
 	    {
 	        return $query->result();
