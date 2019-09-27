@@ -1437,5 +1437,37 @@ class Api extends CI_Controller
 		));
 	}
 		
+	/*Function for submitting leaves. Check if leave is already applied for the dates*/
+	function apply_leave_post(){
+		$this->load->model("m_attendances");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$start_date = date("Y-m-d",strtotime(date($request['start_date'])));
+		$end_date = date("Y-m-d",strtotime(date($request['end_date'])));
+		$reason = $request['reason'];
+		$approver = $request['teacher'];
+		$desc = $request['description'];
+		$student = $request['student'];
+
+		$result = $this->m_attendances->apply_leave($student, $start_date, $end_date, $reason, $approver, $desc);
+		$this->response(array(
+			'msg' => $result
+		));
+	}
+
+	/*Get leaves by student id */
+	function get_leaves_post(){
+		$this->load->model("m_attendances");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$student = $request['student'];
+
+		$result = $this->m_attendances->get_leaves($student);
+		$this->response(array(
+			'leaves'=> $result
+		));
+	}
+		
 
 }

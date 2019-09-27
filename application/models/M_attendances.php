@@ -42,7 +42,7 @@ class m_attendances extends CI_Model {
         $this->db->from('attendance a');
         $this->db->join('students stud', 'stud.id=a.students_id' ,'left');
         $this->db->join('sections s', 's.id=stud.sections_id', 'left');
-        $this->db->join('teacher t', 't.id=s.teachers_id', 'left');
+        $this->db->join('teachers t', 't.id=s.teachers_id', 'left');
         $this->db->where(array( 'stud.users_id' => $user_id )); 
         $query = $this->db->get();
         
@@ -104,5 +104,43 @@ class m_attendances extends CI_Model {
             return $query->result();
         }
     } 
+
+	function apply_leave($student, $start_date, $end_date, $reason, $approver, $desc){
+		
+		$leave = $this->db->select('*')
+		->from('leaves')
+		->where('start_date <=', $start_date)
+		->where('end_date >=', $end_date)
+		->where('student_id =', $student)
+		->get();
+
+		log_message('debug', $this->db->last_query());
+
+		if($leave->num_rows() > 0){
+			return "Leave already applied for this date !";
+		}else{
+			$data = array(
+					'student_id' => $student,
+					'start_date' => $start_date,
+					'end_date'   => $end_date,
+					'reason'	 => $reason,
+					'approver'	 => $approver,
+					'description'=> $desc
+				);
+			$this->db->insert('leaves', $data);
+			return "Leave successfully applied";
+		}
+	}
+
+	function get_leaves($student){
+		return $this->db->select('*')
+				->from('leaves')
+				->where(array('student_id' => $student))
+				->get()
+				->result();
+	}
+
+
+
 }
 ?>
