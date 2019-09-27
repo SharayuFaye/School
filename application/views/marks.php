@@ -139,7 +139,7 @@ var n = document.getElementById("nav1");
 n.className += " nav-expanded nav-active"; 
 
 
-function edit($id,$teacher,$student_name,$date,$exam_type,$marks,$outof,$subject,$competence){  
+function edit($id,$teacher,$student_name,$date,$exam_type,$marks,$outof,$subject,$competence,$per){  
 	$('#id').val($id);      
 	$('#teacher').val($teacher);
 	$('#student').val($student_name); 
@@ -154,6 +154,8 @@ function edit($id,$teacher,$student_name,$date,$exam_type,$marks,$outof,$subject
 	 $('#subject').append(opt); 
 	 
 	$('#competence').val($competence);
+	$('#percentage').val($per);
+	
 	$('#editrow').modal('show'); 
 }
 function add(){
