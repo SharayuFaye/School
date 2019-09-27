@@ -318,14 +318,14 @@ function ValidateEmailE(v)
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">School Mobile:</label>
 				<div class="col-sm-8"><span id="msg1m" style="color:red"></span>
-					<input type="number" required name="school_mobile" id="mobile1" onchange="phonenumber(this.value)" class="form-control">
+					<input type="text" maxlength="10"  required name="school_mobile" id="mobile1" onchange="phonenumber(this.value)" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Alternate Mobile:</label>
 				<div class="col-sm-8"> <span id="msg2m" style="color:red"></span>
 				<span id="msg21" style="color:red"></span>
-					<input type="number" required name="school_mobile2" onchange="phonenumbercheck(this.value)" class="form-control">
+					<input type="text" maxlength="10"  required name="school_mobile2" onchange="phonenumbercheck(this.value)" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
@@ -394,14 +394,14 @@ function ValidateEmailE(v)
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">School Mobile:</label> 
 				<div class="col-sm-8"><span id="msg_e" style="color:red"></span>
-					<input type="number" required id="school_mobile"   name="school_mobile"  onchange="phonenumber_edit(this.value)"  class="form-control">
+					<input type="text" maxlength="10"  required id="school_mobile"   name="school_mobile"  onchange="phonenumber_edit(this.value)"  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Alternate Mobile:</label>
 				<div class="col-sm-8"><span id="msg_e2" style="color:red"></span>
 				<span id="msg_e3" style="color:red"></span>
-					<input type="number" required name="school_mobile2" id="school_mobile2" onchange="phonenumbercheck_edit(this.value)"  class="form-control">
+					<input type="text" maxlength="10"  required name="school_mobile2" id="school_mobile2" onchange="phonenumbercheck_edit(this.value)"  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">

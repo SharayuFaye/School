@@ -709,7 +709,7 @@ function validateImageE(id) {
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
 					<div class="col-sm-8">
-						<input type="number" min="1"  name="roll_number" class="form-control">
+						<input type="number" min="1" max='100' name="roll_number" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -739,7 +739,7 @@ function validateImageE(id) {
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Father Mob:</label>
 					<div class="col-sm-8"><span id="p_mob_msg" style="color:red"></span>
-						<input type="text"  maxlength="100" required  id="p_mob"  name="parent_mob" class="form-control">
+						<input type="text"  maxlength="10" required  id="p_mob"  name="parent_mob" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -757,7 +757,7 @@ function validateImageE(id) {
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Mother Mob:</label>
 					<div class="col-sm-8"><span id="m_mob_msg" style="color:red"></span>
-						<input type="text" maxlength="100"  id="m_mob"  name="mother_mob"  class="form-control">
+						<input type="text" maxlength="10"  id="m_mob"  name="mother_mob"  class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -883,7 +883,7 @@ function validateImageE(id) {
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
 				<div class="col-sm-8">
-					<input type="number"  min ="1" id="student_rollno" name="roll_number" class="form-control">
+					<input type="number"  min ="1" max='100' id="student_rollno" name="roll_number" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -914,7 +914,7 @@ function validateImageE(id) {
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Father Mob:</label>
 					<div class="col-sm-8"><span id="parent_mob_msg" style="color:red"></span>
-						<input type="text"  maxlength="100" required  id="parent_mob"  name="parent_mob" class="form-control">
+						<input type="text"  maxlength="10" required  id="parent_mob"  name="parent_mob" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -932,7 +932,7 @@ function validateImageE(id) {
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Mother Mob:</label>
 					<div class="col-sm-8"><span id="mother_mob_msg" style="color:red"></span>
-						<input type="text"    maxlength="100"  id="mother_mob" name="mother_mob" class="form-control">
+						<input type="text"    maxlength="10"  id="mother_mob" name="mother_mob" class="form-control">
 					</div>
 				</div>
 			<div class="form-group row">

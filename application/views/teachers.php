@@ -332,7 +332,7 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mobile:</label>
 				<div class="col-sm-8"><span id="teacher_mob_msg" style="color:red"></span>
-					<input type="number" name="teacher_mobile" id="teacher_mob" required  class="form-control">
+					<input type="text" maxlength="10" name="teacher_mobile" id="teacher_mob" required  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
@@ -460,7 +460,7 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mobile:</label>
 				<div class="col-sm-8"><span id="teacher_mobile_msg" style="color:red"></span>
-					<input type="number" id="teacher_mobile" required  name="teacher_mobile" class="form-control">
+					<input type="text"  maxlength="10" id="teacher_mobile" required  name="teacher_mobile" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">

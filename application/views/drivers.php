@@ -241,7 +241,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Mobile:</label>
 				<div class="col-sm-8"><span id="mob_msg" style="color:red"></span>
-					<input type="number"  min="1" id="mob"  name="drivers_mobile" class="form-control">
+					<input type="text" maxlength="10"  min="1" id="mob"  name="drivers_mobile" class="form-control">
 				</div>
 			</div>
 			 <div class="form-group row">
@@ -311,7 +311,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Mobile:</label>
 				<div class="col-sm-8"><span id="mobile_msg" style="color:red"></span>
-					<input type="number" name="drivers_mobile"     min="1"  id="drivers_mobile" class="form-control">
+					<input type="text" maxlength="10"  name="drivers_mobile"     min="1"  id="drivers_mobile" class="form-control">
 				</div>
 			</div>
 			
