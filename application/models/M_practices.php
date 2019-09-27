@@ -97,11 +97,12 @@ class m_practices extends CI_Model {
     function practices_id_show_app($school_id,$sections_id){
         
         
-        $this->db->select('f.*,c.class');
+        $this->db->select('f.sections_id,f.image,f.subject,f.date,f.school_id,c.class');
         $this->db->from('practice f'); 
         $this->db->join('class c', 'f.class_id=c.id', 'left');
         $this->db->where(array( 'f.school_id' => $school_id ));
         $this->db->where(array( 'f.sections_id' => $sections_id ));
+        $this->db->order_by('f.date','desc');
          
         $query = $this->db->get();
         if($query)
