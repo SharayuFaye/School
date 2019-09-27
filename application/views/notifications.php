@@ -67,7 +67,7 @@
 					<?php $i=1; foreach ($notifications_show as $row) { ?>
 					<tr data-item-id="1">
 						<td><?php echo $i;?></td> 
-						<td><?php echo $row->roles_id;?></td> 
+						<td><?php echo ucfirst($row->roles_id);?></td> 
 						<td><?php echo $row->class;?></td> 
 						<td><?php echo $row->sections;?></td> 
 						<td><?php echo $row->student_name;?></td> 
@@ -137,7 +137,7 @@ n.className += " nav-expanded nav-active";
 function edit($id,$role,$class_sel_id,$section_sel_id,$section,$student_id,$title,$massage,$date_time){ 
 	
 	$('#id').val($id); 
-	$('#role2').val($role);     
+	$('#role2').val($role.toLowerCase());     
 	$('#class_sel_edit').val($class_sel_id);
 
 
@@ -165,8 +165,7 @@ function edit($id,$role,$class_sel_id,$section_sel_id,$section,$student_id,$titl
              }) 
 		 } 
 	 }); 
-	 
-	console.log($section_sel_id);
+	  
 
 
 	$('#studentsE').val($student_id);  
@@ -407,15 +406,16 @@ function del($id){
 	 
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
+		
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Role:</label>
 				<div class="col-sm-8">
 					<select name="role" id="role2" class="form-control" required> 
-						<option>Teacher</option>
-						<option>Student</option>
-						<option>Driver</option>
-						<option>Parent</option>
-						<option>Section</option>
+						<option value="teacher">Teachers</option>
+						<option value="parent">Parents</option>
+						<option value="driver">Drivers</option>
+						<option value="section">Section</option>
+						<option value="student">Student</option>
 					</select>
 				</div>
 			</div> 
@@ -438,17 +438,20 @@ function del($id){
 					</div>
 			 </div>
 			 
-			 
-			 	<div class="form-group row"  id="student_show2" style="display: none">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Students:</label>
-				<div class="col-sm-8">
+			  
+			
+			<div class="form-group row" id="student_show2" style="display: none">
+				<label class="col-sm-4 control-label text-sm-right pt-2"> Students:</label>
+				<div class="col-sm-8"> 
 					<select name="student" id="studentsE" class="form-control"  > 
 							<?php  foreach ($students_show as $row) { ?>
 							<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
 						<?php } ?> 
 					</select>
 				</div>
-			</div> 
+			</div>
+			
+			
 			 
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Title:</label>
