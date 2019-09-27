@@ -40,7 +40,7 @@ class m_notifications extends CI_Model {
         
         $query = $this->db->get();
 //         if($query->num_rows() == 0){
-            if($role_id != 'Section'){
+            if($role_id != 'section'){
                 $class_id = '';
                 $sections_id= '';
             }
