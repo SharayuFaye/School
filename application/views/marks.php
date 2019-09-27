@@ -257,7 +257,7 @@ $('#m').change(function(){
 
     var per = (parseFloat(m1)/parseFloat(of1))*100;
 	console.log(per);
-	$('#per').val(per);   
+	$('#per').val(per.toFixed(2));   
 	    
     if(parseFloat(m1) > parseFloat(of1)){console.log(m1);
         document.getElementById("save").disabled = true;
@@ -290,7 +290,7 @@ $('#mark').change(function(){
     
     var per = (parseFloat(m)/parseFloat(of))*100;
 	console.log(per);
-	$('#percentage').val(per); 
+	$('#percentage').val(per.toFixed(2)); 
 	  
     if(parseFloat(m) > parseFloat(of)){
         document.getElementById("save2").disabled = true;
