@@ -294,9 +294,9 @@ class Api extends CI_Controller
         $request = json_decode($post_data,true);
         $token = $request['token'];
         $student_id = $request['student_id'];
-		log_message('debug',"Notification student id : " . $student_id);
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
+		log_message('debug',"Notification student id : " . print_r($users,true));
             
 			if($student_id){
             	$students = $this->m_students->students_show_app($token,$student_id);
