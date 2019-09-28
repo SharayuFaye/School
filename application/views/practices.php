@@ -70,7 +70,7 @@
     						<td><?php echo $row->sections;?></td>  
     						<td><?php echo $row->subject;?></td> 
     						<td><?php echo $row->date;?></td>  
-							<td><img src="<?php echo base_url(); ?>practices/<?php echo $row->image;?>" width="35" height="35"/></td> 
+							<td> <?php echo $row->image;?> </td> 
 							<td class="actions"> 
 								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->date;?>','<?php echo $row->subject;?>','<?php echo $row->class_id;?>','<?php echo $row->sections;?>','<?php echo $row->sections_id;?>','<?php echo $row->image;?>')"></i></a>
 								

@@ -1748,7 +1748,7 @@ class Welcome extends CI_Controller {
     public function practices_add()
     {
         $this->load->model('m_practices');
-        $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
+        $file_name  = 'practices_'.date('Y-m-d_h-i-s') ;
         $config['upload_path']  = './practices/';
         $config['file_name']        = $file_name;
         $config['allowed_types'] = '*';
@@ -1757,7 +1757,7 @@ class Welcome extends CI_Controller {
         if ( ! $this->upload->do_upload('image'))
         {
             $error = array('error' => $this->upload->display_errors());
-            $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!'; 
+            $this->data['error_msg'] =$error; 
             $image ='';
         }
         else
@@ -1789,7 +1789,7 @@ class Welcome extends CI_Controller {
             if($this->input->post('save_practices')){  
                  
                 
-                $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
+                $file_name  = 'practices_'.date('Y-m-d_h-i-s') ;
                 $config['upload_path']  = './practices/';
                 $config['file_name']        = $file_name;
                 $config['allowed_types'] = '*';
@@ -1799,7 +1799,7 @@ class Welcome extends CI_Controller {
                 if ( ! $this->upload->do_upload('image'))
                 {
                     $error = array('error' => $this->upload->display_errors());
-                    $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!'; 
+                    $this->data['error_msg'] =$error; 
                     $image ='';
                 }
                 else
@@ -1828,7 +1828,7 @@ class Welcome extends CI_Controller {
                 
                 if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
                     
-                    $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
+                    $file_name  = 'practices_'.date('Y-m-d_h-i-s') ;
                     $config['upload_path']  = './practices/';
                     $config['file_name']        = $file_name;
                     $config['allowed_types'] = '*';
@@ -1837,7 +1837,7 @@ class Welcome extends CI_Controller {
                     if ( ! $this->upload->do_upload('image'))
                     {
                         $error = array('error' => $this->upload->display_errors());
-                        $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!'; 
+                        $this->data['error_msg'] =$error; 
                         
                     }else{
                         $data = array('upload_data' => $this->upload->data());
