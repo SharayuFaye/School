@@ -300,9 +300,9 @@ class Api extends CI_Controller
             
 			if($student_id){
             	$students = $this->m_students->students_show_app($token,$student_id);
-            	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+            	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 			}else{
-            	$notifications = $this->m_notifications->notifications_show_app($token, null, null);
+			    $notifications = $this->m_notifications->notifications_show_app($token, null, null,$users[0]->school_id);
 			}
 
             $d = explode('_',$token);

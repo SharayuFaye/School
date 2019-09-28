@@ -118,7 +118,7 @@ class m_notifications extends CI_Model {
     //APp functions
     
     
-    function notifications_show_app($token,$class_id,$sections_id){
+    function notifications_show_app($token,$class_id,$sections_id,$school_id){
         
 		if($class_id != null){
         	$this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
@@ -127,7 +127,8 @@ class m_notifications extends CI_Model {
         	$this->db->join('users u', 'stud.users_id=u.id', 'left');
         	$this->db->join('school s', 'u.school_id=s.id', 'left');
         	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
-        	$this->db->where(array( 'ut.token' => $token)); 
+        	$this->db->where(array( 'ut.token' => $token));
+        	$this->db->where(array( 's.id' => $school_id)); 
         	$this->db->or_where(array( 'n.sections_id' =>$sections_id));
         	$this->db->or_where(array( 'n.roles_id' =>'Student'));
 		}else{
