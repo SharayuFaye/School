@@ -231,6 +231,11 @@ class m_students extends CI_Model {
             $this->db->from('users');
             $this->db->where(array( 'username' => $row['username']));
             $query = $this->db->get();
+            
+            if (!filter_var($row['username'], FILTER_VALIDATE_EMAIL)  ||  !filter_var($row['mother_mail'], FILTER_VALIDATE_EMAIL) ||  !preg_match('/[^A-Za-z]/', $row['student_name']) ) {  
+                $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['student_name']);
+                
+            }else{
             if($query->num_rows() == 0){
                 $target = array(
                     "username" => $row['username'],
@@ -285,7 +290,8 @@ class m_students extends CI_Model {
                             "join_date" => $row['join_date'],
                             "school_id"=> $this->session->userdata['school'],
                             "created_date"=>date('Y-m-d'),
-                            "created_by"=>$this->session->userdata['id'], 
+                            "created_by"=>$this->session->userdata['id'],
+                            "active"=>1, 
                         );
                         $res =  $this->db->insert('students', $target);
                         
@@ -295,6 +301,7 @@ class m_students extends CI_Model {
                 $duplicate[] = $row['username'];
                 
             }
+         }
         }
         
         return $duplicate;

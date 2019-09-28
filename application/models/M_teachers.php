@@ -133,49 +133,56 @@ class m_teachers extends CI_Model {
             $this->db->from('users');
             $this->db->where(array( 'username' => $row['username']));
             $query = $this->db->get();
-            if($query->num_rows() == 0){
-                $target = array(
-                    "username" => $row['username'],
-                    "password" => $row['password'],
-                    "school_id"=>  $this->session->userdata['school'],
-                    "role"=>  'teacher',
-                    "created_date"=>date('Y-m-d'),
-                    "created_by"=>$this->session->userdata['id'],
-                );
-                $this->db->insert('users', $target);
+            
+            if (!filter_var($row['teacher_mail'], FILTER_VALIDATE_EMAIL)  ) {
+                $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['teacher_mail']);
                 
-                $this->db->select("*");
-                $this->db->from('users');
-                $this->db->where(array( 'username' => $row['username']));
-                $query = $this->db->get();
-                if($query->num_rows() == 1){
-                    $userData = $query->result();
-                    $this->db->select("*");
-                    $this->db->from('teachers');
-                    $this->db->where(array( 'teacher_name' => $row['teacher_name']));
-                    $this->db->where(array( 'teacher_mail' => $row['teacher_mail']));
-                    $query = $this->db->get();
-                    if($query->num_rows() == 0){
-                        $target = array(
-                            "users_id" => $userData[0]->id ,
-                            "teacher_name"=>$row['teacher_name'],
-                            "teacher_address"=>$row['teacher_address'],
-                            "teacher_mobile"=>$row['teacher_mobile'],
-                            "teacher_mail"=>$row['teacher_mail'],
-                            "salary_details"=>$row['salary_details'],
-                            "education_details"=>$row['education_details'],
-                            "join_date"=>$row['join_date'],
-                            "school_id"=>$this->session->userdata['school'],
-                            "created_date"=>date('Y-m-d'),
-                            "created_by"=>$this->session->userdata['id'],
-                        );
-                        $res =  $this->db->insert('teachers', $target);
-                       
-                    }
-                }
             }else{
-                $duplicate[] = $row['username'];
-               
+                 
+                if($query->num_rows() == 0){
+                    $target = array(
+                        "username" => $row['username'],
+                        "password" => $row['password'],
+                        "school_id"=>  $this->session->userdata['school'],
+                        "role"=>  'teacher',
+                        "created_date"=>date('Y-m-d'),
+                        "created_by"=>$this->session->userdata['id'],
+                    );
+                    $this->db->insert('users', $target);
+                    
+                    $this->db->select("*");
+                    $this->db->from('users');
+                    $this->db->where(array( 'username' => $row['username']));
+                    $query = $this->db->get();
+                    if($query->num_rows() == 1){
+                        $userData = $query->result();
+                        $this->db->select("*");
+                        $this->db->from('teachers');
+                        $this->db->where(array( 'teacher_name' => $row['teacher_name']));
+                        $this->db->where(array( 'teacher_mail' => $row['teacher_mail']));
+                        $query = $this->db->get();
+                        if($query->num_rows() == 0){
+                            $target = array(
+                                "users_id" => $userData[0]->id ,
+                                "teacher_name"=>$row['teacher_name'],
+                                "teacher_address"=>$row['teacher_address'],
+                                "teacher_mobile"=>$row['teacher_mobile'],
+                                "teacher_mail"=>$row['teacher_mail'],
+                                "salary_details"=>$row['salary_details'],
+                                "education_details"=>$row['education_details'],
+                                "join_date"=>$row['join_date'],
+                                "school_id"=>$this->session->userdata['school'],
+                                "created_date"=>date('Y-m-d'),
+                                "created_by"=>$this->session->userdata['id'],
+                            );
+                            $res =  $this->db->insert('teachers', $target);
+                           
+                        }
+                    }
+                }else{
+                    $duplicate[] = $row['username'];
+                   
+                }
             }
         }
          
