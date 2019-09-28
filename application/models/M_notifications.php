@@ -124,12 +124,12 @@ class m_notifications extends CI_Model {
         	$this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
         	$this->db->from('notification n');
         	$this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
-        	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
         	$this->db->join('users u', 'stud.users_id=u.id', 'left');
         	$this->db->join('school s', 'u.school_id=s.id', 'left');
+        	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
         	$this->db->where(array( 'ut.token' => $token)); 
         	$this->db->or_where(array( 'n.sections_id' =>$sections_id));
-        	$this->db->or_where(array( 'n.roles_id' =>'Student'));
+        	$this->db->or_where(array( 'n.roles_id' =>'student'));
 		}else{
 			$this->db->select("n.*")
 					->from('notification n')
