@@ -180,7 +180,7 @@ class Api extends CI_Controller
              
 			$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
 
-            $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
+			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
             $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
             
