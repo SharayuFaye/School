@@ -178,8 +178,8 @@ class Api extends CI_Controller
             
             $students = $this->m_students->students_show_app($token);
              
-            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
-            
+			$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
             $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
@@ -285,8 +285,6 @@ class Api extends CI_Controller
         }
     }
     
-    
-    
     function app_notification_post(){
         $this->load->model('m_login'); 
         $this->load->model('m_notifications');
@@ -295,12 +293,18 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token'];
-        $student_id = $request['student_id']; 
+        $student_id = $request['student_id'];
+		log_message('debug',"Notification student id : " . $student_id);
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
             
-            $students = $this->m_students->students_show_app($token,$student_id);
-            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+			if($student_id){
+            	$students = $this->m_students->students_show_app($token,$student_id);
+            	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+			}else{
+            	$notifications = $this->m_notifications->notifications_show_app($token, null, null);
+			}
+
             $d = explode('_',$token);
              $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             if($d[1] <   $endDay){

@@ -120,20 +120,25 @@ class m_notifications extends CI_Model {
     
     function notifications_show_app($token,$class_id,$sections_id){
         
-        $this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
-        $this->db->from('notification n');
-        $this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
-        $this->db->join('users u', 'stud.users_id=u.id', 'left');
-        $this->db->join('school s', 'u.school_id=s.id', 'left');
-        $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
-        $this->db->where(array( 'ut.token' => $token)); 
-        $this->db->or_where(array( 'n.sections_id' =>$sections_id));
-        $this->db->or_where(array( 'n.roles_id' =>'Student'));
+		if($class_id != null){
+        	$this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
+        	$this->db->from('notification n');
+        	$this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
+        	$this->db->join('users u', 'stud.users_id=u.id', 'left');
+        	$this->db->join('school s', 'u.school_id=s.id', 'left');
+        	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
+        	$this->db->where(array( 'ut.token' => $token)); 
+        	$this->db->or_where(array( 'n.sections_id' =>$sections_id));
+        	$this->db->or_where(array( 'n.roles_id' =>'Student'));
+		}else{
+			$this->db->select("n.*")
+					->from('notification n')
+					->join('users u','u.school_id = n.school_id','left')
+					->join('tokens t','t.user_id = u.id','left')
+					->where(array('n.roles_id' => 'teacher'));
+		}
         $this->db->order_by('datetime','desc');
-        
         $this->db->distinct();
-        
-        
         $query = $this->db->get();
         
         if($query)
