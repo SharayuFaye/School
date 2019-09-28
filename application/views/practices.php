@@ -146,7 +146,8 @@ function edit($id,$date,$subject,$class,$sections,$sections_id,$image){
 	 opt.text($subject);
 	 $('#subject').append(opt); 
 	 
-	document.getElementById("image").src = '<?php echo base_url(); ?>practices/'+$image;
+	 $('#image').html($image); 
+	//document.getElementById("image").src = '<?php echo base_url(); ?>practices/'+$image;
 	$('#editrow').modal('show'); 
 }
 function add(){
@@ -378,8 +379,7 @@ $('#sel_section').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8">
-					<input type="file" name="image" id="img" accept="image/*"   class="form-control"> 
-					 	 ( File accepts only jpg , png , jpeg type image file. )
+					<input type="file" name="image" id="img"   class="form-control">  
 				</div>
 			</div> 	
 	    </div>
@@ -451,9 +451,8 @@ $('#sel_section').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8">
-					<input type="file" name="image"  accept="image/*"   class="form-control"> 
-					 	 ( File accepts only jpg , png , jpeg type image file. )<br>
-					<img    id="image"   width="35" height="35"/>
+					<input type="file" name="image"   class="form-control">  
+					<label    id="image"   ></label>
 				</div>
 			</div> 	
 	    </div>

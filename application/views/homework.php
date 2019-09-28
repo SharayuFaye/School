@@ -73,7 +73,9 @@
 							<td><?php echo $row->date;?></td> 
 							<td><?php echo $row->subject;?></td> 
 							<td><?php echo $row->details;?></td> 
-							<td><img src="<?php echo base_url(); ?>homework/<?php echo $row->image;?>" width="35" height="35"/></td> 
+							<td><?php echo $row->image;?>
+							<!-- -<img src="<?php echo base_url(); ?>homework/<?php echo $row->image;?>" width="35" height="35"/>--->
+							</td> 
 						<!-- 	<td><?php echo $row->teacher_name;?></td>  -->
 							<td><?php echo $row->submission_date;?></td>  
 							<td class="actions">
@@ -150,7 +152,9 @@ function edit($id,$class,$sections,$sections_id,$date,$subject,$details,$image,$
 	 opt.text($subject);
 	 $('#subject').append(opt); 
 	 
-	document.getElementById("img1").src = '<?php echo base_url(); ?>homework/'+$image;
+	 $('#img1').html($image); 
+	 
+	//document.getElementById("img1").src = '<?php echo base_url(); ?>homework/'+$image;
 	 
 	$('#teacher').val($teacher); 
 	$('#submission_date').val($submission_date);  
@@ -404,8 +408,8 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8">
-					<input type="file" id="img" accept="image/*" name="image" class="form-control"> 
-					 	 ( File accepts only jpg , png , jpeg type image file. )
+					<input type="file" id="img"   name="image" class="form-control"> 
+					  
 				</div>
 			</div> 	
 
@@ -506,9 +510,9 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8"> 
-					<input type="file" name="image" accept="image/*"    class="form-control">
-					 	 ( File accepts only jpg , png , jpeg type image file. )<br>
-					<img src="img/logo.png"  id="img1"  width="35" height="35"   />
+					<input type="file" name="image"     class="form-control">
+					<label id="img1"></label> 	  
+<!-- 					<img src="img/logo.png"  id="img1"  width="35" height="35"   /> -->
 				</div>
 			</div> 											
 			<!-- <div class="form-group row">

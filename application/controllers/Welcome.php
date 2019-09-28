@@ -1748,8 +1748,10 @@ class Welcome extends CI_Controller {
     public function practices_add()
     {
         $this->load->model('m_practices');
+        $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
         $config['upload_path']  = './practices/';
-        $config['allowed_types']        = 'jpg|png|jpeg';
+        $config['file_name']        = $file_name;
+        $config['allowed_types'] = '*';
         $this->load->library('upload', $config);
         
         if ( ! $this->upload->do_upload('image'))
@@ -1785,9 +1787,13 @@ class Welcome extends CI_Controller {
             $this->data['section'] = 0;
             
             if($this->input->post('save_practices')){  
+                 
                 
+                $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
                 $config['upload_path']  = './practices/';
-                $config['allowed_types']        = 'jpg|png|jpeg';
+                $config['file_name']        = $file_name;
+                $config['allowed_types'] = '*';
+                
                 $this->load->library('upload', $config);
                 
                 if ( ! $this->upload->do_upload('image'))
@@ -1822,8 +1828,10 @@ class Welcome extends CI_Controller {
                 
                 if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
                     
+                    $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
                     $config['upload_path']  = './practices/';
-                    $config['allowed_types']        = 'jpg|png|jpeg';
+                    $config['file_name']        = $file_name;
+                    $config['allowed_types'] = '*';
                     $this->load->library('upload', $config);
                     
                     if ( ! $this->upload->do_upload('image'))
@@ -2233,8 +2241,10 @@ class Welcome extends CI_Controller {
     public function homework_add(){
         
         $this->load->model('m_homework');
+        $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
         $config['upload_path']  = './homework/';
-        $config['allowed_types']        = 'jpg|png|jpeg';
+        $config['file_name']        = $file_name;
+        $config['allowed_types'] = '*';
         $this->load->library('upload', $config);
         
         if ( ! $this->upload->do_upload('image'))
@@ -2279,14 +2289,17 @@ class Welcome extends CI_Controller {
             
             if($this->input->post('save_homework')){
                 
+                $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
                 $config['upload_path']  = './homework/';
-                $config['allowed_types']        = 'jpg|png|jpeg';
+                $config['file_name']        = $file_name;
+                $config['allowed_types'] = '*';
+                
                 $this->load->library('upload', $config);
                 
                 if ( ! $this->upload->do_upload('image'))
                 {
                     $error = array('error' => $this->upload->display_errors());
-                    $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!'; 
+                    $this->data['error_msg'] =$error; 
                     $image ='';
                     
                 }else{
@@ -2319,13 +2332,19 @@ class Welcome extends CI_Controller {
                 
                 if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
                     
+                    $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
                     $config['upload_path']  = './homework/';
-                    $config['allowed_types']        = 'jpg|png|jpeg';
+                    $config['file_name']        = $file_name;
+                    $config['allowed_types'] = '*';
+//                     $config['upload_path']  = './homework/';
+//                     $config['allowed_types']        = 'jpg|png|jpeg';
                     $this->load->library('upload', $config);
                     
                     if ( ! $this->upload->do_upload('image'))
                     {
                         $error = array('error' => $this->upload->display_errors());
+                        $image='';
+                       // print_r($error);exit();
                         
                     }else{
                         $data = array('upload_data' => $this->upload->data());
