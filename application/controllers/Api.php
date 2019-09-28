@@ -1110,7 +1110,7 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
             $teachers = $this->m_teachers->teachers_show_user_app($users[0]->id);
-            
+            $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1119,6 +1119,7 @@ class Api extends CI_Controller
                 $this->response(array(
                     'users' => $users, 
                     'teachers' => $teachers,
+                    'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
             }else{
@@ -1340,7 +1341,7 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             $drivers = $this->m_drivers->drivers_show_user_app($users[0]->id);
-            
+            $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1349,6 +1350,7 @@ class Api extends CI_Controller
                 $this->response(array(
                     'users' => $users,
                     'drivers' => $drivers,
+                    'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
             }else{
