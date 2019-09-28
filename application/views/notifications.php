@@ -75,7 +75,7 @@
 						<td><?php echo $row->message;?></td> 
 						<td><?php echo $row->datetime;?></td>  
 					        <td class="actions"> 
-								<a href="#" class="on-default edit-row"><i class="fa fa-upload" onclick="edit('<?php echo $row->id;?>','<?php echo $row->roles_id;?>','<?php echo $row->class_id;?>','<?php echo $row->sections_id;?>','<?php echo $row->sections;?>','<?php echo $row->students_id;?>','<?php echo $row->title;?>','<?php echo $row->message;?>','<?php echo $row->datetime;?>' )"></i></a>
+								<a href="#" class="on-default edit-row"><i class="fa fa-upload" onclick="edit('<?php echo $row->id;?>','<?php echo $row->roles_id;?>','<?php echo $row->class_id;?>','<?php echo $row->sections_id;?>','<?php echo $row->sections;?>','<?php echo $row->students_id;?>','<?php echo $row->student_name;?>','<?php echo $row->title;?>','<?php echo $row->message;?>','<?php echo $row->datetime;?>' )"></i></a>
 								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 							</td>
 						</tr>
@@ -134,7 +134,7 @@ var n = document.getElementById("nav1");
 n.className += " nav-expanded nav-active"; 
 
 
-function edit($id,$role,$class_sel_id,$section_sel_id,$section,$student_id,$title,$massage,$date_time){ 
+function edit($id,$role,$class_sel_id,$section_sel_id,$section,$student_id,$student_name,$title,$massage,$date_time){ 
 	
 	$('#id').val($id); 
 	$('#role2').val($role.toLowerCase());     
@@ -167,13 +167,18 @@ function edit($id,$role,$class_sel_id,$section_sel_id,$section,$student_id,$titl
 	 }); 
 	  
 
+ 
+		 var opt = $('<option />');  
+		 opt.val($student_id);
+		 opt.text($student_name);
+		 $('#studentsE').append(opt); 
 
-	$('#studentsE').val($student_id);  
+ 
 	$('#title').val($title);  
 	$('#message').val($massage);  
     $('#datetime').val($date_time);
 
-    if($('#role2').val() == 'section'){
+    if($('#role2').val() == 'student'){
        	 document.getElementById('class_edit').style.display = 'flex' ; 
        	 document.getElementById('section_edit').style.display = 'flex' ; 
 	 }else{
@@ -203,7 +208,7 @@ function del($id){
  $(document).ready(function(){
  
  $('#role1').change(function(){   
-	 if($('#role1').val() == 'section'){
+	 if($('#role1').val() == 'student'){
     	 document.getElementById('class_show').style.display = 'flex' ; 
     	 document.getElementById('section_show').style.display = 'flex' ; 
 	 }else{
@@ -221,7 +226,7 @@ function del($id){
  });
 
  $('#role2').change(function(){   
-	 if($('#role2').val() == 'section'){
+	 if($('#role2').val() == 'student'){
     	 document.getElementById('class_edit').style.display = 'flex' ; 
     	 document.getElementById('section_edit').style.display = 'flex' ; 
 	 }else{
@@ -261,6 +266,35 @@ function del($id){
 		 } 
 	 }); 
  }); 
+
+ 
+ $('#sections_sel').change(function(){  
+ $("#student1 > option").remove();  
+ var sections_sel = $('#sections_sel').val();  
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/students_roll_fetch", 
+		 data: 'section_sel='+sections_sel,
+         datatype : "json",
+		 success: function(classD)  
+		 {   
+			 var obj = $.parseJSON(classD);
+			 var opt = $('<option />');  
+			 opt.val('');
+			 opt.text('');
+			 $('#student1').append(opt); 
+			 console.log(obj);
+                $.each(obj, function (index, object) {  
+                	 var opt = $('<option />');  
+					 opt.val(object['id']);
+					 opt.text(object['student_name']);
+					 $('#student1').append(opt); 
+                }) 
+		 } 
+	 }); 
+ }); 
+
+ 
  $('#class_sel_edit').change(function(){  
  $("#sections_sel_edit > option").remove();  
  	var class1 = $('#class_sel_edit').val();  
@@ -288,6 +322,33 @@ function del($id){
 	 }); 
  });
 
+ $('#sections_sel_edit').change(function(){  
+ $("#studentsE > option").remove();  
+ var sections_sel = $('#sections_sel_edit').val();  
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/students_roll_fetch", 
+		 data: 'section_sel='+sections_sel,
+         datatype : "json",
+		 success: function(classD)  
+		 {   
+			 var obj = $.parseJSON(classD);
+			 var opt = $('<option />');  
+			 opt.val('');
+			 opt.text('');
+			 $('#studentsE').append(opt); 
+			 console.log(obj);
+                $.each(obj, function (index, object) {  
+                	 var opt = $('<option />');  
+					 opt.val(object['id']);
+					 opt.text(object['student_name']);
+					 $('#studentsE').append(opt); 
+                }) 
+		 } 
+	 }); 
+ }); 
+
+ 
  });
 
  </script>
@@ -312,27 +373,15 @@ function del($id){
 					<select name="role" id="role1" class="form-control" required>
 						<option></option>
 						<option value="teacher">Teachers</option>
-						<option value="parent">Parents</option>
+<!-- 						<option value="parent">Parents</option> -->
 						<option value="driver">Drivers</option>
-						<option value="section">Section</option>
+<!-- 						<option value="section">Section</option> -->
 						<option value="student">Student</option>
 					</select>
 				</div>
 			</div> 
 			
 			
-			
-			<div class="form-group row"  id="student_show" style="display: none">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Students:</label>
-				<div class="col-sm-8">
-					<select name="student" id="student1" class="form-control"  >
-						<option></option> 
-							<?php  foreach ($students_show as $row) { ?>
-							<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
-						<?php } ?> 
-					</select>
-				</div>
-			</div> 
 			
 			
 			
@@ -347,13 +396,25 @@ function del($id){
 						</select>
 					</div>
 			 </div>
-			 <div class="form-group row" id="section_show"style="display: none">
+			 <div class="form-group row" id="section_show" style="display: none">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
 					<div class="col-sm-8"> 
 						<select  name="section" id="sections_sel" class="form-control"> 
 						</select>
 					</div>
 			 </div>
+			 
+			 
+			<div class="form-group row"  id="student_show" style="display: none">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Students:</label>
+				<div class="col-sm-8">
+					<select name="student" id="student1" class="form-control"  > 
+							 
+					</select>
+				</div>
+			</div> 
+			
+			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Title:</label>
 				<div class="col-sm-8">
@@ -444,9 +505,7 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Students:</label>
 				<div class="col-sm-8"> 
 					<select name="student" id="studentsE" class="form-control"  > 
-							<?php  foreach ($students_show as $row) { ?>
-							<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
-						<?php } ?> 
+							 
 					</select>
 				</div>
 			</div>
