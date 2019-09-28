@@ -1102,6 +1102,7 @@ class Api extends CI_Controller
         
         $this->load->model('m_login'); 
         $this->load->model('m_teachers');
+        $this->load->model('m_home_page_menu');
         
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
@@ -1333,6 +1334,7 @@ class Api extends CI_Controller
         
         $this->load->model('m_login');
         $this->load->model('m_drivers');
+        $this->load->model('m_home_page_menu');
         
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
