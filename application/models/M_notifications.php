@@ -129,7 +129,7 @@ class m_notifications extends CI_Model {
         	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
         	$this->db->where(array( 'ut.token' => $token)); 
         	$this->db->or_where(array( 'n.sections_id' =>$sections_id));
-        	$this->db->or_where(array( 'n.roles_id' =>'student'));
+        	$this->db->or_where(array( 'n.roles_id' =>'Student'));
 		}else{
 			$this->db->select("n.*")
 					->from('notification n')
