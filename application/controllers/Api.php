@@ -178,7 +178,7 @@ class Api extends CI_Controller
             
             $students = $this->m_students->students_show_app($token);
              
-			$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 
 			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
@@ -244,7 +244,7 @@ class Api extends CI_Controller
             
             $students_all = $this->m_students->students_show_app($token);
             
-            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id);
+            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
             
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
