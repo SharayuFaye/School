@@ -140,7 +140,36 @@ class m_attendances extends CI_Model {
 				->result();
 	}
 
+	function get_class_leaves($token, $status){
+		if($status == "pending"){
+			$where = "l.status = 'pending'";
+		}else{
+			$where = "l.status is NOT NULL";
+		}
+		$data = $this->db->select('s.class_id, s.sections, s.id as sec, l.* , st.student_name')
+						->from('sections s')
+						->join('teachers t','s.teachers_id = t.id','left')
+						->join('users u','t.users_id = u.id','left')
+						->join('tokens to','to.user_id = u.id','left')
+						->join('students st','st.sections_id = s.id','left')
+						->join('leaves l','l.student_id = st.id','left')
+						->where(array('to.token' => $token))
+						->where('l.id is NOT NULL',NULL, FALSE)
+						->where($where, NULL, FALSE)
+						->get()
+						->result();
+		log_message('debug',print_r($data, true));
+		return $data;
+	}
 
+	function set_leave($token, $status, $leave_id, $remark){
+		$target = array(
+			'status' => $status,
+			'remark' => $remark
+			);
+		$this->db->update('leaves',$target, array('id' => $leave_id));
+		return $this->get_class_leaves($token, "all");
+	}
 
 }
 ?>

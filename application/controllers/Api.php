@@ -1290,9 +1290,6 @@ class Api extends CI_Controller
         $section = $request['section'];
         $date = $request['date'];
         $teacher_id = $request['teacher_id']; 
-        
-        
-        
         $attendance = $request['attendance'];
         
         
@@ -1472,10 +1469,56 @@ class Api extends CI_Controller
 		$student = $request['student'];
 
 		$result = $this->m_attendances->get_leaves($student);
+		foreach($result as $d){
+			$d->days = round(($d->end_date - $d->start_date)/(60*60*24)) + 1;
+		}
 		$this->response(array(
 			'leaves'=> $result
 		));
 	}
 		
+ 	/*Get the section details for which the teacher is the approver and the pending leaves for those sections*/
+	function get_class_leaves_post(){
+		$this->load->model("m_attendances");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$status = $request['status'];
+
+		$data = $this->m_attendances->get_class_leaves($token, $status);
+		$cons = array();
+		foreach($data as $d){
+			if(!array_key_exists($d->sec, $cons)){
+				$cons[$d->sec] = array($d->class_id, $d->sections, 1);
+			}else{
+				$pending = $cons[$d->sec][2] + 1;
+				$cons[$d->sec] = array($d->class_id, $d->sections, $pending);
+			}
+			$d->days = round(($d->end_date - $d->start_date)/(60*60*24)) + 1;
+		}
+		$this->response(array(
+			'data' => $data,
+			'cons' => $cons
+		));
+	}
+
+	/*Set the leave status and remarks for the student. Teacher function*/
+	function set_leave_post(){
+		$this->load->model("m_attendances");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$status = $request['status'];
+		$leave_id = $request['leave_id'];
+		$remark = $request['remark'];
+
+		$data = $this->m_attendances->set_leave($token, $status, $leave_id, $remark);
+		foreach($data as $d){
+			$d->days = round(($d->end_date - $d->start_date)/(60*60*24)) + 1;
+		}
+		$this->response(array(
+			'data' => $data
+		));
+	}
 
 }
