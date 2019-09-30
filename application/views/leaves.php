@@ -82,7 +82,7 @@
 											<td><?php echo $row->reason;?></td>
 											<td><?php echo $row->start_date;?></td>  
 											<td><?php echo $row->end_date;?></td>  
-											<td><?php echo $row->status;?></td> 
+											<td><?php echo ucfirst($row->status);?></td> 
 											<td><?php echo $row->remark;?></td>  
  
 											<td class="actions">
