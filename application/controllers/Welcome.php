@@ -2406,6 +2406,37 @@ class Welcome extends CI_Controller {
         }
     }
     
+    
+    public function leaves()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{ 
+            $this->load->model('m_attendances');
+           
+             
+            $this->data['leaves_show'] =$this->m_attendances->leaves_show_id($this->session->userdata['id']);
+            
+            $this->load->view('leaves',$this->data);
+        }
+    }
+    
+    
+    public function approve()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{
+            $this->load->model('m_attendances');
+            $leave_id = $this->input->get('leave_id') ;
+            $status = $this->input->get('status') ;
+            
+            $data = $this->m_attendances->set_leave_admin($leave_id, $status);
+            echo $data;
+        }
+    }
+    
+    
     public function activity_add()
     {
         $this->load->model('m_activity'); 

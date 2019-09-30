@@ -33,6 +33,34 @@ class m_attendances extends CI_Model {
         }
     } 
     
+    
+    function leaves_show_id($id){
+       // echo $teacher_id;exit();
+        
+        return $this->db->select('s.class_id, s.sections, l.* , st.student_name')
+                    ->from('leaves l')
+                    ->join('teachers t','l.approver = t.id','left') 
+                    ->join('students st','l.student_id = st.id','left')
+                    ->join('sections s','st.sections_id = s.id','left')
+                    ->join('users u','u.id = t.users_id','left')
+                    ->where(array('u.id' => $id)) 
+                    ->get()
+                    ->result();
+    }
+    
+    
+    function set_leave_admin($leave_id, $status){
+        $target = array(
+            'status' => $status 
+        );
+        $d = $this->db->update('leaves',$target, array('id' => $leave_id));
+        if($d){
+            return '1';
+        }else{
+            return '2';
+        }
+    }
+    
     //App Functions
     
     
