@@ -273,6 +273,11 @@
 				                                    Homework
 				                                </a>
 				                            </li>
+				                            <li id="leaves">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/leaves">
+				                                    Leaves
+				                                </a>
+				                            </li>
 <?php } if( $this->session->userdata['role'] == 'school_admin' ||  $this->session->userdata['role'] == 'teacher'  ){ ?>
 				                            <li id="activity">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/activity">

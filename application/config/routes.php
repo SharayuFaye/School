@@ -87,6 +87,8 @@ $route['homework'] = 'welcome/homework';
 $route['activity'] = 'welcome/activity';
 $route['faq'] = 'welcome/faq'; 
 $route['transportation'] = 'welcome/transportation';
+$route['leaves'] = 'welcome/leaves';
+$route['approve'] = 'welcome/approve';
 
 
 $route['sections_fetch'] = 'welcome/sections_fetch';
