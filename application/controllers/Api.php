@@ -1242,17 +1242,27 @@ class Api extends CI_Controller
         $section = $request['section'];
         $date = $request['date'];
         $teacher_id = $request['teacher_id'];
-//         $students_id = $request['students_id'];
-        
+//         $students_id = $request['students_idrequest'];
+        log_message('debug',print_r($request,true)); 
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             $attendance = $this->m_attendances->attendance_app($class,$section,$date,$teacher_id,$users[0]->school_id);
+			foreach($attendance as $a){
+				if(!isset($a->attendance)){
+					$a->attendance = null;
+					$recorded = false;
+				}else{
+					$recorded = true;
+				}
+			}
+        log_message('debug',print_r($attendance,true)); 
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             
             if($d[1] <   $endDay){
                 $this->response(array(
+					'recorded' => $recorded,
                     'users' => $users,
                     'attendance' => $attendance, 
                     'status' => 'live'
@@ -1292,24 +1302,22 @@ class Api extends CI_Controller
         $teacher_id = $request['teacher_id']; 
         $attendance = $request['attendance'];
         
+        log_message('debug',print_r($request,true)); 
         
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
             
-            foreach($attendance as $attend){
+            foreach($attendance as $key=>$value){
                 
-                $attend  =  json_decode($attend,true);
-                $att  = $this->m_attendances->attendance_add_app($class,$section,$date,$teacher_id,$attend[0]->id,$users[0]->school_id,$users[0]->id);
+				$status = $value == 1 ? "present" : "absent";
+                $att  = $this->m_attendances->attendance_add_app($class,$section,$date,$teacher_id,$key, $status, $users[0]->school_id,$users[0]->id);
             }
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             
             if($d[1] <   $endDay){
                 $this->response(array(
-                    'users' => $users,
-                    'attendance' =>$attend ,
-                    'attend' =>$att  ,
-                    'status' => 'live'
+                    'msg' => 'Attendance submitted successfully'
                 ));
             }else{
                 $msg = "Session Expired.Please,try again!";
@@ -1488,12 +1496,18 @@ class Api extends CI_Controller
 		$data = $this->m_attendances->get_class_leaves($token, $status);
 		$cons = array();
 		foreach($data as $d){
-			if(!array_key_exists($d->sec, $cons)){
-				$cons[$d->sec] = array($d->class_id, $d->sections, 1);
+			if($d->status == "pending"){
+				if(!array_key_exists($d->sec, $cons)){
+					$cons[$d->sec] = array($d->class_id, $d->sections, 1);
+				}else{
+					$pending = $cons[$d->sec][2] + 1;
+					$cons[$d->sec] = array($d->class_id, $d->sections, $pending);
+				}
 			}else{
-				$pending = $cons[$d->sec][2] + 1;
-				$cons[$d->sec] = array($d->class_id, $d->sections, $pending);
-			}
+				if(!array_key_exists($d->sec, $cons)){
+					$cons[$d->sec] = array($d->class_id, $d->sections, 0);
+				}
+			}	
 			$d->days = round(($d->end_date - $d->start_date)/(60*60*24)) + 1;
 		}
 		$this->response(array(
@@ -1518,6 +1532,84 @@ class Api extends CI_Controller
 		}
 		$this->response(array(
 			'data' => $data
+		));
+	}
+
+	/*Save image to local folder*/
+	function hw_image_upload_post(){
+		$this->load->model("m_homework");
+        $config['upload_path']  = './homework/'; 
+        $config['allowed_types']        = 'jpg|png|jpeg';  
+        $this->load->library('upload', $config); 
+
+        if ( ! $this->upload->do_upload('file'))
+        {
+                $error = array('error' => $this->upload->display_errors()); 
+                 $this->response(array(
+                    'error' => $error,  
+                    'request' => $_FILES['file']['name'],  
+                ),200);
+        }
+        else
+        {
+                $data = array('upload_data' => $this->upload->data());
+                 $this->response(array(
+                    'msg' => "File uploaded successfully",
+                    'request' => $_FILES['file']['name'],  
+                ),200); 
+        } 
+	}
+
+	/*Add homework record from the app*/
+	function add_homework_post(){
+		$this->load->model("m_homework");
+		$this->load->model("m_login");
+		$this->load->model("m_teachers");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$user = $this->m_login->get_users($token);
+		$teacher = $this->m_teachers->teachers_show_id_user($user[0]->id); 
+		log_message('debug', print_r($request, true));
+		$homework = array(
+			'teacher_id' 	=> $teacher[0]->id,
+			'class_id' 	=> $request['class_id'],
+			'sections_id' 	=> $request['section'],
+			'subject' 	=>$request['subject'],
+			'details' 	=> $request['details'],
+			'image' 	=> array_key_exists('image',$request) ? $request['image'] : null,
+			'submission_date' => $request['submit_by'],
+			'created_by' => $teacher[0]->id,
+			'created_date' => date('Y-m-d'),
+			'active' 	=> $request['active'],
+			'school_id' 	=> $teacher[0]->school_id
+		);
+		$data = $this->m_homework->add_homework($homework);
+        $this->response(array(
+        	'msg' => "Homework added successfully",
+			'homework' => $data
+        ),200); 
+	}
+
+	/*Get homework details to display to the teachers */
+	function get_teacher_hw_post(){
+		$this->load->model("m_homework");
+		$this->load->model("m_login");
+		$this->load->model("m_teachers");
+		$this->load->model("m_sections");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$user = $this->m_login->get_users($token);
+		$teacher = $this->m_teachers->teachers_show_id_user($user[0]->id); 
+        $class = $this->m_sections->sections_show_distinct_class_app($teacher[0]->id); 
+        $sections = $this->m_sections->sections_show_app($teacher[0]->id); 
+
+		$homework = $this->m_homework->get_teacher_hw($teacher[0]->id);
+		$this->response(array(
+				'homework' => $homework,
+				'sections' => $sections,
+				'class' => $class
 		));
 	}
 

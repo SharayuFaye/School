@@ -94,18 +94,18 @@ class m_attendances extends CI_Model {
     }
     
     
-    function attendance_add_app($class,$section,$date,$teacher_id,$attend,$school_id,$users_id){
+    function attendance_add_app($class,$section,$date,$teacher_id,$user_id, $status, $school_id,$users_id){
         
         $target = array( 
-            "attendance"=>'1' ,
-            "class"=>$class ,
-            "section"=>$section,
-            "date"=>$date,
-            "teacher_id"=>$teacher_id,
-            "students_id"=>$attend,
-            "created_date"=>date('Y-m-d'),
-            "created_by"=>$users_id,
-            "school_id"=>$school_id,
+            "attendance"	=> $status ,
+            "class_id"		=> $class ,
+            "sections_id"	=> $section,
+            "date"			=> date("Y-m-d",strtotime(date($date))),
+            "teachers_id"	=> $teacher_id,
+            "students_id"	=> $user_id,
+            "created_date"	=> date('Y-m-d'),
+            "created_by"	=> $users_id,
+            "school_id"		=> $school_id,
         );
         $query =  $this->db->insert('attendance', $target);
         
@@ -120,17 +120,30 @@ class m_attendances extends CI_Model {
     
     function attendance_app($class,$section,$date,$teacher_id,$school_id){ 
         
-        $this->db->select('stud.id,stud.student_name,stud.roll_number');
-        $this->db->from('students stud');
-        $this->db->join('sections s', 's.id=stud.sections_id', 'left');
-        $this->db->where(array( 's.id' =>$section));  
-        
-        $query = $this->db->get();
-        
-        if($query)
-        {
-            return $query->result();
-        }
+		$query = $this->db->select('s.id, s.student_name, s.roll_number, a.attendance')
+				 ->from('attendance a')
+				 ->join('students s', 's.id = a.students_id', 'left')
+				 ->where(array(
+				 		'a.sections_id' => $section, 
+						'a.date' => date("Y-m-d",strtotime(date($date)))
+					))
+				 ->get();
+        log_message('debug',$this->db->last_query()); 
+		if($query->num_rows() > 0){	
+			return $query->result();
+		}else{
+        	$this->db->select('stud.id,stud.student_name,stud.roll_number');
+        	$this->db->from('students stud');
+        	$this->db->join('sections s', 's.id=stud.sections_id', 'left');
+        	$this->db->where(array( 's.id' =>$section));  
+        	
+        	$query = $this->db->get();
+        	
+        	if($query)
+        	{
+        	    return $query->result();
+        	}
+		}
     } 
 
 	function apply_leave($student, $start_date, $end_date, $reason, $approver, $desc){
@@ -169,11 +182,8 @@ class m_attendances extends CI_Model {
 	}
 
 	function get_class_leaves($token, $status){
-		if($status == "pending"){
-			$where = "l.status = 'pending'";
-		}else{
-			$where = "l.status is NOT NULL";
-		}
+		$where = "l.status is NOT NULL";
+		
 		$data = $this->db->select('s.class_id, s.sections, s.id as sec, l.* , st.student_name')
 						->from('sections s')
 						->join('teachers t','s.teachers_id = t.id','left')

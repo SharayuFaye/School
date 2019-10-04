@@ -116,6 +116,24 @@ class m_homework extends CI_Model {
             return $query->result();
         }
     }
+
+	/*Add homework record from the app*/
+	function add_homework($data){
+		$this->db->insert('homework', $data);
+		return $this->get_teacher_hw($data['teacher_id']);
+	}
+
+	/*Get the homework set by the teacher*/
+	function get_teacher_hw($teacher_id){
+		$query = $this->db->select('h.*, s.sections')
+						->from('homework h')
+						->join('sections s', 'h.sections_id = s.id','left')
+						->where(array('h.teacher_id' => $teacher_id))
+						->get();
+						
+		log_message('debug',$this->db->last_query());
+		return $query->result();
+	}
     
     
 }
