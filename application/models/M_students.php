@@ -346,9 +346,10 @@ class m_students extends CI_Model {
 
     function get_student_fcm($school_id, $sections_id, $class_id){
 
-            $this->db->select('u.fcm_token');
-                $this->db->from('students b');
-                $this->db->join('users u', 'b.users_id=u.id', 'left');
+        $this->db->select('u.fcm_token')
+				->from('tokens t')
+                ->join('users u', 'u.id = t.user_id', 'left')
+				->join('students b', 'b.users_id = u.id','left');
 		$condition = array('b.school_id' => $school_id);
 		if($class_id != ""){
 			$condition['b.class_id'] = $class_id;

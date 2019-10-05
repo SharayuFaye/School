@@ -254,9 +254,10 @@ class m_teachers extends CI_Model {
 
     function get_teachers_fcm($school_id){  
 
-	    $this->db->select('u.fcm_token');
-		$this->db->from('teachers b'); 
-		$this->db->join('users u', 'b.users_id=u.id', 'left');
+	    $this->db->select('t.fcm_token');
+		$this->db->from('tokens t');
+		$this->db->join('users u', 't.user_id = u.id', 'left');
+		$this->db->join('teachers b','b.users_id = u.id','left');
 		$this->db->where(array( 'b.school_id' => $school_id));
 
 		$query = $this->db->get(); 

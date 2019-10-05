@@ -1929,13 +1929,13 @@ class Welcome extends CI_Controller {
 		    $condition = array("school_id" => $school_id);
 		    log_message("debug", "ROLE ::::: ".$role_id);
 		    if($role_id == "teacher"){
-			$fcm = $this->m_teachers->get_teachers_fcm($school_id);
+				$fcm = $this->m_teachers->get_teachers_fcm($school_id);
 		    }elseif($role_id == "driver"){
-			$fcm = $this->m_drivers->get_driver_fcm($school_id);
+				$fcm = $this->m_drivers->get_driver_fcm($school_id);
 		    }elseif($role_id == "section"){
-			$fcm = $this->m_students->get_student_fcm($school_id, $sections_id, $class_id);
+				$fcm = $this->m_students->get_student_fcm($school_id, $sections_id, $class_id);
 		    }else{
-		    	$fcm = $this->m_login->getFCMtokens($condition);
+		    	$fcm = $this->m_login->getFCMtokens($school_id);
 		    }
 		    log_message("debug",print_r($fcm, true));
 		    $this->send_notification($title, $message, $fcm);

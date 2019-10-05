@@ -198,9 +198,10 @@ class m_drivers extends CI_Model {
 
     function get_driver_fcm($school_id){
 
-            $this->db->select('fcm_token');
-                $this->db->from('users');
-                $this->db->where(array( 'school_id' => $school_id,'role'=>"driver"));
+            $this->db->select('t.fcm_token');
+                $this->db->from('tokens t');
+				$this->db->join('users u','t.user_id = u.id','left');
+                $this->db->where(array( 'u.school_id' => $school_id,'role'=>"u.driver"));
 
                 $query = $this->db->get();
                 $data = [];
@@ -221,7 +222,7 @@ class m_drivers extends CI_Model {
 		$this->db->where(array('d.id' => $driver_id));
 		$query = $this->db->get();
 
-		log_message("debug",print_r($query->result(), true));
+		log_message("debug",print_r($query, true));
 		return($query->result());
 	}
     
