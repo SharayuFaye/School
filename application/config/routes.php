@@ -149,5 +149,8 @@ $route['app_attendance_show'] = 'api/app_attendance_show';
 $route['app_dashboard_drivers'] = 'api/app_dashboard_drivers';
  
 
+//EMAIL ROUTES----------------------
+$route['send_otp'] = 'email/send_otp';
+
 
 
