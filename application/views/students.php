@@ -55,32 +55,31 @@
 			<?php } } ?>
   
 <!--    end      for upload -->  	
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="mb-3">
-											<button id="addToTable" onclick="add()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
-										</div>
-									</div>
-								</div>
-		
-<!--          for upload -->
-            		 <?php $this->load->helper('form');?>
-                     <?php echo form_open_multipart('Welcome/students');?>
-				<div class="form-group row" style="padding-left: 50%; margin-top: -57px;padding-bottom:20px;"> 
-						<div class="col-sm-9"> 
-            				<input  type="file" accept=".xls"required  name="xls_file" class="form-control ">
-            				</div>
-						<div class="col-sm-3">
-							<input type="submit" id="upload" name="upload_xls" class="btn btn-primary" value="Upload XLS"> 
-					</div>
-				</div>
-					 <?php echo form_close(); ?>
-					 
-<!--          for upload -->
+        <?php $this->load->helper('form');?>
+        <?php echo form_open_multipart('Welcome/students');?>
+								
+		<div class="form-group row" >  
+			<div class="col-sm-1">
+				<button id="addToTable" type="button" onclick="add()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
+			</div> 
+			<div class="col-sm-2 ">
+				<button id="delToTable" type="button"  class="btn btn-primary">Delete All</button>
+			</div> 
+			 
+			 <div class="col-sm-3">  </div>
+            <!--   for upload --> 
+				<div class="col-sm-5" style="margin-left: -3%;"> 
+    				<input  type="file" accept=".xls"   name="xls_file" class="form-control ">
+    				</div>
+				<div class="col-sm-1">
+					<input type="submit" id="upload" name="upload_xls" class="btn btn-primary" value="Upload XLS"> 
+			</div> 
+                <!--  End for upload -->  
+		</div> 
 							<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 									<thead>
 										<tr>
-<!-- 											<th>Sr No</th> -->
+  											<th></th>  
 											<th>Class</th>
 											<th>Sections</th> 
 											<th>Student Name</th> 
@@ -102,11 +101,10 @@
 											<th>Actions</th>
 										</tr>
 									</thead>
-									<tbody>
- 
+									<tbody> 
 										<?php $i=1; foreach ($students_show as $row) { ?>
 										<tr data-item-id="1">
-										<!-- - 	<td><?php echo $i;?></td> -->
+										    <td><input type="checkbox" name="del_all[]"  id="del_all" value="<?php echo $row->id;?>"></td> 
 											<td><?php echo $row->class;?></td>  
 											<td><?php echo $row->sections;?></td>  
 											<td><?php echo $row->student_name;?></td>  
@@ -151,6 +149,7 @@
 									  
 									</tbody>
 								</table>
+					 <?php echo form_close(); ?>
 							</div>
 						</section>
 					<!-- end: page -->
@@ -189,8 +188,31 @@
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 	
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script type="text/javascript">
+
+$('button[id="delToTable"]').on('click', function(e) {
+	var checkedNum = $('input[name="del_all[]"]:checked').length;
+	if (!checkedNum) {
+		 
+		$('#error').modal('show'); 
+	    
+	}else{
+	 
+	  var $form = $(this).closest('form');
+	  e.preventDefault();
+	  $('#confirm').modal({
+	      backdrop: 'static',
+	      keyboard: false
+	  })
+	  .on('click', '#delete', function(e) {
+	      $form.trigger('submit');
+	    });
+	}
+	});
+
+
 var d = document.getElementById("students");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
@@ -649,9 +671,101 @@ function validateImageE(id) {
 		 } 
 	 }); 
  });
+
+
+
+ $('#rn').change(function(){     
+	     document.getElementById("save1").disabled = false;
+ var roll_no = $('#rn').val();  
+ var section_sel = $('#section_sel').val();   
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/students_byroll_fetch", 
+		 data: 'roll_no='+roll_no+'&sections_id='+section_sel,
+         datatype : "json",
+		 success: function(classD)  
+		 {   
+			 var obj = $.parseJSON(classD);
+			//console.log(obj);
+			if(obj.length > 0){
+				console.log('Already Exists!');
+				$('#r_msg1').html('Roll no. already Exists for another student!');
+		 	    $('#rn').focus()
+		 	     document.getElementById("save1").disabled = true;
+			}else{
+				$('#r_msg1').html('');
+				 document.getElementById("save1").disabled = false;
+			}
+		 } 
+	 }); 
+ });
+
+
+ $('#student_rollno').change(function(){     
+	     document.getElementById("save2").disabled = false;
+ var id = $('#id').val();  
+ var roll_no = $('#student_rollno').val(); 
+ var section_sel = $('#section').val();   
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/students_byroll_fetch_edit", 
+		 data: 'roll_no='+roll_no+'&sections_id='+section_sel+'&id='+id,
+         datatype : "json",
+		 success: function(classD)  
+		 {   
+			 var obj = $.parseJSON(classD);
+			 console.log(obj);
+			if(obj.length > 0){
+				console.log('Already Exists!');
+				$('#r_msg2').html('Roll no. already Exists for another student!');
+		 	    $('#student_rollno').focus()
+		 	     document.getElementById("save2").disabled = true;
+			}else{
+				$('#r_msg2').html('');
+				 document.getElementById("save2").disabled = false;
+			}
+		 } 
+	 }); 
+ });
+
+ 
  });	 
 </script>  
 
+ 
+<!-- del row -->
+<div class="modal fade" id="confirm" role="dialog"  >
+<div class="modal-dialog">
+	<div class="modal-content" style="width: 135%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
+          <h3 class="modal-title" style="margin-right: 77%;">Delete All  </h3>
+        </div>
+<div class="modal-body">  
+    <div class="col-lg-12"> 
+		<section class="card">
+		 	 
+			<div class="card-body" style="padding-left: 0%;padding-right: 13%;">
+			   <div class="modal-wrapper">
+				 <div class="modal-text">
+					 <div class="modal-text">
+	                 <p>Are you sure that you want to delete these rows, this will delete all data of students?</p> 
+                    </div>
+				 </div>
+				</div>
+		    </div>
+			<footer class="card-footer text-right">
+                    <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
+                    <button type="button" data-dismiss="modal" class="btn">Cancel</button>  
+			</footer>
+		</section>  
+</div>
+						
+</div>                                          
+</div>
+</div>                                          
+</div>                                        
+</div>	
 <!-- add row -->
 <div class="modal fade" id="addrow" role="dialog"  >
 	<div class="modal-dialog">
@@ -711,8 +825,8 @@ function validateImageE(id) {
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
-					<div class="col-sm-8">
-						<input type="number" min="1" max='100' name="roll_number" class="form-control">
+					<div class="col-sm-8"><span id="r_msg1" style="color:red"></span>
+						<input type="number" min="1" max='100' name="roll_number" id="rn" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
@@ -885,7 +999,7 @@ function validateImageE(id) {
 			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
-				<div class="col-sm-8">
+				<div class="col-sm-8"><span id="r_msg2" style="color:red"></span>
 					<input type="number"  min ="1" max='100' id="student_rollno" name="roll_number" class="form-control">
 				</div>
 			</div>
@@ -1028,6 +1142,24 @@ function validateImageE(id) {
 </div>
 						
 </div>                                          
+</div>
+</div>                                          
+</div>                                        
+</div>				
+
+
+<!-- errorl row -->
+<div class="modal fade" id="error" role="dialog"  >
+<div class="modal-dialog">
+	<div class="modal-content" style="width: auto;" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
+          <h3 class="modal-title"  >Please select Students to delete !!!!</h3>
+        </div>
+			<footer class="card-footer text-right">
+				<input class="btn btn-primary" type="submit"  name="del_students" value="OK">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</footer>                                        
 </div>
 </div>                                          
 </div>                                        

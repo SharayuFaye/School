@@ -100,6 +100,8 @@ $route['parents_fetch'] = 'welcome/parents_fetch';
 $route['subject_fetch'] = 'welcome/subject_fetch';
 $route['subject_stud_fetch'] = 'welcome/subject_stud_fetch';
 $route['students_roll_fetch'] = 'welcome/students_roll_fetch';
+$route['students_byroll_fetch'] = 'welcome/students_byroll_fetch';
+$route['students_byroll_fetch_edit'] = 'welcome/students_byroll_fetch_edit';
 
 
 $route['fees_add'] = 'welcome/fees_add';

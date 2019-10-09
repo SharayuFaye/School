@@ -36,13 +36,54 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>css/skins/default.css" />
 
 		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>css/custom.css">
-
+		<link rel="stylesheet" href="<?php echo base_url(); ?>css/custom.css"> 
 		<!-- Head Libs -->
 		<script src="<?php echo base_url(); ?>vendor/modernizr/modernizr.js"></script>
-
+		
+ 
 	</head>
-	
+	<style>
+	.btn-secondary{
+	   color: #333 !important;
+        background-color: #fff !important;
+        border-color: #ccc !important;
+        box-shadow: none !important; 
+	}
+	 
+html .btn-secondary:hover,
+html .btn-secondary.hover {
+    	background-color: #ccc !important;
+    	border-color: #ccc #ccc #ccc !important;
+     } 
+    
+html .btn-secondary.disabled,
+html .btn-secondary:disabled {
+    	background-color: #ccc !important;
+    	border-color: #ccc #ccc #ccc !important;
+    }
+    
+html .btn-secondary:focus,
+html .btn-secondary.focus {
+	box-shadow: 0 0 0 3px #ccc !important;
+}
+    
+html .btn-secondary:active,
+html .btn-secondary.active,
+.show > html .btn-secondary.dropdown-toggle {
+    	background-color: #ccc !important;
+    	background-image: none !important;
+    	border-color: #ccc #ccc #ccc !important; 
+    }
+    .show > .btn-secondary.dropdown-toggle {
+    	background-color: #ccc !important;
+    	background-image: none;
+    	border-color: #ccc #ccc #b7281f;
+    }
+  .btn-group{
+	   padding-left: 84.5%;
+          padding-bottom: 1%;
+	}
+	</style>
 <script type="text/javascript">  
 	    setTimeout(function() {
 	        $('#alert').slideUp("slow");
