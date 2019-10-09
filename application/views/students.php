@@ -1156,9 +1156,8 @@ function validateImageE(id) {
           <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
           <h3 class="modal-title"  >Please select Students to delete !!!!</h3>
         </div>
-			<footer class="card-footer text-right">
-				<input class="btn btn-primary" type="submit"  name="del_students" value="OK">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<footer class="card-footer text-right"> 
+				<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
 			</footer>                                        
 </div>
 </div>                                          
