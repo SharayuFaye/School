@@ -64,7 +64,18 @@ class m_attendances extends CI_Model {
     //App Functions
     
     
-    function attendances_show_app($user_id){
+    function attendances_show_app($user_id, $date){
+		if($date == null){
+			$date = date('Y-m');
+			$from_date = $date . '-01';
+			$to_date = date('Y-m-d');
+		}else{
+			$from_date = $date . "-01";
+			$to_date = $date . "-31";
+		}
+
+		log_message('debug',"From date : " . $from_date);
+		log_message('debug',"To date : " . $to_date);
         
         $this->db->select('stud.student_name,stud.roll_number,a.*,t.teacher_name');
         $this->db->from('attendance a');
@@ -72,6 +83,8 @@ class m_attendances extends CI_Model {
         $this->db->join('sections s', 's.id=stud.sections_id', 'left');
         $this->db->join('teachers t', 't.id=s.teachers_id', 'left');
         $this->db->where(array( 'stud.users_id' => $user_id )); 
+		$this->db->where('date >=', $from_date);
+		$this->db->where('date <=', $to_date);
         $query = $this->db->get();
         
         if($query)

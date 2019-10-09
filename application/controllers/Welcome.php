@@ -1918,7 +1918,8 @@ class Welcome extends CI_Controller {
                 $students_id = $this->input->post('student') ;
                 $title = $this->input->post('title') ;
                 $message = $this->input->post('message') ;
-                $datetime = $this->input->post('datetime') ; 
+                //$datetime = $this->input->post('datetime') ; 
+                $datetime = date('Y-m-d H:i:s');
                 $school_id = $this->session->userdata['school'] ;
                 $data = $this->m_notifications->notifications_add($role_id,$class_id,$sections_id,$students_id,$title,$message,$datetime,$school_id);
                 
@@ -1950,7 +1951,8 @@ class Welcome extends CI_Controller {
                 $students_id = $this->input->post('student') ;
                 $title = $this->input->post('title') ;
                 $message = $this->input->post('message') ;
-                $datetime = $this->input->post('datetime') ;
+                //$datetime = $this->input->post('datetime') ;
+                $datetime = date('Y-m-d H:i:s');
                 $school_id = $this->session->userdata['school'] ;
                 $data =  $this->m_notifications->notifications_edit($id,$role_id,$class_id,$sections_id,$students_id,$title,$message,$datetime,$school_id);
                 

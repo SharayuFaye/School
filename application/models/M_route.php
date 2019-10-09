@@ -86,12 +86,45 @@ class m_route extends CI_Model {
     } 
 
     function get_pickup_points($points){
-	    $this->db->select("*");
-	    $this->db->from('pickup_point');
-	    $this->db->where('id in ('.$points.")");
-	    $query = $this->db->get();
-	    return $query->result();
+		$pickups = array();
+		$points = json_decode($points);
+		log_message("debug","Points ::::: ". print_r($points,true));
+		foreach($points as $point){
+	    	$this->db->select("*");
+	    	$this->db->from('pickup_point');
+	    	$this->db->where(array('id' => $point));
+	    	$query = $this->db->get();
+			array_push($pickups, $query->result()[0]);
+		}
+	    return $pickups;
     }
+
+	function get_student_route($token){
+		$this->db->select('r.pickup_point_id');
+		$this->db->from('route r');
+		$this->db->join('students s','s.route_id = r.id','left');
+		$this->db->join('users u','s.users_id = u.id','left');
+		$this->db->join('tokens t','t.user_id = u.id','left');
+		$this->db->where(array('t.token'=> $token));
+		$query = $this->db->get();
+		$points = $query->result();
+
+		log_message("debug","Students pickup points ::::: " . print_r($points,true));
+		return($this->get_pickup_points($points[0]->pickup_point_id));
+
+	}
+
+	function get_bus_location($token){
+		$this->db->select('l.*,b.bus_number');
+		$this->db->from('location l');
+		$this->db->join('students s','s.bus_id = l.bus_id','left');
+		$this->db->join('bus b','b.id = l.bus_id','left');
+		$this->db->join('users u','s.users_id = u.id','left');
+		$this->db->join('tokens t','t.user_id = u.id','left');
+		$this->db->where(array('t.token'=>$token));
+		$query = $this->db->get();
+		return $query->result();
+	}
 
 }
 ?>

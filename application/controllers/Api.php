@@ -111,7 +111,8 @@ class Api extends CI_Controller
                     'role' => $data[0]->role,
                     'msg' => $msg,
                     'token' => $random,
-                    'status' => 'live'
+                    'status' => 'live',
+					'notification' => $data[0]->notification
                 ),200);
              } 
         } else { 
@@ -172,17 +173,17 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true); 
         $token = $request['token']; 
+        $date = $request['date'];
          
         if ($token != '') {
             $users = $this->m_login->get_users($token);
-            
             $students = $this->m_students->students_show_app($token);
              
             $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 
 			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
-            $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
+           // $attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
             
             $backgrounds = $this->m_backgrounds->backgrounds_show_app($users[0]->school_id);
             
@@ -199,7 +200,7 @@ class Api extends CI_Controller
                     'students_all' => $students,
                     'notifications' => $notifications,
                     'home_page_menu' => $home_page_menu,
-                    'attendances' => $attendances,
+            //        'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
                     'teachers' => $teachers,
                     'status' => 'live'
@@ -236,6 +237,7 @@ class Api extends CI_Controller
         $request = json_decode($post_data,true);
         $token = $request['token'];
         $student_id = $request['student_id'];
+        //$date = $request['date'];
         
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
@@ -248,7 +250,7 @@ class Api extends CI_Controller
             
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
-            $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
+            //$attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
             
             $backgrounds = $this->m_backgrounds->backgrounds_show_app($users[0]->school_id); 
             
@@ -264,7 +266,7 @@ class Api extends CI_Controller
                     'students' => $students,
                     'notifications' => $notifications,
                     'home_page_menu' => $home_page_menu,
-                    'attendances' => $attendances,
+                   // 'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
                     'teachers' => $teachers,
                     'status' => 'live'
@@ -299,6 +301,7 @@ class Api extends CI_Controller
 		log_message('debug',"Notification student id : " . print_r($users,true));
             
 			if($student_id){
+				log_message('debug','Notification student id : '. $student_id);
             	$students = $this->m_students->students_show_app($token,$student_id);
             	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 			}else{
@@ -432,13 +435,14 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token'];
+        $date = $request['date'];
         
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             
             $students = $this->m_students->students_show_app($token);
             
-            $attendances = $this->m_attendances->attendances_show_app($users[0]->id);
+            $attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
             
             $teachers = $this->m_teachers->teachers_show_section_app($students[0]->sections_id);
             
@@ -482,8 +486,9 @@ class Api extends CI_Controller
             $users = $this->m_login->get_users($token);
             
             $students = $this->m_students->students_show_app($token);
+			log_message('debug',print_r($students, true));
             
-            $exams = $this->m_exams->exams_show_app($users[0]->school_id);
+            $exams = $this->m_exams->exams_show_app($users[0]->school_id,$students[0]->class_id, $students[0]->sections_id);
             
             $d = explode('_',$token);
              $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1044,32 +1049,12 @@ class Api extends CI_Controller
         $request = json_decode($post_data,true); 
         $username = $request['username'];
         $password = $request['password']; 
-        
-        if ($token != '') {
-            $data = $this->m_login->check_username($username);
-            if($data == 'True'){
-                
-                $users = $this->m_login->set_forget_password($username,$password);
-                
-                    $this->response(array( 
-                        'msg' => 'Password change successfully!',
-                        'status' => 'live'
-                    ));
-                
-            } else {
-                $msg = "Old Password is Incorrect.Please,try again!";
-                $this->response(array(
-                    'msg' => $msg,
-                    'status' => 'expired'
-                ));
-            }
-        } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
-            $this->response(array(
-                'msg' => $msg,
-                'status' => 'expired'
-            ));
-        }
+		$otp = $request['otp'];
+
+		$result = $this->m_login->set_forget_password($otp, $username, $password);
+		$this->response(array(
+			'msg' => $result
+		));
     }
 
     
@@ -1610,6 +1595,18 @@ class Api extends CI_Controller
 				'homework' => $homework,
 				'sections' => $sections,
 				'class' => $class
+		));
+	}
+
+	function set_notification_post(){
+		$this->load->model("m_login");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$value = $request['notification'];
+		$result = $this->m_login->set_notification($token, $value);
+		$this->response(array(
+			'status' => $result
 		));
 	}
 

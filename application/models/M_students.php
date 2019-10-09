@@ -329,15 +329,17 @@ class m_students extends CI_Model {
     } 
     
     function students_show_app_id($token,$id){
-        $this->db->select('st.*,s.school_name');
+        $this->db->select('st.*,s.school_name,sec.sections');
         $this->db->from('students st');
         $this->db->join('school s', 'st.school_id=s.id', 'left');
+        $this->db->join('sections sec', 'st.sections_id=sec.id', 'left');
         $this->db->join('users u', 'st.users_id=u.id', 'left');
         $this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
         $this->db->where(array( 'ut.token' => $token)); 
         $this->db->where(array( 'st.id' =>$id));
         
         $query = $this->db->get();
+           log_message('debug',$this->db->last_query()); 
         if($query)
         {
             return $query->result();

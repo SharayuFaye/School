@@ -138,10 +138,10 @@ class m_notifications extends CI_Model {
             	->where(array('n.roles_id' => 'student'))
             	->where(array( 'n.school_id' => $school_id));
             	if($sections_id!=null){  
-            	    $this->db->or_where(array( 'n.sections_id' =>$sections_id));
+            	    $this->db->where(array( 'n.sections_id' =>$sections_id));
             	}
             	if($class_id!=null){
-            	    $this->db->or_where(array( 'n.class_id' =>$class_id));
+            	    $this->db->where(array( 'n.class_id' =>$class_id));
             	}
             	
 		}else{
@@ -153,7 +153,7 @@ class m_notifications extends CI_Model {
         $this->db->order_by('n.datetime','desc');
         $this->db->distinct();
         $query = $this->db->get();
-        
+       	log_message('debug',$this->db->last_query()); 
         if($query)
         {
             return $query->result();

@@ -24,8 +24,8 @@ class m_login extends CI_Model {
         $this->db->from('users u');
 		$this->db->join('tokens t','t.user_id = u.id', 'left');
         $this->db->where(array( 'u.username' => $username, 'u.password'=> $password));
-        $this->db->where( array( 't.token' => '', 't.fcm_token'=> ));  
-        $this->db->where( array( 'fcm_token' => '' ));   
+        $this->db->where( array( 't.token' => '', 't.fcm_token'=>'' ));  
+        //$this->db->where( array( 'fcm_token' => '' ));   
         $query = $this->db->get();
         
         if($query->num_rows() == 0){
@@ -61,32 +61,34 @@ class m_login extends CI_Model {
     }
     
     function set_token($id,$token,$fcm_token){
-//         $this->db->select("*");
-//         $this->db->from('users');
-//         $this->db->where(array( 'id' => $id));
-//         $query = $this->db->get();
-//         if($query->num_rows() == 0){
-//             $target = array(
-//                 "token" => $token 
-//             );
-//             $this->db->insert('users', $target);
-//             return true;
-//         }else{
+         $this->db->select("*");
+         $this->db->from('tokens');
+         $this->db->where(array( 'user_id' => $id));
+         $query = $this->db->get();
+         if($query->num_rows() == 0){
+             $target = array(
+                 "token" => $token,
+				 "fcm_token"=>$fcm_token,
+				 "user_id"=>$id
+             );
+             $this->db->insert('tokens', $target);
+             return true;
+         }else{
             $target = array(
                 "token" => $token,
                 "fcm_token" => $fcm_token
             );
-            $this->db->where(array( 'id' => $id));
-            $this->db->update('users', $target);
+            $this->db->where(array( 'user_id' => $id));
+            $this->db->update('tokens', $target);
             return true; 
-//         }
+         }
     }
 
     function getFCMtokens($school_id){
 	    $this->db->select("t.fcm_token");
-	    $this->db->from("tokens");
-		$this->db->join('users u','t.user_id = u.id','left');
-	    $this->db->where(array('u.school_id' => $school_id));
+	    $this->db->from("tokens t");
+		$this->db->join('users u','u.id = t.user_id','left');
+	    $this->db->where(array('u.school_id' => $school_id, 'u.notification' => true));
 	    $query = $this->db->get();
 	    $data = [];
 	    foreach($query->result() as $rec){
@@ -99,9 +101,10 @@ class m_login extends CI_Model {
     
     
     function get_users($token){
-        $this->db->select("*");
-        $this->db->from('users');
-        $this->db->where(array( 'token' => $token)); 
+        $this->db->select("u.*");
+        $this->db->from('users u');
+		$this->db->join('tokens t','t.user_id = u.id','left');
+        $this->db->where(array( 't.token' => $token)); 
         $query = $this->db->get();
         if($query->num_rows() == 0){
             $data = 'False';
@@ -114,12 +117,14 @@ class m_login extends CI_Model {
     }
     
     function check_password($token,$old_password){
-        $this->db->select("*");
-        $this->db->from('users');
-        $this->db->where(array( 'token' => $token));
-        $this->db->where(array( 'password' => $old_password));
+        $this->db->select("u.*");
+        $this->db->from('users u');
+		$this->db->join('tokens t','t.user_id = u.id','left');
+        $this->db->where(array( 't.token' => $token));
+        $this->db->where(array( 'u.password' => $old_password));
         $query = $this->db->get();
-        if($query->num_rows() == 1){
+		log_message('debug',$this->db->last_query());
+        if($query->num_rows() > 0){
             $data = 'True';
             return $data;
         }
@@ -144,23 +149,54 @@ class m_login extends CI_Model {
         } 
     }
     function set_password($token,$password){ 
+		$user = $this->db->select('u.username')
+						->from('users u')
+						->join('tokens t','t.user_id = u.id','right')
+						->where(array('t.token'=> $token))
+						->get()
+						->result();
+		log_message('debug',$user[0]->username);
         $target = array(
             "password" => $password
         );
-        $this->db->where(array( 'token' => $token));
+        $this->db->where(array('username' => $user[0]->username));
         $this->db->update('users', $target);
         return true; 
     }
 
-    function set_forget_password($username,$password){ 
+    function set_forget_password($otp, $username, $password){ 
+		$query = $this->db->select('*')
+						->from('users')
+						->where(array('username' => $username, 'otp' => $otp))
+						->get();
+		log_message('debug', $this->db->last_query());
+		if($query->num_rows() > 0){
+        	$target = array(
+        	    "password" => $password
+        	);
+        	$this->db->where(array( 'username' => $username));
+        	$this->db->update('users', $target);
+        	return "Password has been reset successfully";
+		}else{
+			return "Incorrect OTP entered";
+		}
+    }
+
+	function set_notification($token, $value){
+		$user = $this->db->select('u.username')
+						->from('users u')
+						->join('tokens t','t.user_id = u.id','right')
+						->where(array('t.token'=> $token))
+						->get()
+						->result();
+		log_message('debug',$user[0]->username);
         $target = array(
-            "password" => $password
+            "notification" => $value
         );
-        $this->db->where(array( 'username' => $username));
+        $this->db->where(array('username' => $user[0]->username));
         $this->db->update('users', $target);
         return true; 
-    }
-    
+	}
     
     function logout($token){
         $target = array(
@@ -171,5 +207,23 @@ class m_login extends CI_Model {
         $this->db->update('users', $target);
         return true;
     }
+
+	function update_otp($user, $otp){
+		$query = $this->db->select('*')
+						->from('users')
+						->where(array('username' => $user))
+						->get();
+		if($query->num_rows() > 0){
+			$target = array(
+					"otp" => $otp
+			);
+			$this->db->where(array('username'=> $user));
+			$this->db->update('users', $target);
+			log_message('debug', $this->db->last_query());
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
 ?>
