@@ -142,7 +142,7 @@ $(document).ready(function() {
              title: 'School',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,6,7]
+	                columns: [1,2,3,4,6]
 	            }
          },
          {
@@ -150,14 +150,14 @@ $(document).ready(function() {
              title: 'School',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,6,7]
+	                columns: [1,2,3,4,6]
 	            }
          },
          { 
              	extend: 'pdf', 
                 title: 'School',
 	           exportOptions: {
-	                columns: [1,2,3,4,6,7]
+	                columns: [1,2,3,4,6]
 	            } 
           }
      	]
