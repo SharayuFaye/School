@@ -1168,7 +1168,26 @@ class Welcome extends CI_Controller {
     }
     
     
+    public function students_byroll_fetch()
+    {
+        $roll_no = $this->input->get('roll_no') ;
+        $sections_id = $this->input->get('sections_id') ;
+        $this->load->model('m_students');
+        $students = $this->m_students->students_byroll_fetch($roll_no,$sections_id);
+        echo json_encode($students);
+    }
     
+    public function students_byroll_fetch_edit()
+    {
+        $id = $this->input->get('id') ;
+        $roll_no = $this->input->get('roll_no') ;
+        $sections_id = $this->input->get('sections_id') ;
+        $this->load->model('m_students');
+        $students = $this->m_students->students_byroll_fetchE($id,$roll_no,$sections_id);
+        echo json_encode($students);
+    }
+    
+         
 	public function students()
     {	
     	if(!isset($this->session->userdata['username']) ){
@@ -1389,6 +1408,33 @@ class Welcome extends CI_Controller {
 	            
 	            $data = $this->m_students->students_delete($id);
 
+	            if($data != 'true'){
+	                $this->data['error_msg'] ='Error in deletion!';
+	            }else{
+	                $this->data['success_msg'] ='Record deleted successfully!';
+	            }
+	        }
+	        
+	         
+	        if($this->input->post('del_all')){
+// 	            print_r($this->input->post('del_all')); 
+	            foreach($this->input->post('del_all') as $id ){
+	               $data = $this->m_students->students_delete($id);
+	            }
+	            
+	            if($data != 'true'){
+	                $this->data['error_msg'] ='Error in deletion!';
+	            }else{
+	                $this->data['success_msg'] ='Record deleted successfully!';
+	            }
+	            
+	        }
+	        
+	        if($this->input->post('del_students')){
+	            $id = $this->input->post('id') ; 
+	            
+	            $data = $this->m_students->students_delete($id);
+	            
 	            if($data != 'true'){
 	                $this->data['error_msg'] ='Error in deletion!';
 	            }else{

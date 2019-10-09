@@ -20,7 +20,9 @@ class m_school extends CI_Model {
 		        "created_date"=>date('Y-m-d'),
 		        "created_by"=>$this->session->userdata['id'], 
 				);   
-		    $query = $this->db->insert('school', $target); 
+// 		    print_r($target); 
+		    $query = $this->db->insert('school', $target);
+// 		    print_r($query);exit();
 			if($query){ return true;  }else{ return false; }
 		}	 
     }

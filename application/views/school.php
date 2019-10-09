@@ -63,7 +63,7 @@
 											<th> Alternate Mobile</th> 
 											<th> Logo</th>
 											<th> Mail</th> 
-											<th>Date</th>
+<!-- 											<th>Date</th> -->
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -77,7 +77,7 @@
 											<td><?php echo $row->school_mobile2;?></td> 
 											<td><img src="<?php echo base_url(); ?>logo/<?php echo $row->school_logo;?>" width="35" height="35"/></td>  
 											<td><?php echo $row->school_mail;?></td> 
-											<td><?php echo $row->date;?></td> 
+											<!-- <td><?php echo $row->date;?></td>  -->
 									        <td class="actions">
 												<a href="#" class="on-default edit-row"><i onclick="edit(<?php echo $row->id;?>,'<?php echo $row->school_name;?>','<?php echo $row->school_address;?>','<?php echo $row->school_mobile;?>','<?php echo $row->school_mobile2;?>','<?php echo $row->school_logo;?>','<?php echo $row->school_mail;?>','<?php echo $row->date;?>')" class="fa fa-pencil"></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)" ></i></a>
@@ -111,7 +111,7 @@
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script><?php echo base_url(); ?>
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-		<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
 		
 		<!-- Theme Base, Components and Settings -->
@@ -124,13 +124,47 @@
 		<script src="<?php echo base_url(); ?>js/theme.init.js"></script>
 
 		<!-- Examples<?php echo base_url(); ?> -->
-		<script src="js/examples/examples.datatables.default.js"></script>
+		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 
-
-
+ 
 <script type="text/javascript"> 
+
+$(document).ready(function() {
+	 $('#datatable-tabletools').DataTable( {
+			destroy: true,
+	        dom: 'Bfrtip',
+	        
+    	 buttons : [
+         {
+        	 extend: 'excel',
+             title: 'School',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,6,7]
+	            }
+         },
+         {
+        	 extend: 'print',
+             title: 'School',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,6,7]
+	            }
+         },
+         { 
+             	extend: 'pdf', 
+                title: 'School',
+	           exportOptions: {
+	                columns: [1,2,3,4,6,7]
+	            } 
+          }
+     	]
+    } );
+
+} );
+	
 var d = document.getElementById("school");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
@@ -341,12 +375,13 @@ function ValidateEmailE(v)
 					<input type="email" required name="school_mail" onchange="ValidateEmail(this.value)" id="smail" class="form-control">
 				</div>
 			</div>
-			<div class="form-group row">
+			<input type="hidden"  name="date" value="<?php echo date('Y-m-d');?>"  class="form-control">
+			<!-- <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
 				<div class="col-sm-8">
-					<input type="date" required name="date" max="<?php echo date('Y-m-d');?>"  class="form-control">
+					
 				</div>
-			</div>
+			</div> -->
 
 	    </div>
 		<footer class="card-footer text-right"> 
@@ -418,12 +453,12 @@ function ValidateEmailE(v)
 					<input type="mail" required id="school_mail"  onchange="ValidateEmailE(this.value)" name="school_mail" class="form-control">
 				</div>
 			</div>
-			<div class="form-group row">
+		<!-- 	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
 				<div class="col-sm-8">
 					<input type="date" required id="date" name="date" max="<?php echo date('Y-m-d');?>" class="form-control">
 				</div>
-			</div>
+			</div> -->
 		</div>
 									<footer class="card-footer text-right">
 										<input class="btn btn-primary" type="submit" id="save2"  name="edit_school" value="Update">

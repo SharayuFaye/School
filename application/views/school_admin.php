@@ -103,7 +103,7 @@
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-		<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 		<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
 		
 		<!-- Theme Base, Components and Settings -->
@@ -116,13 +116,48 @@
 		<script src="<?php echo base_url(); ?>js/theme.init.js"></script>
 
 		<!-- Examples<?php echo base_url(); ?> -->
-		<script src="js/examples/examples.datatables.default.js"></script>
+		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 		<script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 
 
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	 $('#datatable-tabletools').DataTable( {
+			destroy: true,
+	        dom: 'Bfrtip',
+	        
+    	 buttons : [
+         {
+        	 extend: 'excel',
+             title: 'SchoolAdmin',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2]
+	            }
+         },
+         {
+        	 extend: 'print',
+             title: 'SchoolAdmin',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2]
+	            }
+         },
+         { 
+             	extend: 'pdf', 
+                title: 'SchoolAdmin',
+	           exportOptions: {
+	                columns: [1,2]
+	            } 
+          }
+     	]
+    } );
+
+} );
+
 var d = document.getElementById("school_admin");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
@@ -208,7 +243,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="password" required id="confirm_password1" name="confirm_password" class="form-control">
+					<input type="text" required id="confirm_password1" name="confirm_password" class="form-control">
 					<span id="msg1" style="color: red"></span>
 				</div>
 			</div>
@@ -271,7 +306,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="password" required id="confirm_password2" name="confirm_password" class="form-control">
+					<input type="text" required id="confirm_password2" name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>

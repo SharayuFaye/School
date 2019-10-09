@@ -215,7 +215,36 @@ class m_students extends CI_Model {
     function parents_fetch($id){
         $this->db->select("*");
         $this->db->from('students');
-        $this->db->where(array( 'username' => $id )); 
+        $this->db->where(array( 'username' => $id ));
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    
+    function students_byroll_fetch($roll,$sections_id){
+        $this->db->select("*");
+        $this->db->from('students');
+        $this->db->where(array( 'roll_number' => $roll ));
+        $this->db->where(array( 'sections_id' => $sections_id ));
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    function students_byroll_fetchE($id,$roll,$sections_id){
+        $this->db->select("*");
+        $this->db->from('students');
+        $this->db->where( 'id!=',$id );
+        $this->db->where(array( 'roll_number' => $roll ));
+        $this->db->where(array( 'sections_id' => $sections_id ));
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
         $query = $this->db->get();
         if($query)
         {
@@ -258,8 +287,17 @@ class m_students extends CI_Model {
                     $this->db->select("*");
                     $this->db->from('students');
                     $this->db->where(array( 'student_name' =>  $row['student_name']));
+                    $this->db->where(array( 'school_id' => $this->session->userdata['school']));
                     $query = $this->db->get();
-                    if($query->num_rows() == 0){
+                    
+                    
+                    $this->db->select("*");
+                    $this->db->from('students');
+                    $this->db->where(array( 'roll_number' =>  $row['roll_number']));
+                    $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+                    $rollno = $this->db->get();
+                    
+                    if($query->num_rows() == 0  && $rollno->num_rows() ==0 ){
                          
                         $this->db->select("*");
                         $this->db->from('sections');
@@ -297,7 +335,9 @@ class m_students extends CI_Model {
                         
                     }
                 }
-            }else{
+            }
+            
+            else{
                 $duplicate[] = $row['username'];
                 
             }
