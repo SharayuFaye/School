@@ -29,7 +29,9 @@ class m_marks extends CI_Model {
     			);   
     	   $q = $this->db->insert('marks', $target);
 //     	    print_r($target);print_r($q);exit();
+    	   if($q){
     		return true;
+    	   }
         }
     }
     function marks_edit($id,$teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school,$class,$section,$roll_no,$evaluation_type,$pa){ 

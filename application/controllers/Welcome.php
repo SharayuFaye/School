@@ -1743,7 +1743,35 @@ class Welcome extends CI_Controller {
             $this->load->view('exams',$this->data);
         }
     }
-     
+    public function marks_add(){
+    
+         $this->load->model('m_marks');  
+    
+        $class = $this->input->post('class') ;
+        $section = $this->input->post('section') ;
+        $roll_no = $this->input->post('roll_no') ;
+        $evaluation_type = $this->input->post('evaluation_type') ;
+        $pa = $this->input->post('pa') ;
+        
+        
+        $teacher_id = $this->input->post('teacher_id') ;
+        $student_id = $this->input->post('students_id') ;
+        $date = $this->input->post('date') ;
+        $exam_type = $this->input->post('exam_type') ;
+        $marks = $this->input->post('marks') ;
+        $out_of = $this->input->post('out_of') ;
+        $subject = $this->input->post('subject') ;
+        if($this->input->post('percentage') == 'NaN'){
+            $percentage = $marks;
+        }else{
+            $percentage = $this->input->post('percentage') ;
+        }
+        $competence = $this->input->post('competence') ;
+        $school_id = $this->session->userdata['school'] ;
+        $data = $this->m_marks->marks_add($teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school_id,$class,$section,$roll_no,$evaluation_type,$pa);
+        echo $data;
+        
+    }
     public function marks()
     {
         if(!isset($this->session->userdata['username']) ){

@@ -190,6 +190,64 @@ $(document).ready(function() {
     	]
    } );
 
+
+
+
+
+	 $('#add_new').attr("disabled", true);
+	 $('#save').attr("disabled", false);
+	  
+	 $('#add_new').click(function(){  
+	 	$('#add_new').attr("disabled", true);
+	 	$('#save').attr("disabled", false);  
+	    $('#per').val(''); 
+	    $('#m').val(''); 
+	    $('#roll_no1').val(''); 
+	    $('#student_name1').val('');  
+	    $('#cm').val('');  
+	    $('#err_m').html("");
+	     $('#error_m').html('');
+	 	 $('#success_m').html('');
+	 });
+
+	 $('#save').click(function(e){  
+
+	 	$('#add_new').attr("disabled", false);
+	 	$('#save').attr("disabled", true);
+	 	
+	     e.preventDefault();    
+	         var form = $('#comment1')[0]; 
+	 		// Create an FormData object 
+	         var data = new FormData(form); 
+	         console.log("data : ", data); 
+	         $.ajax({
+	             type:'POST',
+	             url: "<?php echo base_url(); ?>index.php/marks_add",
+	             data:data,
+	             cache:false,
+	             contentType: false,
+	             processData: false,
+	             success:function(data){
+	                 console.log("succe42342ss");
+	                 console.log(data); 
+	                 if(data == 1){ 
+	               		$('#success_m').html('Record inserted successfully');
+	               	    $('#error_m').html('');
+	               		$('#add_new').attr("disabled", false);
+	               		$('#save').attr("disabled", true);
+	                 }
+	                 else{ 
+	                     $('#error_m').html('Error in insertion   !');
+	                	 	$('#success_m').html('');
+	                     $('#add_new').attr("disabled", true);
+	                     $('#save').attr("disabled", false);
+	                 }
+	         } 
+	    }); 
+
+	 });
+
+	 
 } );
 
 
@@ -197,6 +255,9 @@ var d = document.getElementById("marks");
 d.className += " nav-active";  
 var n = document.getElementById("nav1");
 n.className += " nav-expanded nav-active"; 
+
+
+
 
 
 function edit($id,$class_id,$sections, $sections_id, $type, $subject, $teacher_name,$teacher_id, $evaluation_type, $roll_no,  $student_name,$students_id, $pa, $marks, $out_of, $competence, $percentage){  
@@ -547,8 +608,8 @@ $('#mark').change(function(){
 <div class="modal-body">
 <div class="col-lg-12"> 
 	<section class="card">
-	 <?php $this->load->helper('form');?>
-	 <?php echo form_open_multipart('Welcome/marks');?>   
+	
+	<form id="comment1" method="post" enctype="multipart/form-data" > 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			
 			<div class="form-group row">
@@ -669,7 +730,7 @@ $('#mark').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Competence:</label>
 				<div class="col-sm-8">
-					<input type="text" name="competence" class="form-control">
+					<input type="text" name="competence" id="cm" class="form-control">
 				</div>
 			</div>
  
@@ -688,10 +749,17 @@ $('#mark').change(function(){
 			
 		</div>
 		<footer class="card-footer text-right"> 
-			<input class="btn btn-primary" type="submit"  name="save_marks" id="save" value="Save">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		
+		<span style="margin-left:10px;color:green;" id="success_m"></span>
+		<span style="margin-left:10px;color:red" id="error_m"></span>
+			<input class="btn btn-primary" type="button" id="add_new"  value="Add new">
+			<input class="btn btn-primary" type="button"  name="save_marks" id="save" value="Save">  
+			<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:window.location.reload()">Close</button>
+			
+<!-- 			<input class="btn btn-primary" type="submit"  name="save_marks" id="save" value="Save"> -->
+<!-- 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 		</footer>
-<?php echo form_close(); ?> 
+</form>
 	</section>  
 </div> 
 

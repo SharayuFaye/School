@@ -111,6 +111,7 @@ $route['timetables_add'] = 'welcome/timetables_add';
 $route['timetables_edit'] = 'welcome/timetables_edit';
 $route['homework_add'] = 'welcome/homework_add';
 $route['activity_add'] = 'welcome/activity_add';
+$route['marks_add'] = 'welcome/marks_add';
 
 
 
