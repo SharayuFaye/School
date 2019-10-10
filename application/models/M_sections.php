@@ -49,6 +49,7 @@ class m_sections extends CI_Model {
         $this->db->from('sections'); 
         $this->db->where(array( 'class_id' => $class));
         $this->db->where(array( 'sections' => $sections));
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
         $this->db->where('id!=', $id);
         $query = $this->db->get();
         if($query->num_rows() ==0 ){
