@@ -302,7 +302,8 @@ class Api extends CI_Controller
             
 			if($student_id){
 				log_message('debug','Notification student id : '. $student_id);
-            	$students = $this->m_students->students_show_app($token,$student_id);
+            	$students = $this->m_students->students_show_app_id($token,$student_id);
+       	log_message('debug',print_r($students, true));
             	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 			}else{
 			    $notifications = $this->m_notifications->notifications_show_app($token, null, null,$users[0]->school_id);
