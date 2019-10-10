@@ -523,7 +523,7 @@ class Welcome extends CI_Controller {
 	            if ( ! $this->upload->do_upload('profile'))
 	            {
 	                $error = array('error' => $this->upload->display_errors());
-	                $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!';
+	                $this->data['error_msg'] ='Please select profile in jpg,png,jpeg format!';
 	                $profile = '';
 	            }else{
 	                $data = array('upload_data' => $this->upload->data());
@@ -562,7 +562,7 @@ class Welcome extends CI_Controller {
 	                if ( ! $this->upload->do_upload('profile'))
 	                {
 	                    $error = array('error' => $this->upload->display_errors());
-	                    $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!';
+	                    $this->data['error_msg'] ='Please select profile in jpg,png,jpeg format!';
 	                    $profile = '';
 	                    
 	                }else{
@@ -1199,9 +1199,9 @@ class Welcome extends CI_Controller {
     
     public function subject_stud_fetch()
     {
-        $student_id = $this->input->get('student_id') ;
+        $sections_id = $this->input->get('sections_id') ;
         $this->load->model('m_sections');
-        $subject_data = $this->m_sections->subject_stud_fetch($student_id);
+        $subject_data = $this->m_sections->subject_fetch($sections_id);
         echo json_encode($subject_data);
     }
     
@@ -1752,12 +1752,21 @@ class Welcome extends CI_Controller {
             $this->load->model('m_teachers');
             $this->load->model('m_students');
             $this->load->model('m_marks');
-            $this->load->model('m_exam_type'); 
+            $this->load->model('m_exam_type');
+            $this->load->model('m_class');
+            $this->load->model('m_sections');
             
             $this->data['class'] = 0;
             $this->data['section'] = 0;
             
             if($this->input->post('save_marks')){
+                
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $roll_no = $this->input->post('roll_no') ;
+                $evaluation_type = $this->input->post('evaluation_type') ;
+                $pa = $this->input->post('pa') ; 
+                
                 
                 $teacher_id = $this->input->post('teacher_id') ; 
                 $student_id = $this->input->post('students_id') ;
@@ -1766,10 +1775,14 @@ class Welcome extends CI_Controller {
                 $marks = $this->input->post('marks') ;
                 $out_of = $this->input->post('out_of') ;
                 $subject = $this->input->post('subject') ;
+                if($this->input->post('percentage') == 'NaN'){
+                    $percentage = $marks;
+                }else{
+                    $percentage = $this->input->post('percentage') ;
+                }
                 $competence = $this->input->post('competence') ;
-                $percentage = $this->input->post('percentage') ;
                 $school_id = $this->session->userdata['school'] ;
-                $data = $this->m_marks->marks_add($teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school_id);
+                $data = $this->m_marks->marks_add($teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school_id,$class,$section,$roll_no,$evaluation_type,$pa);
                 if($data != 'true'){
                     $this->data['error_msg'] ='Data should be Unique!';
                 }else{
@@ -1780,6 +1793,14 @@ class Welcome extends CI_Controller {
             
             if($this->input->post('edit_marks')){
                 $id = $this->input->post('id') ;
+                
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $roll_no = $this->input->post('roll_no') ;
+                $evaluation_type = $this->input->post('evaluation_type') ;
+                $pa = $this->input->post('pa') ;
+                
+                
                 $teacher_id = $this->input->post('teacher_id') ;
                 $student_id = $this->input->post('students_id') ;
                 $date = $this->input->post('date') ;
@@ -1791,7 +1812,7 @@ class Welcome extends CI_Controller {
                 $percentage = $this->input->post('percentage') ;
                 $school_id = $this->session->userdata['school'] ;
                 
-                $data = $this->m_marks->marks_edit($id,$teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school_id);
+                $data = $this->m_marks->marks_edit($id,$teacher_id,$student_id,$date,$exam_type,$marks,$out_of,$subject,$competence,$percentage,$school_id,$class,$section,$roll_no,$evaluation_type,$pa);
                 if($data != 'true'){
                     $this->data['error_msg'] ='Error in updation!';
                 }else{
@@ -1823,7 +1844,10 @@ class Welcome extends CI_Controller {
             
             $this->data['exam_type_show'] =$this->m_exam_type->exam_type_show();
             $this->data['students_show'] =$this->m_students->students_show();
-            $this->data['teachers_show'] =$this->m_teachers->teachers_show_id(); 
+            $this->data['teachers_show'] =$this->m_teachers->teachers_show_id();
+             $this->data['class_show'] =$this->m_class->class_show_id();
+            $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
+            $this->data['sections_show'] =$this->m_sections->sections_show_id();
             
             $this->load->view('marks',$this->data);
         }

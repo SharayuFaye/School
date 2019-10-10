@@ -53,15 +53,18 @@
 					<thead>
 						<tr>
 							<th>Sr No</th>
-							<th>Teacher Details</th>
-							<th>Student Name</th> 
-							<th>Date</th> 
+							<th>Class</th> 
+							<th>Sections</th> 
 							<th>Exam Type</th> 
-							<th>Marks</th> 
-							<th>Out Of</th>
 							<th>Subject</th>
-							<th>Competence</th>
-							<th>Percentage</th>
+							<th>Teacher Details</th>
+							<th>Evaluation Type</th>
+							<th>Student Name</th> 
+							<th>Present / Absent</th>  
+							<th>Marks Obtained / Grade</th> 
+							<th>Out Of</th>
+							<th>Compe tence</th>
+							<th>%</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -69,19 +72,38 @@
 	<?php $i=1; foreach ($marks_show as $row) { ?>
     					<tr data-item-id="<?php echo $i;?>">
     						<td><?php echo $i;?></td> 
-    						<td><?php echo $row->teacher_name;?></td> 
-    						<td><?php echo $row->student_name;?></td> 
-    						<td><?php echo $row->date;?></td> 
+    						<td><?php echo $row->class_id;?></td> 
+    						<td><?php echo $row->sections;?></td> 
     						<td><?php echo $row->type;?></td> 
+    						<td><?php echo $row->subject;?></td> 
+    						<td><?php echo $row->teacher_name;?></td> 
+    						<td><?php echo $row->evaluation_type;?></td>  
+    						<td><?php echo $row->student_name;?></td>  
+    						<td><?php echo $row->pa;?></td>  
     						<td><?php echo $row->marks;?></td> 
     						<td><?php echo $row->out_of;?></td> 
-    						<td><?php echo $row->subject;?></td> 
     						<td><?php echo $row->competence;?></td> 
     						<td><?php echo $row->percentage;?></td> 
 					        <td class="actions">
 								<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
 								<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->teacher_id;?>','<?php echo $row->students_id;?>','<?php echo $row->date;?>','<?php echo $row->exam_type_id;?>','<?php echo $row->marks;?>','<?php echo $row->out_of;?>','<?php echo $row->subject;?>','<?php echo $row->competence;?>','<?php echo $row->percentage;?>')"></i></a>
+								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>',
+								'<?php echo $row->class_id;?>',
+                                '<?php echo $row->sections;?>',
+        						'<?php echo $row->sections_id;?>',
+        						'<?php echo $row->type;?>',
+        						'<?php echo $row->subject;?>',
+        						'<?php echo $row->teacher_name;?>',
+                                '<?php echo $row->teacher_id;?>',
+        						'<?php echo $row->evaluation_type;?>', 
+                                '<?php echo $row->roll_number;?>',
+                                '<?php echo $row->student_name;?>', 
+        						'<?php echo $row->students_id;?>', 
+        						'<?php echo $row->pa;?>', 
+        						'<?php echo $row->marks;?>',
+        						'<?php echo $row->out_of;?>',
+        						'<?php echo $row->competence;?>',
+        						'<?php echo $row->percentage;?>')"></i></a>
 								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 							</td>
 						</tr>  
@@ -113,7 +135,7 @@
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
 
 <!-- Theme Base, Components and Settings -->
@@ -125,36 +147,90 @@
 <!-- Theme Initialization Files -->
 <script src="<?php echo base_url(); ?>js/theme.init.js"></script>
 
-<!-- Examples<?php echo base_url(); ?> -->
-<script src="js/examples/examples.datatables.default.js"></script>
+<!-- Examples -->
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 	
 		
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+	 $('#datatable-tabletools').DataTable( {
+			destroy: true,
+	        dom: 'Bfrtip',
+            scrollX : true,
+            scrollCollapse : true,
+	        
+   	 buttons : [
+        {
+       	 extend: 'excel',
+            title: 'Marks',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+	            }
+        },
+        {
+       	 extend: 'print',
+            title: 'Marks',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+	            }
+        },
+        { 
+            	extend: 'pdf', 
+               title: 'Marks',
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8,9,10,11,12]
+	            } 
+         }
+    	]
+   } );
+
+} );
+
+
 var d = document.getElementById("marks");
 d.className += " nav-active";  
 var n = document.getElementById("nav1");
 n.className += " nav-expanded nav-active"; 
 
 
-function edit($id,$teacher,$student_name,$date,$exam_type,$marks,$outof,$subject,$competence,$per){  
+function edit($id,$class_id,$sections, $sections_id, $type, $subject, $teacher_name,$teacher_id, $evaluation_type, $roll_no,  $student_name,$students_id, $pa, $marks, $out_of, $competence, $percentage){  
 	$('#id').val($id);      
-	$('#teacher').val($teacher);
-	$('#student').val($student_name); 
-	$('#date').val($date); 
-	$('#exam_type').val($exam_type); 
+	$('#class2').val($class_id);
+	//$('#section2').val($sections_id);
+
+    var opt = $('<option />');  
+	 opt.val($sections_id);
+	 opt.text($sections);
+	 $('#section2').append(opt); 
+	 
+	$('#teacher').val($teacher_id);
+	$('#student_name2').val($student_name); 
+	$('#students_id2').val($students_id);  
+	$('#exam_type').val($type); 
 	$('#mark').val($marks);
-	$('#outof').val($outof);
+	$('#subject').val($subject);
+	$('#evaluation_type2').val($evaluation_type);
+	$('#pa2').val($pa);
+	$('#outof').val($out_of);
 
     var opt = $('<option />');  
 	 opt.val($subject);
 	 opt.text($subject);
 	 $('#subject').append(opt); 
 	 
+	 var opt = $('<option />');  
+	 opt.val($students_id);
+	 opt.text($roll_no);
+	 $('#roll_no2').append(opt); 
+	 
 	$('#competence').val($competence);
-	$('#percentage').val($per);
+	$('#percentage').val($percentage);
 	
 	$('#editrow').modal('show'); 
 }
@@ -168,13 +244,160 @@ function del($id){
 
 
 $(document).ready(function(){
-$('#student_id').change(function(){  
-	$("#sel_sub > option").remove();  
-	var student_id = $('#student_id').val();  
+
+	   $('#class1').change(function(){  
+	         $("#section1 > option").remove();  
+	         var class1 = $('#class1').val();  
+	        	 $.ajax({
+	        		 type: "GET",
+	        		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+	        		 data: 'class_sel='+class1,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD);
+	        			 var opt = $('<option />');  
+						 opt.val('');
+						 opt.text('');
+						 $('#section1').append(opt); 
+	                        $.each(obj, function (index, object) { 
+	                        	console.log(object);
+	                        	 var opt = $('<option />');  
+	    						 opt.val(object['id']);
+	    						 opt.text(object['sections']);
+	    						 $('#section1').append(opt); 
+	                        }) 
+	        		 } 
+	        	 }); 
+	     });  
+
+	     $('#section1').change(function(){  
+	         $("#roll_no1 > option").remove();  
+	         var section1 = $('#section1').val();   
+	        	 $.ajax({
+	        		 type: "GET",
+	        		 url: "<?php echo base_url(); ?>index.php/students_roll_fetch", 
+	        		 data: 'section_sel='+section1,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD);
+	        			 var opt = $('<option />');  
+						 opt.val('');
+						 opt.text('');
+						 $('#roll_no1').append(opt); 
+	                        $.each(obj, function (index, object) { 
+	                        	console.log(object['roll_number']);
+	                        	 var opt = $('<option />');  
+	    						 opt.val(object['id']);
+	    						 opt.text(object['roll_number']);
+	    						 $('#roll_no1').append(opt); 
+	                        }) 
+	        		 } 
+	        	 }); 
+	     });  
+
+	     $('#roll_no1').change(function(){  
+	         $("#student_name1 > option").remove();  
+	         var roll_no1 = $('#roll_no1').val();  
+	         var class1 = $('#class1').val();  
+	         var section1 = $('#section1').val(); 
+	        	 $.ajax({
+	        		 type: "POST",
+	        		 url: "<?php echo base_url(); ?>index.php/students_sel_fetch", 
+	        		 data: { "roll_no": roll_no1, "class1": class1, "sections": section1 } ,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD); 
+	        			 console.log(obj); 
+	    				 $('#student_name1').val(obj[0].student_name);  
+	    				 $('#students_id').val(obj[0].id);  
+	        		 } 
+	        	 }); 
+	     }); 
+
+	     $('#roll_no2').change(function(){   
+	         var roll_no1 = $('#roll_no2').val();  
+	         var class1 = $('#class2').val();  
+	         var section1 = $('#section2').val(); 
+	        	 $.ajax({
+	        		 type: "POST",
+	        		 url: "<?php echo base_url(); ?>index.php/students_sel_fetch", 
+	        		 data: { "roll_no": roll_no1, "class1": class1, "sections": section1 } ,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD); 
+	        			 console.log(obj); 
+	    				 $('#student_name2').val(obj[0].student_name);  
+	    				 $('#students_id2').val(obj[0].id);   
+	        		 } 
+	        	 }); 
+	     }); 
+	     
+
+	     $('#class2').change(function(){  
+	         $("#section2 > option").remove();  
+	         var class2 = $('#class2').val();  
+	        	 $.ajax({
+	        		 type: "GET",
+	        		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+	        		 data: 'class_sel='+class2,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD);  
+	        			 var opt = $('<option />');  
+						 opt.val('');
+						 opt.text('');
+						 $('#section2').append(opt); 
+	                        $.each(obj, function (index, object) { 
+	                        	console.log(object);
+	                        	 var opt = $('<option />');  
+	    						 opt.val(object['id']);
+	    						 opt.text(object['sections']);
+	    						 $('#section2').append(opt); 
+	                        }) 
+	        		 } 
+	        	 });  
+	     });   
+
+
+	     $('#section2').change(function(){  
+	         $("#roll_no2 > option").remove();  
+	         var section1 = $('#section2').val();   
+	        	 $.ajax({
+	        		 type: "GET",
+	        		 url: "<?php echo base_url(); ?>index.php/students_roll_fetch", 
+	        		 data: 'section_sel='+section1,
+	                 datatype : "json",
+	        		 success: function(classD)  
+	        		 {   
+	        			 var obj = $.parseJSON(classD);
+	        			 var opt = $('<option />');  
+						 opt.val('');
+						 opt.text('');
+						 $('#roll_no2').append(opt); 
+	                        $.each(obj, function (index, object) { 
+	                        	console.log(object['roll_number']);
+	                        	 var opt = $('<option />');  
+	    						 opt.val(object['id']);
+	    						 opt.text(object['roll_number']);
+	    						 $('#roll_no2').append(opt); 
+	                        }) 
+	        		 } 
+	        	 }); 
+	     });  
+	      
+
+	
+$('#section1').change(function(){    
+	var  section1 = $('#section1').val();  
 		 $.ajax({
 			 type: "GET",
 			 url: "<?php echo base_url(); ?>index.php/subject_stud_fetch", 
-			 data: 'student_id='+student_id,
+			 data: 'sections_id='+section1,
 	         datatype : "json",
 			 success: function(classD)  
 			 {   
@@ -201,36 +424,35 @@ $('#student_id').change(function(){
 	});
 
 
-$('#student').change(function(){  
-	$("#subject > option").remove();  
-	var student_id = $('#student').val();  
-		 $.ajax({
-			 type: "GET",
-			 url: "<?php echo base_url(); ?>index.php/subject_stud_fetch", 
-			 data: 'student_id='+student_id,
-	         datatype : "json",
-			 success: function(classD)  
-			 {   
-					console.log(classD);
-				 var obj = $.parseJSON(classD);
-				 var opt = $('<option />');  
-				 opt.val('');
-				 opt.text('');
-				 $('#subject').append(opt);  
-	                $.each(obj, function (index, object) { 
-	                   	console.log(object);
+$('#section2').change(function(){   
+	var  section2 = $('#section2').val();  
+	 $.ajax({
+		 type: "GET",
+		 url: "<?php echo base_url(); ?>index.php/subject_stud_fetch", 
+		 data: 'sections_id='+section2,
+        datatype : "json",
+		 success: function(classD)  
+		 {   
+				console.log(classD);
+			 var obj = $.parseJSON(classD);
+			 var opt = $('<option />');  
+			 opt.val('');
+			 opt.text('');
+			 $('#subject').append(opt);  
+               $.each(obj, function (index, object) { 
+                  	console.log(object);
 
-	                	var strArray = object['subject'].split(","); 
-	                 
-	                    for(var i = 0; i < strArray.length; i++){  
-    	               		 var opt = $('<option />');  
-    	    				 opt.val(strArray[i]);
-    	    				 opt.text(strArray[i]);
-    	    				 $('#subject').append(opt); 
-	                    }
-	               }) 
-			 } 
-		 }); 
+               	var strArray = object['subject'].split(","); 
+                
+                   for(var i = 0; i < strArray.length; i++){  
+	               		 var opt = $('<option />');  
+	    				 opt.val(strArray[i]);
+	    				 opt.text(strArray[i]);
+	    				 $('#subject').append(opt); 
+                   }
+              }) 
+		 } 
+	 }); 
 	});
 
 
@@ -239,14 +461,16 @@ $('#of').change(function(){
     document.getElementById("save").disabled = false;
     var m1 = $('#m').val(); 	
     var of1 = $('#of').val();   
-    if(parseFloat(m1) > parseFloat(of1)){console.log(m1);
-        document.getElementById("save").disabled = true;
-    	$('#err_m').html("Marks can't be greater than Out Of!"); 
-    } else{
-        document.getElementById("save").disabled = false;
-    	$('#err_m').html("");
+    var evaluation_type2 = $('#evaluation_type').val();  
+    if(evaluation_type2 == 'Score'){  
+        if(parseFloat(m1) > parseFloat(of1)){console.log(m1);
+            document.getElementById("save").disabled = true;
+        	$('#err_m').html("Marks can't be greater than Total Marks!"); 
+        } else{
+            document.getElementById("save").disabled = false;
+        	$('#err_m').html("");
+        }
     }
-    
 });  
 
 $('#m').change(function(){   
@@ -255,51 +479,57 @@ $('#m').change(function(){
     var m1 = $('#m').val(); 	
     var of1 = $('#of').val();
 
-    var per = (parseFloat(m1)/parseFloat(of1))*100;
-	console.log(per);
-	$('#per').val(per.toFixed(2));   
-	    
-    if(parseFloat(m1) > parseFloat(of1)){console.log(m1);
-        document.getElementById("save").disabled = true;
-    	$('#err_m').html("Marks can't be greater than Out Of!"); 
-    } else{
-        document.getElementById("save").disabled = false;
-    	$('#err_m').html("");
-    } 
+    var evaluation_type2 = $('#evaluation_type').val();  
+    if(evaluation_type2 == 'Score'){  
+        var per = (parseFloat(m1)/parseFloat(of1))*100;
+    	console.log(per);
+    	$('#per').val(per.toFixed(2));   
+    	    
+        if(parseFloat(m1) > parseFloat(of1)){console.log(m1);
+            document.getElementById("save").disabled = true;
+        	$('#err_m').html("Marks can't be greater than Total Marks!"); 
+        } else{
+            document.getElementById("save").disabled = false;
+        	$('#err_m').html("");
+        } 
+    }    
 });  
 
 $('#outof').change(function(){   
     document.getElementById("save2").disabled = false;
     var m2 = $('#mark').val(); 
-    var of2 = $('#outof').val();    
-    if( parseFloat(m2)  >  parseFloat(of2) ){
-        console.log(of2); 
-        document.getElementById("save2").disabled = true;
-    	$('#err_mE').html("Marks can't be greater than Out Of!"); 
-    } else{
-        document.getElementById("save2").disabled = false;
-    	$('#err_mE').html("");
+    var of2 = $('#outof').val();  
+    var evaluation_type2 = $('#evaluation_type2').val();  
+    if(evaluation_type2 == 'Score'){  
+        if( parseFloat(m2)  >  parseFloat(of2) ){
+            console.log(of2); 
+            document.getElementById("save2").disabled = true;
+        	$('#err_mE').html("Marks can't be greater than Total Marks!"); 
+        } else{
+            document.getElementById("save2").disabled = false;
+        	$('#err_mE').html("");
+        }
     }
-    
 });  
 
 $('#mark').change(function(){   
     document.getElementById("save2").disabled = false;
     var m = $('#mark').val(); 
     var of = $('#outof').val();   
-    
-    var per = (parseFloat(m)/parseFloat(of))*100;
-	console.log(per);
-	$('#percentage').val(per.toFixed(2)); 
-	  
-    if(parseFloat(m) > parseFloat(of)){
-        document.getElementById("save2").disabled = true;
-    	$('#err_mE').html("Marks can't be greater than Out Of!"); 
-    } else{
-        document.getElementById("save2").disabled = false;
-    	$('#err_mE').html("");
+    var evaluation_type2 = $('#evaluation_type2').val();  
+    if(evaluation_type2 == 'Score'){
+        var per = (parseFloat(m)/parseFloat(of))*100;
+    	console.log(per);
+    	$('#percentage').val(per.toFixed(2)); 
+    	  
+        if(parseFloat(m) > parseFloat(of)){
+            document.getElementById("save2").disabled = true;
+        	$('#err_mE').html("Marks can't be greater than Total Marks!"); 
+        } else{
+            document.getElementById("save2").disabled = false;
+        	$('#err_mE').html("");
+        }
     }
-    
 });  
 
 });
@@ -320,32 +550,22 @@ $('#mark').change(function(){
 	 <?php $this->load->helper('form');?>
 	 <?php echo form_open_multipart('Welcome/marks');?>   
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
+			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
 				<div class="col-sm-8">
-					<select name="teacher_id" class="form-control" required >
-						<option></option>
-						<?php  foreach ($teachers_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
+					<select   name="class" id="class1"  class="form-control" required>
+					<option></option>
+						<?php  foreach ($class_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->class;?></option> 
 						<?php } ?> 
 					</select>
 				</div>
 			</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
 				<div class="col-sm-8">
-					<select name="students_id"id="student_id" class="form-control" required >
-						<option></option>
-						<?php  foreach ($students_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
-						<?php } ?>       
-					</select>	
-				</div>
-			</div> 
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
-				<div class="col-sm-8">
-					<select name="subject" id="sel_sub" class="form-control" required > 
+					<select   name="section" id="section1" class="form-control" required> 
 					</select>
 				</div>
 			</div>
@@ -360,24 +580,92 @@ $('#mark').change(function(){
 					</select>
 				</div>
 			</div>
+			
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
 				<div class="col-sm-8">
-					<input type="date" name="date" max="<?php echo date('Y-m-d');?>"  class="form-control" required >
+					<select name="subject" id="sel_sub" class="form-control" required > 
+					</select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Out Of:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
+				<div class="col-sm-8">
+					<select name="teacher_id" class="form-control" required >
+						<option></option>
+						<?php  foreach ($teachers_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
+						<?php } ?> 
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
+				<div class="col-sm-8">
+					<select name="evaluation_type" id="evaluation_type" class="form-control" required >
+						<option>Grade</option> 
+						<option>Score</option> 
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Total Marks:</label>
 				<div class="col-sm-8"><span id="err_m" style="color:red"></span>
-					<input type="number" name="out_of" id="of" class="form-control" required >
+					<input type="number" name="out_of" id="of" class="form-control"   >
+				</div>
+			</div>
+			
+			
+		
+		    <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<div class="col-sm-8"> 
+					<select   name="roll_no" id="roll_no1"  class="form-control" required>
+					<option></option>
+						<!------ <?php  foreach ($students_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->roll_number;?></option> 
+						<?php } ?> ----->
+					</select>
+					
+				</div>
+			</div> 
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<div class="col-sm-8">
+					<input type="text" readonly name="student_name" id="student_name1" class="form-control" required>
+					<input type="hidden"   name="students_id" id="students_id" class="form-control" required>
+				</div>
+			</div>
+<!-- 	    	<div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+<!-- 					<select name="students_id"id="student_id" class="form-control" required > -->
+<!-- 						<option></option>  
+						<?php  foreach ($students_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
+						<?php } ?>       
+<!-- 					</select>	 -->
+<!-- 				</div> -->
+<!-- 			</div>  -->
+
+			
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Present/Absent:</label>
+				<div class="col-sm-8">
+					<select name="pa" id="pa" class="form-control" required >
+						<option>Present</option> 
+						<option>Absent</option> 
+					</select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Marks:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Marks Obtained/Grade:</label>
 				<div class="col-sm-8">
-					<input type="number" name="marks" id="m" class="form-control" required >
+					<input type="text" name="marks" id="m" class="form-control" required >
 				</div>
 			</div>
+
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Competence:</label>
 				<div class="col-sm-8">
@@ -389,6 +677,12 @@ $('#mark').change(function(){
 				<label class="col-sm-4 control-label text-sm-right pt-2">Percentage:</label>
 				<div class="col-sm-8">
 					<input type="text" name="percentage" readonly id="per" class="form-control">
+				</div>
+			</div>
+	        <div class="form-group row">
+				 
+				<div class="col-sm-8">
+					<input type="hidden" name="date" max="<?php echo date('Y-m-d');?>"  class="form-control" required >
 				</div>
 			</div>
 			
@@ -423,6 +717,44 @@ $('#mark').change(function(){
 	 <input type="hidden" name="id" id="id" class="form-control">
 	 
 		 <div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
+		 <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<div class="col-sm-8">
+					<select name="class" id="class2"  class="form-control"  required>
+					<option></option>
+						<?php  foreach ($class_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->class;?></option> 
+						<?php } ?> 
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<div class="col-sm-8">
+					<select name="section" id="section2" class="form-control" required> 
+						 
+					</select>
+				</div>
+			</div>
+			  <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Exam Type:</label>
+				<div class="col-sm-8">
+					<select name="exam_type" id="exam_type" class="form-control" required > 
+						<?php  foreach ($exam_type_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->type;?></option> 
+						<?php } ?>       
+					</select>
+				</div>
+			</div> 
+	        <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<div class="col-sm-8">
+					<select name="subject" id="subject" class="form-control" required > 
+					 
+					</select>
+				</div>
+			</div>
+			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
 				<div class="col-sm-8">
@@ -435,50 +767,54 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
 				<div class="col-sm-8">
-					<select name="students_id" id="student" class="form-control" required >
-						<option></option>
-						<?php  foreach ($students_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->student_name;?></option> 
-						<?php } ?>       
-					</select>	
+					<select name="evaluation_type" id="evaluation_type2" class="form-control" required >
+						<option>Grade</option> 
+						<option>Score</option> 
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Total Marks:</label>
+				<div class="col-sm-8"><span id="err_mE" style="color:red"></span>
+					<input type="number" name="out_of" id="outof" class="form-control"   >
+				</div>
+			</div>
+			
+			
+			 <div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<div class="col-sm-8"> 
+					<select name="roll_no" id="roll_no2"  class="form-control" required> 
+					</select> 
 				</div>
 			</div> 
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
 				<div class="col-sm-8">
-					<select name="subject" id="subject" class="form-control" required > 
-					 
+				<input type="hidden"   name="students_id" id="students_id2" class="form-control" required>
+					<input type="text" readonly name="student_name" id="student_name2" class="form-control" required>
+				</div>
+			</div>
+	       
+					<input type="hidden" name="date"  value="<?php echo date('Y-m-d');?>" max="<?php echo date('Y-m-d');?>" id="date" class="form-control" required >
+				 
+			<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Present/Absent:</label>
+				<div class="col-sm-8">
+					<select name="pa" id="pa2" class="form-control" required >
+						<option>Present</option> 
+						<option>Absent</option> 
 					</select>
 				</div>
 			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Exam Type:</label>
-				<div class="col-sm-8">
-					<select name="exam_type" id="exam_type" class="form-control" required > 
-						<?php  foreach ($exam_type_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->type;?></option> 
-						<?php } ?>       
-					</select>
-				</div>
-			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
-				<div class="col-sm-8">
-					<input type="date" name="date"  max="<?php echo date('Y-m-d');?>" id="date" class="form-control" required >
-				</div>
-			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Out Of:</label>
-				<div class="col-sm-8"><span id="err_mE" style="color:red"></span>
-					<input type="number" name="out_of" id="outof" class="form-control" required >
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Marks:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Marks Obtained/Grade:</label>
+			 
 				<div class="col-sm-8">
-					<input type="number" name="marks" id="mark" class="form-control" required >
+					<input type="text" name="marks" id="mark" class="form-control" required >
 				</div>
 			</div>
 			<div class="form-group row">
