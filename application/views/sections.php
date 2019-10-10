@@ -214,7 +214,7 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
 				<div class="col-sm-8">
-					<input type="text" name="sections" maxlength="2" onkeyup="this.value = this.value.toUpperCase();" class="form-control">
+					<input type="text" name="sections" required maxlength="2" onkeyup="this.value = this.value.toUpperCase();" class="form-control">
 				</div>
 			</div> 
 			
@@ -292,7 +292,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
 				<div class="col-sm-8"> 
-					<select  name="teacher"  class="form-control">
+					<select  name="teacher" required  class="form-control">
 					<option></option>
 				 		<?php  foreach ($teachers_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
@@ -357,7 +357,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
 				<div class="col-sm-8">
-					<input type="text" id="section" onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control">
+					<input type="text" required id="section"  onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control">
 				</div>
 			</div>
 	      <div class="form-group row">
@@ -435,7 +435,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
 				<div class="col-sm-8"> 
-					<select  name="teacher" id="teacher_e"  class="form-control"> 
+					<select  name="teacher" id="teacher_e" required class="form-control"> 
 				 		<?php  foreach ($teachers_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
 					<?php } ?> 

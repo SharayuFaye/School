@@ -356,7 +356,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msg1" style="color: red"></span>
-					<input type="password" id="confirm_password1" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
@@ -484,7 +484,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="password" id="confirm_password2" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>
