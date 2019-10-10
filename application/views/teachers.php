@@ -398,7 +398,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Join Date:</label>
 				<div class="col-sm-8">
-					<input type="date" name="join_date" max="<?php echo date('Y-m-d');?>" class="form-control">
+					<input type="date" name="join_date" min="<?php echo $school_show_id[0]->date; ?>" max="<?php echo date('Y-m-d');?>" class="form-control">
 				</div>
 			</div>
 		<!-- <div class="form-group row">
@@ -526,7 +526,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Join Date:</label>
 				<div class="col-sm-8">
-					<input type="date" id="join_date" max="<?php echo date('Y-m-d');?>"  name="join_date" class="form-control">
+					<input type="date" id="join_date"  min="<?php echo $school_show_id[0]->date; ?>" max="<?php echo date('Y-m-d');?>"  name="join_date" class="form-control">
 				</div>
 			</div>	
 			<!-- <div class="form-group row">

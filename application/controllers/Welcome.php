@@ -568,6 +568,7 @@ class Welcome extends CI_Controller {
 	                $this->data['success_msg'] ='Record deleted successfully!';
 	            }
 	        } 
+	        $this->data['school_show_id'] =$this->m_school->school_show_id($this->session->userdata['school']);
 	        $this->data['school_show'] =$this->m_school->school_show();
 	        $this->data['teachers_show'] =$this->m_teachers->teachers_show();
 	        $this->load->view('teachers',$this->data);

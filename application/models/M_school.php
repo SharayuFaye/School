@@ -33,6 +33,7 @@ class m_school extends CI_Model {
         $this->db->where(array( 'school_mail' => $school_mail));
         $this->db->where(array( 'school_mobile' => $school_mobile));
         $this->db->where(array( 'school_mobile2' => $school_mobile2));
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
         $this->db->where('id!=', $id);
         $query = $this->db->get();
         if($query->num_rows() == 0){
