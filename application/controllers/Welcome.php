@@ -1872,7 +1872,12 @@ class Welcome extends CI_Controller {
             
             $this->data['exam_type_show'] =$this->m_exam_type->exam_type_show();
             $this->data['students_show'] =$this->m_students->students_show();
-            $this->data['teachers_show'] =$this->m_teachers->teachers_show_id();
+            
+            if($this->session->userdata['role']=='teacher' ){ 
+                $this->data['teachers_show'] =$this->m_teachers->teachers_show_id_user($this->session->userdata['id']);
+            }else{            
+                $this->data['teachers_show'] =$this->m_teachers->teachers_show_id();
+            }
              $this->data['class_show'] =$this->m_class->class_show_id();
             $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
             $this->data['sections_show'] =$this->m_sections->sections_show_id();

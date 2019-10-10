@@ -92,6 +92,7 @@
                                 '<?php echo $row->sections;?>',
         						'<?php echo $row->sections_id;?>',
         						'<?php echo $row->type;?>',
+        						'<?php echo $row->exam_type_id;?>',
         						'<?php echo $row->subject;?>',
         						'<?php echo $row->teacher_name;?>',
                                 '<?php echo $row->teacher_id;?>',
@@ -260,7 +261,7 @@ n.className += " nav-expanded nav-active";
 
 
 
-function edit($id,$class_id,$sections, $sections_id, $type, $subject, $teacher_name,$teacher_id, $evaluation_type, $roll_no,  $student_name,$students_id, $pa, $marks, $out_of, $competence, $percentage){  
+function edit($id,$class_id,$sections, $sections_id, $type,$exam_type_id,$subject, $teacher_name,$teacher_id, $evaluation_type, $roll_no,  $student_name,$students_id, $pa, $marks, $out_of, $competence, $percentage){  
 	$('#id').val($id);      
 	$('#class2').val($class_id);
 	//$('#section2').val($sections_id);
@@ -273,7 +274,7 @@ function edit($id,$class_id,$sections, $sections_id, $type, $subject, $teacher_n
 	$('#teacher').val($teacher_id);
 	$('#student_name2').val($student_name); 
 	$('#students_id2').val($students_id);  
-	$('#exam_type').val($type); 
+	$('#exam_type').val($exam_type_id); 
 	$('#mark').val($marks);
 	$('#subject').val($subject);
 	$('#evaluation_type2').val($evaluation_type);
@@ -649,6 +650,15 @@ $('#mark').change(function(){
 					</select>
 				</div>
 			</div>
+			
+			
+			<?php if($this->session->userdata['role']=='teacher' ){ ?>
+					<select style="display:none" name="teacher_id" class="form-control" required > 
+						<?php  foreach ($teachers_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
+						<?php } ?> 
+					</select>
+			<?php }else { ?>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
 				<div class="col-sm-8">
@@ -660,7 +670,7 @@ $('#mark').change(function(){
 					</select>
 				</div>
 			</div>
-			
+			<?php } ?>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
 				<div class="col-sm-8">
@@ -822,11 +832,19 @@ $('#mark').change(function(){
 					</select>
 				</div>
 			</div>
+			 
 			
+			<?php if($this->session->userdata['role']=='teacher' ){ ?>
+					<select style="display:none" name="teacher_id" id="teacher"  class="form-control" required > 
+						<?php  foreach ($teachers_show as $row) { ?>
+						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
+						<?php } ?> 
+					</select>
+			<?php }else { ?>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
 				<div class="col-sm-8">
-					<select name="teacher_id" id="teacher" class="form-control" required >
+					<select name="teacher_id" id="teacher"  class="form-control" required >
 						<option></option>
 						<?php  foreach ($teachers_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->teacher_name;?></option> 
@@ -834,6 +852,9 @@ $('#mark').change(function(){
 					</select>
 				</div>
 			</div>
+			<?php } ?>
+			
+			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
 				<div class="col-sm-8">
