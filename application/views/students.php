@@ -201,7 +201,7 @@ $(document).ready(function() {
                      title: 'Students',
                     footer: true,
                   	 exportOptions: {
-                        columns: [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17]
+                        columns: [1,2,3,4,5,7,8,9,10,11,12,13]
                     }
                  },
                  {
@@ -209,14 +209,14 @@ $(document).ready(function() {
                      title: 'Students',
                  	  footer: true,
                  	  exportOptions: {
-                        columns: [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17]
+                        columns: [1,2,3,4,5,7,8,9,10,11,12,13]
                     }
                  },
                  { 
                      	extend: 'pdf', 
                         title: 'Students',
                    	    exportOptions: {
-                        columns: [1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17]
+                        columns: [1,2,3,4,5,7,8,9,10,11,12,13]
                   } 
                }
        		]
