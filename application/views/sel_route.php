@@ -11,7 +11,7 @@
 									</a>
 								</li>
 								<li><span>Forms</span></li>
-								<li><span>PickUp Point &nbsp;</span></li> 
+								<li><span>Select PickUp Point &nbsp;</span></li> 
 			</ol> 
 		</div>
 	</header>
@@ -24,7 +24,7 @@
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">PickUp Point</h2>
+								<h2 class="card-title">Select PickUp Point</h2>
 							</header>
 							<div class="card-body">
 
@@ -109,7 +109,7 @@
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script> 
 <!-- Theme Base, Components and Settings -->
 <script src="<?php echo base_url(); ?>js/theme.js"></script> 
@@ -118,11 +118,46 @@
 <!-- Theme Initialization Files -->
 <script src="<?php echo base_url(); ?>js/theme.init.js"></script> 
 <!-- Examples<?php echo base_url(); ?> -->
-<script src="js/examples/examples.datatables.default.js"></script>
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 	 
 <script type="text/javascript">
+$(document).ready(function() {
+
+$('#datatable-tabletools').DataTable( {
+		destroy: true,
+       dom: 'Bfrtip',
+       
+	 buttons : [
+   {
+  	 extend: 'excel',
+       title: 'Select PickUp Point',
+          footer: true,
+          exportOptions: {
+               columns: [1,2]
+           }
+   },
+   {
+  	 extend: 'print',
+       title: 'Select PickUp Point',
+          footer: true,
+          exportOptions: {
+               columns: [1,2]
+           }
+   },
+   { 
+       	extend: 'pdf', 
+          title: 'Select PickUp Point',
+          exportOptions: {
+               columns: [1,2]
+           } 
+    }
+	]
+} );
+
+} );
+
 var d = document.getElementById("sel_route");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
