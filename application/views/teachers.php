@@ -86,6 +86,7 @@
 							<th>Teacher Mobile</th>
 							<th>Teacher Mail</th>
 							<th>Username</th>  
+							<th>Profile</th>
 							<th>Salary Details</th> 
 							<th>Education Details</th>
 							<th>Join Date</th>
@@ -102,12 +103,13 @@
 							<td><?php echo $row->teacher_mobile;?></td> 
 							<td><?php echo $row->teacher_mail;?></td> 
 							<td><?php echo $row->username;?></td>  
+							<td><img src="<?php echo base_url(); ?>profile/<?php echo $row->profile;?>" width="35" height="35"/></td>
 							<td><?php echo $row->salary_details;?></td> 
 							<td><?php echo $row->education_details;?></td> 
 							<td><?php echo $row->join_date;?></td> 
 							<!-- <td><?php echo $row->school_name;?></td>   -->
 					        <td class="actions">
-								<a href="#" class="on-default edit-row"><i onclick="edit(<?php echo $row->id;?>,<?php echo $row->users_id;?>,'<?php echo $row->teacher_name;?>','<?php echo $row->teacher_address;?>','<?php echo $row->teacher_mobile;?>','<?php echo $row->teacher_mail;?>','<?php echo $row->username;?>','<?php echo $row->password;?>','<?php echo $row->salary_details;?>','<?php echo $row->education_details;?>','<?php echo $row->join_date;?>','<?php echo $row->school_name;?>' )" class="fa fa-pencil"></i></a>
+								<a href="#" class="on-default edit-row"><i onclick="edit(<?php echo $row->id;?>,<?php echo $row->users_id;?>,'<?php echo $row->teacher_name;?>','<?php echo $row->teacher_address;?>','<?php echo $row->teacher_mobile;?>','<?php echo $row->teacher_mail;?>','<?php echo $row->username;?>','<?php echo $row->password;?>','<?php echo $row->profile;?>','<?php echo $row->salary_details;?>','<?php echo $row->education_details;?>','<?php echo $row->join_date;?>','<?php echo $row->school_name;?>' )" class="fa fa-pencil"></i></a>
 								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)" ></i></a>
 							</td>
 						</tr> 
@@ -174,7 +176,7 @@ $(document).ready(function() {
              title: 'Teachers',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,5,6,7,8]
+	                columns: [1,2,3,4,5,7,8,9]
 	            }
          },
          {
@@ -182,14 +184,14 @@ $(document).ready(function() {
              title: 'Teachers',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,5,6,7,8]
+	                columns: [1,2,3,4,5,7,8,9]
 	            }
          },
          { 
              	extend: 'pdf', 
                 title: 'Teachers',
 	           exportOptions: {
-	                columns: [1,2,3,4,5,6,7,8]
+	                columns: [1,2,3,4,5,7,8,9]
 	            } 
           }
      	]
@@ -204,12 +206,13 @@ var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
 
 
-function edit($id,$users_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$salary_details,$education_details,$join_date,$school){    
+function edit($id,$users_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$profile,$salary_details,$education_details,$join_date,$school){    
 	$('#id').val($id);    
 	$('#users_id').val($users_id);   
 	$('#teacher_name').val($teacher_name);
 	$('#teacher_address').val($teacher_address); 
 	$('#teacher_mobile').val($teacher_mobile); 
+	document.getElementById("profile").src = '<?php echo base_url(); ?>profile/'+$profile;
 	$('#teacher_mail').val($teacher_mail);
 	$('#username').val($username);
 	$('#password').val($password);
@@ -230,6 +233,50 @@ function del($id){
 	$('#delrow').modal('show'); 
 }
 
+
+function validateImage(id) {
+    var formData = new FormData();
+    $('#msg_i').html(''); 
+    document.getElementById("save1").disabled = false;
+    var file = document.getElementById(id).files[0];
+ 
+    formData.append("Filedata", file);
+    var t = file.type.split('/').pop().toLowerCase();
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") { 
+        var msg_i = "Please select a valid image file!";
+	    $('#msg_i').html(msg_i); 
+	     document.getElementById("save1").disabled = true; 
+        document.getElementById(id).value = ''; 
+    }
+    if (file.size > 250000) { 
+        document.getElementById(id).value = ''; 
+        var msg_i = "Max Upload size is 250KB only!";
+	    $('#msg_i').html(msg_i); 
+	     document.getElementById("save1").disabled = true;  
+    } 
+}
+
+function validateImageE(id) {
+    var formData = new FormData();
+    $('#msg_ie').html(''); 
+    document.getElementById("save1").disabled = false;
+    var file = document.getElementById(id).files[0];
+ 
+    formData.append("Filedata", file);
+    var t = file.type.split('/').pop().toLowerCase();
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") { 
+        var msg_i = "Please select a valid image file!";
+	    $('#msg_ie').html(msg_i); 
+	     document.getElementById("save1").disabled = true; 
+        document.getElementById(id).value = ''; 
+    }
+    if (file.size > 250000) { 
+        document.getElementById(id).value = ''; 
+        var msg_i = "Max Upload size is 250KB only!";
+	    $('#msg_ie').html(msg_i); 
+	     document.getElementById("save2").disabled = true;  
+    } 
+}
 
 function ValidateEmail(v)
 { 
@@ -397,6 +444,13 @@ $(document).ready(function(){
 				
 				</div>
 			</div>
+				<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2">Profile Image:</label>
+					<div class="col-sm-8"><span id="msg_i" style="color:red"></span>
+						<input type="file" accept="image/*" onchange="validateImage(this.id)" id="profile_img" name="profile" class="form-control">
+					 	 ( File accepts only jpg , png , jpeg type image file & Max Upload size is 250KB only )
+					</div>
+				</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Salary Details:</label>
@@ -525,6 +579,16 @@ $(document).ready(function(){
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>
+			
+				<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2">Profile Image:</label>
+					<div class="col-sm-8"><span id="msg_ie" style="color:red"></span>
+					<input type="file" accept="image/*" onchange="validateImageE(this.id)" id="profileE"    name="profile" class="form-control">
+					 
+					 	 ( File accepts only jpg , png , jpeg type image file & Max Upload size is 250KB only )<br>
+					 	 <img src="profile/logo.png" id="profile"  width="35" height="35"   />
+					</div>
+				</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Salary Details:</label>

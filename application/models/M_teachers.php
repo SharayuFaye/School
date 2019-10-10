@@ -1,6 +1,6 @@
 <?php
 class m_teachers extends CI_Model { 
-    function teachers_add($teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$salary_details,$education_details,$join_date,$school){ 
+    function teachers_add($teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$profile,$salary_details,$education_details,$join_date,$school){ 
 		
         $this->db->select("*");
         $this->db->from('users');
@@ -35,6 +35,7 @@ class m_teachers extends CI_Model {
                         "teacher_address"=>$teacher_address,
                         "teacher_mobile"=>$teacher_mobile,
                         "teacher_mail"=>$teacher_mail,
+                        "profile" => $profile,
                         "salary_details"=>$salary_details,
                         "education_details"=>$education_details,
                         "join_date"=>$join_date,
@@ -49,7 +50,7 @@ class m_teachers extends CI_Model {
             }
         } 
     }
-    function teachers_edit($id,$user_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$salary_details,$education_details, $join_date,$school){ 
+    function teachers_edit($id,$user_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$profile,$salary_details,$education_details, $join_date,$school){ 
      
         $this->db->select("*");
         $this->db->from('teachers');
@@ -62,7 +63,8 @@ class m_teachers extends CI_Model {
     				"teacher_name"=>$teacher_name,
     				"teacher_address"=>$teacher_address,
     				"teacher_mobile"=>$teacher_mobile,
-    				"teacher_mail"=>$teacher_mail,
+                "teacher_mail"=>$teacher_mail,
+                "profile" => $profile,
     				"salary_details"=>$salary_details,
     				"education_details"=>$education_details,
     				"join_date"=>$join_date,

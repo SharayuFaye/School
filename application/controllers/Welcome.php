@@ -515,7 +515,22 @@ class Welcome extends CI_Controller {
 	  		}
 		
 	        if($this->input->post('save_teachers')){  
- 
+	            $profile = '';
+	            $config['upload_path']  = './profile/';
+	            $config['allowed_types']        = 'jpg|png|jpeg';
+	            $this->load->library('upload', $config);
+	            
+	            if ( ! $this->upload->do_upload('profile'))
+	            {
+	                $error = array('error' => $this->upload->display_errors());
+	                $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!';
+	                $profile = '';
+	            }else{
+	                $data = array('upload_data' => $this->upload->data());
+	                $profile = $data['upload_data']['file_name'];
+	            }
+	            
+	            
 	            $teacher_name = $this->input->post('teacher_name') ;
 	            $teacher_address = $this->input->post('teacher_address') ; 
 	            $teacher_mobile = $this->input->post('teacher_mobile') ;
@@ -527,7 +542,7 @@ class Welcome extends CI_Controller {
 	            $join_date = $this->input->post('join_date') ;
 	            $school = $this->session->userdata['school']; 
 
-	            $data = $this->m_teachers->teachers_add($teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$salary_details,$education_details, $join_date,$school);
+	            $data = $this->m_teachers->teachers_add($teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$profile,$salary_details,$education_details, $join_date,$school);
 	            if($data != 'true'){
 	                $this->data['error_msg'] ='Data should be Unique!';
 	            }else{
@@ -536,7 +551,29 @@ class Welcome extends CI_Controller {
 	        }
 
 	        if($this->input->post('edit_teachers')){
-
+	            $profile = '';
+	            $id = $this->input->post('id') ;
+	            if (isset($_FILES['profile']) && is_uploaded_file($_FILES['profile']['tmp_name'])) {
+	                
+	                $config['upload_path']  = './profile/';
+	                $config['allowed_types']        = 'jpg|png|jpeg';
+	                $this->load->library('upload', $config);
+	                
+	                if ( ! $this->upload->do_upload('profile'))
+	                {
+	                    $error = array('error' => $this->upload->display_errors());
+	                    $this->data['error_msg'] ='Please select logo in jpg,png,jpeg format!';
+	                    $profile = '';
+	                    
+	                }else{
+	                    $data = array('upload_data' => $this->upload->data());
+	                    $profile = $data['upload_data']['file_name'];
+	                }
+	            }else{
+	                $students_show_id   =$this->m_students->students_fetch($id);
+	                $profile = $students_show_id[0]->profile;
+	            } 
+	            
 	            $id = $this->input->post('id') ;
 	            $user_id = $this->input->post('users_id') ;
 	            $teacher_name = $this->input->post('teacher_name') ;
@@ -550,7 +587,7 @@ class Welcome extends CI_Controller {
 	            $join_date = $this->input->post('join_date') ;
 	            $school = $this->session->userdata['school']; 
 
-	            $data = $this->m_teachers->teachers_edit($id,$user_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$salary_details,$education_details, $join_date,$school);
+	            $data = $this->m_teachers->teachers_edit($id,$user_id,$teacher_name,$teacher_address,$teacher_mobile,$teacher_mail,$username,$password,$profile,$salary_details,$education_details, $join_date,$school);
 	            if($data != 'true'){
 	                $this->data['error_msg'] ='Error in updation!';
 	            }else{
