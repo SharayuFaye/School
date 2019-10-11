@@ -269,12 +269,12 @@ class m_sections extends CI_Model {
     
     
     
-    function sections_show_distinct_class_app($teachers_id){
+    function sections_show_distinct_class_app($school_id){
         
         $this->db->select(' c.class');
         $this->db->from('sections s');
         $this->db->join('class c', 'c.id=s.class_id', 'left');
-        $this->db->where(array( 's.teachers_id' => $teachers_id)); 
+        $this->db->where(array( 's.school_id' => $school_id)); 
         $this->db->distinct();
         $query = $this->db->get();
         
