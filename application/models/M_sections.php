@@ -244,6 +244,18 @@ class m_sections extends CI_Model {
         return $duplicate;
     }
     
+    function subject_show(){
+        $this->db->select('b.*');
+        $this->db->from('subject b');
+        $this->db->where(array( 'b.school_id' => $this->session->userdata['school']));
+        // 	    $this->db->order_by('b.sections','desc');
+        
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    }
     
     
     
