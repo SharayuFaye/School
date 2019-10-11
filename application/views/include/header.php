@@ -223,6 +223,13 @@ html .btn-secondary.active,
 				                                </a>
 				                            </li>
 
+
+				                            <li id="subject_allocation">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/subject_allocation">
+				                                    Subject Allocation
+				                                </a>
+				                            </li>
+											
 				                            <li id="route">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/route">
 				                                    PickUp Point

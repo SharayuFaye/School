@@ -894,6 +894,104 @@ class Welcome extends CI_Controller {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function subject_allocation()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{
+            $this->load->model('m_class');
+            $this->load->model('m_sections');
+            $this->load->model('m_school');
+            $this->load->model('m_teachers');
+            $this->load->model('m_subject_allocation');
+            
+            
+            if($this->input->post('save_subject_allocation')){
+                
+                $school = $this->session->userdata['school'] ;
+                $class = $this->input->post('class') ;
+                $sections_id = $this->input->post('sections') ;
+                $teacher = $this->input->post('teacher') ;
+                $subject = $this->input->post('subject') ;
+                
+                $data = $this->m_subject_allocation->subject_allocation_add($school,$class,$sections_id,$subject,$teacher);
+                
+                if($data != 'true'){
+                    $this->data['error_msg'] ='Data should be Unique!';
+                }else{
+                    $this->data['success_msg'] ='Record inserted successfully!';
+                }
+                
+            }
+            
+            if($this->input->post('edit_subject_allocation')){
+                
+                $id = $this->input->post('id');
+                $school = $this->session->userdata['school'] ;
+                $class = $this->input->post('class') ;
+                $sections_id = $this->input->post('section') ;
+                $teacher = $this->input->post('teacher') ;
+                $subject = $this->input->post('subject') ;
+                
+                $data = $this->m_subject_allocation->subject_allocation_edit($id,$school,$class,$sections_id,$subject,$teacher);
+                if($data != 'true'){
+                    $this->data['error_msg'] ='Error in updation!';
+                }else{
+                    $this->data['success_msg'] ='Record updated successfully!';
+                }
+            }
+            
+            if($this->input->post('del_subject_allocation')){
+                $id = $this->input->post('id') ;
+                $data = $this->m_subject_allocation->subject_allocation_delete($id);
+                if($data != 'true'){
+                    $this->data['error_msg'] ='Error in deletion!';
+                }else{
+                    $this->data['success_msg'] ='Record deleted successfully!';
+                }
+            }
+            
+            $this->data['school_show'] =$this->m_school->school_show();
+            $this->data['teachers_show'] =$this->m_teachers->teachers_show();
+            $this->data['class_show'] =$this->m_class->class_show_id();
+            $this->data['sections_show'] =$this->m_sections->sections_show();
+            $this->data['subject_show'] =$this->m_sections->subject_show();
+            $this->data['subject_allocation_show'] = $this->m_subject_allocation->subject_allocation_show();
+            $this->load->view('subject_allocation',$this->data);
+        }
+    }
+    
+    
+    
+    
+    
     public function route_map()
     {
         $bus_id = $this->input->get('id') ;
