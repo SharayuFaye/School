@@ -129,6 +129,7 @@ class m_homework extends CI_Model {
 						->from('homework h')
 						->join('sections s', 'h.sections_id = s.id','left')
 						->where(array('h.teacher_id' => $teacher_id))
+						->order_by('h.id','desc')
 						->get();
 						
 		log_message('debug',$this->db->last_query());

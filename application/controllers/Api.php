@@ -1086,18 +1086,23 @@ class Api extends CI_Controller
     
     function app_dashboard_teacher_post(){
         
+			log_message('debug',"Teacher's token: " );
         $this->load->model('m_login'); 
         $this->load->model('m_teachers');
+        $this->load->model('m_notifications');
         $this->load->model('m_home_page_menu');
         
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token'];
         
+			log_message('debug',"Teacher's token: " . $token);
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
             $teachers = $this->m_teachers->teachers_show_user_app($users[0]->id);
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
+            $notifications = $this->m_notifications->notifications_show_app($token, null, null, $users[0]->school_id);
+			log_message('debug',print_r($notifications, true));
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1106,6 +1111,7 @@ class Api extends CI_Controller
                 $this->response(array(
                     'users' => $users, 
                     'teachers' => $teachers,
+                    'notifications' => $notifications,
                     'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
