@@ -1,4 +1,4 @@
-<?php include('include/header.php');?>	
+<?php include('include/header.php');?>
 <section role="main" class="content-body">
 	<header class="page-header">
 		<h2>Timetable</h2>
@@ -280,7 +280,7 @@ $(document).ready(function(){
     var sel_class = $('#classE').val();  
     	 $.ajax({
     		 type: "GET",
-    		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+    		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
     		 data: 'class_sel='+sel_class,
              datatype : "json",
     		 success: function(classD)  
@@ -336,7 +336,7 @@ $(document).ready(function(){
     var sel_class = $('#sel_class').val();  
     	 $.ajax({
     		 type: "GET",
-    		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+    		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
     		 data: 'class_sel='+sel_class,
              datatype : "json",
     		 success: function(classD)  
