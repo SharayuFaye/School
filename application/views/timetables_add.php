@@ -1,4 +1,4 @@
-<?php include('include/header.php');?>	
+<?php include('include/header.php');?>
 <section role="main" class="content-body">
 	<header class="page-header">
 		<h2>Timetable</h2>
@@ -280,124 +280,7 @@ $(document).ready(function(){
         		next_div +='</div>'; 
     	    } 
     	    $('#next_div_'+week[i]).html(next_div); 
-        }
-        
-		
-
-// 		var tue =   $('#tue').val();  
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+tue+'">'; 
-// 	    for(var i = 1; i <= tue; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_tue[]" id="subject_tue_'+i+'" class="form-control"> '+opt+' </select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_tue[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_tue[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-    //		next_div +='<select name="teacher_tue[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_tue').html(next_div);
-
-// 		var wed =   $('#wed').val(); 
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+wed+'">'; 
-// 	    for(var i = 1; i <= wed; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_wed[]" id="subject_wed_'+i+'" class="form-control"> '+opt+' </select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_wed[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_wed[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-    //		next_div +='<select name="teacher_wed[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_wed').html(next_div);
-
-// 		var thu =   $('#thu').val();  
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+thu+'">'; 
-// 	    for(var i = 1; i <= thu; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_thu[]" id="subject_thu_'+i+'" class="form-control">  '+opt+'</select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_thu[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_thu[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-    	//	next_div +='<select name="teacher_thu[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_thu').html(next_div);
-
-// 		var fri =   $('#fri').val();  
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+fri+'">'; 
-// 	    for(var i = 1; i <= fri; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_fri[]" id="subject_fri_'+i+'" class="form-control"> '+opt+' </select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_fri[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_fri[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-    	//	next_div +='<select name="teacher_fri[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_fri').html(next_div);
-
-// 		var sat =   $('#sat').val();  
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+sat+'">'; 
-// 	    for(var i = 1; i <= sat; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_sat[]" id="subject_sat_'+i+'" class="form-control">  '+opt+'</select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_sat[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_sat[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-    	//	next_div +='<select name="teacher_sat[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_sat').html(next_div);
-
-// 		var sun =   $('#sun').val();  
-// 		var next_div ='<input type="hidden"  name="lecture[]" value="'+sun+'">'; 
-// 	    for(var i = 1; i <= sun; i++){  
-//     		next_div +='<label class="col-sm-4 control-label text-sm-right pt-2">Lecture '+i+':</label> ';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<select name="subject_sun[]" id="subject_sun_'+i+'" class="form-control">  '+opt+'</select>';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="start_time_sun[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-//     		next_div +='<input type="Time" name="end_time_sun[]" id="tm" class="form-control">';
-//     		next_div +='</div>';
-//     		next_div +='<div class="col-sm-2">';
-   // 		next_div +='<select name="teacher_sun[]" id="teacher" class="form-control">  <?php foreach ($teachers_show as $row) { ?><option value="<?php echo $row->id;?>"> <?php echo $row->teacher_name;?> </option> <?php  }?> </select>';
-//     		next_div +='</div>'; 
-// 	    }
-// 	    $('#next_div_sun').html(next_div);
-    
+        }   
 	});
 
  
@@ -420,7 +303,7 @@ $(document).ready(function(){
     var sel_class = $('#classE').val();  
     	 $.ajax({
     		 type: "GET",
-    		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+    		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
     		 data: 'class_sel='+sel_class,
              datatype : "json",
     		 success: function(classD)  
@@ -476,7 +359,7 @@ $(document).ready(function(){
     var sel_class = $('#sel_class').val();  
     	 $.ajax({
     		 type: "GET",
-    		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+    		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
     		 data: 'class_sel='+sel_class,
              datatype : "json",
     		 success: function(classD)  
