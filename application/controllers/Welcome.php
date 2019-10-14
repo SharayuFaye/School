@@ -570,7 +570,7 @@ class Welcome extends CI_Controller {
                         $profile = $data['upload_data']['file_name'];
                     }
                 }else{
-                    $students_show_id   =$this->m_students->students_fetch($id);
+                    $students_show_id   =$this->m_teachers->teachers_show_app($id);
                     $profile = $students_show_id[0]->profile;
                 }
                 
