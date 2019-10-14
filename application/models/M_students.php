@@ -25,15 +25,19 @@ class m_students extends CI_Model {
 	             
 	             $userData = $query->result();
 	                         
-//         	    $this->db->select("*"); 
-//         		$this->db->from('students'); 
-//         		$this->db->where(array( 'student_name' => $student_name));
-//         		$query = $this->db->get(); 
+        	    $this->db->select("*"); 
+        		$this->db->from('students'); 
+        		$this->db->where(array( 'roll_number' => $roll_number));
+        		$this->db->where(array( 'class_id' => $class));
+        		$this->db->where(array( 'sections_id' => $section));
+        		$this->db->where(array( 'school_id' => $school));
+        		
+        		$query = $this->db->get(); 
         		
 // //         		print_r($userData[0]->id); 
         		
         		
-//         		if($query->num_rows() == 0){
+        		if($query->num_rows() == 0){
         		    $targetS = array(
           		        "users_id" => $userData[0]->id ,
         				"class_id" => $class ,
@@ -68,16 +72,19 @@ class m_students extends CI_Model {
         		    if($query){ return true;  }else{ return false; }
         		}
 
-// 	    }
+	    }
     }
     function students_edit($id,$user_id,$class,$section,$student_name,$dob,$adhar,$profile,$parent_name,$parent_mob,$mother_name, $mother_mail, $mother_mob,$parent_id,$roll_number,$batch,$username,$password,$bus,$route,$pickup_point,$join_date,$school ){ 
         
-//         $this->db->select("*");
-//         $this->db->from('students');
-//         $this->db->where(array( 'student_name' => $student_name));
-//         $this->db->where('id!=', $id);
-//         $query = $this->db->get();
-//         if($query->num_rows() == 0){ 
+        $this->db->select("*");
+        $this->db->from('students');
+        $this->db->where(array( 'roll_number' => $roll_number));
+        $this->db->where(array( 'class_id' => $class));
+        $this->db->where(array( 'sections_id' => $section));
+        $this->db->where(array( 'school_id' => $school));
+        $this->db->where('id!=', $id);
+        $query = $this->db->get();
+        if($query->num_rows() == 0){ 
             $target = array(  	
     				"class_id" => $class ,
     				"sections_id" => $section,
@@ -122,7 +129,7 @@ class m_students extends CI_Model {
     	       $this->db->update('users', $target);
     	   }
     	   if($query1){ return true;  }else{ return false; }
-//         }
+        }
     }
     function students_show(){  
 
