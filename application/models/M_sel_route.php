@@ -51,7 +51,8 @@ class m_sel_route extends CI_Model {
     function route_show(){ 
         
         $this->db->select("*");
-        $this->db->from('route'); 
+        $this->db->from('route');
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
         $this->db->distinct();
         
 		$query = $this->db->get(); 
