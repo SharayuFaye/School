@@ -189,7 +189,7 @@ $('#datatable-tabletools').DataTable( {
        title: 'Bus',
           footer: true,
           exportOptions: {
-               columns: [1,2,3,4]
+               columns: [1,2,3]
            }
    },
    {
@@ -197,14 +197,14 @@ $('#datatable-tabletools').DataTable( {
        title: 'Bus',
           footer: true,
           exportOptions: {
-               columns: [1,2,3,4]
+               columns: [1,2,3]
            }
    },
    { 
        	extend: 'pdf', 
           title: 'Bus',
           exportOptions: {
-               columns: [1,2,3,4]
+               columns: [1,2,3]
            } 
     }
 	]

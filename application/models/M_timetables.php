@@ -66,12 +66,13 @@ class m_timetables extends CI_Model {
     
     
     function class_show_teacher($users_id){
-        $this->db->select('c.*');
+        $this->db->select('c.class');
         $this->db->from('teachers f');
         $this->db->join('sections sec', 'f.id=sec.teachers_id', 'left');
         $this->db->join('class c', 'c.id=sec.class_id', 'left');
         $this->db->where(array( 'f.users_id' => $users_id));
         $this->db->where(array( 'f.school_id' => $this->session->userdata['school']));
+        $this->db->distinct('sec.class_id');
         
         $query = $this->db->get();
         
