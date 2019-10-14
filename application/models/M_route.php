@@ -45,7 +45,8 @@ class m_route extends CI_Model {
 
 	    $this->db->select('s.school_name,b.* ');
 		$this->db->from('pickup_point b'); 
-	    $this->db->join('school s', 'b.school_id=s.id', 'left');  
+		$this->db->join('school s', 'b.school_id=s.id', 'left');
+		$this->db->where(array( 'school_id' => $this->session->userdata['school']));
 
 		$query = $this->db->get(); 
 		if($query)
