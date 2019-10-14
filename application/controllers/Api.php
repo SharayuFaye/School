@@ -864,9 +864,9 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token);  
             $activity = $this->m_activity->activity_show_app($users[0]->school_id);
-             
-            $month = 9  ; 
-            $year =  2019 ; 
+            
+            $month = date('m')  ;
+            $year =  date('Y') ; 
             $firstday = date("w", mktime(0, 0, 0, $month, 1, $year)); 
             $lastday = date("t", mktime(0, 0, 0, $month, 1, $year)); 
             $count_weeks = 1 + ceil(($lastday-7+$firstday)/7);
@@ -911,8 +911,8 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token);  
 
-            $month = 9  ; 
-            $year =  2019 ; 
+            $month = date('m')  ; 
+            $year =  date('Y') ; 
             $firstday = date("w", mktime(0, 0, 0, $month, 1, $year)); 
             $lastday = date("t", mktime(0, 0, 0, $month, 1, $year)); 
             $count_weeks = 1 + ceil(($lastday-7+$firstday)/7);
