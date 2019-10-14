@@ -87,7 +87,7 @@
 										<tr>
 											<th>Sr No</th>
 											<th>Bus No</th> 
-											<th>Student Strength</th> 		
+<!-- 											<th>Student Strength</th> 		 -->
 											<th>Routes</th>  
   										    <th>Drivers</th>  
 											<th class="myclass" style=" background: none !important;">Actions</th>
@@ -98,7 +98,7 @@
 										<tr data-item-id="1">
 											<td><?php echo $i;?></td>
 											<td><?php echo $row->bus_number;?></td>
-											<td><?php echo $row->student_strength;?></td>
+											<!-- - <td><?php echo $row->student_strength;?></td> -->
 											<td>
 											<?php $pick ='';
 											if($route_map_show){  foreach ($route_map_show as $drv) {
@@ -415,12 +415,12 @@ $(document).on('click', '.rt', function(){
 					<input type="text" maxlength="100" required name="bus_number" class="form-control">
 				</div>
 			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label>
-				<div class="col-sm-8">
-					<input type="number" min="1" name="student_strength" class="form-control">
-				</div>
-			</div>
+<!-- 	        <div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+ 					<input type="hidden" min="1" value="0" name="student_strength" class="form-control">  
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
 			
 	    	
@@ -492,12 +492,12 @@ $(document).on('click', '.rt', function(){
 					<input type="text"  maxlength="100" id="bus_no" name="bus_number" class="form-control">
 				</div>
 			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label>
-				<div class="col-sm-8">
-					<input type="number" min="1" id="student_strength" name="student_strength" class="form-control">
-				</div>
-			</div>
+<!-- 	        <div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2">Student Strength:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+ 					<input type="hidden" value="0" min="1" id="student_strength" name="student_strength" class="form-control">  
+<!-- 				</div> -->
+<!-- 			</div> -->
 	    
 	    
 	    
