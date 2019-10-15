@@ -215,18 +215,28 @@ class m_drivers extends CI_Model {
                 return $data;
     }
 
-    function get_driver_route($driver_id){
-		$this->db->select('d.*, r.*');
+    function get_driver_bus($driver_id){
+		$this->db->select('b.*');
 		$this->db->from('drivers d');
 		$this->db->join('driver_map dm', 'dm.drivers_id = d.id', 'left');
-		$this->db->join('route_map rm', 'dm.bus_id = rm.bus_id', 'left');
-		$this->db->join('route r', 'r.id = rm.route_id', 'left');
+		$this->db->join('bus b', 'dm.bus_id = b.id', 'left');
+		$this->db->group_by('b.bus_number');
 		$this->db->where(array('d.id' => $driver_id));
 		$query = $this->db->get();
 
-		log_message("debug",print_r($query, true));
+		log_message("debug",$this->db->last_query());
 		return($query->result());
 	}
     
+    function get_driver_route($bus_id){
+		$this->db->select('r.*');
+		$this->db->from('route r');
+		$this->db->join('route_map rm', 'rm.route_id = r.id', 'left');
+		$this->db->where(array('rm.bus_id' => $bus_id));
+		$query = $this->db->get();
+
+		log_message("debug",$this->db->last_query());
+		return($query->result());
+	}
 }
 ?>

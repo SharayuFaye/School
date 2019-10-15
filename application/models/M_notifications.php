@@ -126,15 +126,16 @@ class m_notifications extends CI_Model {
             	->from('notification n') 
             	->where(array('n.roles_id' => 'student'))
             	->where(array( 'n.school_id' => $school_id))
-            	->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL)',NULL, FALSE)
+            	->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL or n.sections_id = 0)',NULL, FALSE)
             	->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
             	->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE);
             	
 		}else{
-		    $this->db->select('n.message,n.title,n.datetime,n.school_id')
+		    $this->db->select('n.*')
 					->from('notification n') 
-					->where(array('n.roles_id' => 'teacher'))
-					->where(array( 'n.school_id' => $school_id));
+					->join('users u','n.roles_id = u.role','left')
+					->join('tokens t','t.user_id = u.id','left')
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();

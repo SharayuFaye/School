@@ -304,10 +304,10 @@ class Api extends CI_Controller
 			if($student_id){
             	$students = $this->m_students->students_show_app_id($token,$student_id);
             	$notifications = $this->m_notifications->notifications_show_app($student_id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
-		log_message('debug',"Notifications  : " . print_r($notifications,true));
+		log_message('debug',"Notifications  : Student");
 			}else{
-			    $notifications = $this->m_notifications->notifications_show_app(null, null, null,$users[0]->school_id);
-		log_message('debug',"Notifications  : " . print_r($notifications,true));
+			    $notifications = $this->m_notifications->notifications_show_app($token, null, null,$users[0]->school_id);
+		log_message('debug',"Notifications  : Others ");
 			}
 
             $d = explode('_',$token);
@@ -1343,6 +1343,7 @@ class Api extends CI_Controller
         
         $this->load->model('m_login');
         $this->load->model('m_drivers');
+        $this->load->model('m_notifications');
         $this->load->model('m_home_page_menu');
         
         $post_data = file_get_contents("php://input");
@@ -1353,6 +1354,7 @@ class Api extends CI_Controller
             $users = $this->m_login->get_users($token);
             $drivers = $this->m_drivers->drivers_show_user_app($users[0]->id);
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
+            $notifications = $this->m_notifications->notifications_show_app($token, null, null, $users[0]->school_id);
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1361,6 +1363,7 @@ class Api extends CI_Controller
                 $this->response(array(
                     'users' => $users,
                     'drivers' => $drivers,
+                    'notifications' => $notifications,
                     'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
@@ -1388,15 +1391,25 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token'];
+        $action = $request['action'];
 	log_message("debug","Driver Route Token ::::: " . $token);
         
         if ($token != '') {
-            $users = $this->m_login->get_users($token);
-            $drivers = $this->m_drivers->drivers_show_user_app($users[0]->id);
-	    	$route = $this->m_drivers->get_driver_route($drivers[0]->id);
-	    	$this->response(array(
-			    'routes'=> $route
-	    	));
+           	$users = $this->m_login->get_users($token);
+           	$drivers = $this->m_drivers->drivers_show_user_app($users[0]->id);
+			if($action == "get_bus"){
+	    		$bus = $this->m_drivers->get_driver_bus($drivers[0]->id);
+	    		$this->response(array(
+				    'bus'=> $bus
+	    		));
+			}else if($action == "get_route"){
+				$bus_id = $request['bus_id'];
+				log_message('debug',$bus_id);
+	    		$routes = $this->m_drivers->get_driver_route($bus_id);
+	    		$this->response(array(
+				    'routes'=> $routes
+	    		));
+			}
 		}
     }
     
@@ -1404,9 +1417,9 @@ class Api extends CI_Controller
 		$this->load->model('m_route');
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
-        $points = $request['points'];
-		log_message("debug","Points ::::: " . $points);
-		$pickups = $this->m_route->get_pickup_points($points);
+        $route_id = $request['route_id'];
+
+		$pickups = $this->m_route->get_pickup_points($route_id);
 		$this->response(array(
 			'pickups'=> $pickups
 		));

@@ -86,10 +86,17 @@ class m_route extends CI_Model {
 	    } 
     } 
 
-    function get_pickup_points($points){
+    function get_pickup_points($route_id){
 		$pickups = array();
-		$points = json_decode($points);
-		log_message("debug","Points ::::: ". print_r($points,true));
+		//Get pickup points for the route
+		$pp = $this->db->select("pickup_point_id")
+						->from('route')
+						->where(array('id'=>$route_id))
+						->get()
+						->result();
+		log_message('debug',print_r($pp, true));
+		$points = json_decode($pp[0]->pickup_point_id);
+		log_message('debug',print_r($points, true));
 		foreach($points as $point){
 	    	$this->db->select("*");
 	    	$this->db->from('pickup_point');
