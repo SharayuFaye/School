@@ -90,6 +90,7 @@ $route['faq'] = 'welcome/faq';
 $route['transportation'] = 'welcome/transportation';
 $route['leaves'] = 'welcome/leaves';
 $route['approve'] = 'welcome/approve';
+$route['my_class'] = 'welcome/my_class';
 
 
 $route['sections_fetch'] = 'welcome/sections_fetch';

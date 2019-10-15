@@ -2529,6 +2529,7 @@ class Welcome extends CI_Controller {
             $this->load->model('m_class');
             $this->load->model('m_sections');
             $this->load->model('m_teachers');
+            $this->load->model('m_timetables');
             
             $this->data['class'] = 0;
             $this->data['section'] = 0;
@@ -2645,7 +2646,12 @@ class Welcome extends CI_Controller {
                 $this->data['homework_show'] =$this->m_homework->homework_show();
             }
             
-            $this->data['class_show'] =$this->m_class->class_show_id();
+            if($this->session->userdata['role'] =='teacher'){
+                $this->data['class_show'] =$this->m_timetables->class_show_teacher($this->session->userdata['id']);
+            }else
+            {
+                $this->data['class_show'] =$this->m_class->class_show_id();
+            } 
             $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
             $this->data['sections_show'] =$this->m_sections->sections_show_id();
             $this->data['teachers_show'] =$this->m_teachers->teachers_show_id();
@@ -2653,7 +2659,24 @@ class Welcome extends CI_Controller {
             $this->load->view('homework',$this->data);
         }
     }
-    
+    public function my_class()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{
+            $this->load->model('m_teachers');
+            $this->load->model('m_subject_allocation');
+            $this->load->model('m_timetables');
+            
+            $teachers_show_id_user =$this->m_teachers->teachers_show_id_user($this->session->userdata['id']);  
+            $this->data['subject_allocation'] =$this->m_subject_allocation->subject_allocation_id($teachers_show_id_user[0]->id);
+           
+            $this->data['timetables_show'] =$this->m_timetables->timetables_my_class($teachers_show_id_user[0]->id);
+            //print_r($this->data['timetables_show']);exit();
+            $this->data['msg'] = 'No Records Found!';
+            $this->load->view('my_class',$this->data);
+        }
+    }
     
     public function leaves()
     {
@@ -2703,10 +2726,10 @@ class Welcome extends CI_Controller {
         if(!isset($this->session->userdata['username']) ){
             $this->load->view('login');
         } else{
-            $this->load->model('m_activity');
-            
+            $this->load->model('m_activity'); 
             $this->load->model('m_class');
             $this->load->model('m_sections');
+            $this->load->model('m_timetables');
             
             $this->data['class'] = 0;
             $this->data['section'] = 0;
@@ -2762,8 +2785,13 @@ class Welcome extends CI_Controller {
             }
             
             $this->data['activity_show'] =$this->m_activity->activity_show();
-            
-            $this->data['class_show'] =$this->m_class->class_show_id();
+            if($this->session->userdata['role'] =='teacher'){
+                $this->data['class_show'] =$this->m_timetables->class_show_teacher($this->session->userdata['id']);
+            }else
+            {
+                $this->data['class_show'] =$this->m_class->class_show_id();
+            } 
+            //$this->data['class_show'] =$this->m_class->class_show_id();
             $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
             $this->data['sections_show'] =$this->m_sections->sections_show_id();
             

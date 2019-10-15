@@ -151,8 +151,34 @@ class m_timetables extends CI_Model {
             return $query->result();
         }
     }
-    
-    
+     
+    function timetables_my_class($teachers_id){
+        
+        $this->db->select('f.id, f.details, f.class_id, f.sections_id, f.subject, f.school_id, f.date,sec.sections');
+        $this->db->from('timetable f');
+        $this->db->join('subject_allocation sub', 'sub.sections_id=f.sections_id', 'left');
+        $this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
+        $this->db->where(array( 'f.school_id' => $this->session->userdata['school']));
+        $this->db->where(array( 'sub.teachers_id' => $teachers_id  ));
+        $this->db->distinct('f.id'); 
+        $query = $this->db->get();
+        
+        
+        
+//         $this->db->select('b.*,sub.subject,s.sections,s.class_id,t.teacher_name');
+//         $this->db->from('subject_allocation b');
+//         $this->db->join('sections s', 'b.sections_id=s.id', 'left');
+//         $this->db->join('subject sub', 'b.subject_id=sub.id', 'left');
+//         $this->db->join('teachers t', 'b.teachers_id=t.id', 'left');
+//         $this->db->where(array( 'b.school_id' => $this->session->userdata['school']));
+//         $this->db->where(array( 'b.teachers_id' => $teachers_id ));
+//         $query = $this->db->get();
+        if($query)
+        {
+//             print_r($query->result());exit();
+            return $query->result();
+        }
+    } 
     //App Functions
     
     function timetables_show_app($class,$section){

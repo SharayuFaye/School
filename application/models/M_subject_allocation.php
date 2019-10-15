@@ -85,7 +85,17 @@ class m_subject_allocation extends CI_Model {
 	        return true;
 	    } 
     }    
-
+    
+    function subject_allocation_id($teacher){
+        $query = $this->db->select('sa.subject,s.sections_id')
+        ->from('subject_allocation s')
+        ->join('subject sa','sa.id = s.subject_id','left')
+        ->where(array('s.teachers_id' => $teacher))
+        ->get();
+        return $query->result();
+    }
+    
+    
 	function get_allocated_classes($teacher){
 		$query = $this->db->select('class_id')
 						->from('subject_allocation')

@@ -316,23 +316,26 @@ html .btn-secondary.active,
 				                                </a>
 				                            </li>
   <?php }  if( $this->session->userdata['role'] == 'teacher'){ ?>  
+				                            <li id="my_class">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/my_class">
+				                                    My Class
+				                                </a>
+				                            </li>
 				                            <li id="homework">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/homework">
 				                                    Homework
+				                                </a> <li id="activity">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/activity">
+				                                    Activity
 				                                </a>
+				                            </li>
 				                            </li>
 				                            <li id="leaves">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/leaves">
 				                                    Leaves
 				                                </a>
 				                            </li>
-<?php } if( $this->session->userdata['role'] == 'school_admin' ||  $this->session->userdata['role'] == 'teacher'  ){ ?>
-				                            <li id="activity">
-				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/activity">
-				                                    Activity
-				                                </a>
-				                            </li>
-	<?php } if( $this->session->userdata['role'] == 'school_admin'){ ?>			                             
+<?php } if( $this->session->userdata['role'] == 'school_admin' ){ ?>			                             
 				                            <li id="faq">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/faq">
 				                                    FAQs

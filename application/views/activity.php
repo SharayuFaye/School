@@ -142,7 +142,13 @@ function edit($id,$activity,$details,$date,$submission_date,$section,$sections_i
 	$('#details').val($details); 
 	$('#date').val($date); 
 	$('#submission_date').val($submission_date);
-	$('#section').val($section);
+
+	var opt = $('<option />');  
+	 opt.val($sections_id);
+	 opt.text($section);
+	 $('#section').append(opt); 
+	 
+// 	$('#section').val($section);
 	$('#class').val($class);
 	$('#editrow').modal('show'); 
 }
@@ -217,7 +223,7 @@ function del($id){
  var class_sel = $('#class_sel').val();  
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
 		 data: 'class_sel='+class_sel,
          datatype : "json",
 		 success: function(classD)  
@@ -240,7 +246,7 @@ function del($id){
  console.log(class1);
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
 		 data: 'class_sel='+class1,
          datatype : "json",
 		 success: function(classD)  
@@ -400,10 +406,8 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
 				<div class="col-sm-8">
-					<select  name="section" id="sections" class="form-control">
-						<?php  foreach ($sections_show as $row) { ?>
-						<option value="<?php echo $row->id;?>"><?php echo $row->sections;?></option> 
-					<?php } ?> 
+					<select  name="section" id="section" class="form-control">
+						 
 					</select>
 				</div>
 			</div>			
