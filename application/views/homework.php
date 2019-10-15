@@ -145,7 +145,7 @@ function edit($id,$class,$sections,$sections_id,$date,$subject,$details,$image,$
 	 var opt = $('<option />');  
 	 opt.val($sections_id);
 	 opt.text($sections);
-	 $('#section').append(opt); 
+	 $('#section').html(opt); 
 	   
     var opt = $('<option />');  
 	 opt.val($subject);
@@ -235,7 +235,7 @@ function del($id){
  var class_sel = $('#class_sel').val();  
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
 		 data: 'class_sel='+class_sel,
          datatype : "json",
 		 success: function(classD)  
@@ -265,7 +265,7 @@ function del($id){
  console.log(class1);
 	 $.ajax({
 		 type: "GET",
-		 url: "<?php echo base_url(); ?>index.php/sections_fetch", 
+		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
 		 data: 'class_sel='+class1,
          datatype : "json",
 		 success: function(classD)  
@@ -281,7 +281,7 @@ function del($id){
                     	 var opt = $('<option />');  
 						 opt.val(object['id']);
 						 opt.text(object['sections']);
-						 $('#section').append(opt); 
+						 $('#section').html(opt); 
                 }) 
 		 } 
 	 }); 

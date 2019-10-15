@@ -64,16 +64,17 @@
 					</select>
 				</div>
 			</div> 
-			
+			 
 			<div class="col-sm-2" style="float: left">	
 				<div class="mb-2" >
 					<select  name="section" id="section" class="form-control"  required > 
 						<option value="0">Select Section</option> 
-						<?php    foreach ($sections_show  as $row) {  if($class == $row->class_id){  ?>
-    						<option <?php if($section1 == $row->id){ echo "selected"; }  ?>  value="<?php echo $row->id;?>" >
-    							<?php echo $row->sections;?> 
-     						</option>  
-						<?php }   } ?> 
+						<?php  foreach ($sections_show  as $row) {  if($class == $row->class_id){  ?>
+							<?php if($section1 == $row->id){ ?>
+        						<option   selected value="<?php echo $row->id;?>" >
+        							<?php echo $row->sections;?> 
+         						</option> 
+     						 <?php  } }     } ?> 
 					</select>
 				</div>
 			</div>
@@ -94,7 +95,7 @@
 <?php if(isset($timetables_show[0])){ $timetable = json_decode($timetables_show[0]->details, True) ;  
 $week =array('mon','tue','wed','thu','fri','sat','sun');
  ?> 
- Class : <?php echo $timetable['class'] ; ?> <br>Section : <?php echo $section1 ; ?> 
+ Class : <?php echo $timetable['class'] ; ?> <br>Section :  <?php echo $timetables_show[0]->sections ; ?> 
 				<table class="table table-responsive-md table-striped  table-bordered  mb-0" >
 					<thead>
 						<tr>
@@ -179,7 +180,6 @@ function del($id){
 
 $(document).ready(function(){
  
-    	    
     $('#classE').change(function(){  
     $("#section > option").remove();  
     var sel_class = $('#classE').val();  
