@@ -120,7 +120,7 @@
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script> 
 <!-- Theme Base, Components and Settings -->
 <script src="<?php echo base_url(); ?>js/theme.js"></script> 
@@ -130,7 +130,7 @@
 <!-- Theme Initialization Files -->
 <script src="<?php echo base_url(); ?>js/theme.init.js"></script> 
 <!-- Examples<?php echo base_url(); ?> -->
-<script src="js/examples/examples.datatables.default.js"></script>
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 		
@@ -140,6 +140,42 @@
 <script src="<?php echo base_url(); ?>js/examples/examples.notifications.js"></script>
  
 <script type="text/javascript"> 
+
+$(document).ready(function() {
+	 $('#datatable-tabletools').DataTable( {
+			destroy: true,
+	        dom: 'Bfrtip',
+            scrollX : true,
+            scrollCollapse : true,
+	        
+   	 buttons : [
+        {
+       	 extend: 'excel',
+            title: 'Leaves',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8]
+	            }
+        },
+        {
+       	 extend: 'print',
+            title: 'Leaves',
+	           footer: true,
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8]
+	            }
+        },
+        { 
+            	extend: 'pdf', 
+               title: 'Leaves',
+	           exportOptions: {
+	                columns: [1,2,3,4,5,6,7,8]
+	            } 
+         }
+    	]
+	   } );
+
+} );
 
 var d = document.getElementById("leaves");
 d.className += " nav-active";  
