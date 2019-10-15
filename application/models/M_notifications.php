@@ -118,31 +118,17 @@ class m_notifications extends CI_Model {
     //APp functions
     
     
-    function notifications_show_app($token,$class_id,$sections_id,$school_id){
+    function notifications_show_app($user_id, $class_id, $sections_id, $school_id){
         
 		if($class_id != null){
-//         	$this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
-//         	$this->db->from('notification n');
-//         	$this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
-//         	$this->db->join('users u', 'stud.users_id=u.id', 'left');
-//         	$this->db->join('school s', 'u.school_id=s.id', 'left');
-//         	$this->db->join('tokens ut', 'ut.user_id=u.id', 'left');
-//         	$this->db->where(array( 'ut.token' => $token));
-//         	$this->db->where(array( 's.id' => $school_id)); 
-//         	$this->db->or_where(array( 'n.sections_id' =>$sections_id));
-//         	$this->db->or_where(array( 'n.roles_id' =>'Student'));
-        	
         	
         	$this->db->select('n.message,n.title,n.datetime,n.school_id')
             	->from('notification n') 
             	->where(array('n.roles_id' => 'student'))
-            	->where(array( 'n.school_id' => $school_id));
-            	if($sections_id!=null){  
-            	    $this->db->where(array( 'n.sections_id' =>$sections_id));
-            	}
-            	if($class_id!=null){
-            	    $this->db->where(array( 'n.class_id' =>$class_id));
-            	}
+            	->where(array( 'n.school_id' => $school_id))
+            	->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL)',NULL, FALSE)
+            	->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
+            	->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE);
             	
 		}else{
 		    $this->db->select('n.message,n.title,n.datetime,n.school_id')
@@ -151,7 +137,6 @@ class m_notifications extends CI_Model {
 					->where(array( 'n.school_id' => $school_id));
 		}
         $this->db->order_by('n.datetime','desc');
-        $this->db->distinct();
         $query = $this->db->get();
        	log_message('debug',$this->db->last_query()); 
         if($query)

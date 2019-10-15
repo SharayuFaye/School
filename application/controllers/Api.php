@@ -94,7 +94,7 @@ class Api extends CI_Controller
             
             $data = $this->m_login->check($username,$password);
              if($data == 'False'){
-                 $msg = "Login credentials are  Incorrect.Please,try again!";
+                 $msg = "Login credentials are incorrect. Please,try again!";
          		 $this->response(array(
                      'msg' => $msg,
                      'status' => 'expired'
@@ -105,6 +105,7 @@ class Api extends CI_Controller
                 $date = date('Y/m/d-H:m:s') ;
                 $random = $rand .'_'.  $date ; 
                 $dataset = $this->m_login->set_token($data[0]->id,$random, $fcm_token); 
+				$school = $this->m_login->get_school($random);
                  
                 $msg = "Login Successfull";
                 $this->response(array(
@@ -112,11 +113,12 @@ class Api extends CI_Controller
                     'msg' => $msg,
                     'token' => $random,
                     'status' => 'live',
-					'notification' => $data[0]->notification
+					'notification' => $data[0]->notification,
+					'school' => $school
                 ),200);
              } 
         } else { 
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -145,7 +147,7 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
@@ -153,7 +155,7 @@ class Api extends CI_Controller
             }
              
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -178,8 +180,8 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             $students = $this->m_students->students_show_app($token);
-             
-            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
+            log_message('debug',print_r($students, true)); 
+            $notifications = $this->m_notifications->notifications_show_app($students[0]->id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 
 			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
@@ -206,14 +208,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 )); 
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }  
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -246,7 +248,7 @@ class Api extends CI_Controller
             
             $students_all = $this->m_students->students_show_app($token);
             
-            $notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
+            $notifications = $this->m_notifications->notifications_show_app($students[0]->id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
             
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
@@ -272,14 +274,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -298,15 +300,14 @@ class Api extends CI_Controller
         $student_id = $request['student_id'];
         if ($token != '') {
             $users = $this->m_login->get_users($token); 
-		log_message('debug',"Notification student id : " . print_r($users,true));
             
 			if($student_id){
-				log_message('debug','Notification student id : '. $student_id);
             	$students = $this->m_students->students_show_app_id($token,$student_id);
-       	log_message('debug',print_r($students, true));
-            	$notifications = $this->m_notifications->notifications_show_app($token,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
+            	$notifications = $this->m_notifications->notifications_show_app($student_id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
+		log_message('debug',"Notifications  : " . print_r($notifications,true));
 			}else{
-			    $notifications = $this->m_notifications->notifications_show_app($token, null, null,$users[0]->school_id);
+			    $notifications = $this->m_notifications->notifications_show_app(null, null, null,$users[0]->school_id);
+		log_message('debug',"Notifications  : " . print_r($notifications,true));
 			}
 
             $d = explode('_',$token);
@@ -318,14 +319,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -361,7 +362,7 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
@@ -369,7 +370,7 @@ class Api extends CI_Controller
             }
             
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -411,14 +412,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             } 
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -458,14 +459,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -501,14 +502,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }  
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -549,14 +550,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -598,14 +599,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -648,14 +649,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -692,14 +693,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -747,14 +748,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -797,14 +798,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -836,14 +837,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -882,14 +883,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -949,14 +950,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -989,14 +990,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1026,14 +1027,14 @@ class Api extends CI_Controller
                     ));
                 
             } else {
-                $msg = "Old Password is Incorrect.Please,try again!";
+                $msg = "Old Password is incorrect. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1090,6 +1091,7 @@ class Api extends CI_Controller
         $this->load->model('m_login'); 
         $this->load->model('m_teachers');
         $this->load->model('m_notifications');
+        $this->load->model('m_attendances');
         $this->load->model('m_home_page_menu');
         
         $post_data = file_get_contents("php://input");
@@ -1103,6 +1105,13 @@ class Api extends CI_Controller
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             $notifications = $this->m_notifications->notifications_show_app($token, null, null, $users[0]->school_id);
 			log_message('debug',print_r($notifications, true));
+			$data = $this->m_attendances->get_class_leaves($token, 'pending');
+			$cons = 0;
+			foreach($data as $d){
+				if($d->status == "pending"){
+					$cons += 1;
+				}	
+			}
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -1113,17 +1122,18 @@ class Api extends CI_Controller
                     'teachers' => $teachers,
                     'notifications' => $notifications,
                     'home_page_menu' => $home_page_menu,
+                    'pending' => $cons,
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1145,7 +1155,7 @@ class Api extends CI_Controller
         
         if ($token != '') {
             $users = $this->m_login->get_users($token);
-            $class = $this->m_sections->sections_show_distinct_class_app($teachers_id); 
+            $class = $this->m_sections->sections_show_distinct_class_app($users[0]->school_id); 
             $sections = $this->m_sections->sections_show_app($teachers_id); 
              
             $d = explode('_',$token);
@@ -1159,14 +1169,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1189,6 +1199,7 @@ class Api extends CI_Controller
         
         if ($token != '') {
             $users = $this->m_login->get_users($token);
+			log_message('debug',print_r($users, true));
             $sections = $this->m_sections->sections_class_app($class,$users[0]->school_id); 
             
             $d = explode('_',$token);
@@ -1201,14 +1212,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1236,6 +1247,7 @@ class Api extends CI_Controller
         $teacher_id = $request['teacher_id'];
 //         $students_id = $request['students_idrequest'];
         log_message('debug',print_r($request,true)); 
+		$recorded = false;
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             $attendance = $this->m_attendances->attendance_app($class,$section,$date,$teacher_id,$users[0]->school_id);
@@ -1260,14 +1272,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1312,14 +1324,14 @@ class Api extends CI_Controller
                     'msg' => 'Attendance submitted successfully'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1353,14 +1365,14 @@ class Api extends CI_Controller
                     'status' => 'live'
                 ));
             }else{
-                $msg = "Session Expired.Please,try again!";
+                $msg = "Session Expired. Please,try again!";
                 $this->response(array(
                     'msg' => $msg,
                     'status' => 'expired'
                 ));
             }
         } else {
-            $msg = "Login credentials are Incorrect.Please,try again!";
+            $msg = "Login credentials are incorrect. Please,try again!";
             $this->response(array(
                 'msg' => $msg,
                 'status' => 'expired'
@@ -1588,20 +1600,50 @@ class Api extends CI_Controller
 		$this->load->model("m_homework");
 		$this->load->model("m_login");
 		$this->load->model("m_teachers");
-		$this->load->model("m_sections");
+		$this->load->model("m_subject_allocation");
 		$post_data = file_get_contents("php://input");
 		$request = json_decode($post_data, true);
 		$token = $request['token'];
 		$user = $this->m_login->get_users($token);
 		$teacher = $this->m_teachers->teachers_show_id_user($user[0]->id); 
-        $class = $this->m_sections->sections_show_distinct_class_app($teacher[0]->id); 
-        $sections = $this->m_sections->sections_show_app($teacher[0]->id); 
+        $class = $this->m_subject_allocation->get_allocated_classes($teacher[0]->id); 
 
 		$homework = $this->m_homework->get_teacher_hw($teacher[0]->id);
 		$this->response(array(
 				'homework' => $homework,
-				'sections' => $sections,
 				'class' => $class
+		));
+	}
+	
+	function get_alloc_sections_post(){
+		$this->load->model("m_login");
+		$this->load->model("m_teachers");
+		$this->load->model("m_subject_allocation");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$class = $request['class_id'];
+		$user = $this->m_login->get_users($token);
+		$teacher = $this->m_teachers->teachers_show_id_user($user[0]->id); 
+		$sections = $this->m_subject_allocation->get_alloc_sections($teacher[0]->id, $class);
+		$this->response(array(
+			'sections'=> $sections
+		));
+	}
+
+	function get_alloc_subjects_post(){
+		$this->load->model("m_login");
+		$this->load->model("m_teachers");
+		$this->load->model("m_subject_allocation");
+		$post_data = file_get_contents("php://input");
+		$request = json_decode($post_data, true);
+		$token = $request['token'];
+		$section_id = $request['section_id'];
+		$user = $this->m_login->get_users($token);
+		$teacher = $this->m_teachers->teachers_show_id_user($user[0]->id); 
+		$subjects = $this->m_subject_allocation->get_alloc_subjects($teacher[0]->id, $section_id);
+		$this->response(array(
+			'subjects'=> $subjects
 		));
 	}
 

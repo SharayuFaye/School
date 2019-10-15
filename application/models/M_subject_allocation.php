@@ -85,5 +85,33 @@ class m_subject_allocation extends CI_Model {
 	        return true;
 	    } 
     }    
+
+	function get_allocated_classes($teacher){
+		$query = $this->db->select('class_id')
+						->from('subject_allocation')
+						->group_by('class_id')
+						->where(array('teachers_id' => $teacher))
+						->get();
+		return $query->result();
+	}
+
+	function get_alloc_sections($teacher, $class){
+		$query = $this->db->select('s.id, s.sections')
+						->from('sections s')
+						->join('subject_allocation sa','sa.sections_id = s.id','left')
+						->where(array('sa.teachers_id' => $teacher, 'sa.class_id'=> $class))
+						->get();
+		log_message('debug',$this->db->last_query());
+		return $query->result();
+	}
+
+	function get_alloc_subjects($teacher, $section){
+		$query = $this->db->select('s.id, s.subject')
+						->from('subject s')
+						->join('subject_allocation sa', 'sa.subject_id = s.id','left')
+						->where(array('sa.teachers_id' => $teacher, 'sa.sections_id' => $section))
+						->get();
+		return $query->result();
+	}
 }
 ?>

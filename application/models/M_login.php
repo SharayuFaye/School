@@ -204,7 +204,7 @@ class m_login extends CI_Model {
             "fcm_token" => ''
         );
         $this->db->where(array( 'token' => $token));
-        $this->db->update('users', $target);
+        $this->db->update('tokens', $target);
         return true;
     }
 
@@ -224,6 +224,16 @@ class m_login extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+	function get_school($token){
+		$query = $this->db->select('s.school_name')
+						->from('school s')
+						->join('users u','u.school_id = s.id','left')
+						->join('tokens t', 't.user_id = u.id','left')
+						->where(array('t.token' => $token))
+						->get();
+		return $query->result();
 	}
 }
 ?>
