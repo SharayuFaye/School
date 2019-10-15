@@ -270,6 +270,7 @@ function edit($id,$users_id ,$class_id ,$section,$sections_id ,$student_name,$do
 // 	$('#teacher').val($teachers_id); 
 	$('#username').val($username);  
 	$('#password').val($password); 
+	$('#confirm_password2').val($password); 
 	
 	$('#parent_name').val($parent_name);
 	$('#parent_mob').val($parent_mob);
@@ -760,6 +761,55 @@ function validateImageE(id) {
 	 }); 
  });
 
+
+
+ $('#confirm_password1').change(function(){   
+     document.getElementById("save1").disabled = false;
+	 $('#msgp1').html('');  
+	 var confirm_password1 = $('#confirm_password1').val();  
+	 var password1 = $('#pwd').val();  
+	 if(confirm_password1 != password1){
+		var msg = 'Password should match!';
+		$('#msgp1').html(msg);  
+		document.getElementById("save1").disabled = true;
+	 } 
+ });  
+ $('#pwd').change(function(){   
+     document.getElementById("save1").disabled = false;
+	 $('#msgp1').html('');  
+	 var confirm_password1 = $('#confirm_password1').val();  
+	 var password1 = $('#pwd').val();  
+	 if(confirm_password1 != password1){
+		var msg = 'Password should match!';
+		$('#msgp1').html(msg);  
+		document.getElementById("save1").disabled = true;
+	 } 
+ });  
+
+ $('#confirm_password2').change(function(){   
+     document.getElementById("save2").disabled = false;
+     $('#msgp2').html('');  
+	 var confirm_password2 = $('#confirm_password2').val();  
+	 var password2 = $('#password').val();  
+	 if(confirm_password2 != password2){
+		var msg = 'Password should match!';
+		$('#msgp2').html(msg);  
+		document.getElementById("save2").disabled = true;
+	 } 
+}); 
+
+ $('#password').change(function(){   
+     document.getElementById("save2").disabled = false;
+     $('#msgp2').html('');  
+	 var confirm_password2 = $('#confirm_password2').val();  
+	 var password2 = $('#password').val();  
+	 if(confirm_password2 != password2){
+		var msg = 'Password should match!';
+		$('#msgp2').html(msg);  
+		document.getElementById("save2").disabled = true;
+	 } 
+}); 
+ 
  
  });	 
 </script>  
@@ -879,6 +929,13 @@ function validateImageE(id) {
 						<input type="password"  maxlength="100" id="pwd" required name="password" class="form-control">
 					</div>
 				</div>
+	    	<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
+					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
+				
+				</div>
+			</div>
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2">Father Name:</label>
 					<div class="col-sm-8">
@@ -1053,6 +1110,13 @@ function validateImageE(id) {
 						<input type="password" required maxlength="100"  id="password" name="password" class="form-control">
 					</div>
 				</div>
+	    	<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<div class="col-sm-8">
+					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
+					<span id="msgp2" style="color: red"></span>
+				</div>
+			</div>
 				
 				<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Parent Name:</label>
