@@ -60,6 +60,7 @@
     for($j=0;$j< max($timetable['lecture']);$j++){
     }
     }
+    if(isset($timetables)){
     for($j=0;$j<= max($timetable['lecture']);$j++){
      ?>
     <tr > 	 
@@ -166,7 +167,8 @@
             echo "Time :";  ?> 
 	<?php if(isset($timetable['start_time_sun'][$j]) &&  $timetable['start_time_sun'][$j]!=''){    echo $timetable['start_time_sun'][$j] ; ?> 
     - <?php  if(isset($timetable['end_time_sun'][$j]) &&  $timetable['end_time_sun'][$j]!=''){ echo $timetable['end_time_sun'][$j] ;  }   }
-        }   }  } }  ?>
+        }   }  } } 
+    }?>
         </th> 	   	
     </tr>  
     <?php }?>
