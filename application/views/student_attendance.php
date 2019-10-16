@@ -46,6 +46,7 @@
 						
 					</div>
 				</div>
+				
 			</div>
 <?php echo form_close();  ?> 
 <style>
@@ -59,6 +60,19 @@ td.calendar-day-head { background:#ccc; font-weight:bold; text-align:center; wid
 div.day-number		{ background:#999; padding:5px; color:#fff; font-weight:bold; float:right; margin:-5px -5px 0 0; width:30px; text-align:center; }
 /* shared */
 td.calendar-day, td.calendar-day-np { width:120px; padding:5px; border-bottom:1px solid #999; border-right:1px solid #999; }
+
+.box{
+	width:20px;
+	height:20px;
+}
+ 
+.red{
+	background:#ff0000;
+}
+.green{
+	background:#008000;
+}
+
 </style>
 <?php
 function build_html_calendar($year, $month, $events = null,$attendances_student_show) {
@@ -192,6 +206,10 @@ echo build_html_calendar($year, $month, $events,$attendances_student_show);
 ?> 
  <br>
  
+ <div style="margin-left: 84%;">
+<div  style="float: left"> <div class="box green" style="float: left" ></div>  &nbsp; Present &nbsp; &nbsp;</div>  
+<div  style="float: left"> <div class="box red" style="float: left" ></div>   &nbsp; Absent</div> 
+ </div>
 <!-- 			 			<div class="col-sm-4"> -->
 <!-- 					<div class="mb-3"> -->
 <!-- 						<a href="attendances"><button id="addToTable"  class="btn btn-primary"> <i class="fa fa-arrow-left "></i> Back</button></a> -->
