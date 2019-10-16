@@ -438,13 +438,14 @@ class Api extends CI_Controller
         $request = json_decode($post_data,true);
         $token = $request['token'];
         $date = $request['date'];
+        $student_id = $request['student_id'];
         
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             
             $students = $this->m_students->students_show_app($token);
             
-            $attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
+            $attendances = $this->m_attendances->attendances_show_app($student_id, $date);
             
             $teachers = $this->m_teachers->teachers_show_section_app($students[0]->sections_id);
             

@@ -82,11 +82,12 @@ class m_attendances extends CI_Model {
         $this->db->join('students stud', 'stud.id=a.students_id' ,'left');
         $this->db->join('sections s', 's.id=stud.sections_id', 'left');
         $this->db->join('teachers t', 't.id=s.teachers_id', 'left');
-        $this->db->where(array( 'stud.users_id' => $user_id )); 
+        $this->db->where(array( 'stud.id' => $user_id )); 
 		$this->db->where('date >=', $from_date);
 		$this->db->where('date <=', $to_date);
         $query = $this->db->get();
-        
+       
+	   	log_message('debug',$this->db->last_query());
         if($query)
         {
             return $query->result();
