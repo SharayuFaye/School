@@ -34,26 +34,70 @@
 					</div>
 				</div>
 			</div>
+			
+ <?php $this->load->helper('form');?>
+ <?php echo form_open_multipart('Welcome/attendances');?>  
+ 		<div class="row"> 
+			<div class="col-sm-4" style="float: left"></div>
+			<div class="col-sm-2" style="float: left">
+				<div class="mb-2">
+					<select  name="class" id="classE" class="form-control" required > 
+						<option value="0">Select Class</option>
+							<?php foreach ($class_show as $row) { ?>
+							<option <?php if($class == $row->id){  echo "selected" ; }?> value="<?php echo $row->id;?>">
+								<?php echo $row->class;?>
+							</option> 
+						<?php  }?> 
+					</select>
+				</div>
+			</div> 
+			 
+			<div class="col-sm-2" style="float: left">	
+				<div class="mb-2" >
+					<select  name="section" id="section" class="form-control"  required >  
+						<?php  foreach ($sections_show  as $row) {    ?>
+							<?php if($section == $row->id){ ?>
+        						<option   selected value="<?php echo $row->id;?>" >
+        							<?php echo $row->sections;?> 
+         						</option> 
+     					<?php  } }   ?> 
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-2" style="float: left">	
+				<div class="mb-2" >
+					<input type="date"  <?php if(isset($date)){ ?>value="<?php echo $date; ?>" <?php  }?>  name="date" id="date" class="form-control"  required > 
+				</div>
+			</div>
+			<div class="col-sm-2" style="float: left">	
+				<div class="mb-2" >
+					<input class="btn btn-primary" type="submit"  name="Search" value="Show"> 
+					<input class="btn btn-primary" id="clear" type="submit"  name="Clear All" value="Clear All"> 
+				</div>
+			</div>
+		</div> 
+<?php echo form_close(); ?> 
+			
 			<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 				<thead>
-					<tr>
-						<th>Sr No</th>
+					<tr> 
 						<th>Class</th>
-						<th>Date</th> 
+						<th>Section</th>
+						<th>Student Name </th> 
 						<th>Attendance</th> 
-						<th>Section</th> 
+						<th>Date</th> 
 						<th>Teacher </th>
-					<!-- 	<th>Actions</th> -->
+					<!-- <th>Actions</th> -->
 					</tr>
 				</thead>
 				<tbody>
-					<?php $i=1; foreach ($attendances_show as $row) { ?>
-					<tr data-item-id="<?php echo $i;?>">
-						<td><?php echo $i;?></td> 
-						<td><a href="class_attendance?class=<?php echo $row->class_id;?>"><?php echo $row->class;?></a></td>
-						<td><?php echo $row->date;?></td> 
-						<td><?php echo $row->attendance;?></td>
+					<?php if(isset($attendances_show)){ $i=1; foreach ($attendances_show as $row) { ?>
+					<tr data-item-id="<?php echo $i;?>"> 
+						<td><?php echo $row->class;?></td> 
 						<td><?php echo $row->sections;?></td> 
+						<td><a href="<?php echo base_url(); ?>index.php/student_attendance?student_id=<?php echo $row->stud_id;?>&date=<?php  echo $date;?>"><?php echo $row->student_name;?></a></td>
+						<td><?php echo ucfirst($row->attendance);?></td>
+						<td><?php echo date_format(date_create($row->date),"Y-m-d"); ?></td> 
 						<td><?php echo $row->teacher_name;?></td> 
 						<!-- <td class="actions">
 							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
@@ -62,7 +106,7 @@
 							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(1)"></i></a>
 						</td> -->
 					</tr>
-					<?php $i++;} ?> 
+					<?php $i++;} } ?> 
 					 
 				</tbody>
 			</table>
@@ -109,7 +153,7 @@
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
 	
  
-<<script type="text/javascript">
+<script type="text/javascript">
 
 $(document).ready(function() {
 	 $('#datatable-tabletools').DataTable( {
@@ -124,7 +168,7 @@ $(document).ready(function() {
             title: 'Attendances',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,5]
+	                columns: [0,1,2,3,4,5]
 	            }
         },
         {
@@ -132,14 +176,14 @@ $(document).ready(function() {
             title: 'Attendances',
 	           footer: true,
 	           exportOptions: {
-	                columns: [1,2,3,4,5]
+	                columns: [0,1,2,3,4,5]
 	            }
         },
         { 
             	extend: 'pdf', 
                title: 'Attendances',
 	           exportOptions: {
-	                columns: [1,2,3,4,5]
+	                columns: [0,1,2,3,4,5]
 	            } 
          }
     	]
@@ -151,6 +195,33 @@ var d = document.getElementById("attendances");
 d.className += " nav-active";  
 var n = document.getElementById("nav1");
 n.className += " nav-expanded nav-active"; 
+
+
+$(document).ready(function(){
+ 
+    $('#classE').change(function(){  
+    $("#section > option").remove();  
+    var sel_class = $('#classE').val();  
+    	 $.ajax({
+    		 type: "GET",
+    		 url: "<?php echo base_url(); ?>index.php/timetable_sections_fetch", 
+    		 data: 'class_sel='+sel_class,
+             datatype : "json",
+    		 success: function(classD)  
+    		 {   
+    			 var obj = $.parseJSON(classD); 
+                    $.each(obj, function (index, object) {  
+                   		 var opt = $('<option />');  
+        				 opt.val(object['id']);
+        				 opt.text(object['sections']);
+        				 $('#section').append(opt); 
+                   }) 
+    		 } 
+    	 }); 
+    });
+     
+
+});
 
 </script>
  
