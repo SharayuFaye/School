@@ -47,6 +47,7 @@ class m_faq extends CI_Model {
         $this->db->select('h.*,s.school_name');
         $this->db->from('faq h');
         $this->db->join('school s', 'h.school_id=s.id', 'left');
+        $this->db->where(array( 'h.school_id' =>$this->session->userdata['school']));
         
         $query = $this->db->get();
         
