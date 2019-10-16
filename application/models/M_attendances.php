@@ -61,6 +61,46 @@ class m_attendances extends CI_Model {
         }
     }
     
+    
+    function attendances_class_sel($class_id,$section_id,$date){
+        
+        $this->db->select('s.student_name,s.id as stud_id,s.roll_number,a.*,c.class,sec.sections,t.teacher_name');
+        $this->db->from('attendance a');
+        $this->db->join('students s', 'a.students_id=s.id', 'left');
+        $this->db->join('class c', 'a.class_id=c.id', 'left');
+        $this->db->join('sections sec', 'a.sections_id=sec.id', 'left');
+        $this->db->join('teachers t', 'a.teachers_id=t.id', 'left'); 
+        $this->db->where(array( 'a.school_id' => $this->session->userdata['school']));
+        $this->db->where(array( 'a.class_id' => $class_id ));
+        $this->db->where(array( 'a.sections_id' => $section_id ));
+        $this->db->where(array( 'a.date' => $date ));
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    function attendances_student_show($student_id,$date){
+        
+        $this->db->select('s.student_name,s.id as stud_id,s.roll_number,a.*,c.class,sec.sections,t.teacher_name');
+        $this->db->from('attendance a');
+        $this->db->join('students s', 'a.students_id=s.id', 'left');
+        $this->db->join('class c', 'a.class_id=c.id', 'left');
+        $this->db->join('sections sec', 'a.sections_id=sec.id', 'left');
+        $this->db->join('teachers t', 'a.teachers_id=t.id', 'left');
+        $this->db->where(array( 'a.school_id' => $this->session->userdata['school'])); 
+        $this->db->where(array( 'a.students_id' => $student_id )) 
+        ->where("DATE_FORMAT(date,'%Y-%m')", $date);
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
     //App Functions
     
     

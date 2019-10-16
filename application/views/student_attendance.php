@@ -26,260 +26,184 @@
 				<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 			</div>
 	
-			<h2 class="card-title">Student Attendance : Arya Raut</h2>
+			<h2 class="card-title">Student Attendance : <?php echo $student_name  ; ?> </h2>
 		</header>
 		<div class="card-body">
-			<div class="row">
-				<!-- <div class="col-sm-4">
-					<div class="mb-3">
-						<button id="addToTable" onclick="add()" class="btn btn-primary">Add <i class="fa fa-plus"></i></button>
-					</div>
-				</div> -->
+		
+ <?php $this->load->helper('form');?>
+ <?php echo form_open_multipart('Welcome/student_attendance');?>  
+			<div class="row"> 
+ <input type="hidden" name="student_id" value="<?php echo $student_id  ; ?>" >
+ <input type="hidden" name="student_name" value="<?php echo $student_name  ; ?>" >
 				<div class="col-sm-8">
 					<div class="mb-3">
 						<div class="col-sm-4"  style="float: left;">
-						 	<input type="date"  class="form-control " name="start_date">
-						</div>
-						 <div class="col-sm-4"  style="float: left;">
-						 	<input type="date"  class="form-control " name="end_date">
-						</div>
-						<div class="col-sm-2"  style="float: left;">
-						 	<button id="addToTable" onclick="add()" class="btn btn-primary">Search <i class="fa fa-search"></i></button>
+						 	<input type="month"  class="form-control " name="date" max="<?php echo date('Y-m');?>" value="<?php echo $date  ; ?>">
+						</div> 
+						<div class="col-sm-4"  style="float: left;">
+						 	<input class="btn btn-primary" type="submit"  name="Search" value="Show">  
 						</div>
 						
 					</div>
 				</div>
 			</div>
-			<?php
-				$date = '2019-06-01';
-				$end = '2019-06-' . date('t', strtotime($date)); //get end date of month
-				?>
-			<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
-				<thead>
-					<tr>
-						<th>Sr No</th> 
-						<th>Month</th> 
-						 <?php for($i=1;$i<=31;$i++){ 
-						        echo "<th> $i</th>";
-						    }
-						    ?>
-						<!-- <th>Actions</th> -->
-					</tr>
-				</thead>
-				 <tbody>
-					<tr data-item-id="1">
-						<td>1</td>
-						<td>March</td>
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td>  
-						<!-- <td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(1,'5th','06/06/2019','75%','C Section','Arya Raut')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(1)"></i></a>
-						</td> -->
-					</tr>
+<?php echo form_close();  ?> 
+<style>
+/* calendar */
+table.calendar		{ width: 100%;border-left:1px solid #999; }
+tr.calendar-row	{  }
+td.calendar-day	{ min-height:80px; font-size:11px; position:relative; } * html div.calendar-day { height:80px; }
+td.calendar-day:hover	{ background:#eceff5; }
+td.calendar-day-np	{ background:#eee; min-height:80px; } * html div.calendar-day-np { height:80px; }
+td.calendar-day-head { background:#ccc; font-weight:bold; text-align:center; width:120px; padding:5px; border-bottom:1px solid #999; border-top:1px solid #999; border-right:1px solid #999; }
+div.day-number		{ background:#999; padding:5px; color:#fff; font-weight:bold; float:right; margin:-5px -5px 0 0; width:30px; text-align:center; }
+/* shared */
+td.calendar-day, td.calendar-day-np { width:120px; padding:5px; border-bottom:1px solid #999; border-right:1px solid #999; }
+</style>
+<?php
+function build_html_calendar($year, $month, $events = null,$attendances_student_show) {
+   // print_r($attendances_student_show);
+    // CSS classes
+    $css_cal = 'calendar';
+    $css_cal_row = 'calendar-row';
+    $css_cal_day_head = 'calendar-day-head';
+    $css_cal_day = 'calendar-day';
+    $css_cal_day_number = 'day-number';
+    $css_cal_day_blank = 'calendar-day-np';
+    $css_cal_day_event = 'calendar-day-event';
+    $css_cal_event = 'calendar-event';
+    
+    // Table headings
+    $headings = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    
+    // Start: draw table
+    $calendar =
+    "<table cellpadding='0' cellspacing='0' class='{$css_cal}'>" .
+    "<tr class='{$css_cal_row}'>" .
+    "<td class='{$css_cal_day_head}'>" .
+    implode("</td><td class='{$css_cal_day_head}'>", $headings) .
+    "</td>" .
+    "</tr>";
+    
+    // Days and weeks
+    $running_day = date('N', mktime(0, 0, 0, $month, 1, $year));
+    $days_in_month = date('t', mktime(0, 0, 0, $month, 1, $year));
+    
+    // Row for week one
+    $calendar .= "<tr class='{$css_cal_row}'>";
+    
+    // Print "blank" days until the first of the current week
+    for ($x = 1; $x < $running_day; $x++) {
+        $calendar .= "<td class='{$css_cal_day_blank}'> </td>";
+    }
+    
+    // Keep going with days...
+    for ($day = 1; $day <= $days_in_month; $day++) {
+        
+        // Check if there is an event today
+        $cur_date = date('Y-m-d', mktime(0, 0, 0, $month, $day, $year));
+        $draw_event = false;
+        if (isset($events) && isset($events[$cur_date])) {
+            $draw_event = true;
+        }
+        
+        // Day cell
+        $calendar .= $draw_event ?
+        "<td class='{$css_cal_day} {$css_cal_day_event}'>" :
+        "<td class='{$css_cal_day}'>";
+        
+        // Add the day number
+        $calendar .= "<div class='{$css_cal_day_number}' ";
+        if($day <10){
+            $day1 = '0'.$day ;
+        }else{
+            $day1 =  $day ;
+        }
+        foreach($attendances_student_show as $attendance){ 
+            
+            $dt = $year.'-'.$month.'-'.$day1 .' 00:00:00' ;
+            if($attendance->date == $dt && $attendance->attendance == 'present') {
+                $calendar .=" style='background-color: green;' ";
+            }
+            if($attendance->date == $dt && $attendance->attendance == 'absent') {
+                $calendar .=" style='background-color: red;' ";
+            }
+        } 
+        $calendar .=">" . $day . "</div>";
+        
+        // Insert an event for this day
+        if ($draw_event) {
+            $calendar .=
+            "<div class='{$css_cal_event}'>" .
+            "<a href='{$events[$cur_date]['href']}'>" .
+            $events[$cur_date]['text'] .
+            "</a>" .
+            "</div>";
+        }
+        
+        // Close day cell
+        $calendar .= "</td>";
+        
+        // New row
+        if ($running_day == 7) {
+            $calendar .= "</tr>";
+            if (($day + 1) <= $days_in_month) {
+                $calendar .= "<tr class='{$css_cal_row}'>";
+            }
+            $running_day = 1;
+        }
+        
+        // Increment the running day
+        else {
+            $running_day++;
+        }
+        
+    } // for $day
+    
+    // Finish the rest of the days in the week
+    if ($running_day != 1) {
+        for ($x = $running_day; $x <= 7; $x++) {
+            $calendar .= "<td class='{$css_cal_day_blank}'> </td>";
+        }
+    }
+    
+    // Final row
+    $calendar .= "</tr>";
+    
+    // End the table
+    $calendar .= '</table>';
+    
+    // All done, return result
+    return $calendar;
+}
+?> 
 
-					<tr data-item-id="1">
-						<td>2</td>
-						<td>April</td>
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td></td>  
-						<!-- <td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(1,'5th','06/06/2019','75%','C Section','Arya Raut')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(1)"></i></a>
-						</td> -->
-					</tr>
-					<tr data-item-id="1">
-						<td>3</td>
-						<td>May</td>
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td> </td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>A</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td>  
-						<!-- <td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(1,'5th','06/06/2019','75%','C Section','Arya Raut')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(1)"></i></a>
-						</td> -->
-					</tr>
-
-					<tr data-item-id="1">
-						<td>4</td>
-						<td>June</td>
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>A</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td> </td> 
-						<td>P</td> 
-						<td>P</td> 
-						<td></td>  
-						<!-- <td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(1,'5th','06/06/2019','75%','C Section','Arya Raut')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(1)"></i></a>
-						</td> -->
-					</tr>
-					
-					<!-- <tr data-item-id="2">
-						<td>2</td>
-						<td>8th</td>
-						<td>07/06/2019</td> 
-						<td>80%</td>
-						<td>A Section</td> 
-						<td>Sakhi Roy</td> 
-						<td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(2,'8th','07/06/2019','80%','A Section','Sakhi Roy')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(2)"></i></a>
-						</td>
-					</tr>
-
-					<tr data-item-id="3">
-						<td>3</td>
-						<td>3rd</td>
-						<td>08/06/2019</td> 
-						<td>95%</td>
-						<td>B Section</td> 
-						<td>Pooja Rathod</td>
-						<td class="actions">
-							<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-							<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-							<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit(3,'3rd','08/06/2019','95%','B Section','Pooja Rathod')"></i></a>
-							<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(3)"></i></a>
-						</td>
-					</tr> -->
-
-				</tbody>  
-			</table>
-			<div class="col-sm-4">
-					<div class="mb-3">
-						<a href="class_attendance.php"><button id="addToTable"  class="btn btn-primary"> <i class="fa fa-arrow-left "></i> Back</button></a>
-					</div>
-				</div>
-		</div>
+<?php
+$events = [ 
+];  
+if($date !='' && isset($attendances_student_show)){
+$date = DateTime::createFromFormat("Y-m", $date);
+  
+$year = $date->format("Y");
+$month = $date->format("m");
+echo "<br>";
+echo build_html_calendar($year, $month, $events,$attendances_student_show);
+}
+?> 
+ <br>
+ 
+<!-- 			 			<div class="col-sm-4"> -->
+<!-- 					<div class="mb-3"> -->
+<!-- 						<a href="attendances"><button id="addToTable"  class="btn btn-primary"> <i class="fa fa-arrow-left "></i> Back</button></a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 		</div> -->
 
 	</section>
 					<!-- end: page -->
 				</section>
 			<?php include('include/footer.php');?>			
-
-<!-- Vendor -->
-<script src="<?php echo base_url(); ?>vendor/jquery/jquery.js"></script>
+ 
 <script src="<?php echo base_url(); ?>vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 <script src="<?php echo base_url(); ?>vendor/popper/umd/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/bootstrap/js/bootstrap.js"></script>
@@ -297,7 +221,7 @@
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
-<script src="vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script> 
 <!-- Theme Base, Components and Settings -->
 <script src="<?php echo base_url(); ?>js/theme.js"></script> 
@@ -306,211 +230,15 @@
 <!-- Theme Initialization Files -->
 <script src="<?php echo base_url(); ?>js/theme.init.js"></script> 
 <!-- Examples<?php echo base_url(); ?> -->
-<script src="js/examples/examples.datatables.default.js"></script>
+<script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
-	
+ 
+ 
+ <script>
 
-		
-
-<script type="text/javascript">
-
-function edit($id,$class,$date,$Student Attendance,$section,$student_name){ 
-
-	$('#id').val($id); 
-	$('#class').val($class);
-	$('#date').val($date);
-	$('#Student Attendance').val($Student Attendance);  
-    $('#section').val($section);
-    $('#student_name').val($student_name);
-	$('#editrow').modal('show'); 
-}
-function add(){
-	$('#addrow').modal('show'); 
-}
-function del($id){   
-	$('#id_del').val($id); 
-	$('#delrow').modal('show'); 
-}
-</script>
-  
-<!-- add row -->
-<div class="modal fade" id="addrow" role="dialog"  >
-<div class="modal-dialog">
-	<div class="modal-content" style="width: 155%;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right:  76%;">Add Student Attendance</h3>
-        </div>
-<div class="modal-body">
-<div class="col-lg-12"> 
-	<section class="card">
-	 
-		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
-				<div class="col-sm-8">
-					<select name="class"  class="form-control">
-						<option>5th</option>
-						<option>8th</option>
-						<option>3rd</option>
-						<option>4th</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
-				<div class="col-sm-8">
-					<input type="date" name="date" class="form-control">
-				</div>
-			</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Student Attendance:</label>
-				<div class="col-sm-8">
-					<input type="text" name="Student Attendance" class="form-control">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
-				<div class="col-sm-8">
-					<select name="section" class="form-control">
-						<option>A Section</option>
-						<option>B Section</option>
-						<option>C Section</option>
-						<option>D Section</option>
-					</select>
-				</div>
-			</div>
-	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
-				<div class="col-sm-8">
-					<select name="student_name" class="form-control">
-						<option>Arya Raut</option>
-						<option>Sakhi Roy</option>
-						<option>Pooja Rathod</option>
-					</select>	
-				</div>
-			</div>
-
-	    </div>
-		<footer class="card-footer text-right"> 
-			<input class="btn btn-primary" type="submit"  name="save_Student Attendance" value="Save">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</footer>
-	</section>  
-</div> 
-
-</div>                                          
-</div>
-</div>                                          
-</div>
-</div>        
-
-<!-- edit row -->
-<div class="modal fade" id="editrow" role="dialog"  >
-<div class="modal-dialog">
-         <div class="modal-content" style="width: 155%;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right:  76%;">Edit Notification</h3>
-        </div>
-		<div class="modal-body">         
-		       <div class="col-lg-12"> 
-								<section class="card"> 
-									<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
-				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
-				<div class="col-sm-8">
-					<select name="class" id="class" class="form-control">
-						<option>5th</option>
-						<option>8th</option>
-						<option>3rd</option>
-						<option>4th</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
-				<div class="col-sm-8">
-					<input type="text" id="date" name="date" class="form-control">
-				</div>
-			</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Student Attendance:</label>
-				<div class="col-sm-8">
-					<input type="text" id="Student Attendance" name="Student Attendance" class="form-control">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
-				<div class="col-sm-8">
-					<select name="section" id="section" class="form-control">
-						<option>A Section</option>
-						<option>B Section</option>
-						<option>C Section</option>
-						<option>D Section</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
-				<div class="col-sm-8">
-					<select name="student_name" id="student_name" class="form-control">
-						<option>Arya Raut</option>
-						<option>Sakhi Roy</option>
-						<option>Pooja Rathod</option>
-				    </select>		
-				</div>
-			</div>
-	        
-
-	    </div>
-			<footer class="card-footer text-right">
-				<input class="btn btn-primary" type="submit"  name="edit_notification" value="Update">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</footer>
-		</section>
-	</form>
-</div> 
-
-</div>                                          
-</div>
-</div>       
-</div>                                          
-</div>
-<!-- del row -->
-<div class="modal fade" id="delrow" role="dialog"  >
-<div class="modal-dialog">
-	<div class="modal-content" style="width: 155%;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right: 73%;">Delete Student Attendance</h3>
-        </div>
-<div class="modal-body">  
-    <div class="col-lg-12"> 
-	<section class="card">
-		 
-		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">
-		   <div class="modal-wrapper">
-			 <div class="modal-text">
-				 <div class="modal-text">
-                 <p>Are you sure that you want to delete this row?</p>
-                 <input type="hidden" id="id_del" name="id" class="form-control">
-					<input type="hidden" id="Student Attendance_name" name="Student Attendance" class="form-control">
-                </div>
-			 </div>
-			</div>
-	    </div>
-		<footer class="card-footer text-right">
-			<input class="btn btn-primary" type="submit"  name="del_Student Attendance" value="Delete">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		</footer>
-	</section> 
-</div>
-						
-</div>                                          
-</div>
-</div>                                          
-</div>                                        
-</div>								
+ var d = document.getElementById("attendances");
+ d.className += " nav-active";  
+ var n = document.getElementById("nav1");
+ n.className += " nav-expanded nav-active"; 
+  </script>

@@ -2310,12 +2310,12 @@ class Welcome extends CI_Controller {
             if($this->input->post('Search')){
                 $class = $this->input->post('class') ;
                 $section = $this->input->post('section') ;
-                $this->data['attendances_show'] =$this->m_attendances->attendances_class_sel($class,$section);
+                $date = $this->input->post('date') ;
+                $this->data['attendances_show'] =$this->m_attendances->attendances_class_sel($class,$section,$date);
                 $this->data['class'] = $class;
                 $this->data['section'] = $section;
-            }else{
-                $this->data['attendances_show'] =$this->m_attendances->attendances_show();
-            }
+                $this->data['date'] = $date;
+            } 
             
             $this->data['students_show'] =$this->m_students->students_show();
             $this->data['class_show'] =$this->m_class->class_show_id();
@@ -2339,14 +2339,34 @@ class Welcome extends CI_Controller {
     }
     
     public function student_attendance()
-    {
-        $class = $this->input->get('class') ;
+    { 
         $this->load->model('m_attendances');
         $this->load->model('m_students');
         
-        $this->data['students_show'] = $this->m_students->students_show();
-        $this->data['attendances_class_show'] = $this->m_attendances->attendances_class_show($class);
+        if($this->input->get('student_id')){
+            $student_id = $this->input->get('student_id') ;
+             $date = $this->input->get('date') ;
+            $date = DateTime::createFromFormat("Y-m-d", $date);            
+            $date = $date->format("Y-m"); 
+            
+            $this->data['students_show'] = $this->m_students->students_show();
+            $this->data['attendances_student_show'] = $this->m_attendances->attendances_student_show($student_id,$date);
+            $this->data['student_name'] =  $this->data['attendances_student_show'][0]->student_name;
+           // print_r($this->data['attendances_student_show']);exit();
+        }
         
+        
+        if($this->input->post('Search')){
+            $student_name = $this->input->post('student_name') ;
+            $student_id = $this->input->post('student_id') ;
+            $date = $this->input->post('date') ; 
+            $this->data['attendances_student_show'] = $this->m_attendances->attendances_student_show($student_id,$date);  
+            $this->data['student_name'] = $student_name;
+            
+        }
+        
+        $this->data['student_id'] =  $student_id;
+        $this->data['date'] =  $date;
         $this->load->view('student_attendance',$this->data);
     }
     
@@ -2467,11 +2487,11 @@ class Welcome extends CI_Controller {
                 }
             }
             
-            //             $this->data['timetables_show'] =$this->m_timetables->timetables_show();
+            //$this->data['timetables_show'] =$this->m_timetables->timetables_show();
             
             $this->data['teachers_show'] =$this->m_teachers->teachers_show_id();
             $this->data['students_show'] =$this->m_students->students_show();
-            //   $this->data['class_show'] =$this->m_class->class_show_id();
+            //$this->data['class_show'] =$this->m_class->class_show_id();
             
             
             if($this->session->userdata['role'] =='teacher'){
