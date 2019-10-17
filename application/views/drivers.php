@@ -263,7 +263,7 @@ $(document).ready(function(){
 		 <?php $this->load->helper('form');?>
          <?php echo form_open_multipart('Welcome/drivers');?> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Name:</label>
 				<div class="col-sm-8">
 					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required name="drivers_name" class="form-control">
 				</div>
@@ -281,13 +281,13 @@ $(document).ready(function(){
 				</div>
 			</div>
 			 <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
 					<input type="text"  name="username" required class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
 					<input type="password"  name="password" required class="form-control">
 				</div>
@@ -333,7 +333,7 @@ $(document).ready(function(){
 		<section class="card"> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"> Name:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Name:</label>
 					<div class="col-sm-8">
 						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required  id="drivers_name" name="drivers_name" class="form-control">
 					</div>
@@ -352,15 +352,15 @@ $(document).ready(function(){
 			</div>
 			
 			  <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text" readonly  id="username" name="username" class="form-control">
+					<input type="text" readonly  id="username" required name="username" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password" name="password" class="form-control">
+					<input type="password"   id="password" required  name="password" class="form-control">
 				</div>
 			</div>
 			

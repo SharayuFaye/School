@@ -192,7 +192,7 @@ function del($id){
          <?php echo form_open_multipart('Welcome/home_page_menu');?>  
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Page Name :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
 					<select name="page_name"  required class="form-control">
 						<option></option>
@@ -210,7 +210,7 @@ function del($id){
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Menu Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Menu Name:</label>
 				<div class="col-sm-8">
 					<input type="text" required name="menu_name" class="form-control">
 				</div>
@@ -228,7 +228,7 @@ function del($id){
 				</div>
 			</div> -->
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School:</label>
 				<div class="col-sm-8">
 					<select  name="school"  required class="form-control">
 						<option></option>
@@ -272,7 +272,7 @@ function del($id){
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Page Name :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
 					<select name="page_name" id="page_name"  required class="form-control">
 						<option>Notication</option>
@@ -290,7 +290,7 @@ function del($id){
 
 
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Menu Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Menu Name:</label>
 				<div class="col-sm-8">
 					<input type="hidden" id="id" name="id" class="form-control">
 					<input type="text" id="menu_name" required  name="menu_name" class="form-control">
@@ -303,7 +303,7 @@ function del($id){
 				</div>
 			</div>   -->
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School:</label>
 				<div class="col-sm-8">
 					<select  name="school"  id="school1" required  class="form-control">
 						<?php  foreach ($school_show as $row) { ?>

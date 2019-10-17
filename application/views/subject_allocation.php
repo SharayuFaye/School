@@ -360,7 +360,7 @@ $('#section2').change(function(){
 				</div>
 			</div> --> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8"> 
 					<select  name="class"  id="class1" class="form-control">
 						<option></option>
@@ -371,7 +371,7 @@ $('#section2').change(function(){
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8"> 
 					<select  name="sections" required id="section1" class="form-control">
 						<!--- <option></option>
@@ -383,7 +383,7 @@ $('#section2').change(function(){
 			</div> 
 			
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  <div class="col-sm-8"> 
 					<select  name="subject" required id="subject1" class="form-control">
 						<!--- <option></option>
@@ -395,7 +395,7 @@ $('#section2').change(function(){
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
 					<select  name="teacher" required  class="form-control">
 					<option></option>
@@ -449,7 +449,7 @@ $('#section2').change(function(){
 				</div>
 			</div> -->
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select  name="class" id="class2" class="form-control">
 						<?php  foreach ($class_show as $row) { ?>
@@ -460,14 +460,14 @@ $('#section2').change(function(){
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
-					<select  name="section" id="section2" class="form-control"> 
+					<select  name="section" id="section2" required class="form-control"> 
 					</select>
 				</div>
 			</div>
 	      <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
 			<div class="col-sm-8"> 
 					<select  name="subject" id="subject2" required  class="form-control"> 
@@ -480,7 +480,7 @@ $('#section2').change(function(){
 	    </div>
 	    
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
 					<select  name="teacher" id="teacher2" required class="form-control"> 
 				 		<?php  foreach ($teachers_show as $row) { ?>

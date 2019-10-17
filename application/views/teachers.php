@@ -402,43 +402,43 @@ $(document).ready(function(){
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Name:</label>
 				<div class="col-sm-8">
 					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' name="teacher_name" required class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Address:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Address:</label>
 				<div class="col-sm-8">
 					<input type="text" name="teacher_address" required  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mobile:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mobile:</label>
 				<div class="col-sm-8"><span id="teacher_mob_msg" style="color:red"></span>
 					<input type="text" maxlength="10" name="teacher_mobile" id="teacher_mob" required  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mail:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mail:</label>
 				<div class="col-sm-8"><span id="msg1t" style="color:red"></span>
 					<input type="mail"  onchange="ValidateEmail(this.value)"  required  name="teacher_mail" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
 					<input type="text"  name="username"  required required class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
 					<input type="password" id="password1" name="password"  required required class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msg1" style="color: red"></span>
 					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
 				
@@ -459,7 +459,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Education Details:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Education Details:</label>
 				<div class="col-sm-8">
 					<input type="text"  name="education_details" required  class="form-control">
 				</div>
@@ -537,43 +537,43 @@ $(document).ready(function(){
 		<section class="card"> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Name:</label>
 				<div class="col-sm-8">
 					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' id="teacher_name" required  name="teacher_name" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Address:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Address:</label>
 				<div class="col-sm-8">
 					<input type="text" id="teacher_address" required  name="teacher_address" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mobile:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mobile:</label>
 				<div class="col-sm-8"><span id="teacher_mobile_msg" style="color:red"></span>
 					<input type="text"  maxlength="10" id="teacher_mobile" required  name="teacher_mobile" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Mail:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mail:</label>
 				<div class="col-sm-8"><span id="msg2t" style="color:red"></span>
 					<input type="mail"  required  onchange="ValidateEmailE(this.value)"  id="teacher_mail" name="teacher_mail" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
 					<input type="text" readonly     id="username" name="username" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
 					<input type="password"   id="password"   required   name="password" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
 					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
@@ -597,7 +597,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Education Details:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Education Details:</label>
 				<div class="col-sm-8">
 					<input type="text" id="education_details"  required name="education_details" class="form-control">
 				</div>

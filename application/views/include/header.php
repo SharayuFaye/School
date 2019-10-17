@@ -43,6 +43,9 @@
  
 	</head>
 	<style>
+	.req{
+	   color: #c40e0e;
+	}
 	.btn-secondary{
 	   color: #333 !important;
         background-color: #fff !important;

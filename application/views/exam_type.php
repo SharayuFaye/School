@@ -185,7 +185,7 @@ function del($id){
 	 <?php echo form_open_multipart('Welcome/exam_type');?> 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type:</label>
 				<div class="col-sm-8">
 					<input type="text" required maxlength="100" name="type" class="form-control">
 				</div>
@@ -221,7 +221,7 @@ function del($id){
 			 <section class="card"> 
 				 <div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type:</label>
 				<div class="col-sm-8">
 					<input type="text" required maxlength="100" name="type" id="type" class="form-control">
 				</div>

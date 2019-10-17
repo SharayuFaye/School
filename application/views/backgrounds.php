@@ -159,7 +159,7 @@ function del($id){
          <?php echo form_open_multipart('Welcome/backgrounds');?> 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 		<div class="form-group row"> 
-			<label class="col-sm-4 control-label text-sm-right pt-2">Wallpaper:</label>
+			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Wallpaper:</label>
 			<div class="col-sm-8"> 
 				<input accept="image/*" type="file" required  name="wallpaper" class="form-control">
 					 	 ( File accepts only jpg , png , jpeg type image file. )
@@ -172,7 +172,7 @@ function del($id){
 			</div>
 		</div>
 		<div class="form-group row">
-			<label class="col-sm-4 control-label text-sm-right pt-2">School  :</label>
+			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 			<div class="col-sm-8"> 
 				<select name="school" required class="form-control">
 				<option></option>
@@ -214,7 +214,7 @@ function del($id){
 							<section class="card"> 
 								<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 									<div class="form-group row"> 
-										<label class="col-sm-4 control-label text-sm-right pt-2">Wallpaper:</label>
+										<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Wallpaper:</label>
 										<div class="col-sm-8">
 											<input type="hidden" id="id" name="id" class="form-control">
 											<input accept="image/*" type="file"   name="wallpaper" class="form-control">
@@ -229,7 +229,7 @@ function del($id){
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-4 control-label text-sm-right pt-2">School  :</label>
+										<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 										<div class="col-sm-8"> 
 											
 										<select name="school" id="School" required class="form-control">

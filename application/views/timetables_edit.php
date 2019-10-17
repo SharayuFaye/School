@@ -60,7 +60,7 @@
 			
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="sel_class" class="form-control" required >
 						<option></option>
@@ -71,7 +71,7 @@
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Sections:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Sections:</label>
 				<div class="col-sm-8">
 					<select name="section" id="sel_section" class="form-control" required >
 						<?php foreach ($sections_show as $row) { ?>
@@ -94,7 +94,7 @@
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> No. Of Lectures:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> No. Of Lectures:</label>
 				<div class="col-sm-1"> <input type="number" min="0" name="mon" id="mon" class="form-control" value="<?php echo $timetable['mon'];?>" readonly> </div>
 				<div class="col-sm-1"> <input type="number" min="0" name="tue" id="tue" class="form-control" value="<?php echo $timetable['tue'];?>" readonly> </div>
 				<div class="col-sm-1"> <input type="number" min="0" name="wed" id="wed" class="form-control" value="<?php echo $timetable['wed'];?>" readonly> </div>

@@ -863,7 +863,7 @@ function validateImageE(id) {
 	 <?php echo form_open_multipart('Welcome/students');?> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 					<div class="col-sm-8">
 						<select required name="class" id="class_sel" class="form-control">
 							<option></option>
@@ -874,26 +874,26 @@ function validateImageE(id) {
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 					<div class="col-sm-8"> 
 						<select required name="section" id="section_sel" class="form-control"> 
 						</select>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 					<div class="col-sm-8">
 						<input   type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100" required name="student_name" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Student DOB:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student DOB:</label>
 					<div class="col-sm-8">
 						<input type="date" required name="dob" max="<?php echo date('Y-m-d');?>" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Student Adhar No.:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Adhar No.:</label>
 					<div class="col-sm-8">
 						<input type="text"  maxlength="100" required name="adhar" class="form-control">
 					</div>
@@ -918,38 +918,38 @@ function validateImageE(id) {
 					</div>
 				</div> 
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Parents MailId</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
 					<div class="col-sm-8"><span id="msg" style="color:red"></span><span id="msg1" style="color:red"></span>
 						<input type="text"  maxlength="100" id="mail_id" onchange="ValidateEmail(this.value)" required name="username" class="form-control">
 					</div>
 				</div>
 					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Password:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 					<div class="col-sm-8">
 						<input type="password"  maxlength="100" id="pwd" required name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
 					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Father Name:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Father Name:</label>
 					<div class="col-sm-8">
 						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100" required id="parent_nm" name="parent_name" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Father Mob:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Father Mob:</label>
 					<div class="col-sm-8"><span id="p_mob_msg" style="color:red"></span>
 						<input type="text"  maxlength="10" required  id="p_mob"  name="parent_mob" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Mother Name:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Mother Name:</label>
 					<div class="col-sm-8">
 						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100"  required  id="m_name" name="mother_name" class="form-control">
 					</div>
@@ -967,7 +967,7 @@ function validateImageE(id) {
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Parent Scan Id:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Scan Id:</label>
 					<div class="col-sm-8">
 					
 						<input type="text"  maxlength="100" required id="parent_scn" name="parent_id" class="form-control">
@@ -1041,7 +1041,7 @@ function validateImageE(id) {
 	 <section class="card"> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select  name="class" id="class" required class="form-control">
 						<?php  foreach ($class_show as $row) { ?>
@@ -1051,7 +1051,7 @@ function validateImageE(id) {
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8"> 
 					<select  name="sections" required id="section" class="form-control">
 						 
@@ -1059,19 +1059,19 @@ function validateImageE(id) {
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 				<div class="col-sm-8">
 					<input type="text" maxlength="100" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required id="student_name" name="student_name" class="form-control">
 				</div>
 			</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Student DOB:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student DOB:</label>
 					<div class="col-sm-8">
 						<input type="date" id="dob"   max="<?php echo date('Y-m-d');?>" required name="dob" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Student Adhar No.:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Adhar No.:</label>
 					<div class="col-sm-8">
 						<input type="text" id="adhar" maxlength="100"  required name="adhar" class="form-control">
 					</div>
@@ -1099,19 +1099,19 @@ function validateImageE(id) {
 				</div>
 			</div> 
 					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Parents MailId</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
 					<div class="col-sm-8"> <span id="msg2" style="color:red"></span>
 						<input type="email" required maxlength="100"  id="username"  onchange="ValidateEmailE(this.value)" name="username" class="form-control">
 					</div>
 				</div>
 					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Password:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 					<div class="col-sm-8">
 						<input type="password" required maxlength="100"  id="password" name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
 					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
 					<span id="msgp2" style="color: red"></span>
@@ -1119,19 +1119,19 @@ function validateImageE(id) {
 			</div>
 				
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Parent Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Name:</label>
 				<div class="col-sm-8">
 					<input type="text" required onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100"  id="parent_name" name="parent_name" class="form-control">
 				</div>
 			</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Father Mob:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Father Mob:</label>
 					<div class="col-sm-8"><span id="parent_mob_msg" style="color:red"></span>
 						<input type="text"  maxlength="10" required  id="parent_mob"  name="parent_mob" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Mother Name:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Mother Name:</label>
 					<div class="col-sm-8">
 						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100" required  id="mother_name" name="mother_name" class="form-control">
 					</div>
@@ -1149,9 +1149,9 @@ function validateImageE(id) {
 					</div>
 				</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Parent Scan Id:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Scan Id:</label>
 				<div class="col-sm-8">
-					<input type="text"  maxlength="100" id="parent_id" name="parent_id" class="form-control">
+					<input type="text" required  maxlength="100" id="parent_id" name="parent_id" class="form-control">
 				</div>
 			</div>
 			

@@ -383,7 +383,7 @@ $('#sel_section').change(function(){
 	<form id="comment1" method="post" enctype="multipart/form-data" >
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">   
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="sel_class" class="form-control" required >
 						<option></option>
@@ -394,21 +394,21 @@ $('#sel_section').change(function(){
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Sections:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Sections:</label>
 				<div class="col-sm-8">
 					<select name="section" id="sel_section" class="form-control" required > 
 					</select>
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Subject:</label>
 				<div class="col-sm-8">
 					<select name="subject" id="sel_sub" class="form-control" required > 
 					</select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" id="dt"  max="<?php echo date('Y-m-d');?>"  name="date" class="form-control" required >
 				</div>
@@ -454,7 +454,7 @@ $('#sel_section').change(function(){
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">   
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="classE" class="form-control" required > 
 						<?php foreach ($class_show as $row) { ?>
@@ -464,14 +464,14 @@ $('#sel_section').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Sections:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Sections:</label>
 				<div class="col-sm-8">
 					<select name="section" id="section" class="form-control" required > 
 					 </select>
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Subject:</label>
 				<div class="col-sm-8">
 					<select name="subject" id="subject" class="form-control" required > 
 					 
@@ -480,7 +480,7 @@ $('#sel_section').change(function(){
 			</div>
 	      
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" name="date" max="<?php echo date('Y-m-d');?>"  id="date" class="form-control" required >
 				</div>

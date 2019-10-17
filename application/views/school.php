@@ -337,26 +337,26 @@ function ValidateEmailE(v)
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Name:</label>
 				<div class="col-sm-8">
 					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required name="school_name" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Address:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Address:</label>
 				<div class="col-sm-8">
 					<input type="text" required name="school_address" class="form-control">
 				</div>
 			</div>
 					
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Mobile:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Mobile:</label>
 				<div class="col-sm-8"><span id="msg1m" style="color:red"></span>
 					<input type="text" maxlength="10"  required name="school_mobile" id="mobile1" onchange="phonenumber(this.value)" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Alternate Mobile:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Alternate Mobile:</label>
 				<div class="col-sm-8"> <span id="msg2m" style="color:red"></span>
 				<span id="msg21" style="color:red"></span>
 					<input type="text" maxlength="10"  required name="school_mobile2" onchange="phonenumbercheck(this.value)" class="form-control">
@@ -370,7 +370,7 @@ function ValidateEmailE(v)
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Mail:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Mail:</label>
 				<div class="col-sm-8"><span id="msg1" style="color:red"></span>
 					<input type="email" required name="school_mail" onchange="ValidateEmail(this.value)" id="smail" class="form-control">
 				</div>
@@ -414,26 +414,26 @@ function ValidateEmailE(v)
 			<section class="card"> 
 				<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Name:</label>
 				<div class="col-sm-8">
 					<input type="text" required id="school_name" name="school_name"  onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))'  class="form-control">
 					<input type="hidden" id="id" name="id" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Address:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Address:</label>
 				<div class="col-sm-8">
 					<input type="text" required id="school_address" name="school_address" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Mobile:</label> 
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Mobile:</label> 
 				<div class="col-sm-8"><span id="msg_e" style="color:red"></span>
 					<input type="text" maxlength="10"  required id="school_mobile"   name="school_mobile"  onchange="phonenumber_edit(this.value)"  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Alternate Mobile:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Alternate Mobile:</label>
 				<div class="col-sm-8"><span id="msg_e2" style="color:red"></span>
 				<span id="msg_e3" style="color:red"></span>
 					<input type="text" maxlength="10"  required name="school_mobile2" id="school_mobile2" onchange="phonenumbercheck_edit(this.value)"  class="form-control">
@@ -448,7 +448,7 @@ function ValidateEmailE(v)
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Mail:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Mail:</label>
 				<div class="col-sm-8"><span id="msg2" style="color:red"></span>
 					<input type="mail" required id="school_mail"  onchange="ValidateEmailE(this.value)" name="school_mail" class="form-control">
 				</div>

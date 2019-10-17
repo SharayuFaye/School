@@ -492,7 +492,7 @@ function del($id){
 	<form id="comment1" method="post" enctype="multipart/form-data" > 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select   name="class" id="class1"  class="form-control" required>
 					<option></option>
@@ -503,7 +503,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select   name="section" id="section1" class="form-control" required> 
 					</select>
@@ -512,7 +512,7 @@ function del($id){
 			
 			
 		    <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Roll No:</label>
 				<div class="col-sm-8"> 
 					<select   name="roll_no" id="roll_no1"  class="form-control" required>
 					<option></option>
@@ -524,32 +524,32 @@ function del($id){
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 				<div class="col-sm-8">
 					<input type="text" readonly name="student_name" id="student_name1" class="form-control" required>
 				</div>
 			</div>
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Annual Fees :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Annual Fees :</label>
 				<div class="col-sm-8">
 					<input type="number"  min="0" id="af" name="annual_fees" class="form-control" required>
 				</div>
 			</div>
 			
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Fees Paid:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Fees Paid:</label>
 				<div class="col-sm-8"><span id="err_m" style="color:red"></span>
 					<input type="number" required min="0" id="fp" name="fees_paid" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Due Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Due Date:</label>
 				<div class="col-sm-8">
 					<input type="date" id="dt" name="date"  max="<?php echo date('Y-m-d');?>" class="form-control"  required>
 				</div>
 			</div>
 	         <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type of payment:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type of payment:</label>
 				<div class="col-sm-8">
 					<input type="text" id="tp" name="type_payment" class="form-control"  required>
 				</div>
@@ -579,7 +579,7 @@ function del($id){
          <div class="modal-content" style="width: 155%;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right:  73%;">Edit Fees</h3>
+          <h3 class="modal-title" style="margin-right:  73%;">Edit Fees Details</h3>
         </div>
 		<div class="modal-body">         
 		       <div class="col-lg-12"> 
@@ -589,7 +589,7 @@ function del($id){
 	 <input type="hidden" name="id" id="id">
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="class2"  class="form-control"  required>
 					<option></option>
@@ -600,7 +600,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select name="section" id="section2" class="form-control" required> 
 						 
@@ -609,39 +609,39 @@ function del($id){
 			</div>
 			
 		    <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Roll No:</label>
 				<div class="col-sm-8"> 
 					<select name="roll_no" id="roll_no2"  class="form-control" required> 
 					</select> 
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 				<div class="col-sm-8">
 					<input type="text" readonly name="student_name" id="student_name2" class="form-control" required>
 				</div>
 			</div>
 				<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Annual Fees :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Annual Fees :</label>
 				<div class="col-sm-8">
 					<input type="number" min="0" name="annual_fees" id="annual_fees" class="form-control" required>
 				</div>
 			</div>
 			
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Fees Paid:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Fees Paid:</label>
 				<div class="col-sm-8"><span id="err_mE" style="color:red"></span>
-					<input type="number" min="0" name="fees_paid" id="fees_paid" class="form-control">
+					<input type="number" required min="0" name="fees_paid" id="fees_paid" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Due Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Due Date:</label>
 				<div class="col-sm-8">
 					<input type="date" name="date" id="date"  max="<?php echo date('Y-m-d');?>" class="form-control" required>
 				</div>
 			</div>
 	         <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type of payment:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type of payment:</label>
 				<div class="col-sm-8">
 					<input type="text" name="type_payment" id="type_payment" class="form-control" required>
 				</div>

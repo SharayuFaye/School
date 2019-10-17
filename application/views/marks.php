@@ -614,7 +614,7 @@ $('#mark').change(function(){
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select   name="class" id="class1"  class="form-control" required>
 					<option></option>
@@ -625,14 +625,14 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select   name="section" id="section1" class="form-control" required> 
 					</select>
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Exam Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Exam Type:</label>
 				<div class="col-sm-8">
 					<select name="exam_type" class="form-control" required >
 						<option></option>
@@ -644,7 +644,7 @@ $('#mark').change(function(){
 			</div>
 			
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				<div class="col-sm-8">
 					<select name="subject" id="sel_sub" class="form-control" required > 
 					</select>
@@ -660,7 +660,7 @@ $('#mark').change(function(){
 					</select>
 			<?php }else { ?>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Details:</label>
 				<div class="col-sm-8">
 					<select name="teacher_id" class="form-control" required >
 						<option></option>
@@ -672,7 +672,7 @@ $('#mark').change(function(){
 			</div>
 			<?php } ?>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Evaluation Type:</label>
 				<div class="col-sm-8">
 					<select name="evaluation_type" id="evaluation_type" class="form-control" required >
 						<option>Grade</option> 
@@ -683,14 +683,14 @@ $('#mark').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Total Marks:</label>
 				<div class="col-sm-8"><span id="err_m" style="color:red"></span>
-					<input type="number" name="out_of" id="of" class="form-control"   >
+					<input type="number" name="out_of" min="0" id="of" class="form-control"   >
 				</div>
 			</div>
 			
 			
 		
 		    <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Roll No:</label>
 				<div class="col-sm-8"> 
 					<select   name="roll_no" id="roll_no1"  class="form-control" required>
 					<option></option>
@@ -702,7 +702,7 @@ $('#mark').change(function(){
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 				<div class="col-sm-8">
 					<input type="text" readonly name="student_name" id="student_name1" class="form-control" required>
 					<input type="hidden"   name="students_id" id="students_id" class="form-control" required>
@@ -722,7 +722,7 @@ $('#mark').change(function(){
 
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Present/Absent:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Present/Absent:</label>
 				<div class="col-sm-8">
 					<select name="pa" id="pa" class="form-control" required >
 						<option>Present</option> 
@@ -731,7 +731,7 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Marks Obtained/Grade:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Marks Obtained/Grade:</label>
 				<div class="col-sm-8">
 					<input type="text" name="marks" id="m" class="form-control" required >
 				</div>
@@ -796,7 +796,7 @@ $('#mark').change(function(){
 	 
 		 <div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 		 <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="class2"  class="form-control"  required>
 					<option></option>
@@ -807,7 +807,7 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select name="section" id="section2" class="form-control" required> 
 						 
@@ -815,7 +815,7 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			  <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Exam Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Exam Type:</label>
 				<div class="col-sm-8">
 					<select name="exam_type" id="exam_type" class="form-control" required > 
 						<?php  foreach ($exam_type_show as $row) { ?>
@@ -825,7 +825,7 @@ $('#mark').change(function(){
 				</div>
 			</div> 
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				<div class="col-sm-8">
 					<select name="subject" id="subject" class="form-control" required > 
 					 
@@ -842,7 +842,7 @@ $('#mark').change(function(){
 					</select>
 			<?php }else { ?>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teacher Details:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Details:</label>
 				<div class="col-sm-8">
 					<select name="teacher_id" id="teacher"  class="form-control" required >
 						<option></option>
@@ -856,7 +856,7 @@ $('#mark').change(function(){
 			
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Evaluation Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Evaluation Type:</label>
 				<div class="col-sm-8">
 					<select name="evaluation_type" id="evaluation_type2" class="form-control" required >
 						<option>Grade</option> 
@@ -868,20 +868,20 @@ $('#mark').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Total Marks:</label>
 				<div class="col-sm-8"><span id="err_mE" style="color:red"></span>
-					<input type="number" name="out_of" id="outof" class="form-control"   >
+					<input type="number" name="out_of" min="0" id="outof" class="form-control"   >
 				</div>
 			</div>
 			
 			
 			 <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Roll No:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Roll No:</label>
 				<div class="col-sm-8"> 
 					<select name="roll_no" id="roll_no2"  class="form-control" required> 
 					</select> 
 				</div>
 			</div> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Student Name:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Student Name:</label>
 				<div class="col-sm-8">
 				<input type="hidden"   name="students_id" id="students_id2" class="form-control" required>
 					<input type="text" readonly name="student_name" id="student_name2" class="form-control" required>
@@ -891,7 +891,7 @@ $('#mark').change(function(){
 					<input type="hidden" name="date"  value="<?php echo date('Y-m-d');?>" max="<?php echo date('Y-m-d');?>" id="date" class="form-control" required >
 				 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Present/Absent:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Present/Absent:</label>
 				<div class="col-sm-8">
 					<select name="pa" id="pa2" class="form-control" required >
 						<option>Present</option> 
@@ -900,7 +900,7 @@ $('#mark').change(function(){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Marks Obtained/Grade:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Marks Obtained/Grade:</label>
 			 
 				<div class="col-sm-8">
 					<input type="text" name="marks" id="mark" class="form-control" required >

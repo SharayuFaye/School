@@ -229,26 +229,26 @@ $(document).ready(function(){
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username:</label>
 				<div class="col-sm-8">
 					<input type="mail" required name="username" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 				<div class="col-sm-8">
 					<input type="password" required id="password1" name="password" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
 					<input type="text" required id="confirm_password1" name="confirm_password" class="form-control">
 					<span id="msg1" style="color: red"></span>
 				</div>
 			</div>
 	       <div class="form-group row">
-			<label class="col-sm-4 control-label text-sm-right pt-2">School  :</label>
+			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 			<div class="col-sm-8"> 
 				<select name="school" required class="form-control">
 					<option></option>
@@ -292,19 +292,19 @@ $(document).ready(function(){
 	 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Username:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username:</label>
 				<div class="col-sm-8">
 					<input type="text" required readonly name="username" id="username" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 				<div class="col-sm-8">
 					<input type="password" required name="password" id="password" class="form-control">
 				</div>
 			</div> 
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
 					<input type="text" required id="confirm_password2" name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
@@ -312,7 +312,7 @@ $(document).ready(function(){
 			</div>
 			
 	       <div class="form-group row">
-			<label class="col-sm-4 control-label text-sm-right pt-2">School  :</label>
+			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 			<div class="col-sm-8"> 
 				<select name="school" required id="schoolid" class="form-control"> 
 					<?php  foreach ($school_show as $row) { ?>

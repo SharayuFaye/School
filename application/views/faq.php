@@ -158,7 +158,7 @@ function del($id){
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 		 
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Questions:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Questions:</label>
 				<div class="col-sm-8">
 					<input type="text" name="questions" class="form-control" required>
 				</div>
@@ -170,7 +170,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" name="date" class="form-control" required>
 				</div>
@@ -208,7 +208,7 @@ function del($id){
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 				 
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Questions:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Questions:</label>
 				<div class="col-sm-8">
 					<input type="text" id="questions" name="questions" class="form-control" required>
 				</div>
@@ -220,7 +220,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" id="date" name="date" class="form-control" required>
 				</div>

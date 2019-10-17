@@ -353,7 +353,7 @@ $(document).ready(function(){
 <?php echo form_open_multipart('Welcome/sel_route');?>  
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Route Name</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Route Name</label>
 				<div class="col-sm-8">
 					<input type="text" name="route" required class="form-control">
 				</div>
@@ -413,7 +413,7 @@ $(document).ready(function(){
 <input type="hidden" id="id" name="id" class="form-control">
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Route Name</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Route Name</label>
 				<div class="col-sm-8">
 					<input type="text" required id="routee" name="route" class="form-control">
 				</div>

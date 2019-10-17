@@ -405,7 +405,7 @@ function del($id){
 	 <?php echo form_open_multipart('Welcome/notifications');?> 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Role:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Role:</label>
 				<div class="col-sm-8">
 					<select name="role" id="role1" class="form-control" required>
 						<option></option>
@@ -453,20 +453,20 @@ function del($id){
 			
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Title:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Title:</label>
 				<div class="col-sm-8">
 					<input type="text" name="title" class="form-control"  required> 
 				</div>
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Message:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Message:</label>
 				<div class="col-sm-8">
 					<textarea name="message" class="form-control"  required></textarea> 
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Date  :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Date  :</label>
 				<div class="col-sm-8">
 					<input type="date" name="datetime"  max="<?php echo date('Y-m-d');?>" value="<?php echo date('Y-m-d');?>"  class="form-control" required>
 				</div>
@@ -506,7 +506,7 @@ function del($id){
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 		
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Role:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Role:</label>
 				<div class="col-sm-8">
 					<select name="role" id="role2" class="form-control" required> 
 						<option value="teacher">Teachers</option>
@@ -550,7 +550,7 @@ function del($id){
 			
 			 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Title:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Title:</label>
 				<div class="col-sm-8">
 					<input type="text" name="title" id="title" class="form-control"  required> 
 				</div>
@@ -560,13 +560,13 @@ function del($id){
 			
 			 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Message:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Message:</label>
 				<div class="col-sm-8">
 					<textarea name="message" id="message" class="form-control"  required></textarea> 
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" name="datetime" id="datetime"  max="<?php echo date('Y-m-d');?>"  class="form-control" required>
 				</div>

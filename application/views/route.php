@@ -261,20 +261,20 @@ $('#lattitude').change(function(){
 <?php echo form_open_multipart('Welcome/route');?>  
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Pickup point</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup point</label>
 				<div class="col-sm-8">
 					<input type="text" required name="pickup_point" maxlength="100" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Longitude</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Longitude</label>
 				<div class="col-sm-8"><span id="ld_msg" style="color:red"></span>
 					<input type="text" required name="longitude" id="ld" class="form-control" >
 				</div>
 			</div>
 	       
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Lattitude</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Lattitude</label>
 				<div class="col-sm-8"><span id="lt_msg" style="color:red"></span>
 					<input type="text" required name="lattitude" id="lt" class="form-control">
 				</div>
@@ -313,20 +313,20 @@ $('#lattitude').change(function(){
 	
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;">  
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Pickup Point</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup Point</label>
 				<div class="col-sm-8">
 					<input type="text" required name="pickup_point" id="pickup_point" class="form-control">
 				</div>
 			</div>	
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Longitude</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Longitude</label>
 				<div class="col-sm-8"><span id="longitude_msg" style="color:red"></span>
 					<input type="text" required id="longitude" name="longitude" class="form-control">
 				</div>
 			</div>
 	       
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Lattitude</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Lattitude</label>
 				<div class="col-sm-8"><span id="lattitude_msg" style="color:red"></span>
 					<input type="text" required id="lattitude" name="lattitude" class="form-control">
 				</div>

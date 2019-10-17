@@ -385,7 +385,7 @@ function del($id){
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;">
 		
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="class1"  class="form-control">
 					<option></option>
@@ -396,7 +396,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select name="section" id="section1" class="form-control"> 
 					</select>
@@ -405,7 +405,7 @@ function del($id){
 			
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Subject:</label>
 				<div class="col-sm-8">
 			 <select name="subject" id="subject1" class="form-control"> 
 					</select>
@@ -413,7 +413,7 @@ function del($id){
 			</div>
 	      
 			 <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type:</label>
 				<div class="col-sm-8">
 					<select name="exam_type" id="et" class="form-control">
 					<option></option>
@@ -424,7 +424,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" min="<?php echo date('Y-m-d');?>" name="date" id="dt" class="form-control">
 				</div>
@@ -471,7 +471,7 @@ function del($id){
 	 
 		    <div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select name="class" id="class2"  class="form-control"> 
 						<?php  foreach ($class_show as $row) { ?>
@@ -481,7 +481,7 @@ function del($id){
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<select name="section" id="section2" class="form-control">  
 					</select>
@@ -489,7 +489,7 @@ function del($id){
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Subject:</label>
 				<div class="col-sm-8">
 					 <select name="subject" id="subject2" class="form-control"> 
 					</select> 
@@ -497,7 +497,7 @@ function del($id){
 			</div>
 	      
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Type:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type:</label>
 				<div class="col-sm-8">
 					<select name="exam_type" id="type"  class="form-control">
 					<option></option>
@@ -508,7 +508,7 @@ function del($id){
 				</div>
 			</div>
 					<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
 				<div class="col-sm-8">
 					<input type="date" id="date" min="<?php echo date('Y-m-d');?>" name="date" class="form-control">
 				</div>

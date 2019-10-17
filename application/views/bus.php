@@ -410,7 +410,7 @@ $(document).on('click', '.rt', function(){
 <?php echo form_open_multipart('Welcome/bus');?> 
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Bus Number:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Bus Number:</label>
 				<div class="col-sm-8">
 					<input type="text" maxlength="100" required name="bus_number" class="form-control">
 				</div>
@@ -487,9 +487,9 @@ $(document).on('click', '.rt', function(){
 					<input type="hidden" id="id" name="id" class="form-control">
 		<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Bus Number:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Bus Number:</label>
 				<div class="col-sm-8">
-					<input type="text"  maxlength="100" id="bus_no" name="bus_number" class="form-control">
+					<input type="text"  maxlength="100" id="bus_no" name="bus_number" required class="form-control">
 				</div>
 			</div>
 <!-- 	        <div class="form-group row"> -->

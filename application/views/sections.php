@@ -237,7 +237,7 @@ function del($id){
 				</div>
 			</div> --> 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8"> 
 					<select  name="class"  id="class_sel" class="form-control">
 				 		<?php  foreach ($class_show as $row) { ?>
@@ -247,14 +247,14 @@ function del($id){
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<input type="text" name="sections" required maxlength="2" onkeyup="this.value = this.value.toUpperCase();" class="form-control">
 				</div>
 			</div> 
 			
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
 				 <div class="col-sm-8">
 					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
@@ -325,7 +325,7 @@ function del($id){
 	    </div>
 			
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
 					<select  name="teacher" required  class="form-control">
 					<option></option>
@@ -379,7 +379,7 @@ function del($id){
 				</div>
 			</div> -->
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Class:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
 					<select  name="class" id="class1" class="form-control">
 						<?php  foreach ($class_show as $row) { ?>
@@ -390,13 +390,13 @@ function del($id){
 			</div>
 
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Section:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
 					<input type="text" required id="section"  onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control">
 				</div>
 			</div>
 	      <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Subject:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
 				<div class="col-sm-8">
 					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
@@ -468,7 +468,7 @@ function del($id){
 	    </div>
 	    
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Teachers:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
 					<select  name="teacher" id="teacher_e" required class="form-control"> 
 				 		<?php  foreach ($teachers_show as $row) { ?>
