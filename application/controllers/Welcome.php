@@ -2599,6 +2599,7 @@ class Welcome extends CI_Controller {
             if($this->input->post('edit_homework')){
                 $id = $this->input->post('id') ;
                 
+                
                 if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
                     
                     $file_name  = 'homework_'.date('Y-m-d_h-i-s') ;
@@ -2620,10 +2621,16 @@ class Welcome extends CI_Controller {
                         $image = $data['upload_data']['file_name'];
                     }
                 }else{
-                    $homework_show_id   =$this->m_homework->homework_show_id($id);
-                    $image = $homework_show_id[0]->image;
+                    if($this->input->post('remove') == 'on'){ 
+                        $image = '';
+                    }else{
+                        $homework_show_id   =$this->m_homework->homework_show_id($id);
+                        $image = $homework_show_id[0]->image;
+                    }
                 }
                 
+                
+               // print_r($this->input->post('remove')); 
                 
                 
                 $class = $this->input->post('class') ;

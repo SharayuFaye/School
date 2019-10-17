@@ -550,7 +550,8 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8"> 
 					<input type="file" name="image"     class="form-control">
-					<label id="img1"></label> 	  
+					<label id="img1"></label>
+					<input type="checkbox" name="remove"> Remove File 
 <!-- 					<img src="img/logo.png"  id="img1"  width="35" height="35"   /> -->
 				</div>
 			</div> 											
