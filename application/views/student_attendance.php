@@ -234,6 +234,7 @@ echo build_html_calendar($year, $month, $events,$attendances_student_show,$leave
 				</section>
 			<?php include('include/footer.php');?>			
  
+<script src="<?php echo base_url(); ?>vendor/jquery/jquery.js"></script>
 <script src="<?php echo base_url(); ?>vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 <script src="<?php echo base_url(); ?>vendor/popper/umd/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/bootstrap/js/bootstrap.js"></script>
@@ -241,7 +242,8 @@ echo build_html_calendar($year, $month, $events,$attendances_student_show,$leave
 <script src="<?php echo base_url(); ?>vendor/common/common.js"></script>
 <script src="<?php echo base_url(); ?>vendor/nanoscroller/nanoscroller.js"></script>
 <script src="<?php echo base_url(); ?>vendor/magnific-popup/jquery.magnific-popup.js"></script>
-<script src="<?php echo base_url(); ?>vendor/jquery-placeholder/jquery-placeholder.js"></script> 
+<script src="<?php echo base_url(); ?>vendor/jquery-placeholder/jquery-placeholder.js"></script>
+
 <!-- Specific Page Vendor -->
 <script src="<?php echo base_url(); ?>vendor/select2/js/select2.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/media/js/jquery.dataTables.min.js"></script>
@@ -252,21 +254,24 @@ echo build_html_calendar($year, $month, $events,$attendances_student_show,$leave
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/Buttons-1.4.2/js/buttons.print.min.js"></script> 
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/JSZip-2.5.0//jszip.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/pdfmake.min.js"></script>
-<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script> 
+<script src="<?php echo base_url(); ?>vendor/datatables/extras/TableTools/pdfmake-0.1.32/vfs_fonts.js"></script>
+
 <!-- Theme Base, Components and Settings -->
-<script src="<?php echo base_url(); ?>js/theme.js"></script> 
+<script src="<?php echo base_url(); ?>js/theme.js"></script>
+
 <!-- Theme Custom -->
-<script src="<?php echo base_url(); ?>js/custom.js"></script> 
+<script src="<?php echo base_url(); ?>js/custom.js"></script>
+
 <!-- Theme Initialization Files -->
-<script src="<?php echo base_url(); ?>js/theme.init.js"></script> 
+<script src="<?php echo base_url(); ?>js/theme.init.js"></script>
+ 
 <!-- Examples<?php echo base_url(); ?> -->
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.default.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.row.with.details.js"></script>
 <script src="<?php echo base_url(); ?>js/examples/examples.datatables.tabletools.js"></script>
+	
  
- 
- <script>
-
+<script type="text/javascript">
  var d = document.getElementById("attendances");
  d.className += " nav-active";  
  var n = document.getElementById("nav1");

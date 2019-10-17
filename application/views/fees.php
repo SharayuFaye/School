@@ -386,6 +386,27 @@ $('#annual_fees').change(function(){
         	 }); 
      }); 
 
+
+     $('#roll_no2').change(function(){  
+         $("#student_name2 > option").remove();  
+         var roll_no1 = $('#roll_no2').val();  
+         var class1 = $('#class2').val();  
+         var section1 = $('#section2').val(); 
+        	 $.ajax({
+        		 type: "POST",
+        		 url: "<?php echo base_url(); ?>index.php/students_sel_fetch", 
+        		 data: { "roll_no": roll_no1, "class1": class1, "sections": section1 } ,
+                 datatype : "json",
+        		 success: function(classD)  
+        		 {   
+        			 var obj = $.parseJSON(classD); 
+        			 console.log(obj); 
+    				 $('#student_name2').val(obj[0].student_name);  
+    				 $('#af').val(obj[0].annual_fees);  
+        		 } 
+        	 }); 
+     }); 
+
      $('#class2').change(function(){  
          $("#section2 > option").remove();  
          var class2 = $('#class2').val();  
