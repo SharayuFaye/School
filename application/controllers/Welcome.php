@@ -2351,6 +2351,7 @@ class Welcome extends CI_Controller {
             
             $this->data['students_show'] = $this->m_students->students_show();
             $this->data['attendances_student_show'] = $this->m_attendances->attendances_student_show($student_id,$date);
+            $this->data['leaves_student_show'] = $this->m_attendances->leaves_student_show($student_id,$date);  
             $this->data['student_name'] =  $this->data['attendances_student_show'][0]->student_name;
            // print_r($this->data['attendances_student_show']);exit();
         }
@@ -2360,11 +2361,12 @@ class Welcome extends CI_Controller {
             $student_name = $this->input->post('student_name') ;
             $student_id = $this->input->post('student_id') ;
             $date = $this->input->post('date') ; 
-            $this->data['attendances_student_show'] = $this->m_attendances->attendances_student_show($student_id,$date);  
+            $this->data['attendances_student_show'] = $this->m_attendances->attendances_student_show($student_id,$date);
+            $this->data['leaves_student_show'] = $this->m_attendances->leaves_student_show($student_id,$date);  
             $this->data['student_name'] = $student_name;
             
         }
-        
+//         print_r($this->data['leaves_student_show']);exit();
         $this->data['student_id'] =  $student_id;
         $this->data['date'] =  $date;
         $this->load->view('student_attendance',$this->data);

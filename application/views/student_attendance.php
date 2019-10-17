@@ -75,7 +75,7 @@ td.calendar-day, td.calendar-day-np { width:120px; padding:5px; border-bottom:1p
 
 </style>
 <?php
-function build_html_calendar($year, $month, $events = null,$attendances_student_show) {
+function build_html_calendar($year, $month, $events = null,$attendances_student_show,$leaves_student_show) {
    // print_r($attendances_student_show);
     // CSS classes
     $css_cal = 'calendar';
@@ -142,7 +142,18 @@ function build_html_calendar($year, $month, $events = null,$attendances_student_
             if($attendance->date == $dt && $attendance->attendance == 'absent') {
                 $calendar .=" style='background-color: red;' ";
             }
+        }
+        
+        //print_r($leaves_student_show);exit();
+        if(isset($leaves_student_show[0])){
+        foreach($leaves_student_show as $leaves){
+            
+             $dt = $year.'-'.$month.'-'.$day1 ;
+            if($leaves->start_date <= $dt && $leaves->end_date >= $dt) {
+                $calendar .=" style='background-color: #276560;' ";
+            }
         } 
+        }
         $calendar .=">" . $day . "</div>";
         
         // Insert an event for this day
@@ -201,14 +212,15 @@ $date = DateTime::createFromFormat("Y-m", $date);
 $year = $date->format("Y");
 $month = $date->format("m");
 echo "<br>";
-echo build_html_calendar($year, $month, $events,$attendances_student_show);
+echo build_html_calendar($year, $month, $events,$attendances_student_show,$leaves_student_show);
 }
 ?> 
  <br>
  
- <div style="margin-left: 84%;">
+ <div style="margin-left: 74%;">
 <div  style="float: left"> <div class="box green" style="float: left" ></div>  &nbsp; Present &nbsp; &nbsp;</div>  
-<div  style="float: left"> <div class="box red" style="float: left" ></div>   &nbsp; Absent</div> 
+<div  style="float: left"> <div class="box red" style="float: left" ></div>   &nbsp; Absent &nbsp;  &nbsp; </div> 
+<div  style="float: left"> <div class="box" style="float: left ;background: #276560" ></div>   &nbsp; Leaves</div>
  </div>
 <!-- 			 			<div class="col-sm-4"> -->
 <!-- 					<div class="mb-3"> -->

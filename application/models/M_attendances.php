@@ -101,6 +101,21 @@ class m_attendances extends CI_Model {
         }
     }
     
+    
+    function leaves_student_show($student_id,$date){
+        
+        $this->db->select('s.student_name,s.id as stud_id,s.roll_number,a.*');
+        $this->db->from('leaves a');
+        $this->db->join('students s', 'a.student_id=s.id', 'left'); 
+        $this->db->where(array( 'a.student_id' => $student_id ))
+        ->where("DATE_FORMAT(start_date,'%Y-%m')", $date);
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+    }
     //App Functions
     
     
