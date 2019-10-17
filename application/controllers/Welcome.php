@@ -778,7 +778,7 @@ class Welcome extends CI_Controller {
             
             $this->data['school_show'] =$this->m_school->school_show();
             $this->data['teachers_show'] =$this->m_teachers->teachers_show();
-            $this->data['class_show'] =$this->m_class->class_show_id();
+            $this->data['class_show'] =$this->m_class->class_show_all();
             $this->data['sections_show'] =$this->m_sections->sections_show();
             $this->load->view('sections',$this->data);
         }

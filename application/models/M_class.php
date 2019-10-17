@@ -60,6 +60,16 @@ class m_class extends CI_Model {
 	        return $query->result();
 	    } 
     } 
-
+    
+    function class_show_all(){
+        $this->db->select('b.*');
+        $this->db->from('class b');
+        $this->db->order_by('b.class','asc'); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    } 
 }
 ?>
