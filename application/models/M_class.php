@@ -27,8 +27,8 @@ class m_class extends CI_Model {
     }
     function class_show(){ 
 
-	    $this->db->select('b.*');
-		$this->db->from('class b');    
+	    $this->db->select('b.class_id as class,b.class_id as id');
+		$this->db->from('sections b');    
 
 		$query = $this->db->get(); 
 		if($query)
@@ -50,9 +50,10 @@ class m_class extends CI_Model {
 
 
     function class_show_id(){ 
-	    $this->db->select("id,class"); 
-		$this->db->from('class');  
-		$this->db->order_by('class','asc'); 
+        $this->db->select('b.class_id as class,b.class_id as id'); 
+		$this->db->from('sections b');  
+		$this->db->order_by('b.class_id','asc');
+		$this->db->distinct('b.class_id'); 
 		$query = $this->db->get(); 
 		if($query)
 	    {
