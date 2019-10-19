@@ -62,10 +62,10 @@ class Welcome extends CI_Controller {
                 $this->data['attendances_count_today'] =count($this->m_attendances->attendances_percent_today());
                 
                 for($i=1;$i<=date('m');$i++){
-                    echo  $this->data['students_count'] =count($this->m_students->students_show());echo "&";
-                  echo   $attendances_count=count($this->m_attendances->attendances_percent($i));echo "<br>";
+                       $this->data['students_count'] =count($this->m_students->students_show()); 
+                      $attendances_count=count($this->m_attendances->attendances_percent($i)); 
                     if($attendances_count > 0){
-                echo        $this->data['attendances_count'][$i] = round( ($attendances_count / $this->data['students_count'])*100 );
+                         $this->data['attendances_count'][$i] = round( ($attendances_count / $this->data['students_count'])*100 );
                     }else{
                         $this->data['attendances_count'][$i] = 0;
                     }
@@ -73,7 +73,7 @@ class Welcome extends CI_Controller {
                 $this->data['teachers_count'] =count($this->m_teachers->teachers_show());
                 $this->data['drivers_count'] =count($this->m_drivers->drivers_show());
                 $this->load->view('dashboard',$this->data);
-            }exit();
+            } 
         } else{
             $this->load->view('login');
         }
