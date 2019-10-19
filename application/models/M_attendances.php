@@ -137,21 +137,42 @@ class m_attendances extends CI_Model {
     }
     
     
+    
     function attendances_percent($month){
         $date = date('Y');
         $from_date = $date .'-'.$month. '-01 00:00:00';
         $to_date = $date  .'-'.$month. "-31 00:00:00";
         
-        $this->db->select('a.*');
+        $this->db->select('a.students_id,s.id');
         $this->db->from('attendance a');
-        $this->db->join('students s', 'a.srudents_id=s.id', 'left');  
+        $this->db->join('students s', 'a.students_id=s.id', 'left');
+        $this->db->where(array( 'a.school_id' => $this->session->userdata['school'])); 
+        $this->db->where('a.date >=', $from_date);
+        $this->db->where('a.date <=', $to_date);
+        $this->db->where(array( 's.active' => 1));
+        $query = $this->db->get();
+//         print_r($query->result());
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    function attendances_percent_present($month){
+        $date = date('Y');
+        $from_date = $date .'-'.$month. '-01 00:00:00';
+        $to_date = $date  .'-'.$month. "-31 00:00:00";
+        
+        $this->db->select('a.students_id,s.id');
+        $this->db->from('attendance a');
+        $this->db->join('students s', 'a.students_id=s.id', 'left');  
         $this->db->where(array( 'a.school_id' => $this->session->userdata['school']));
         $this->db->where(array( 'a.attendance' => 'present' ));
         $this->db->where('a.date >=', $from_date);
         $this->db->where('a.date <=', $to_date);
         $this->db->where(array( 's.active' => 1));
         $query = $this->db->get();
-        
+//         print_r($query->result()); 
         if($query)
         {
             return $query->result();
