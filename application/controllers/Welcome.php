@@ -65,7 +65,7 @@ class Welcome extends CI_Controller {
                     echo  $this->data['students_count'] =count($this->m_students->students_show());echo "&";
                   echo   $attendances_count=count($this->m_attendances->attendances_percent($i));echo "<br>";
                     if($attendances_count > 0){
-                        $this->data['attendances_count'][$i] = round( ($this->data['students_count']/$attendances_count)*100 );
+                echo        $this->data['attendances_count'][$i] = round( ($attendances_count / $this->data['students_count'])*100 );
                     }else{
                         $this->data['attendances_count'][$i] = 0;
                     }
