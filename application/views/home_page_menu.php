@@ -279,7 +279,7 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
 					<select name="page_name" id="page_name"  required class="form-control">
-						<option>Notication</option>
+						<option>Notifications</option>
 						<option>Fees</option>
 						<option>Activity</option>
 						<option>Homework</option>
@@ -287,7 +287,11 @@ function del($id){
 						<option>Marks</option>
 						<option>Attendance</option>
 						<option>Timetable</option>
-						<option>Practises</option> 
+						<option>Practice</option> 
+						
+						<option>Leaves</option>
+						
+						<option>Bus ROutes</option> 
 					</select>
 				</div>
 			</div>
