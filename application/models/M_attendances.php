@@ -144,10 +144,12 @@ class m_attendances extends CI_Model {
         
         $this->db->select('a.*');
         $this->db->from('attendance a');
+        $this->db->join('students s', 'a.srudents_id=s.id', 'left');  
         $this->db->where(array( 'a.school_id' => $this->session->userdata['school']));
         $this->db->where(array( 'a.attendance' => 'present' ));
         $this->db->where('a.date >=', $from_date);
         $this->db->where('a.date <=', $to_date);
+        $this->db->where(array( 's.active' => 1));
         $query = $this->db->get();
         
         if($query)
