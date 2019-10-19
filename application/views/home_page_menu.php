@@ -196,19 +196,19 @@ function del($id){
 				<div class="col-sm-8">
 					<select name="page_name"  required class="form-control">
 						<option></option>
-						<option value="notification" >Notifications</option>
+						<option value="notification" >Notification</option>
 						<option value="fees" >Fees</option>
 						<option value="activity" >Activity</option>
 						<option value="homework" >Homework</option>
-						<option value="exam" >Exams</option>
-						<option value="mark" >Marks</option>
+						<option value="exam" >Exam</option>
+						<option value="mark" >Mark</option>
 						<option value="attendance" >Attendance</option>
 						<option value="timetable" >Timetable</option>
 						<option value="practice" >Practice</option> 
 						
-						<option value="leave" >Leaves</option>
+						<option value="leave" >Leave</option>
 						
-						<option value="busroute" >Busroutes</option> 
+						<option value="busroute" >Busroute</option> 
 					</select>
 				</div>
 			</div>
@@ -279,19 +279,19 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
 					<select name="page_name" id="page_name"  required class="form-control">
-							<option value="notification" >Notifications</option>
+							<option value="notification" >Notification</option>
 						<option value="fees" >Fees</option>
 						<option value="activity" >Activity</option>
 						<option value="homework" >Homework</option>
-						<option value="exam" >Exams</option>
-						<option value="mark" >Marks</option>
+						<option value="exam" >Exam</option>
+						<option value="mark" >Mark</option>
 						<option value="attendance" >Attendance</option>
 						<option value="timetable" >Timetable</option>
 						<option value="practice" >Practice</option> 
 						
-						<option value="leave" >Leaves</option>
+						<option value="leave" >Leave</option>
 						
-						<option value="busroute" >Busroutes</option> 
+						<option value="busroute" >Busroute</option> 
 					</select>
 				</div>
 			</div>
