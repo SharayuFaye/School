@@ -81,9 +81,9 @@ class m_home_page_menu extends CI_Model {
     function home_page_menu_show_app($school_id){
         
         
-        $this->db->select('s.school_name,b.*');
+        $this->db->select('b.*');
         $this->db->from('home_page_menu b');
-        $this->db->join('school s', 'b.school_id='.$school_id, 'left');
+        $this->db->where(array( 'b.school_id' => $school_id));
         $query = $this->db->get();
         
         if($query)
