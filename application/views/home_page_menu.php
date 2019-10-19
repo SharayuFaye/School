@@ -208,7 +208,7 @@ function del($id){
 						
 						<option value="leave" >Leaves</option>
 						
-						<option value="busroute" >BusRoutes</option> 
+						<option value="busroute" >Busroutes</option> 
 					</select>
 				</div>
 			</div>
@@ -291,7 +291,7 @@ function del($id){
 						
 						<option value="leave" >Leaves</option>
 						
-						<option value="busroute" >BusRoutes</option> 
+						<option value="busroute" >Busroutes</option> 
 					</select>
 				</div>
 			</div>
