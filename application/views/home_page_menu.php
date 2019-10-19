@@ -196,19 +196,19 @@ function del($id){
 				<div class="col-sm-8">
 					<select name="page_name"  required class="form-control">
 						<option></option>
-						<option>Notifications</option>
-						<option>Fees</option>
-						<option>Activity</option>
-						<option>Homework</option>
-						<option>Exams</option>
-						<option>Marks</option>
-						<option>Attendance</option>
-						<option>Timetable</option>
-						<option>Practice</option> 
+						<option value="notification" >Notifications</option>
+						<option value="fees" >Fees</option>
+						<option value="activity" >Activity</option>
+						<option value="homework" >Homework</option>
+						<option value="exam" >Exams</option>
+						<option value="mark" >Marks</option>
+						<option value="attendance" >Attendance</option>
+						<option value="timetable" >Timetable</option>
+						<option value="practice" >Practice</option> 
 						
-						<option>Leaves</option>
+						<option value="leave" >Leaves</option>
 						
-						<option>Bus Routes</option> 
+						<option value="bus_route" >Bus Routes</option> 
 					</select>
 				</div>
 			</div>
@@ -279,19 +279,19 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
 					<select name="page_name" id="page_name"  required class="form-control">
-						<option>Notifications</option>
-						<option>Fees</option>
-						<option>Activity</option>
-						<option>Homework</option>
-						<option>Exams</option>
-						<option>Marks</option>
-						<option>Attendance</option>
-						<option>Timetable</option>
-						<option>Practice</option> 
+							<option value="notification" >Notifications</option>
+						<option value="fees" >Fees</option>
+						<option value="activity" >Activity</option>
+						<option value="homework" >Homework</option>
+						<option value="exam" >Exams</option>
+						<option value="mark" >Marks</option>
+						<option value="attendance" >Attendance</option>
+						<option value="timetable" >Timetable</option>
+						<option value="practice" >Practice</option> 
 						
-						<option>Leaves</option>
+						<option value="leave" >Leaves</option>
 						
-						<option>Bus Routes</option> 
+						<option value="bus_route" >Bus Routes</option> 
 					</select>
 				</div>
 			</div>
