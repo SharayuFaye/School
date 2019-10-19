@@ -55,7 +55,21 @@ class Welcome extends CI_Controller {
                 $this->data['school_count'] =count($this->m_school->school_show());
                 $this->data['school_admin_count'] =count($this->m_school_admin->school_admin_show());
                 
-                $this->data['students_count'] =count($this->m_students->students_show());
+                
+                
+                $this->load->model('m_attendances');
+                
+                $this->data['attendances_count_today'] =count($this->m_attendances->attendances_percent_today());
+                
+                for($i=1;$i<=date('m');$i++){
+                    $this->data['students_count'] =count($this->m_students->students_show());
+                    $attendances_count=count($this->m_attendances->attendances_percent($i));
+                    if($attendances_count > 0){
+                        $this->data['attendances_count'][$i] = round( ($this->data['students_count']/$attendances_count)*100 );
+                    }else{
+                        $this->data['attendances_count'][$i] = 0;
+                    }
+                }
                 $this->data['teachers_count'] =count($this->m_teachers->teachers_show());
                 $this->data['drivers_count'] =count($this->m_drivers->drivers_show());
                 $this->load->view('dashboard',$this->data);
@@ -74,12 +88,24 @@ class Welcome extends CI_Controller {
             $this->load->model('m_teachers');
             $this->load->model('m_school_admin');
             $this->load->model('m_drivers');
+            $this->load->model('m_attendances');
+            
+            $this->data['attendances_count_today'] =count($this->m_attendances->attendances_percent_today());
+            
+            for($i=1;$i<=date('m');$i++){
+                $this->data['students_count'] =count($this->m_students->students_show());
+                $attendances_count=count($this->m_attendances->attendances_percent($i));   
+                if($attendances_count > 0){
+                      $this->data['attendances_count'][$i] = round( ($this->data['students_count']/$attendances_count)*100 );
+                }else{
+                      $this->data['attendances_count'][$i] = 0;
+                }
+            } 
             
             $this->data['school_count'] =count($this->m_school->school_show());
             $this->data['school_admin_count'] =count($this->m_school_admin->school_admin_show());
             
             $this->data['school_show'] =$this->m_school->school_show();
-            $this->data['students_count'] =count($this->m_students->students_show());
             $this->data['teachers_count'] =count($this->m_teachers->teachers_show());
             $this->data['drivers_count'] =count($this->m_drivers->drivers_show());
             

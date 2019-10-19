@@ -35,6 +35,7 @@ $(function(){
                 </div> 
 	<div class="row">
 	
+									 
 <?php   if( $this->session->userdata['role'] == 'school_admin'  ){ ?>  
 		<div class="col-lg-4 mb-3">
 			<section class="card">
@@ -57,15 +58,19 @@ $(function(){
 									<script>
 	
 										var flotDashSales1Data = [{
-										    data: [
-										        ["Jan", 140],
-										        ["Feb", 240],
-										        ["Mar", 190],
-										        ["Apr", 140],
-										        ["May", 180],
-										        ["Jun", 320],
-										        ["Jul", 270],
-										        ["Aug", 180]
+										    data: [     
+										    	["Jan", <?php if(isset($attendances_count[1])){ echo $attendances_count[1]; } ?>],
+										    	["Feb", <?php if(isset($attendances_count[2])){ echo $attendances_count[2]; } ?>],
+										    	["Mar", <?php if(isset($attendances_count[3])){ echo $attendances_count[3]; } ?>],
+										    	["Apr", <?php if(isset($attendances_count[4])){ echo $attendances_count[4]; } ?>],
+										    	["May", <?php if(isset($attendances_count[5])){ echo $attendances_count[5]; } ?>],
+										    	["Jun", <?php if(isset($attendances_count[6])){ echo $attendances_count[6]; } ?>],
+										    	["Jul", <?php if(isset($attendances_count[7])){ echo $attendances_count[7]; } ?>],
+										    	["Aug", <?php if(isset($attendances_count[8])){ echo $attendances_count[8]; } ?>],
+										    	["Sep", <?php if(isset($attendances_count[9])){ echo $attendances_count[9]; } ?>],
+										    	["Oct", <?php if(isset($attendances_count[10])){ echo $attendances_count[10]; } ?>],
+										    	["Nov", <?php if(isset($attendances_count[11])){ echo $attendances_count[11]; } ?>],
+										    	["Dec", <?php if(isset($attendances_count[12])){ echo $attendances_count[12]; } ?>]
 										    ],
 										    color: "#0088cc"
 										}];
@@ -124,7 +129,7 @@ $(function(){
 									<div class="summary">
 										<h4 class="title">Student present</h4>
 										<div class="info">
-											<strong class="amount">0</strong>
+											<strong class="amount"><?php echo $attendances_count_today ;?></strong>
 										</div>
 									</div> 
 								</div>

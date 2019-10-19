@@ -116,6 +116,47 @@ class m_attendances extends CI_Model {
             return $query->result();
         }
     }
+    
+    
+    
+    function attendances_percent_today(){  
+        
+          $date = date('Y-m-d') . " 00:00:00";
+        
+        $this->db->select('a.*');
+        $this->db->from('attendance a'); 
+        $this->db->where(array( 'a.school_id' => $this->session->userdata['school']));
+        $this->db->where(array( 'a.attendance' => 'present' ));
+        $this->db->where(array( 'a.date' => $date ));   
+        $query = $this->db->get();
+         
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    
+    function attendances_percent($month){
+        $date = date('Y');
+        $from_date = $date .'-'.$month. '-01 00:00:00';
+        $to_date = $date  .'-'.$month. "-31 00:00:00";
+        
+        $this->db->select('a.*');
+        $this->db->from('attendance a');
+        $this->db->where(array( 'a.school_id' => $this->session->userdata['school']));
+        $this->db->where(array( 'a.attendance' => 'present' ));
+        $this->db->where('a.date >=', $from_date);
+        $this->db->where('a.date <=', $to_date);
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+    }
+    
+    
     //App Functions
     
     

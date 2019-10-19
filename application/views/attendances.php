@@ -194,11 +194,8 @@ $(document).ready(function() {
 var d = document.getElementById("attendances");
 d.className += " nav-active";  
 var n = document.getElementById("nav1");
-n.className += " nav-expanded nav-active"; 
-
-
-$(document).ready(function(){
- 
+n.className += " nav-expanded nav-active";  
+$(document).ready(function(){  
     $('#classE').change(function(){  
     $("#section > option").remove();  
     var sel_class = $('#classE').val();  
