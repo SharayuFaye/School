@@ -63,7 +63,7 @@
 										<tr data-item-id="<?php echo $i;?>"> 
 											<td><?php echo $i;?></td> 
 											<td><?php echo $row->menu_name;?></td> 
-											<td><?php echo $row->page_name;?></td> 
+											<td><?php echo ucfirst($row->page_name);?></td> 
 											<td><?php echo $row->school_name;?></td> 
 									        <td class="actions">
 												<a href="#" class="on-default edit-row"><i onclick="edit(<?php echo $row->id;?>,'<?php echo $row->menu_name;?>','<?php echo $row->page_name;?>','<?php echo $row->school_id;?>' )" class="fa fa-pencil"></i></a>
@@ -208,7 +208,7 @@ function del($id){
 						
 						<option value="leave" >Leaves</option>
 						
-						<option value="bus_route" >Bus Routes</option> 
+						<option value="busroute" >BusRoutes</option> 
 					</select>
 				</div>
 			</div>
@@ -291,7 +291,7 @@ function del($id){
 						
 						<option value="leave" >Leaves</option>
 						
-						<option value="bus_route" >Bus Routes</option> 
+						<option value="busroute" >BusRoutes</option> 
 					</select>
 				</div>
 			</div>
