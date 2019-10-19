@@ -61,8 +61,8 @@ class Welcome extends CI_Controller {
                 
                 $this->data['attendances_count_today'] =count($this->m_attendances->attendances_percent_today());
                 
+                $this->data['students_count'] =count($this->m_students->students_show());
                 for($i=1;$i<=date('m');$i++){
-                       $this->data['students_count'] =count($this->m_students->students_show());
                        $attendances_count = count($this->m_attendances->attendances_percent($i)); 
                        $attendances_percent_present = count($this->m_attendances->attendances_percent_present($i)); 
                     if($attendances_count > 0){
