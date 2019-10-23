@@ -71,7 +71,7 @@
     if(isset($timetable['subject_mon'][$j]) &&  $timetable['subject_mon'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_mon'][$j] == $subject->subject ){
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_mon'][$j] ;  echo "<br>";
             echo "Time :";  ?>
@@ -86,7 +86,7 @@
     if(isset($timetable['subject_tue'][$j]) &&  $timetable['subject_tue'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_tue'][$j] == $subject->subject ){ 
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_tue'][$j] ;  echo "<br>";
             echo "Time :";  ?>
@@ -101,7 +101,7 @@
     if(isset($timetable['subject_wed'][$j]) &&  $timetable['subject_wed'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_wed'][$j] == $subject->subject ){
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_wed'][$j] ;  echo "<br>";
             echo "Time :";  ?>
@@ -116,7 +116,7 @@
     if(isset($timetable['subject_thu'][$j]) &&  $timetable['subject_thu'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_thu'][$j] == $subject->subject ){ 
-                echo "Class :";echo  $timetable['class']; echo "<br>";
+                echo "Class :";echo  $timetables->class; echo "<br>";
                 echo "Sec :"; echo $timetables->sections ;echo "<br>";
                 echo "Sub :";echo $timetable['subject_thu'][$j] ;  echo "<br>";
                 echo "Time :";  ?> 
@@ -131,7 +131,7 @@
     if(isset($timetable['subject_fri'][$j]) &&  $timetable['subject_fri'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_fri'][$j] == $subject->subject ){
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_fri'][$j] ;  echo "<br>";
             echo "Time :";  ?> 
@@ -146,7 +146,7 @@
     if(isset($timetable['subject_sat'][$j]) &&  $timetable['subject_sat'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_sat'][$j] == $subject->subject ){
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_sat'][$j] ;  echo "<br>";
             echo "Time :";  ?> 
@@ -161,7 +161,7 @@
     if(isset($timetable['subject_sun'][$j]) &&  $timetable['subject_sun'][$j]!=''){   
     foreach($subject_allocation as $subject){ 
         if($timetable['subject_sun'][$j] == $subject->subject ){
-            echo "Class :";echo  $timetable['class']; echo "<br>";
+            echo "Class :";echo  $timetables->class; echo "<br>";
             echo "Sec :"; echo $timetables->sections ;echo "<br>";
             echo "Sub :";echo $timetable['subject_sun'][$j] ;  echo "<br>";
             echo "Time :";  ?> 
