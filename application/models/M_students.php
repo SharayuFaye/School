@@ -106,11 +106,10 @@ class m_students extends CI_Model {
                     "updated_date"=>date('Y-m-d'),
                     "updated_by"=>$this->session->userdata['id'],
                 );
-                print_r($target);
-                print_r($user_id);
+//                 print_r($target);
                 $this->db->where(array( 'id' => $user_id));
              $q =   $this->db->update('users', $target);
-             print_r($q);exit();
+//             print_r($q);exit();
             $target = array(  	
     				"class_id" => $class ,
     				"sections_id" => $section,
@@ -140,10 +139,7 @@ class m_students extends CI_Model {
     	    
             $this->db->where(array( 'id' => $id));
     	   $query1 = $this->db->update('students', $target);
-    	  
-//     	   print_r($this->db->last_query());
-//     	   print_r($query1); 
-//     	   log_message('debug',$query1);
+    	   
     	   if($query1){ return true;  }else{ return false; }
         }
     }
