@@ -126,7 +126,7 @@ class m_students extends CI_Model {
         	       "updated_by"=>$this->session->userdata['id'],
     	   );
     	    
-    	   $this->db->where(array( 'id' => $id));
+            $this->db->where(array( 'users_id' => $user_id));
     	   $query1 = $this->db->update('students', $target);
     	   if($queryStud->num_rows() == 1){
     	       $target = array(
