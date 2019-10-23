@@ -484,6 +484,7 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token']; 
+        $student_id = $request['student_id']; 
         
         if ($token != '') {
             $users = $this->m_login->get_users($token);
@@ -491,7 +492,7 @@ class Api extends CI_Controller
             $students = $this->m_students->students_show_app($token);
 			log_message('debug',print_r($students, true));
             
-            $exams = $this->m_exams->exams_show_app($users[0]->school_id,$students[0]->class_id, $students[0]->sections_id);
+            $exams = $this->m_exams->exams_show_app($student_id);
             
             $d = explode('_',$token);
              $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -529,13 +530,14 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token'];
-         
+        $student_id = $request['student_id'];
+        
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             
             $students = $this->m_students->students_show_app($token);
             
-            $exam_type = $this->m_exam_type->exam_type_show_app($users[0]->school_id);
+            $exam_type = $this->m_exam_type->exam_type_show_app($student_id);
             
             $marks = $this->m_marks->marks_show_app($users[0]->school_id);
             
@@ -787,7 +789,7 @@ class Api extends CI_Controller
 //             $users = $this->m_login->get_users($token);
 //             $students = $this->m_students->students_show_app_id($token,$student_id);
              
-            $timetable = $this->m_timetables->timetables_show_app($students[0]->class_id,$students[0]->sections_id); 
+            $timetable = $this->m_timetables->timetables_show_app($student_id);
            log_message('debug',print_r($timetable, true)); 
             $d = explode('_',$token);
              $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
@@ -862,10 +864,11 @@ class Api extends CI_Controller
         $post_data = file_get_contents("php://input");
         $request = json_decode($post_data,true);
         $token = $request['token']; 
+        $student_id = $request['student_id']; 
          
         if ($token != '') {
             $users = $this->m_login->get_users($token);  
-            $activity = $this->m_activity->activity_show_app($users[0]->school_id);
+            $activity = $this->m_activity->activity_show_app($student_id);
             
             $month = date('m')  ;
             $year =  date('Y') ; 

@@ -63,7 +63,8 @@ class m_login extends CI_Model {
     function set_token($id,$token,$fcm_token){
          $this->db->select("*");
          $this->db->from('tokens');
-         $this->db->where(array( 'user_id' => $id));
+         $this->db->where(array( 'user_id' => $id,
+		 						 'fcm_token' => $fcm_token));
          $query = $this->db->get();
          if($query->num_rows() == 0){
              $target = array(
@@ -227,7 +228,7 @@ class m_login extends CI_Model {
 	}
 
 	function get_school($token){
-		$query = $this->db->select('s.school_name')
+		$query = $this->db->select('s.school_name,s.school_logo')
 						->from('school s')
 						->join('users u','u.school_id = s.id','left')
 						->join('tokens t', 't.user_id = u.id','left')

@@ -101,16 +101,13 @@ class m_exams extends CI_Model {
     
     //App Functions
     
-    function exams_show_app($school_id, $class_id, $sections_id){
+    function exams_show_app($student_id){
         
-        $this->db->select('*');
-        $this->db->from('exams'); 
-		$this->db->where(array(
-			'school_id' => $school_id,
-			'class_id' => $class_id,
-			'sections_id' => $sections_id
-		));
-        $this->db->order_by('date','desc');
+        $this->db->select('e.*')
+        	->from('exams e') 
+			->join('students s','s.sections_id = e.sections_id', 'left')
+			->where(array('s.id' => $student_id))
+        	->order_by('date','desc');
         
         $query = $this->db->get();
 		log_message('debug',$this->db->last_query());

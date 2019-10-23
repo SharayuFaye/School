@@ -98,14 +98,14 @@ class m_activity extends CI_Model {
     } 
     //App Functions
     
-    function activity_show_app($school_id){
-        $this->db->select('f.*,c.class ,sec.sections');
+    function activity_show_app($student_id){
+        $this->db->select('f.*');
         $this->db->from('activity f');
-        $this->db->join('class c', 'f.class_id=c.id', 'left'); 
-        $this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
-        $this->db->where(array( 'f.school_id' => $school_id ));
+		$this->db->join('students s', 's.sections_id = f.sections_id', 'left');
+        $this->db->where(array( 's.id' => $student_id ));
         
         $query = $this->db->get();
+		log_message('debug', $this->db->last_query());
         if($query)
         {
             return $query->result();
@@ -113,14 +113,13 @@ class m_activity extends CI_Model {
     }
 
 
-    function activity_show_week_app($school_id,$start,$end){
-        $this->db->select('f.*,c.class ,sec.sections');
+    function activity_show_week_app($student_id,$start,$end){
+        $this->db->select('f.*');
         $this->db->from('activity f');
-        $this->db->join('class c', 'f.class_id=c.id', 'left'); 
-        $this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
+		$this->db->join('students s', 's.sections_id = f.sections_id', 'left');
+        $this->db->where(array('s.id ' => $student_id));
         $this->db->where('f.date >=', $start);
         $this->db->where('f.date <=', $end);
-        $this->db->where(array( 'f.school_id' => $school_id ));
         
         $query = $this->db->get();
         if($query)

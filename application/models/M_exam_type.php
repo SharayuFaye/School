@@ -74,13 +74,14 @@ class m_exam_type extends CI_Model {
      
      //App Functions
      
-     function exam_type_show_app($school_id){
+     function exam_type_show_app($student_id){
          
-         $this->db->select("*");
-         $this->db->from('exam_type');
-         $this->db->where(array( 'school_id' =>$school_id));
+         $this->db->select("e.*");
+         $this->db->from('exam_type e');
+		 $this->db->join('students s', 's.school_id = e.school_id', 'left');
+         $this->db->where(array( 's.id' =>$student_id));
          $query = $this->db->get(); 
-          
+         
          if($query)
          {
              return $query->result();

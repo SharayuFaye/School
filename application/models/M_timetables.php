@@ -181,16 +181,13 @@ class m_timetables extends CI_Model {
     } 
     //App Functions
     
-    function timetables_show_app($class,$section){
+    function timetables_show_app($students_id){
         
         
-        $this->db->select('f.*,c.class,sec.sections');
+        $this->db->select('f.*');
         $this->db->from('timetable f');
-        $this->db->join('class c', 'f.class_id=c.id', 'left');
-        $this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
-        $this->db->where(array( 'f.class_id' => $class ));
-        $this->db->where(array( 'f.sections_id' => $section ));
-        
+        $this->db->join('students s', 's.sections_id = f.sections_id', 'left');
+        $this->db->where(array( 's.id' => $students_id ));
         
         $query = $this->db->get();
         if($query)
