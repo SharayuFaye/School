@@ -86,7 +86,8 @@ class m_students extends CI_Model {
         $query = $this->db->get();
         if($query->num_rows() == 0){ 
             
-            
+            log_message('debug',$id);
+            log_message('debug',$user_id);
             $this->db->select("*");
             $this->db->from('users');
             $this->db->where(array( 'id' => $user_id));
@@ -138,6 +139,7 @@ class m_students extends CI_Model {
             $this->db->where(array( 'id' => $id));
     	   $query1 = $this->db->update('students', $target);
     	   
+    	   log_message('debug',$query1);
     	   if($query1){ return true;  }else{ return false; }
         }
     }
