@@ -301,7 +301,7 @@ class m_sections extends CI_Model {
         $this->db->select('s.*');
         $this->db->from('sections s');
         $this->db->join('class c', 'c.id=s.class_id', 'left');
-        $this->db->where(array( 'c.class' => $class));
+        $this->db->where(array( 's.class_id' => $class));
         $this->db->where(array( 's.school_id' => $school_id)); 
         $query = $this->db->get();
         
