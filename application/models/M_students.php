@@ -78,12 +78,11 @@ class m_students extends CI_Model {
         
         $this->db->select("*");
         $this->db->from('students');
-        $this->db->where(array( 'roll_number' => $roll_number));
-        $this->db->where(array( 'class_id' => $class));
+        $this->db->where(array( 'roll_number' => $roll_number)); 
         $this->db->where(array( 'sections_id' => $section));
         $this->db->where(array( 'school_id' => $school));
         $this->db->where('id!=', $id);
-        $query = $this->db->get();
+        $query = $this->db->get(); print_r($query);
         if($query->num_rows() == 0){ 
             
             log_message('debug',$id);
