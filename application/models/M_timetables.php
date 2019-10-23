@@ -154,10 +154,11 @@ class m_timetables extends CI_Model {
      
     function timetables_my_class($teachers_id){
         
-        $this->db->select('f.id, f.details, f.class_id, f.sections_id, f.subject, f.school_id, f.date,sec.sections');
+        $this->db->select('f.id, f.details, f.class_id, f.sections_id, f.subject, f.school_id, f.date,sec.sections,c.class');
         $this->db->from('timetable f');
         $this->db->join('subject_allocation sub', 'sub.sections_id=f.sections_id', 'left');
         $this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
+        $this->db->join('class c', 'f.class_id=c.id', 'left');
         $this->db->where(array( 'f.school_id' => $this->session->userdata['school']));
         $this->db->where(array( 'sub.teachers_id' => $teachers_id  ));
         $this->db->distinct('f.id'); 
