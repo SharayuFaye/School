@@ -98,7 +98,16 @@ class m_students extends CI_Model {
             }else{
                 $password =$res[0]->password ;
             }
-            
+            if($queryStud->num_rows() == 1){
+                $target = array(
+                    "username" => $username,
+                    "password" => $password,
+                    "updated_date"=>date('Y-m-d'),
+                    "updated_by"=>$this->session->userdata['id'],
+                );
+                $this->db->where(array( 'id' => $user_id));
+                $this->db->update('users', $target);
+            }
             $target = array(  	
     				"class_id" => $class ,
     				"sections_id" => $section,
@@ -128,16 +137,7 @@ class m_students extends CI_Model {
     	    
             $this->db->where(array( 'users_id' => $user_id));
     	   $query1 = $this->db->update('students', $target);
-    	   if($queryStud->num_rows() == 1){
-    	       $target = array(
-    	           "username" => $username,
-    	           "password" => $password,
-    	           "updated_date"=>date('Y-m-d'),
-    	           "updated_by"=>$this->session->userdata['id'],
-    	       );
-    	       $this->db->where(array( 'id' => $user_id));
-    	       $this->db->update('users', $target);
-    	   }
+    	   
     	   if($query1){ return true;  }else{ return false; }
         }
     }
