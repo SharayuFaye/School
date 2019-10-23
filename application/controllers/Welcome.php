@@ -1454,7 +1454,7 @@ class Welcome extends CI_Controller {
                 $roll_number = $this->input->post('roll_number') ;
                 $batch = $this->input->post('batch') ;
                 $username = $this->input->post('username') ;
-                $password = $this->input->post('password') ;
+                $password = md5($this->input->post('password')) ;
                 // 	            $teacher = $this->input->post('teacher') ;
                 $bus = $this->input->post('bus') ;
                 $route = $this->input->post('route') ;
@@ -1513,7 +1513,7 @@ class Welcome extends CI_Controller {
                 $roll_number = $this->input->post('roll_number') ;
                 $batch = $this->input->post('batch') ;
                 $username = $this->input->post('username') ;
-                $password = $this->input->post('password') ;
+                $password = md5($this->input->post('password') );
                 // 	            $teacher = $this->input->post('teacher') ;
                 $bus = $this->input->post('bus') ;
                 $route = $this->input->post('route') ;

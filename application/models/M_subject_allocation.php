@@ -64,9 +64,10 @@ class m_subject_allocation extends CI_Model {
         }
     }
     function subject_allocation_show(){   
-	    $this->db->select('b.*,sub.subject,s.sections,s.class_id,t.teacher_name');
+	    $this->db->select('b.*,sub.subject,s.sections,s.class_id,c.class,t.teacher_name');
 		$this->db->from('subject_allocation b');   
-	    $this->db->join('sections s', 'b.sections_id=s.id', 'left');
+		$this->db->join('sections s', 'b.sections_id=s.id', 'left');
+		$this->db->join('class c', 'c.id=b.class_id', 'left');
 	    $this->db->join('subject sub', 'b.subject_id=sub.id', 'left');
 	    $this->db->join('teachers t', 'b.teachers_id=t.id', 'left');
 	    $this->db->where(array( 'b.school_id' => $this->session->userdata['school'])); 

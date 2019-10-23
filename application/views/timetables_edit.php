@@ -65,7 +65,7 @@
 					<select name="class" id="sel_class" class="form-control" required >
 						<option></option>
 						<?php foreach ($class_show as $row) { ?>
-							<option <?php if($timetables_show[0]->class == $row->id){  echo "selected" ; }?>   value="<?php echo $row->id;?>"> <?php echo $row->class;?> </option> 
+							<option <?php if($timetables_show[0]->class == $row->class){  echo "selected" ; }?>   value="<?php echo $row->id;?>"> <?php echo $row->class;?> </option> 
 						<?php  }?> 
 					</select>
 				</div>

@@ -27,8 +27,10 @@ class m_class extends CI_Model {
     }
     function class_show(){ 
 
-	    $this->db->select('b.class_id as class,b.class_id as id');
-		$this->db->from('sections b');    
+	    $this->db->select('c.class as class,b.class_id as id');
+	    $this->db->from('sections b');
+	    $this->db->join('class c', 'c.id=b.class_id', 'left');
+	    $this->db->order_by('c.id','asc');
 
 		$query = $this->db->get(); 
 		if($query)
@@ -50,8 +52,9 @@ class m_class extends CI_Model {
 
 
     function class_show_id(){ 
-        $this->db->select('b.class_id as class,b.class_id as id'); 
-		$this->db->from('sections b');  
+        $this->db->select('c.class as class,b.class_id as id'); 
+        $this->db->from('sections b');
+        $this->db->join('class c', 'c.id=b.class_id', 'left'); 
 		$this->db->order_by('b.class_id','asc');
 		$this->db->distinct('b.class_id'); 
 		$query = $this->db->get(); 
@@ -64,7 +67,7 @@ class m_class extends CI_Model {
     function class_show_all(){
         $this->db->select('b.*');
         $this->db->from('class b');
-        $this->db->order_by('b.class','asc'); 
+        $this->db->order_by('b.id','asc'); 
         $query = $this->db->get();
         if($query)
         {

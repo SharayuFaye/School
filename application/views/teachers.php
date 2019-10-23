@@ -215,8 +215,8 @@ function edit($id,$users_id,$teacher_name,$teacher_address,$teacher_mobile,$teac
 	document.getElementById("profile").src = '<?php echo base_url(); ?>profile/'+$profile;
 	$('#teacher_mail').val($teacher_mail);
 	$('#username').val($username);
-	$('#password').val($password);
-	$('#confirm_password2').val($password);
+// 	$('#password').val($password);
+// 	$('#confirm_password2').val($password);
 	$('#salary_details').val($salary_details);
 	$('#education_details').val($education_details);
 	// $('#class').val($class); 
@@ -434,13 +434,13 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password" id="password1" name="password"  required required class="form-control">
+					<input type="password" id="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="password"  required required class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msg1" style="color: red"></span>
-					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password1"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
@@ -567,15 +567,15 @@ $(document).ready(function(){
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password"   required   name="password" class="form-control">
+					<input type="password"   id="password"   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"      name="password" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>

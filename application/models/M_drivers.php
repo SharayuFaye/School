@@ -8,7 +8,7 @@ class m_drivers extends CI_Model {
 	    if($query->num_rows() == 0){
 	        $target = array(
 	            "username" => $username,
-	            "password" => $password,
+	            "password" => md5($password),
 	            "school_id"=>  $this->session->userdata['school'],
 	            "role"=>  'driver',
                 "created_date"=>date('Y-m-d'),
@@ -65,6 +65,13 @@ class m_drivers extends CI_Model {
     	   $this->db->from('users');
     	   $this->db->where(array( 'id' => $user_id));
     	   $query = $this->db->get();
+    	   $res = $query->result();
+    	   
+    	   if(md5($password) != $res[0]->password && $password !=''){
+    	       $password = md5($this->input->post('password') );
+    	   }else{
+    	       $password =$res[0]->password ;
+    	   }
     	   if($query->num_rows() == 1){
     	       $target1 = array(
     	           "username" => $username,
@@ -138,7 +145,7 @@ class m_drivers extends CI_Model {
             if($query->num_rows() == 0){
                 $target = array(
                     "username" => $row['username'],
-                    "password" => $row['password'],
+                    "password" => md5($row['password']),
                     "school_id"=>  $this->session->userdata['school'],
                     "role"=>  'driver',
                     "created_date"=>date('Y-m-d'),

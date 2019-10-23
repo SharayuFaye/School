@@ -86,7 +86,7 @@
 									<tbody>
 										<?php $i=1; foreach ($subject_allocation_show as $row) { ?>
 										<tr data-item-id="1">  
-											<td><?php echo $row->class_id;?></td>  
+											<td><?php echo $row->class;?></td>  
 											<td><?php echo $row->sections;?></td>  
 											<td><?php echo $row->subject;?></td> 
 											<td><?php echo $row->teacher_name;?></td> 
@@ -260,13 +260,14 @@ $('#section1').change(function(){
 	                   	console.log(object);
 
 	                	var strArray = object['subject'].split(","); 
-	                 
+
+	                    var opt =  '<option></option>';
 	                    for(var i = 0; i < strArray.length; i++){  
-    	               		 var opt = $('<option />');  
-    	    				 opt.val(strArray[i]);
-    	    				 opt.text(strArray[i]);
-    	    				 $('#subject1').append(opt); 
+	                     
+	                    	opt +='<option value="'+strArray[i]+'">'+strArray[i]+'</option> ';  
+	                           
 	                    }
+	                    $('#subject1').html(opt);
 	               }) 
 			 } 
 		 }); 
@@ -319,13 +320,15 @@ $('#section2').change(function(){
 	                   	console.log(object);
 
 	                	var strArray = object['subject'].split(","); 
-	                 
+	                  
+
+	                    var opt =  '<option></option>';
 	                    for(var i = 0; i < strArray.length; i++){  
-    	               		 var opt = $('<option />');  
-    	    				 opt.val(strArray[i]);
-    	    				 opt.text(strArray[i]);
-    	    				 $('#subject2').append(opt); 
+	                     
+	                    	opt +='<option value="'+strArray[i]+'">'+strArray[i]+'</option> ';  
+	                           
 	                    }
+	                    $('#subject2').html(opt);
 	               }) 
 			 } 
 		 }); 

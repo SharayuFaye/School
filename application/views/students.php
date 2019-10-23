@@ -269,8 +269,8 @@ function edit($id,$users_id ,$class_id ,$section,$sections_id ,$student_name,$do
 	$('#student_batch').val($batch);
 // 	$('#teacher').val($teachers_id); 
 	$('#username').val($username);  
-	$('#password').val($password); 
-	$('#confirm_password2').val($password); 
+// 	$('#password').val($password); 
+// 	$('#confirm_password2').val($password); 
 	
 	$('#parent_name').val($parent_name);
 	$('#parent_mob').val($parent_mob);
@@ -308,7 +308,6 @@ function del($id){
 }
 
 
-
 function ValidateEmail(v)
 { 
     document.getElementById("save1").disabled = false;
@@ -323,10 +322,12 @@ function ValidateEmail(v)
 }
 
 
-function ValidateEmailE(v)
-{ 
+$(document).ready(function() {
+
+
+ $('#username').change(function(){ 
     document.getElementById("save2").disabled = false;
-	var val = v; console.log(val);
+	var val = $('#username').val() ; console.log(val);
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)) {
 		$('#msg2').html(''); 
 	} else { 
@@ -334,8 +335,8 @@ function ValidateEmailE(v)
 	    $('#msg2').html(msg); 
 	     document.getElementById("save2").disabled = true; 
 	}
-}
-
+});
+});
 
 function validateImage(id) {
     var formData = new FormData();
@@ -926,13 +927,13 @@ function validateImageE(id) {
 					<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 					<div class="col-sm-8">
-						<input type="password"  maxlength="100" id="pwd" required name="password" class="form-control">
+						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd" required name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
-					<input type="text" id="confirm_password1" required  name="confirm_password" class="form-control">
+					<input type="text"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="confirm_password1" required  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
@@ -1105,15 +1106,15 @@ function validateImageE(id) {
 					</div>
 				</div>
 					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"> Password:</label>
 					<div class="col-sm-8">
-						<input type="password" required maxlength="100"  id="password" name="password" class="form-control">
+						<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"  id="password" name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text" id="confirm_password2" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
 					<span id="msgp2" style="color: red"></span>
 				</div>
 			</div>

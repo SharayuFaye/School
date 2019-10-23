@@ -72,9 +72,10 @@ class m_marks extends CI_Model {
         }
     }
     function marks_show(){  
-		$this->db->select('s.student_name,s.roll_number,f.*,t.teacher_name,ex.type,sec.sections');
+		$this->db->select('s.student_name,s.roll_number,f.*,t.teacher_name,ex.type,sec.sections,c.class');
 		$this->db->from('marks f');
 		$this->db->join('sections sec', 'f.sections_id=sec.id', 'left');
+		$this->db->join('class c', 'c.id=sec.class_id', 'left');
 		$this->db->join('students s', 'f.students_id=s.id', 'left');
 		$this->db->join('teachers t', 'f.teacher_id=t.id', 'left');
 		$this->db->join('exam_type ex', 'f.exam_type_id=ex.id', 'left'); 

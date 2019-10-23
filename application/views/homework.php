@@ -320,7 +320,7 @@ function del($id){
                     	 var opt = $('<option />');  
 						 opt.val(object['id']);
 						 opt.text(object['sections']);
-						 $('#section').html(opt); 
+						 $('#section').append(opt); 
                 }) 
 		 } 
 	 }); 

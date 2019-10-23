@@ -95,7 +95,7 @@
 <?php if(isset($timetables_show[0])){ $timetable = json_decode($timetables_show[0]->details, True) ;  
 $week =array('mon','tue','wed','thu','fri','sat','sun');
  ?> 
- Class : <?php echo $timetable['class'] ; ?> <br>Section :  <?php echo $timetables_show[0]->sections ; ?> 
+ Class : <?php echo $timetables_show[0]->class ; ?> <br>Section :  <?php echo $timetables_show[0]->sections ; ?> 
 				<table class="table table-responsive-md table-striped  table-bordered  mb-0" >
 					<thead>
 						<tr>

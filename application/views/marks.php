@@ -72,7 +72,7 @@
 	<?php $i=1; foreach ($marks_show as $row) { ?>
     					<tr data-item-id="<?php echo $i;?>">
     						<td><?php echo $i;?></td> 
-    						<td><?php echo $row->class_id;?></td> 
+    						<td><?php echo $row->class;?></td> 
     						<td><?php echo $row->sections;?></td> 
     						<td><?php echo $row->type;?></td> 
     						<td><?php echo $row->subject;?></td> 
@@ -473,13 +473,17 @@ $('#section1').change(function(){
 	                   	console.log(object);
 
 	                	var strArray = object['subject'].split(","); 
-	                 
+
+	                    var opt =  '<option></option>';
 	                    for(var i = 0; i < strArray.length; i++){  
-    	               		 var opt = $('<option />');  
-    	    				 opt.val(strArray[i]);
-    	    				 opt.text(strArray[i]);
-    	    				 $('#sel_sub').append(opt); 
+	                     
+	                    	opt +='<option value="'+strArray[i]+'">'+strArray[i]+'</option> ';  
+	                           
 	                    }
+	                    $('#sel_sub').html(opt);
+
+	                    
+	                     
 	               }) 
 			 } 
 		 }); 
@@ -505,13 +509,14 @@ $('#section2').change(function(){
                   	console.log(object);
 
                	var strArray = object['subject'].split(","); 
-                
-                   for(var i = 0; i < strArray.length; i++){  
-	               		 var opt = $('<option />');  
-	    				 opt.val(strArray[i]);
-	    				 opt.text(strArray[i]);
-	    				 $('#subject').append(opt); 
-                   }
+
+                var opt =  '<option></option>';
+                for(var i = 0; i < strArray.length; i++){  
+                 
+                	opt +='<option value="'+strArray[i]+'">'+strArray[i]+'</option> ';  
+                       
+                }
+                $('#subject').html(opt); 
               }) 
 		 } 
 	 }); 

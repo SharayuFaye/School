@@ -85,6 +85,20 @@ class m_students extends CI_Model {
         $this->db->where('id!=', $id);
         $query = $this->db->get();
         if($query->num_rows() == 0){ 
+            
+            
+            $this->db->select("*");
+            $this->db->from('users');
+            $this->db->where(array( 'id' => $user_id));
+            $queryStud = $this->db->get();
+            $res = $queryStud->result();
+            
+            if(md5($password) != $res[0]->password && $password !=''){
+                $password = md5($this->input->post('password') );
+            }else{
+                $password =$res[0]->password ;
+            }
+            
             $target = array(  	
     				"class_id" => $class ,
     				"sections_id" => $section,
@@ -114,11 +128,7 @@ class m_students extends CI_Model {
     	    
     	   $this->db->where(array( 'id' => $id));
     	   $query1 = $this->db->update('students', $target);
-    	   $this->db->select("*");
-    	   $this->db->from('users');
-    	   $this->db->where(array( 'id' => $user_id));
-    	   $query = $this->db->get();
-    	   if($query->num_rows() == 1){
+    	   if($queryStud->num_rows() == 1){
     	       $target = array(
     	           "username" => $username,
     	           "password" => $password,
@@ -275,7 +285,7 @@ class m_students extends CI_Model {
             if($query->num_rows() == 0){
                 $target = array(
                     "username" => $row['username'],
-                    "password" => $row['password'],
+                    "password" => md5($row['password']),
                     "school_id"=>  $this->session->userdata['school'],
                     "role"=>  'student',
                     "created_date"=>date('Y-m-d'),
@@ -331,7 +341,7 @@ class m_students extends CI_Model {
                             "roll_number" => $row['roll_number'],
                             "batch"=>  $row['batch'],
                             "username"=>  $row['username'],
-                            "password"=>  $row['password'],
+                            "password"=>  md5($row['password']),
                             "join_date" => $row['join_date'],
                             "school_id"=> $this->session->userdata['school'],
                             "created_date"=>date('Y-m-d'),

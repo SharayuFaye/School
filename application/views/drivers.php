@@ -199,7 +199,7 @@ function edit($id,$users_id,$drivers_name,$drivers_address,$drivers_mobile,$user
 	$('#drivers_address').val($drivers_address);  
 	$('#drivers_mobile').val($drivers_mobile);  
 	$('#username').val($username);
-	$('#password').val($password);
+// 	$('#password').val($password);
 	$('#join_date').val($join_date);    
 	$('#editrow').modal('show'); 
 }
@@ -289,7 +289,7 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"  name="password" required class="form-control">
+					<input type="password"  name="password" required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			
@@ -360,7 +360,7 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password" required  name="password" class="form-control">
+					<input type="password"   id="password"    name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			

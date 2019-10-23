@@ -10,7 +10,7 @@ class m_school_admin extends CI_Model {
 		if($query->num_rows() == 0){
 		    $target = array(  	
 		        "username"=>$username,
-		        "password"=>$password,
+		        "password"=>md5($password),
 				"school_id"=>$school_id,
 		        "role"=>$role,
 		        "created_date"=>date('Y-m-d'),
@@ -27,6 +27,20 @@ class m_school_admin extends CI_Model {
             $this->db->where(array( 'school_id' => $school_id));
             $this->db->where('id!=', $id);
             $query = $this->db->get();
+            
+            
+            $this->db->select("*");
+            $this->db->from('users');
+            $this->db->where(array( 'role' => 'school_admin'));
+            $this->db->where(array( 'school_id' => $school_id));
+            $this->db->where('id', $id);
+            $queryStud = $this->db->get();
+            $res = $queryStud->result();
+            if(md5($password) != $res[0]->password && $password !=''){
+                $password = md5($this->input->post('password') );
+            }else{
+                $password =$res[0]->password ;
+            }
             
             if($query->num_rows() == 0){
                 $target = array(  	 

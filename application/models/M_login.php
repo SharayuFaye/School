@@ -4,7 +4,13 @@ class m_login extends CI_Model {
 		$this->db->select("t.*, u.*"); 
 		$this->db->from('users u'); 
 		$this->db->join('tokens t','t.user_id = u.id', 'left');
-        $this->db->where(array( 'u.username' => $username, 'u.password'=> $password));
+		
+		if($username == 'admin'){
+		    $this->db->where(array( 'u.username' => $username, 'u.password'=> $password));
+		}else{
+		    $this->db->where(array( 'u.username' => $username, 'u.password'=> md5($password)));
+		}
+		
 		$query = $this->db->get();  
 		
 		if($query->num_rows() == 0){
@@ -23,7 +29,7 @@ class m_login extends CI_Model {
         $this->db->select("t.*, u.*");
         $this->db->from('users u');
 		$this->db->join('tokens t','t.user_id = u.id', 'left');
-        $this->db->where(array( 'u.username' => $username, 'u.password'=> $password));
+		$this->db->where(array( 'u.username' => $username, 'u.password'=>  md5($password)));
         $this->db->where( array( 't.token' => '', 't.fcm_token'=>'' ));  
         //$this->db->where( array( 'fcm_token' => '' ));   
         $query = $this->db->get();
@@ -122,7 +128,7 @@ class m_login extends CI_Model {
         $this->db->from('users u');
 		$this->db->join('tokens t','t.user_id = u.id','left');
         $this->db->where(array( 't.token' => $token));
-        $this->db->where(array( 'u.password' => $old_password));
+        $this->db->where(array( 'u.password' => md5($old_password) ));
         $query = $this->db->get();
 		log_message('debug',$this->db->last_query());
         if($query->num_rows() > 0){
@@ -158,7 +164,7 @@ class m_login extends CI_Model {
 						->result();
 		log_message('debug',$user[0]->username);
         $target = array(
-            "password" => $password
+            "password" =>  md5($password)
         );
         $this->db->where(array('username' => $user[0]->username));
         $this->db->update('users', $target);
@@ -173,7 +179,7 @@ class m_login extends CI_Model {
 		log_message('debug', $this->db->last_query());
 		if($query->num_rows() > 0){
         	$target = array(
-        	    "password" => $password
+        	    "password" =>  md5($password)
         	);
         	$this->db->where(array( 'username' => $username));
         	$this->db->update('users', $target);
