@@ -106,7 +106,8 @@ class m_students extends CI_Model {
                     "updated_date"=>date('Y-m-d'),
                     "updated_by"=>$this->session->userdata['id'],
                 );
-                 print_r($target);
+                print_r($target);
+                print_r($user_id);
                 $this->db->where(array( 'id' => $user_id));
              $q =   $this->db->update('users', $target);
              print_r($q);exit();
