@@ -142,7 +142,7 @@ class m_students extends CI_Model {
     	   $query1 = $this->db->update('students', $target);
     	  
     	   print_r($this->db->last_query());
-    	   print_r($query1);exit();
+    	   print_r($query1); 
     	   log_message('debug',$query1);
     	   if($query1){ return true;  }else{ return false; }
         }
