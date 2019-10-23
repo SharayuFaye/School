@@ -98,7 +98,7 @@ class m_students extends CI_Model {
             }else{
                 $password =$res[0]->password ;
             }
-            if($queryStud->num_rows() == 1){
+            if($res){
                 $target = array(
                     "username" => $username,
                     "password" => $password,
