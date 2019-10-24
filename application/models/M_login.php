@@ -5,6 +5,8 @@ class m_login extends CI_Model {
 		$this->db->from('users u'); 
 		$this->db->join('tokens t','t.user_id = u.id', 'left');
 		
+		log_message('debug',$username . " :: ". $password);
+		log_message('debug',$username . " :: ". md5($password));
 		if($username == 'admin'){
 		    $this->db->where(array( 'u.username' => $username, 'u.password'=> $password));
 		}else{

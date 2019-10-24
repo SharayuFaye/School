@@ -1255,9 +1255,17 @@ class Api extends CI_Controller
         if ($token != '') {
             $users = $this->m_login->get_users($token);
             $attendance = $this->m_attendances->attendance_app($class,$section,$date,$teacher_id,$users[0]->school_id);
+			$leaves = $this->m_attendances->get_leaves_by_date($section, $date);
+			log_message('debug', print_r($leaves, true));
 			foreach($attendance as $a){
 				if(!isset($a->attendance)){
-					$a->attendance = null;
+					foreach($leaves as $l){
+						if($l->student_id == $a->id && $l->status != "rejected"){
+							$a->attendance = "Leave";
+						}else{
+							$a->attendance = null;
+						}
+					}
 					$recorded = false;
 				}else{
 					$recorded = true;
@@ -1519,14 +1527,14 @@ class Api extends CI_Controller
 		foreach($data as $d){
 			if($d->status == "pending"){
 				if(!array_key_exists($d->sec, $cons)){
-					$cons[$d->sec] = array($d->class_id, $d->sections, 1);
+					$cons[$d->sec] = array($d->class, $d->sections, 1);
 				}else{
 					$pending = $cons[$d->sec][2] + 1;
-					$cons[$d->sec] = array($d->class_id, $d->sections, $pending);
+					$cons[$d->sec] = array($d->class, $d->sections, $pending);
 				}
 			}else{
 				if(!array_key_exists($d->sec, $cons)){
-					$cons[$d->sec] = array($d->class_id, $d->sections, 0);
+					$cons[$d->sec] = array($d->class, $d->sections, 0);
 				}
 			}	
 			$d->days = round(($d->end_date - $d->start_date)/(60*60*24)) + 1;

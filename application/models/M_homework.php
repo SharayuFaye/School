@@ -125,9 +125,10 @@ class m_homework extends CI_Model {
 
 	/*Get the homework set by the teacher*/
 	function get_teacher_hw($teacher_id){
-		$query = $this->db->select('h.*, s.sections')
+		$query = $this->db->select('h.*, s.sections, c.class')
 						->from('homework h')
 						->join('sections s', 'h.sections_id = s.id','left')
+						->join('class c', 'c.id = h.class_id','left')
 						->where(array('h.teacher_id' => $teacher_id))
 						->order_by('h.id','desc')
 						->get();

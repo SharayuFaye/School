@@ -314,11 +314,23 @@ class m_attendances extends CI_Model {
 				->result();
 	}
 
+	function get_leaves_by_date($section, $date){
+		return $this->db->select('l.*')
+				->from('leaves l')
+				->join('students s','l.student_id = s.id','left')
+				->where(array('s.sections_id' => $section))
+				->where('start_date <=', $date)
+				->where('end_date >=', $date)
+				->get()
+				->result();
+	}
+
 	function get_class_leaves($token, $status){
 		$where = "l.status is NOT NULL";
 		
-		$data = $this->db->select('s.class_id, s.sections, s.id as sec, l.* , st.student_name')
+		$data = $this->db->select('c.class, s.sections, s.id as sec, l.* , st.student_name')
 						->from('sections s')
+						->join('class c','c.id = s.class_id','left')
 						->join('teachers t','s.teachers_id = t.id','left')
 						->join('users u','t.users_id = u.id','left')
 						->join('tokens to','to.user_id = u.id','left')

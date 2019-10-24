@@ -98,7 +98,7 @@ class m_subject_allocation extends CI_Model {
     
     
 	function get_allocated_classes($teacher){
-		$query = $this->db->select('sb.class_id ,c.class')
+		$query = $this->db->select('sb.class_id ,c.*')
 						->from('subject_allocation sb')
 						->join('class c','c.id = sb.class_id','left')
 						->group_by('sb.class_id')
