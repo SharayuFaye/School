@@ -1124,7 +1124,7 @@ class Api extends CI_Controller
                 $this->response(array(
                     'users' => $users, 
                     'teachers' => $teachers,
-                    'notifications' => $notifications,
+                    'notifications' => empty($notifications) ? null : $notifications,
                     'home_page_menu' => $home_page_menu,
                     'pending' => $cons,
                     'status' => 'live'
@@ -1324,7 +1324,8 @@ class Api extends CI_Controller
             $users = $this->m_login->get_users($token); 
             
             foreach($attendance as $key=>$value){
-                
+             	log_message('debug',"Attendance : ". $value);   
+
 				$status = $value == 1 ? "present" : "absent";
                 $att  = $this->m_attendances->attendance_add_app($class,$section,$date,$teacher_id,$key, $status, $users[0]->school_id,$users[0]->id);
             }
