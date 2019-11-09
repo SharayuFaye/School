@@ -354,8 +354,15 @@ html .btn-secondary.active,
 				                        </ul>
 				                    </li> 
 				 <?php } ?>                   
+				  <li>
+				                        <a class="nav-link" href="/user_guide/front_page.php">
+				                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+				                            <span>User Guide</span>
+				                        </a>                        
+				                    </li>
 				                        </ul>
 				                    </li>
+				                    
 				
 				                </ul>
 				            </nav>
