@@ -31,8 +31,7 @@ class m_school_admin extends CI_Model {
             
             $this->db->select("*");
             $this->db->from('users');
-            $this->db->where(array( 'role' => 'school_admin'));
-            $this->db->where(array( 'school_id' => $school_id));
+            $this->db->where(array( 'role' => 'school_admin')); 
             $this->db->where('id', $id);
             $queryStud = $this->db->get();
             $res = $queryStud->result();
