@@ -152,6 +152,12 @@ class m_teachers extends CI_Model {
                 $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['teacher_mail']);
                 
             }else{
+                
+                $this->db->select("*");
+                $this->db->from('teachers');
+                $this->db->where(array( 'teacher_mail' => $row['teacher_mail']));
+                $queryteacher = $this->db->get();
+                if($queryteacher->num_rows() == 0){
                  
                 if($query->num_rows() == 0){
                     $target = array(
@@ -170,12 +176,6 @@ class m_teachers extends CI_Model {
                     $query = $this->db->get();
                     if($query->num_rows() == 1){
                         $userData = $query->result();
-                        $this->db->select("*");
-                        $this->db->from('teachers');
-                        $this->db->where(array( 'teacher_name' => $row['teacher_name']));
-                        $this->db->where(array( 'teacher_mail' => $row['teacher_mail']));
-                        $query = $this->db->get();
-                        if($query->num_rows() == 0){
                             $target = array(
                                 "users_id" => $userData[0]->id ,
                                 "teacher_name"=>$row['teacher_name'],
