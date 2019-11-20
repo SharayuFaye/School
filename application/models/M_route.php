@@ -86,16 +86,39 @@ class m_route extends CI_Model {
 	    } 
     } 
 
-    function get_pickup_points($route_id){
+    function get_driver_pickup_points($route_id){
 		$pickups = array();
 		//Get pickup points for the route
 		$pp = $this->db->select("pickup_point_id")
-						->from('route')
-						->where(array('id'=>$route_id))
-						->get()
-						->result();
+				->from('route')
+				->where(array('id'=>$route_id))
+				->get()
+				->result();
 		log_message('debug',print_r($pp, true));
 		$points = json_decode($pp[0]->pickup_point_id);
+		//$points = json_decode($route_id);
+		log_message('debug',print_r($points, true));
+		foreach($points as $point){
+	    	$this->db->select("*");
+	    	$this->db->from('pickup_point');
+	    	$this->db->where(array('id' => $point));
+	    	$query = $this->db->get();
+			array_push($pickups, $query->result()[0]);
+		}
+	    return $pickups;
+    }
+
+    function get_pickup_points($route_id){
+		$pickups = array();
+		//Get pickup points for the route
+		//$pp = $this->db->select("pickup_point_id")
+		//				->from('route')
+		//				->where(array('id'=>$route_id))
+		//				->get()
+		//				->result();
+		//log_message('debug',print_r($pp, true));
+		//$points = json_decode($pp[0]->pickup_point_id);
+		$points = json_decode($route_id);
 		log_message('debug',print_r($points, true));
 		foreach($points as $point){
 	    	$this->db->select("*");

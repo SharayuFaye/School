@@ -59,8 +59,8 @@ class Email extends CI_Controller {
 		if($result){
 
 			$subject = "OTP to reset your password";
-			$msg = "Your OTP for resetting your password is " . $otp ."\n\n
-					Regards \n Team Disha";
+			$msg = "Your OTP for resetting your password is " . $otp ."\r\r\n\n";
+			$msg = $msg ."Regards \n Team Disha";
 			$this->send($user, $subject, $msg);
 			$this->response(array(
 				'msg'=> "OTP sent to the email",

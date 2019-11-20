@@ -204,7 +204,7 @@ function del($id){
 						<option value="marks" >Marks</option>
 						<option value="attendance" >Attendance</option>
 						<option value="timetable" >Timetable</option>
-						<option value="practice" >Practice</option> 
+						<option value="practise" >Practice</option> 
 						
 						<option value="leaves" >Leaves</option>
 						
@@ -287,7 +287,7 @@ function del($id){
 						<option value="marks" >Marks</option>
 						<option value="attendance" >Attendance</option>
 						<option value="timetable" >Timetable</option>
-						<option value="practice" >Practice</option> 
+						<option value="practise" >Practice</option> 
 						
 						<option value="leaves" >Leaves</option>
 						

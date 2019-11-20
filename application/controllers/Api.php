@@ -177,9 +177,11 @@ class Api extends CI_Controller
         $token = $request['token']; 
         $date = $request['date'];
          
-        if ($token != '') {
+        log_message('debug',print_r($token, true)); 
+        if ($token != '' || $token != null) {
             $users = $this->m_login->get_users($token);
             $students = $this->m_students->students_show_app($token);
+            log_message('debug',print_r($users, true)); 
             log_message('debug',print_r($students, true)); 
             $notifications = $this->m_notifications->notifications_show_app($students[0]->id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
 
@@ -446,6 +448,7 @@ class Api extends CI_Controller
             $students = $this->m_students->students_show_app($token);
             
             $attendances = $this->m_attendances->attendances_show_app($student_id, $date);
+			$leaves = $this->m_attendances->get_leaves($student_id);
             
             $teachers = $this->m_teachers->teachers_show_section_app($students[0]->sections_id);
             
@@ -457,6 +460,7 @@ class Api extends CI_Controller
                     'students' => $students,
                     'teachers' => $teachers, 
                     'attendances' => $attendances,
+                    'leaves' => $leaves,
                     'status' => 'live'
                 ));
             }else{
@@ -1426,6 +1430,18 @@ class Api extends CI_Controller
 		}
     }
     
+    function get_driver_pickup_points_post(){
+		$this->load->model('m_route');
+        $post_data = file_get_contents("php://input");
+        $request = json_decode($post_data,true);
+        $route_id = $request['route_id'];
+
+		$pickups = $this->m_route->get_driver_pickup_points($route_id);
+		$this->response(array(
+			'pickups'=> $pickups
+		));
+    }
+
     function get_pickup_points_post(){
 		$this->load->model('m_route');
         $post_data = file_get_contents("php://input");
@@ -1446,11 +1462,10 @@ class Api extends CI_Controller
 		$request = json_decode($post_data, true);
 		$lat = $request['latitude'];
 		$lon = $request['longitude'];
-		$bus = $request['bus'];
-		$bus_id = $this->m_bus->get_bus_id($bus);
-		log_message("debug","Bus id ::::: " . print_r($bus_id, true));
+		$bus_id = $request['bus'];
+		log_message("debug","Bus id ::::: " . $bus_id);
 
-		$this->m_location->update_location($lat, $lon, $bus_id[0]->id);
+		$this->m_location->update_location($lat, $lon, $bus_id);
 	}
 
 	/*Get the pickup points for the student. Called from bus.page.ts*/
