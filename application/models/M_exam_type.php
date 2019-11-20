@@ -5,14 +5,14 @@ class m_exam_type extends CI_Model {
 		$this->db->from('exam_type'); 
 		$this->db->where(array( 'type' => $type));
 		$query = $this->db->get(); 
-		if($query->num_rows() == 0){
+// 		if($query->num_rows() == 0){
 		    $target = array(  	
 				"type"=>$type,
 				"school_id"=>$school 
 				);   
 			$this->db->insert('exam_type', $target);
 			return true;
-		}	
+// 		}	
     }
     function exam_type_edit($id,$type,$school){ 
         $this->db->select("*");
@@ -20,7 +20,7 @@ class m_exam_type extends CI_Model {
         $this->db->where(array( 'type' => $type));
         $this->db->where('id!=', $id);
         $query = $this->db->get();
-        if($query->num_rows() == 0){
+//         if($query->num_rows() == 0){
     	   $target = array(  	
     				"type"=>$type,
     				"school_id"=>$school 
@@ -28,7 +28,7 @@ class m_exam_type extends CI_Model {
     	    $this->db->where(array( 'id' => $id));
     		$this->db->update('exam_type', $target);
     		return true; 
-        }
+//         }
     }
     function exam_type_show(){ 
 	    $this->db->select("*"); 

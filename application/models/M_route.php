@@ -6,7 +6,7 @@ class m_route extends CI_Model {
         $this->db->from('pickup_point');
         $this->db->where(array( 'pickup_point' => $pickup_point));
         $query = $this->db->get();
-        if($query->num_rows() == 0){
+//         if($query->num_rows() == 0){
 		    $target = array(  	 
 		        "pickup_point"=>$pickup_point,
 		        "longitude"=>$longitude,
@@ -18,7 +18,7 @@ class m_route extends CI_Model {
 		    // print_r($target);exit();
 			$this->db->insert('pickup_point', $target);
 			return true; 
-        }
+//         }
     }
     function route_edit($id,$pickup_point,$longitude,$lattitude,$school){
         $this->db->select("*");
@@ -26,7 +26,7 @@ class m_route extends CI_Model {
         $this->db->where(array( 'pickup_point' => $pickup_point));
         $this->db->where('id!=', $id);
         $query = $this->db->get();
-        if($query->num_rows() == 0){
+//         if($query->num_rows() == 0){
     	   $target = array(  	
     	       "pickup_point"=>$pickup_point,
     	       "longitude"=>$longitude,
@@ -39,7 +39,7 @@ class m_route extends CI_Model {
     	    $this->db->where(array( 'id' => $id));
     		$this->db->update('pickup_point', $target);
     		return true; 
-        }
+//         }
     }
     function route_show(){ 
 

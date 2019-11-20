@@ -278,53 +278,58 @@ class m_students extends CI_Model {
             $this->db->select("*");
             $this->db->from('users');
             $this->db->where(array( 'username' => $row['username']));
-            $query = $this->db->get();
+            $queryUser = $this->db->get();
             
             if (!filter_var($row['username'], FILTER_VALIDATE_EMAIL)  ||  !filter_var($row['mother_mail'], FILTER_VALIDATE_EMAIL) ||  !preg_match('/[^A-Za-z]/', $row['student_name']) ) {  
                 $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['student_name']);
                 
             }else{
-            if($query->num_rows() == 0){
-                $target = array(
-                    "username" => $row['username'],
-                    "password" => md5($row['password']),
-                    "school_id"=>  $this->session->userdata['school'],
-                    "role"=>  'student',
-                    "created_date"=>date('Y-m-d'),
-                    "created_by"=>$this->session->userdata['id'],
-                );
-                $this->db->insert('users', $target);
+                
                 
                 $this->db->select("*");
-                $this->db->from('users');
-                $this->db->where(array( 'username' => $row['username']));
+                $this->db->from('sections');
+                $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+                $this->db->where(array( 'class_id' =>  $row['class_id']));
+                $this->db->where(array( 'sections' => $row['sections_id']));
                 $query = $this->db->get();
-                if($query->num_rows() == 1){
+                $section = $query->result();
+                
+                if( $section){ 
+                $this->db->select("*");
+                $this->db->from('students');
+                $this->db->where(array( 'roll_number' =>  $row['roll_number']));
+                $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+                $this->db->where(array( 'class_id' =>  $row['class_id']));
+                $this->db->where(array( 'sections_id' => $section[0]->id ));
+                $rollno = $this->db->get();
+                
+                if(  $rollno->num_rows() ==0 ){
+                
+                
+                if($query->num_rows() == 0){
+                    $target = array(
+                        "username" => $row['username'],
+                        "password" => md5($row['password']),
+                        "school_id"=>  $this->session->userdata['school'],
+                        "role"=>  'student',
+                        "created_date"=>date('Y-m-d'),
+                        "created_by"=>$this->session->userdata['id'],
+                    );
+                    $this->db->insert('users', $target);
+                }
+                if($queryUser->num_rows() == 1){
                     
-                    $userData = $query->result(); 
+                    $userData = $queryUser->result(); 
                     
-                    $this->db->select("*");
-                    $this->db->from('students');
-                    $this->db->where(array( 'student_name' =>  $row['student_name']));
-                    $this->db->where(array( 'school_id' => $this->session->userdata['school']));
-                    $query = $this->db->get();
+//                     $this->db->select("*");
+//                     $this->db->from('students');
+//                     $this->db->where(array( 'roll_number' =>  $row['student_name']));
+//                     $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+//                     $query = $this->db->get();
                     
-                    
-                    $this->db->select("*");
-                    $this->db->from('students');
-                    $this->db->where(array( 'roll_number' =>  $row['roll_number']));
-                    $this->db->where(array( 'school_id' => $this->session->userdata['school']));
-                    $rollno = $this->db->get();
-                    
-                    if($query->num_rows() == 0  && $rollno->num_rows() ==0 ){
+                   
                          
-                        $this->db->select("*");
-                        $this->db->from('sections');
-                        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
-                        $this->db->where(array( 'class_id' =>  $row['class_id']));
-                        $this->db->where(array( 'sections' => $row['sections_id']));
-                        $query = $this->db->get();
-                        $section = $query->result();
+                       
 //                         print_r($section);exit();
                         $target = array(
                             "users_id" => $userData[0]->id,
@@ -354,7 +359,7 @@ class m_students extends CI_Model {
                         
                     }
                 }
-            }
+                }
             
             else{
                 $duplicate[] = $row['username'];

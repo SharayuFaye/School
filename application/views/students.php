@@ -45,7 +45,7 @@
         	<?php if(isset($duplicate_record)){    if(isset($duplicate_record[0])){  ?>
         		<div class="alert alert-success" id="duplicate">
         				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        				<strong>Duplicate entries for user - <?php $i=1;foreach($duplicate_record as $record){ ?> <?php echo $i.") "; echo $record; ?> <?php $i++ ;} ?></strong>  
+        				<strong>Duplicate roll number entries for user - <?php $i=1;foreach($duplicate_record as $record){ ?> <?php echo $i.") "; echo $record; ?> <?php $i++ ;} ?></strong>  
         			</div>
         	<?php }else{ ?>
         	<div class="alert alert-success" id="success">
@@ -388,7 +388,8 @@ function validateImageE(id) {
 </script>
 <script type="text/javascript"> 
  $(document).ready(function(){
- 
+	 $('#pw_msg').html('');
+	 
  $('#parent_mob').change(function(){    
      document.getElementById("save2").disabled = false;
  	var val =  $('#parent_mob').val();  
@@ -670,7 +671,11 @@ function validateImageE(id) {
                 $('#msg').html('This parent e-mail id already exists!'); 
                 $('#parent_scn').val(obj[0]['parent_scan_id']); 
                 $('#parent_nm').val(obj[0]['parent_name']);  
-                $('#pwd').val(obj[0]['password']);  
+//                 $('#pwd').val(obj[0]['password']);  
+
+$('#pw_msg').html('Already has password');
+$('#pwd').removeAttr('required');
+$('#confirm_password1').removeAttr('required');
             	$('#p_mob').val(obj[0]['parent_mob']);
             	$('#m_name').val(obj[0]['mother_name']);
             	$('#m_mail').val(obj[0]['mother_mail']);
@@ -696,7 +701,7 @@ function validateImageE(id) {
                 $('#msg1').html('This parent e-mail id already exists!'); 
                 $('#parent_id').val(obj[0]['parent_scan_id']); 
                 $('#parent_name').val(obj[0]['parent_name']);  
-                $('#password').val(obj[0]['password']);  
+                 $('#password').val(obj[0]['password']); 
             	$('#parent_mob').val(obj[0]['parent_mob']);
             	$('#mother_name').val(obj[0]['mother_name']);
             	$('#mother_mail').val(obj[0]['mother_mail']);
@@ -926,7 +931,7 @@ function validateImageE(id) {
 				</div>
 					<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
-					<div class="col-sm-8">
+					<div class="col-sm-8"><span id="pw_msg" style="color:red"></span>
 						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd" required name="password" class="form-control">
 					</div>
 				</div>
