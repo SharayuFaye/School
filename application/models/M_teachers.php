@@ -149,7 +149,9 @@ class m_teachers extends CI_Model {
             $query = $this->db->get();
             
             if (!filter_var($row['teacher_mail'], FILTER_VALIDATE_EMAIL)  ) {
-                $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['teacher_mail']);
+                if(!preg_match('/[^A-Za-z ]/', $row['teacher_mail'])){
+//                     $duplicate[] =$row['teacher_mail'];
+                }
                 
             }else{
                 
