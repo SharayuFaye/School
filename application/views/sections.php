@@ -260,7 +260,7 @@ function del($id){
 				 <div class="col-sm-8">
 				 
 				 <?php   foreach($subject_list as $sub){ ?>
-					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+					<div class="col-sm-4 checkbox-custom checkbox-default" style="float:left">
 						<input type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="checkboxExample1">
 						<label for="checkboxExample1"><?php echo $sub['name']; ?></label>
 					</div>
@@ -430,7 +430,7 @@ function del($id){
 				 <div class="col-sm-8">
 				 
 				 <?php   foreach($subject_list as $sub){ ?>
-					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+					<div class="col-sm-4 checkbox-custom checkbox-default" style="float:left">
 						<input type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="<?php echo $sub['name']; ?>">
 						<label for="checkboxExample1"><?php echo $sub['name']; ?></label>
 					</div>
