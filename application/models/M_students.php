@@ -317,7 +317,7 @@ class m_students extends CI_Model {
                     );
                     $this->db->insert('users', $target);
                 }
-                if($queryUser->num_rows() == 1){
+                if($queryUser->num_rows() >0){
                     
                     $userData = $queryUser->result(); 
                     
