@@ -281,7 +281,7 @@ class m_students extends CI_Model {
             $queryUser = $this->db->get();
             
             if (!filter_var($row['username'], FILTER_VALIDATE_EMAIL)  ||  !filter_var($row['mother_mail'], FILTER_VALIDATE_EMAIL) ||  !preg_match('/[^A-Za-z]/', $row['student_name']) ) {  
-                $duplicate[] = !preg_match('/[^A-Za-z ]/', $row['student_name']);
+                $duplicate[] = $row['username'];
                 
             }else{
                 
