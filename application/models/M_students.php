@@ -362,13 +362,13 @@ class m_students extends CI_Model {
                         $res =  $this->db->insert('students', $target);
                         
                     }
+                } else{
+                    $duplicate[] = $row['username'];
+                    
                 }
                 }
             
-            else{
-                 $duplicate[] = $row['username'];
-                
-            }
+           
          }
         }
 //         print_r($duplicate);exit();
