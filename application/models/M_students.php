@@ -286,11 +286,12 @@ class m_students extends CI_Model {
             }else{
                 
                 
-                $this->db->select("*");
-                $this->db->from('sections');
-                $this->db->where(array( 'school_id' => $this->session->userdata['school']));
-                $this->db->where(array( 'class_id' =>  $row['class_id']));
-                $this->db->where(array( 'sections' => $section[0]->id));
+                $this->db->select("s.*");
+                $this->db->from('sections s');
+                $this->db->join('class c', 's.class_id=c.id', 'left');  
+                $this->db->where(array( 's.school_id' => $this->session->userdata['school']));
+                $this->db->where(array( 'c.class' =>  $row['class_id']));
+                $this->db->where(array( 's.sections' => $row['sections_id']));
                 $query = $this->db->get();
                 $section = $query->result();
                 
@@ -298,8 +299,7 @@ class m_students extends CI_Model {
                 $this->db->select("*");
                 $this->db->from('students');
                 $this->db->where(array( 'roll_number' =>  $row['roll_number']));
-                $this->db->where(array( 'school_id' => $this->session->userdata['school']));
-                $this->db->where(array( 'class_id' =>  $row['class_id']));
+                $this->db->where(array( 'school_id' => $this->session->userdata['school'])); 
                 $this->db->where(array( 'sections_id' => $section[0]->id ));
                 $rollno = $this->db->get();
                 
