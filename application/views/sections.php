@@ -323,6 +323,17 @@ function del($id){
 					</div>
 				</div> 
 	    </div>
+	    
+	    	<div class="form-group row">
+			<label class="col-sm-4 control-label text-sm-right pt-2"></label>
+				 <div class="col-sm-8">
+					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+						<input type="checkbox"  name="subject[]" value="SocialScience"  id="checkboxExample1">
+						<label for="checkboxExample1">SocialScience</label>
+					</div> 
+				</div> 
+	    </div>
+	    
 			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
@@ -466,7 +477,15 @@ function del($id){
 			
 
 	    </div>
-	    
+	    <div class="form-group row">
+			<label class="col-sm-4 control-label text-sm-right pt-2"></label>
+				 <div class="col-sm-8">
+					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+						<input type="checkbox"  name="subject[]" value="SocialScience"  id="SocialScience">
+						<label for="checkboxExample1">SocialScience</label>
+					</div> 
+				</div> 
+	    </div>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
