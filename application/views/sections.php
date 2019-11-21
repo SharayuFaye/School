@@ -184,9 +184,11 @@ var d = document.getElementById("sections");
 d.className += " nav-active";  
 var n = document.getElementById("nav");
 n.className += " nav-expanded nav-active"; 
-
+ 
 function edit($id,$school,$class,$section,$subject,$teachers){ 
-
+	
+	$('.chckbox').attr("checked", false);
+	
 	$('#id').val($id);      
 	$('#school').val($school)
 	$('#class1').val($class);;
@@ -194,7 +196,7 @@ function edit($id,$school,$class,$section,$subject,$teachers){
 	var strArray = $subject.split(",");
      
     for(var i = 0; i < strArray.length; i++){
-    	$('#'+strArray[i]).attr("checked", "checked");
+    	$('#'+strArray[i]).attr("checked", true);
     	console.log(strArray[i]);
     }
     
@@ -431,7 +433,7 @@ function del($id){
 				 
 				 <?php   foreach($subject_list as $sub){ ?>
 					<div class="col-sm-4 checkbox-custom checkbox-default" style="float:left">
-						<input type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="<?php echo $sub['name']; ?>">
+						<input class="chckbox"  type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="<?php echo $sub['name']; ?>">
 						<label for="checkboxExample1"><?php echo $sub['name']; ?></label>
 					</div>
 					<?php } ?>
