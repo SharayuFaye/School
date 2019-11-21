@@ -290,7 +290,7 @@ class m_students extends CI_Model {
                 $this->db->from('sections');
                 $this->db->where(array( 'school_id' => $this->session->userdata['school']));
                 $this->db->where(array( 'class_id' =>  $row['class_id']));
-                $this->db->where(array( 'sections' => $row['sections_id']));
+                $this->db->where(array( 'sections' => $section[0]->id));
                 $query = $this->db->get();
                 $section = $query->result();
                 
