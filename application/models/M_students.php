@@ -280,13 +280,13 @@ class m_students extends CI_Model {
             $this->db->where(array( 'username' => $row['username']));
             $queryUser = $this->db->get();
             
-            if (!filter_var($row['username'], FILTER_VALIDATE_EMAIL)  ||  !filter_var($row['mother_mail'], FILTER_VALIDATE_EMAIL) ||  !preg_match('/[^A-Za-z]/', $row['student_name']) ) {  
-                $duplicate[] = $row['username'];
+            if (!filter_var($row['username'], FILTER_VALIDATE_EMAIL)  ||  !filter_var($row['mother_mail'], FILTER_VALIDATE_EMAIL)   ) {  
+                 $duplicate[] = $row['username']; 
                 
             }else{
                 
                 
-                $this->db->select("s.*");
+                $this->db->select("s.*,c.id as classid");
                 $this->db->from('sections s');
                 $this->db->join('class c', 's.class_id=c.id', 'left');  
                 $this->db->where(array( 's.school_id' => $this->session->userdata['school']));
@@ -294,7 +294,7 @@ class m_students extends CI_Model {
                 $this->db->where(array( 's.sections' => $row['sections_id']));
                 $query = $this->db->get();
                 $section = $query->result();
-                
+               
                 if( $section){ 
                 $this->db->select("*");
                 $this->db->from('students');
@@ -302,11 +302,10 @@ class m_students extends CI_Model {
                 $this->db->where(array( 'school_id' => $this->session->userdata['school'])); 
                 $this->db->where(array( 'sections_id' => $section[0]->id ));
                 $rollno = $this->db->get();
-                
                 if(  $rollno->num_rows() ==0 ){
                 
                 
-                if($query->num_rows() == 0){
+                    if($queryUser->num_rows() == 0){
                     $target = array(
                         "username" => $row['username'],
                         "password" => md5($row['password']),
@@ -317,6 +316,11 @@ class m_students extends CI_Model {
                     );
                     $this->db->insert('users', $target);
                 }
+                $this->db->select("*");
+                $this->db->from('users');
+                $this->db->where(array( 'username' => $row['username']));
+                $queryUser = $this->db->get();
+                
                 if($queryUser->num_rows() >0){
                     
                     $userData = $queryUser->result(); 
@@ -333,7 +337,7 @@ class m_students extends CI_Model {
 //                         print_r($section);exit();
                         $target = array(
                             "users_id" => $userData[0]->id,
-                            "class_id" => $row['class_id'],
+                            "class_id" =>  $section[0]->classid,
                             "sections_id" => $section[0]->id,
                             "student_name" => $row['student_name'],
                             "dob" => $row['dob'],
@@ -362,12 +366,12 @@ class m_students extends CI_Model {
                 }
             
             else{
-                $duplicate[] = $row['username'];
+                 $duplicate[] = $row['username'];
                 
             }
          }
         }
-        
+//         print_r($duplicate);exit();
         return $duplicate;
         
     }
