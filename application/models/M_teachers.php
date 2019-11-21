@@ -141,7 +141,7 @@ class m_teachers extends CI_Model {
     } 
 
     public function importData($data) { 
-        $duplicate = ''; 
+        $duplicate = '';  
         foreach($data as $row){ 
             $this->db->select("*");
             $this->db->from('users');
@@ -149,9 +149,7 @@ class m_teachers extends CI_Model {
             $query = $this->db->get();
             
             if (!filter_var($row['teacher_mail'], FILTER_VALIDATE_EMAIL)  ) {
-                if(!preg_match('/[^A-Za-z ]/', $row['teacher_mail'])){
-//                     $duplicate[] =$row['teacher_mail'];
-                }
+                 $duplicate[] = $row['username'];
                 
             }else{
                 
@@ -196,12 +194,13 @@ class m_teachers extends CI_Model {
                         }
                     }
                 }else{
-                    $duplicate[] = $row['username'];
+                     $duplicate[] = $row['username'];
                    
                 }
             }
         }
-         
+//         print_r($duplicate);
+//         exit();
        return $duplicate;
         
     }
