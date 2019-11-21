@@ -1,4 +1,5 @@
 <?php include('include/header.php');?>
+<?php include('application/config/subject_list.php');?>
 				<section role="main" class="content-body">
 					<header class="page-header">
 						<h2>Sections</h2>
@@ -253,7 +254,23 @@ function del($id){
 				</div>
 			</div> 
 			
-	    	<div class="form-group row">
+				<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
+				  
+				 <div class="col-sm-8">
+				 
+				 <?php   foreach($subject_list as $sub){ ?>
+					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+						<input type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="checkboxExample1">
+						<label for="checkboxExample1"><?php echo $sub['name']; ?></label>
+					</div>
+					<?php } ?>
+					
+					</div>
+				</div> 
+				
+			
+	    <!-- - 	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
 				 <div class="col-sm-8">
@@ -334,7 +351,7 @@ function del($id){
 				</div> 
 	    </div>
 	    
-			
+			--->
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
@@ -406,9 +423,23 @@ function del($id){
 					<input type="text" required id="section"  onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control">
 				</div>
 			</div>
-	      <div class="form-group row">
+			
+				<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
+				 <div class="col-sm-8">
+				 
+				 <?php   foreach($subject_list as $sub){ ?>
+					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
+						<input type="checkbox"  name="subject[]"  value="<?php echo $sub['name']; ?>"  id="<?php echo $sub['name']; ?>">
+						<label for="checkboxExample1"><?php echo $sub['name']; ?></label>
+					</div>
+					<?php } ?>
+					
+					</div>
+				</div> 
+					
+	  <!-- -    
 				<div class="col-sm-8">
 					<div class="col-sm-3 checkbox-custom checkbox-default" style="float:left">
 						<input type="checkbox"  name="subject[]"  value="Marathi"  id="Marathi">
@@ -486,6 +517,7 @@ function del($id){
 					</div> 
 				</div> 
 	    </div>
+	    --->
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teachers:</label>
 				<div class="col-sm-8"> 
