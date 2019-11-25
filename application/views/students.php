@@ -363,7 +363,7 @@ function validateImage(id) {
 function validateImageE(id) {
     var formData = new FormData();
     $('#msg_ie').html(''); 
-    document.getElementById("save1").disabled = false;
+    document.getElementById("save2").disabled = false;
     var file = document.getElementById(id).files[0];
  
     formData.append("Filedata", file);
@@ -371,7 +371,7 @@ function validateImageE(id) {
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") { 
         var msg_i = "Please select a valid image file!";
 	    $('#msg_ie').html(msg_i); 
-	     document.getElementById("save1").disabled = true; 
+	     document.getElementById("save2").disabled = true; 
         document.getElementById(id).value = ''; 
     }
     if (file.size > 250000) { 
@@ -672,7 +672,8 @@ function validateImageE(id) {
                 $('#parent_scn').val(obj[0]['parent_scan_id']); 
                 $('#parent_nm').val(obj[0]['parent_name']);  
 //                 $('#pwd').val(obj[0]['password']);  
-
+$('#pwd').prop("disabled", true);
+$('#confirm_password1').prop("disabled", true);
 $('#pw_msg').html('Already has password');
 $('#pwd').removeAttr('required');
 $('#confirm_password1').removeAttr('required');
@@ -868,6 +869,28 @@ $('#confirm_password1').removeAttr('required');
 	 <?php $this->load->helper('form');?>
 	 <?php echo form_open_multipart('Welcome/students');?> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
+			
+			<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
+					<div class="col-sm-8"><span id="msg" style="color:red"></span><span id="msg1" style="color:red"></span>
+						<input type="text"  maxlength="100" id="mail_id" onchange="ValidateEmail(this.value)" required name="username" class="form-control">
+					</div>
+				</div>
+					<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
+					<div class="col-sm-8"><span id="pw_msg" style="color:red"></span>
+						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd" required name="password" class="form-control">
+					</div>
+				</div>
+	    	<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
+				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
+					<input type="text"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="confirm_password1" required  name="confirm_password" class="form-control">
+				
+				</div>
+			</div>
+			
+			
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 					<div class="col-sm-8">
@@ -923,25 +946,7 @@ $('#confirm_password1').removeAttr('required');
 						<input type="text"  maxlength="100" name="batch" class="form-control">
 					</div>
 				</div> 
-				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
-					<div class="col-sm-8"><span id="msg" style="color:red"></span><span id="msg1" style="color:red"></span>
-						<input type="text"  maxlength="100" id="mail_id" onchange="ValidateEmail(this.value)" required name="username" class="form-control">
-					</div>
-				</div>
-					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
-					<div class="col-sm-8"><span id="pw_msg" style="color:red"></span>
-						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd" required name="password" class="form-control">
-					</div>
-				</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
-				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
-					<input type="text"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="confirm_password1" required  name="confirm_password" class="form-control">
 				
-				</div>
-			</div>
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Father Name:</label>
 					<div class="col-sm-8">
@@ -1046,6 +1051,28 @@ $('#confirm_password1').removeAttr('required');
 
 	 <section class="card"> 
 			<div class="card-body" style="padding-left: 0%;padding-right: 13%;"> 
+			
+			<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
+					<div class="col-sm-8"> <span id="msg2" style="color:red"></span>
+						<input type="email" required maxlength="100"  id="username"  onchange="ValidateEmailE(this.value)" name="username" class="form-control">
+					</div>
+				</div>
+					<div class="form-group row">
+					<label class="col-sm-4 control-label text-sm-right pt-2"> Password:</label>
+					<div class="col-sm-8">
+						<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"  id="password" name="password" class="form-control">
+					</div>
+				</div>
+	    	<div class="form-group row">
+				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
+				<div class="col-sm-8">
+					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
+					<span id="msgp2" style="color: red"></span>
+				</div>
+			</div>
+			
+			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
@@ -1104,25 +1131,7 @@ $('#confirm_password1').removeAttr('required');
 					<input type="text"  maxlength="100" id="student_batch" name="batch" class="form-control">
 				</div>
 			</div> 
-					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
-					<div class="col-sm-8"> <span id="msg2" style="color:red"></span>
-						<input type="email" required maxlength="100"  id="username"  onchange="ValidateEmailE(this.value)" name="username" class="form-control">
-					</div>
-				</div>
-					<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"> Password:</label>
-					<div class="col-sm-8">
-						<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"  id="password" name="password" class="form-control">
-					</div>
-				</div>
-	    	<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
-				<div class="col-sm-8">
-					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
-					<span id="msgp2" style="color: red"></span>
-				</div>
-			</div>
+					
 				
 				<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Name:</label>
