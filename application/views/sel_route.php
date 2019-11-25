@@ -196,28 +196,30 @@ function edit($id,$route){
 	           // 	console.log(obj[0].pickup_point_id);   
 	         var pickup_point =   obj[0].pickup_point_id ;  
     		 console.log(pickup_point); 
-    		var strArray = JSON.parse(pickup_point); 
-    		var my_html ='';
-    	    for(var i = 0; i < strArray.length; i++){  
-    	        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
-    	        my_html +='<label class="col-sm-4 text-sm-right"></label>';
-    	        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-    	        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control">';   
-    	        my_html +='<?php  foreach ($pickup_show as $row) { ?>';
-    	        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> '; 
-    	        my_html +='<?php } ?> ';
-    	        my_html +='</select>'; 
-    	        my_html +='</div>';
-    	        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
-    	        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
-    	        my_html +='</div></div>'; 
-    	    }
-    
-    	    $('#pickupE').html(my_html);
-    	    for(var i = 0; i < strArray.length; i++){ 
-    			$('#pickE'+i).val(strArray[i]);  
-    			console.log(strArray[i])  
-    	    }
+    		 if(pickup_point){
+        		var strArray = JSON.parse(pickup_point); 
+        		var my_html ='';
+        	    for(var i = 0; i < strArray.length; i++){  
+        	        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
+        	        my_html +='<label class="col-sm-4 text-sm-right"></label>';
+        	        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
+        	        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control">';   
+        	        my_html +='<?php  foreach ($pickup_show as $row) { ?>';
+        	        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> '; 
+        	        my_html +='<?php } ?> ';
+        	        my_html +='</select>'; 
+        	        my_html +='</div>';
+        	        my_html +='<div  style="padding: 10px;" class="col-sm-4"> ';
+        	        my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
+        	        my_html +='</div></div>'; 
+        	    }
+        
+        	    $('#pickupE').html(my_html);
+        	    for(var i = 0; i < strArray.length; i++){ 
+        			$('#pickE'+i).val(strArray[i]);  
+        			console.log(strArray[i])  
+        	    }
+    		 } 
     		$('#editrow').modal('show'); 
 
 		 }  
