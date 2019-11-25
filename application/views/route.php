@@ -263,20 +263,20 @@ $('#lattitude').change(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup point</label>
 				<div class="col-sm-8">
-					<input type="text" required name="pickup_point" maxlength="100" class="form-control">
+					<input type="text"  maxlength="100" required name="pickup_point" maxlength="100" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Longitude</label>
 				<div class="col-sm-8"><span id="ld_msg" style="color:red"></span>
-					<input type="text" required name="longitude" id="ld" class="form-control" >
+					<input type="text" maxlength="100" required name="longitude" id="ld" class="form-control" >
 				</div>
 			</div>
 	       
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Lattitude</label>
 				<div class="col-sm-8"><span id="lt_msg" style="color:red"></span>
-					<input type="text" required name="lattitude" id="lt" class="form-control">
+					<input type="text"  maxlength="100" required name="lattitude" id="lt" class="form-control">
 				</div>
 			</div>
 	       
@@ -315,20 +315,20 @@ $('#lattitude').change(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup Point</label>
 				<div class="col-sm-8">
-					<input type="text" required name="pickup_point" id="pickup_point" class="form-control">
+					<input type="text" maxlength="100" required name="pickup_point" id="pickup_point" class="form-control">
 				</div>
 			</div>	
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Longitude</label>
 				<div class="col-sm-8"><span id="longitude_msg" style="color:red"></span>
-					<input type="text" required id="longitude" name="longitude" class="form-control">
+					<input type="text" maxlength="100" required id="longitude" name="longitude" class="form-control">
 				</div>
 			</div>
 	       
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Lattitude</label>
 				<div class="col-sm-8"><span id="lattitude_msg" style="color:red"></span>
-					<input type="text" required id="lattitude" name="lattitude" class="form-control">
+					<input type="text"  maxlength="100" required id="lattitude" name="lattitude" class="form-control">
 				</div>
 			</div>				
 										

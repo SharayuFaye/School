@@ -455,14 +455,14 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Title:</label>
 				<div class="col-sm-8">
-					<input type="text" name="title" class="form-control"  required> 
+					<input type="text" name="title" class="form-control"  maxlength="100" required> 
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Message:</label>
 				<div class="col-sm-8">
-					<textarea name="message" class="form-control"  required></textarea> 
+					<textarea name="message" class="form-control"  maxlength="200" required></textarea> 
 				</div>
 			</div>
 	    	<div class="form-group row">
@@ -552,7 +552,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Title:</label>
 				<div class="col-sm-8">
-					<input type="text" name="title" id="title" class="form-control"  required> 
+					<input type="text" name="title" id="title" class="form-control"  maxlength="100" required> 
 				</div>
 			</div>
 			
@@ -562,7 +562,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Message:</label>
 				<div class="col-sm-8">
-					<textarea name="message" id="message" class="form-control"  required></textarea> 
+					<textarea name="message" id="message" class="form-control"  maxlength="200"  required></textarea> 
 				</div>
 			</div>
 	    	<div class="form-group row">

@@ -572,7 +572,7 @@ function del($id){
 	         <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type of payment:</label>
 				<div class="col-sm-8">
-					<input type="text" id="tp" name="type_payment" class="form-control"  required>
+					<input type="text" id="tp" name="type_payment"  maxlength="100" class="form-control"  required>
 				</div>
 			</div>
 	        
@@ -664,7 +664,7 @@ function del($id){
 	         <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type of payment:</label>
 				<div class="col-sm-8">
-					<input type="text" name="type_payment" id="type_payment" class="form-control" required>
+					<input type="text" name="type_payment" id="type_payment" maxlength="100" class="form-control" required>
 				</div>
 			</div>
 	       

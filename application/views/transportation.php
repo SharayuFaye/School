@@ -157,7 +157,7 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Pickup Point</label>
 				<div class="col-sm-8">
-					<input type="text" name="pickup_point" class="form-control">
+					<input type="text" name="pickup_point"  maxlength="100" class="form-control">
 				</div>
 			</div>
 	       
@@ -204,7 +204,7 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Pickup Point</label>
 				<div class="col-sm-8">
-					<input type="text" name="pickup_point" id="pickup_point" class="form-control">
+					<input type="text" name="pickup_point" id="pickup_point"  maxlength="100" class="form-control">
 				</div>
 			</div>					
 										

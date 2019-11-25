@@ -216,7 +216,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Menu Name:</label>
 				<div class="col-sm-8">
-					<input type="text" required name="menu_name" class="form-control">
+					<input type="text" required name="menu_name" maxlength="100" class="form-control">
 				</div>
 			</div>
 	    	<!-- <div class="form-group row">
@@ -301,7 +301,7 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Menu Name:</label>
 				<div class="col-sm-8">
 					<input type="hidden" id="id" name="id" class="form-control">
-					<input type="text" id="menu_name" required  name="menu_name" class="form-control">
+					<input type="text" id="menu_name" required  maxlength="100" name="menu_name" class="form-control">
 				</div>
 			</div>
 	    	<!-- <div class="form-group row">

@@ -160,13 +160,13 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Questions:</label>
 				<div class="col-sm-8">
-					<input type="text" name="questions" class="form-control" required>
+					<input type="text" name="questions"  maxlength="100" class="form-control" required>
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Answers:</label>
 				<div class="col-sm-8">
-					<input type="text"  name="answers" class="form-control">
+					<input type="text"  name="answers"  maxlength="200" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -210,13 +210,13 @@ function del($id){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Questions:</label>
 				<div class="col-sm-8">
-					<input type="text" id="questions" name="questions" class="form-control" required>
+					<input type="text" id="questions"  maxlength="100" name="questions" class="form-control" required>
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Answers:</label>
 				<div class="col-sm-8">
-					<input type="text" id="answers"  name="answers" class="form-control">
+					<input type="text" id="answers"  maxlength="200" name="answers" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">

@@ -357,7 +357,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Route Name</label>
 				<div class="col-sm-8">
-					<input type="text" name="route" required class="form-control">
+					<input type="text" name="route"  maxlength="100" required class="form-control">
 				</div>
 			</div>
 			 
@@ -417,7 +417,7 @@ $(document).ready(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Route Name</label>
 				<div class="col-sm-8">
-					<input type="text" required id="routee" name="route" class="form-control">
+					<input type="text" required id="routee" maxlength="100" name="route" class="form-control">
 				</div>
 			</div>
 			 

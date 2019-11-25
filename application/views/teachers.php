@@ -404,13 +404,13 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Name:</label>
 				<div class="col-sm-8">
-					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' name="teacher_name" required class="form-control">
+					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' name="teacher_name"  maxlength="100" required class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Address:</label>
 				<div class="col-sm-8">
-					<input type="text" name="teacher_address" required  class="form-control">
+					<input type="text" name="teacher_address" required  maxlength="200" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
@@ -422,25 +422,25 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mail:</label>
 				<div class="col-sm-8"><span id="msg1t" style="color:red"></span>
-					<input type="mail"  onchange="ValidateEmail(this.value)"  required  name="teacher_mail" class="form-control">
+					<input type="mail"  onchange="ValidateEmail(this.value)"  required  maxlength="100" name="teacher_mail" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text"  name="username"  required required class="form-control">
+					<input type="text"  name="username"  required  maxlength="100" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password" id="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="password"  required required class="form-control">
+					<input type="password" id="password1" maxlength="100" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="password"  required required class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msg1" style="color: red"></span>
-					<input type="text" id="confirm_password1"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required  name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password1"  maxlength="100" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
@@ -461,7 +461,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Education Details:</label>
 				<div class="col-sm-8">
-					<input type="text"  name="education_details" required  class="form-control">
+					<input type="text"  name="education_details"  maxlength="100" required  class="form-control">
 				</div>
 			</div>
 			<!-- <div class="form-group row">
@@ -539,13 +539,13 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Name:</label>
 				<div class="col-sm-8">
-					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' id="teacher_name" required  name="teacher_name" class="form-control">
+					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' id="teacher_name"  maxlength="100" required  name="teacher_name" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Address:</label>
 				<div class="col-sm-8">
-					<input type="text" id="teacher_address" required  name="teacher_address" class="form-control">
+					<input type="text" id="teacher_address" required  maxlength="100" name="teacher_address" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
@@ -557,25 +557,25 @@ $(document).ready(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Teacher Mail:</label>
 				<div class="col-sm-8"><span id="msg2t" style="color:red"></span>
-					<input type="mail"  required  onchange="ValidateEmailE(this.value)"  id="teacher_mail" name="teacher_mail" class="form-control">
+					<input type="mail"  required  onchange="ValidateEmailE(this.value)"  maxlength="100" id="teacher_mail" name="teacher_mail" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text" readonly     id="username" name="username" class="form-control">
+					<input type="text" readonly    maxlength="100"  id="username" name="username" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password"   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"      name="password" class="form-control">
+					<input type="password"   id="password"   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    maxlength="100"   name="password" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"   name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>
@@ -599,7 +599,7 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Education Details:</label>
 				<div class="col-sm-8">
-					<input type="text" id="education_details"  required name="education_details" class="form-control">
+					<input type="text" id="education_details" maxlength="100"  required name="education_details" class="form-control">
 				</div>
 			</div>
 			<!-- <div class="form-group row">

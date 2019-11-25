@@ -265,13 +265,13 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Name:</label>
 				<div class="col-sm-8">
-					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required name="drivers_name" class="form-control">
+					<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' maxlength="100" required name="drivers_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Address:</label>
 				<div class="col-sm-8">
-					<input type="text" name="drivers_address" class="form-control">
+					<input type="text" name="drivers_address"  maxlength="200" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -283,13 +283,13 @@ $(document).ready(function(){
 			 <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text"  name="username" required class="form-control">
+					<input type="text"  name="username" required  maxlength="100" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"  name="password" required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
+					<input type="password"  name="password"  maxlength="100" required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			
@@ -335,13 +335,13 @@ $(document).ready(function(){
 				<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span> Name:</label>
 					<div class="col-sm-8">
-						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required  id="drivers_name" name="drivers_name" class="form-control">
+						<input type="text" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode == 32))' required  maxlength="100" id="drivers_name" name="drivers_name" class="form-control">
 					</div>
 				</div>
 				<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Address:</label>
 				<div class="col-sm-8">
-					<input type="text" name="drivers_address" id="drivers_address"  class="form-control">
+					<input type="text" name="drivers_address" maxlength="200" id="drivers_address"  class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -354,13 +354,13 @@ $(document).ready(function(){
 			  <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text" readonly  id="username" required name="username" class="form-control">
+					<input type="text" readonly  id="username" required maxlength="100" name="username" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password"    name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
+					<input type="password"   id="password"   maxlength="100"  name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			

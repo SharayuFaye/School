@@ -738,14 +738,14 @@ $('#mark').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Marks Obtained/Grade:</label>
 				<div class="col-sm-8">
-					<input type="text" name="marks" id="m" class="form-control" required >
+					<input type="text" name="marks" id="m" class="form-control"  maxlength="100" required >
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Competence:</label>
 				<div class="col-sm-8">
-					<input type="text" name="competence" id="cm" class="form-control">
+					<input type="text" name="competence" id="cm" maxlength="100" class="form-control">
 				</div>
 			</div>
  
@@ -908,13 +908,13 @@ $('#mark').change(function(){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Marks Obtained/Grade:</label>
 			 
 				<div class="col-sm-8">
-					<input type="text" name="marks" id="mark" class="form-control" required >
+					<input type="text" name="marks" id="mark" class="form-control"  maxlength="100" required >
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Competence:</label>
 				<div class="col-sm-8">
-					<input type="text" name="competence" id="competence" class="form-control">
+					<input type="text" name="competence" id="competence"  maxlength="100" class="form-control">
 				</div>
 			</div>
 				
