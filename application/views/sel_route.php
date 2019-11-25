@@ -58,9 +58,9 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php $i=1; foreach ($route_show as $row) { ?>
+										<?php $k=1; foreach ($route_show as $row) { ?>
 										<tr data-item-id="1">
-											<td><?php echo $i;?></td> 
+											<td><?php echo $k;?></td> 
 											<td><?php echo $row->route_name;?></td> 
 											<td><?php $pick ='';
 											$pickup = json_decode($row->pickup_point_id);
@@ -79,7 +79,7 @@
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del('<?php echo $row->id;?>')"></i></a>
 											</td>
 										</tr>
-										<?php $i++;} ?> 
+										<?php $k++;} ?> 
 										 
 									</tbody>
 								</table>
