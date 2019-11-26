@@ -274,7 +274,7 @@ function edit($id,$class_id,$sections, $sections_id, $type,$exam_type_id,$subjec
 	$('#teacher').val($teacher_id);
 	$('#student_name2').val($student_name); 
 	$('#students_id2').val($students_id);  
-	$('#exam_type').val($exam_type_id); 
+	$('#exam_type2').val($exam_type_id); 
 	$('#mark').val($marks);
 	$('#subject').val($subject);
 	$('#evaluation_type2').val($evaluation_type);
@@ -526,6 +526,12 @@ $('#sel_sub').change(function(){
 	var  subject = $('#sel_sub').val(); 
 	var  section = $('#section1').val();  
 	var  exam_type_id = $('#exam_type1').val();   
+	 console.log(subject);
+
+	 console.log(section);
+
+	 console.log(exam_type_id);
+
 		 $.ajax({
 			 type: "GET",
 			 url: "<?php echo base_url(); ?>index.php/exams_fetch_id", 
@@ -549,7 +555,12 @@ $('#sel_sub').change(function(){
 $('#subject').change(function(){    
 	var  subject = $('#subject').val(); 
 	var  section = $('#section2').val();  
-	var  exam_type_id = $('#exam_type').val();   
+	var  exam_type_id = $('#exam_type2').val();   
+	 console.log(subject);
+
+	 console.log(section);
+
+	 console.log(exam_type_id); 
 		 $.ajax({
 			 type: "GET",
 			 url: "<?php echo base_url(); ?>index.php/exams_fetch_id", 
@@ -831,7 +842,6 @@ $('#mark').change(function(){
 </div>                                          
 </div>
 </div>                                          
-</div>
 </div>        
 
 <!-- edit row -->
@@ -872,7 +882,7 @@ $('#mark').change(function(){
 			  <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Exam Type:</label>
 				<div class="col-sm-8">
-					<select name="exam_type" id="exam_type" class="form-control" required > 
+					<select name="exam_type" id="exam_type2" class="form-control" required > 
 						<?php  foreach ($exam_type_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->type;?></option> 
 						<?php } ?>       
