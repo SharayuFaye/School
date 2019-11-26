@@ -416,7 +416,7 @@ $('#sel_section').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Image:</label>
 				<div class="col-sm-8">
-					<input type="file" name="image" id="img" required  class="form-control">  
+					<input type="file" name="image" id="img" required   accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .txt,.csv,.pdf"  class="form-control">  
 				</div>
 			</div> 	
 	    </div>
@@ -488,7 +488,7 @@ $('#sel_section').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Image:</label>
 				<div class="col-sm-8">
-					<input type="file" name="image"   class="form-control">  
+					<input type="file" name="image"   accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .txt,.csv,.pdf"  class="form-control">  
 					<label    id="image"   ></label>
 				</div>
 			</div> 	

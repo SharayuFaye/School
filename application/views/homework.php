@@ -447,7 +447,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8">
-					<input type="file" id="img"   name="image" class="form-control"> 
+					<input type="file" id="img"   accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .txt,.csv,.pdf"  name="image" class="form-control"> 
 					  
 				</div>
 			</div> 	
@@ -549,7 +549,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
 				<div class="col-sm-8"> 
-					<input type="file" name="image"     class="form-control">
+					<input type="file" name="image"   accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .txt,.csv,.pdf"    class="form-control">
 					<label id="img1"></label>
 					<input type="checkbox" name="remove"> Remove File 
 <!-- 					<img src="img/logo.png"  id="img1"  width="35" height="35"   /> -->
