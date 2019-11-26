@@ -521,6 +521,55 @@ $('#section2').change(function(){
 		 } 
 	 }); 
 	});
+ 
+$('#sel_sub').change(function(){    
+	var  subject = $('#sel_sub').val(); 
+	var  section = $('#section1').val();  
+	var  exam_type_id = $('#exam_type1').val();   
+		 $.ajax({
+			 type: "GET",
+			 url: "<?php echo base_url(); ?>index.php/exams_fetch_id", 
+			 data: 'subject='+subject+'&section='+section+'&exam_type_id='+exam_type_id,
+	         datatype : "json",
+			 success: function(msg)  
+			 {    
+					 console.log(msg);
+
+			        	$('#error_date1').html('');
+			            document.getElementById("save").disabled = false;
+					 if(msg != 'True' ){ 
+
+				        	$('#error_date1').html(msg);
+				            document.getElementById("save").disabled = true;
+					 } 
+			 } 
+		 }); 
+	});
+
+$('#subject').change(function(){    
+	var  subject = $('#subject').val(); 
+	var  section = $('#section2').val();  
+	var  exam_type_id = $('#exam_type').val();   
+		 $.ajax({
+			 type: "GET",
+			 url: "<?php echo base_url(); ?>index.php/exams_fetch_id", 
+			 data: 'subject='+subject+'&section='+section+'&exam_type_id='+exam_type_id,
+	         datatype : "json",
+			 success: function(msg)  
+			 {    
+					 console.log(msg);
+
+			        	$('#error_date2').html('');
+			            document.getElementById("save2").disabled = false;
+					 if(msg != 'True' ){ 
+
+				        	$('#error_date2').html(msg);
+				            document.getElementById("save2").disabled = true;
+					 } 
+			 } 
+		 }); 
+	});
+
 
 
 $('#of').change(function(){   
@@ -639,12 +688,12 @@ $('#mark').change(function(){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Exam Type:</label>
 				<div class="col-sm-8">
-					<select name="exam_type" class="form-control" required >
+					<select name="exam_type" id="exam_type1" class="form-control" required >
 						<option></option>
 						<?php  foreach ($exam_type_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->type;?></option> 
 						<?php } ?>       
-					</select>
+					</select> 
 				</div>
 			</div>
 			
@@ -653,6 +702,7 @@ $('#mark').change(function(){
 				<div class="col-sm-8">
 					<select name="subject" id="sel_sub" class="form-control" required > 
 					</select>
+					<span id="error_date1" style="color:red"></span>
 				</div>
 			</div>
 			
@@ -835,6 +885,7 @@ $('#mark').change(function(){
 					<select name="subject" id="subject" class="form-control" required > 
 					 
 					</select>
+					<span id="error_date2" style="color:red"></span>
 				</div>
 			</div>
 			 

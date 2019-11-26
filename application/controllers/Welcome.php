@@ -1332,6 +1332,25 @@ class Welcome extends CI_Controller {
         $sections_data = $this->m_timetables->timetable_sections_fetch($class_sel);
         echo json_encode($sections_data);
     }
+     
+    public function exams_fetch_id()
+    {
+        $section = $this->input->get('section') ;
+        $subject = $this->input->get('subject') ;
+        $exam_type_id = $this->input->get('exam_type_id') ;
+        $this->load->model('m_exams');
+        $exams_data = $this->m_exams->exams_fetch_id($section,$subject,$exam_type_id);
+        $today = date('Y-m-d')  ;
+        if($exams_data){
+            if( $today > $exams_data[0]->date){
+                echo 'True';
+            }else{
+                echo 'Exam not done yet!';
+            }
+        }else {
+            echo 'No exam for this subject!';
+        }
+    }
     
     
     

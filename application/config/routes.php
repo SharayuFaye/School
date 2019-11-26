@@ -106,6 +106,7 @@ $route['students_byroll_fetch'] = 'welcome/students_byroll_fetch';
 $route['students_byroll_fetch_edit'] = 'welcome/students_byroll_fetch_edit';
 $route['subject_section_fetch'] = 'welcome/subject_section_fetch';
 $route['timetable_sections_fetch'] = 'welcome/timetable_sections_fetch';
+$route['exams_fetch_id'] = 'welcome/exams_fetch_id';
 
 
 $route['fees_add'] = 'welcome/fees_add';

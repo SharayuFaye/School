@@ -73,8 +73,22 @@ class m_exams extends CI_Model {
 	        return $query->result();
 	    } 
     } 
- 
-
+    
+    function exams_fetch_id($section,$subject,$exam_type_id){
+        $this->db->select("date,time,id");
+        $this->db->from('exams');
+        $this->db->where(array( 'school_id' => $this->session->userdata['school']));
+        $this->db->where(array( 'sections_id' => $section));
+        $this->db->where(array( 'exam_type_id' => $exam_type_id));
+        $this->db->where(array( 'subject' => $subject)); 
+        $query = $this->db->get();
+        if($query)
+        {
+            return $query->result();
+        }
+    } 
+    
+  
     function exams_delete($id){ 
 		$this->db->where(array( 'id' =>$id));
 		$query = $this->db->delete('exams');
