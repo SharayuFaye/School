@@ -41,20 +41,7 @@
 										<strong><?php echo $success_msg; ?></strong>  
 									</div>
 							<?php } ?>
-							<!--          for upload -->
-                        	<?php if(isset($duplicate_record)){    if($duplicate_record[0]){  ?>
-                        		<div class="alert alert-success" id="duplicate">
-                        				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        				<strong>Duplicate entries for user - <?php $i=1;foreach($duplicate_record as $record){ ?> <?php echo $i.") "; echo $record; ?> <?php $i++ ;} ?></strong>  
-                        			</div>
-                        	<?php }else{ ?>
-                        	<div class="alert alert-success" id="success">
-                				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                				<strong>Record inserted successfully!</strong>  
-                			</div>
-                			<?php } } ?>
-                  
-                <!--    end      for upload -->  
+						 
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="mb-3">
@@ -62,26 +49,7 @@
 										</div>
 									</div>
 								</div>
-								<style type="text/css">
-									table {
-										    background : none !important;
-										}
-								</style>
-							
-<!--          for upload  
-            		 <?php $this->load->helper('form');?>
-                     <?php echo form_open_multipart('Welcome/bus');?>
-				<div class="form-group row" style="padding-left: 50%; margin-top: -57px;padding-bottom:20px;"> 
-						<div class="col-sm-9"> 
-            				<input  type="file" accept=".xls"required  name="xls_file" class="form-control ">
-            				</div>
-						<div class="col-sm-3">
-							<input type="submit" id="upload" name="upload_xls" class="btn btn-primary" value="Upload XLS"> 
-					</div>
-				</div>
-					 <?php echo form_close(); ?>
-					 
-<!--          for upload -->
+			 
 			<table class="table table-bordered table-striped mb-0" id="datatable-tabletools">
 									<thead>
 										<tr>
@@ -114,7 +82,7 @@
 											<?php } }  echo rtrim($pick,' , '); } ?>
 											</td>
 											
-									<td>
+									<td class="actions">
 												<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->bus_number;?>','<?php echo $row->student_strength;?>')"></i></a>
 												<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)"></i></a>
 											</td>
