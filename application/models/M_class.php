@@ -56,7 +56,8 @@ class m_class extends CI_Model {
         $this->db->from('sections b');
         $this->db->join('class c', 'c.id=b.class_id', 'left'); 
 		$this->db->order_by('b.class_id','asc');
-		$this->db->distinct('b.class_id'); 
+		$this->db->distinct('b.class_id');
+		$this->db->where(array( 'b.school_id' => $this->session->userdata['school']));
 		$query = $this->db->get(); 
 		if($query)
 	    {
