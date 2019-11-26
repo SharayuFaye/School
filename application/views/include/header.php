@@ -243,14 +243,14 @@ html .btn-secondary.active,
 				                                   Route
 				                                </a>
 				                            </li>
-				                            <li id="bus">
-				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/bus">
-				                                    Bus
-				                                </a>
-				                            </li>
 				                           <li id="drivers">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/drivers">
 				                                    Drivers
+				                                </a>
+				                            </li>
+				                            <li id="bus">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/bus">
+				                                    Bus
 				                                </a>
 				                            </li>
 				                           

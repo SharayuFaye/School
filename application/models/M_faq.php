@@ -6,6 +6,7 @@ class m_faq extends CI_Model {
         $this->db->select("*");
         $this->db->from('faq');
         $this->db->where(array( "questions"=>$questions ));
+        $this->db->where(array( 'school_id' =>$this->session->userdata['school']));
         $query = $this->db->get();
         if($query->num_rows() == 0){
             $target = array(
@@ -25,6 +26,8 @@ class m_faq extends CI_Model {
         $this->db->from('faq');
         $this->db->where(array( "questions"=>$questions ));
         $this->db->where('id!=', $id);
+        $this->db->where(array( 'school_id' =>$this->session->userdata['school']));
+        
         $query = $this->db->get();
         if($query->num_rows() == 0){
             $target = array(

@@ -57,7 +57,7 @@
 							<th>Class</th>
 							<th>Section</th> 
 							<th>Subject</th> 
-							<th>Date</th>
+<!-- 							<th>Date</th> -->
 							<th>Image</th> 
 							<th>Actions</th>
 						</tr>
@@ -69,7 +69,7 @@
     						<td><?php echo $row->class;?></td>  
     						<td><?php echo $row->sections;?></td>  
     						<td><?php echo $row->subject;?></td> 
-    						<td><?php echo $row->date;?></td>  
+    						<!-- -<td><?php echo $row->date;?></td> -->  
 							<td> <?php echo $row->image;?> </td> 
 							<td class="actions"> 
 								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->date;?>','<?php echo $row->subject;?>','<?php echo $row->class_id;?>','<?php echo $row->sections;?>','<?php echo $row->sections_id;?>','<?php echo $row->image;?>')"></i></a>
@@ -407,16 +407,16 @@ $('#sel_section').change(function(){
 					</select>
 				</div>
 			</div>
+<!-- 			<div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+					<input type="hidden" id="dt"  value="<?php echo date('Y-m-d');?>"  name="date" class="form-control" required >
+<!-- 				</div> -->
+<!-- 			</div>  -->
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Image:</label>
 				<div class="col-sm-8">
-					<input type="date" id="dt"  max="<?php echo date('Y-m-d');?>"  name="date" class="form-control" required >
-				</div>
-			</div> 
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
-				<div class="col-sm-8">
-					<input type="file" name="image" id="img"   class="form-control">  
+					<input type="file" name="image" id="img" required  class="form-control">  
 				</div>
 			</div> 	
 	    </div>
@@ -479,14 +479,14 @@ $('#sel_section').change(function(){
 				</div>
 			</div>
 	      
+<!-- 			<div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+					<input type="hidden" name="date" value="<?php echo date('Y-m-d');?>"  id="date" class="form-control" required >
+<!-- 				</div> -->
+<!-- 			</div>  -->
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
-				<div class="col-sm-8">
-					<input type="date" name="date" max="<?php echo date('Y-m-d');?>"  id="date" class="form-control" required >
-				</div>
-			</div> 
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Image:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Image:</label>
 				<div class="col-sm-8">
 					<input type="file" name="image"   class="form-control">  
 					<label    id="image"   ></label>

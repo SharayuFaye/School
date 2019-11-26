@@ -52,7 +52,7 @@
 										<tr>
 											<th>Sr No</th>
 											<th>Wallpaper</th>
-											<th>Date</th>  
+<!-- 											<th>Date</th>   -->
 											<th>School</th> 
 											<th>Actions</th>
 										</tr>
@@ -62,7 +62,7 @@
 										<tr data-item-id="1"> 
 											<td><?php echo $i;?></td>
 											<td><img src="<?php echo base_url(); ?>wallpaper/<?php echo $row->wallpaper;?>" width="35" height="35"/></td>   
-											<td><?php echo $row->date;?></td> 
+										<!-- - <td><?php echo $row->date;?></td> -->	
 											<td><?php echo $row->school_name;?></td> 
 											<td class="actions"> 
 												<a href="#" class="on-default edit-row"><i onclick="edit(<?php echo $row->id;?>,'<?php echo $row->wallpaper;?>','<?php echo $row->date;?>','<?php echo $row->school_id;?>' )" class="fa fa-pencil"></i></a>
@@ -165,12 +165,12 @@ function del($id){
 					 	 ( File accepts only jpg , png , jpeg type image file. )
 			</div> 
 		</div> 	
-		<div class="form-group row">
-			<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
-			<div class="col-sm-8"> 
-				<input type="Date" name="date" max="<?php echo date("Y-m-d");?>" class="form-control">
-			</div>
-		</div>
+<!-- 		<div class="form-group row"> -->
+<!-- 			<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label> -->
+<!-- 			<div class="col-sm-8">  -->
+				<input type="hidden" name="date" value="<?php echo date("Y-m-d");?>" class="form-control">
+<!-- 			</div> -->
+<!-- 		</div> -->
 		<div class="form-group row">
 			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 			<div class="col-sm-8"> 
@@ -222,12 +222,12 @@ function del($id){
 											<img src="img/logo.png"  id="Wallpaper"  width="35" height="35"   />
 										</div> 
 									</div> 	
-									<div class="form-group row">
-										<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label>
-										<div class="col-sm-8"> 
-											<input type="date" id="Date"  max="<?php echo date("Y-m-d");?>"  name="date" class="form-control">
-										</div>
-									</div>
+<!-- 									<div class="form-group row"> -->
+<!-- 										<label class="col-sm-4 control-label text-sm-right pt-2">Date:</label> -->
+<!-- 										<div class="col-sm-8">  -->
+											<input type="hidden" id="Date"  value="<?php echo date("Y-m-d");?>"  name="date" class="form-control">
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="form-group row">
 										<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 										<div class="col-sm-8"> 

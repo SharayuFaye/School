@@ -53,7 +53,7 @@
 							<th>Sr No</th> 
 							<th>Questions</th>
 							<th>Answers</th>
-							<th>Date</th>
+<!-- 							<th>Date</th> -->
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -63,7 +63,7 @@
         					<td><?php echo $i;?></td>   
         					<td><?php echo $row->questions;?></td> 
 							<td><?php echo $row->answers;?></td>
-							<td><?php echo $row->date;?></td> 
+						<!-- 	<td><?php echo $row->date;?></td> --> 
 					        <td class="actions"> 
 								<a href="#" class="on-default edit-row"><i class="fa fa-pencil" onclick="edit('<?php echo $row->id;?>','<?php echo $row->questions;?>','<?php echo $row->answers;?>','<?php echo $row->date;?>')"></i></a>
 								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o" onclick="del(<?php echo $row->id;?>)"></i></a>
@@ -169,12 +169,12 @@ function del($id){
 					<input type="text"  name="answers"  maxlength="200" class="form-control">
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
-				<div class="col-sm-8">
-					<input type="date" name="date" class="form-control" required>
-				</div>
-			</div>
+<!-- 			<div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+ 					<input type="hidden" name="date" class="form-control" value="<?php echo date('Y-m-d');?>">  
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 	    </div>
 		<footer class="card-footer text-right"> 
@@ -219,12 +219,12 @@ function del($id){
 					<input type="text" id="answers"  maxlength="200" name="answers" class="form-control">
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label>
-				<div class="col-sm-8">
-					<input type="date" id="date" name="date" class="form-control" required>
-				</div>
-			</div>
+<!-- 			<div class="form-group row"> -->
+<!-- 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Date:</label> -->
+<!-- 				<div class="col-sm-8"> -->
+					<input type="hidden" id="date" name="date" class="form-control"  value="<?php echo date('Y-m-d');?>">
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 									<footer class="card-footer text-right">
 										<input class="btn btn-primary" type="submit"  name="edit_faq" value="Update">

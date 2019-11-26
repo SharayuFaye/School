@@ -94,7 +94,7 @@
 							<th>Mother Name</th>
 							<th>Mother MailID</th>
 							<th>Mother Mob No</th>
-							<th>Parent Scan Id</th> 
+							<th>Parent Id</th> 
 							<th>Bus</th>
 							<th>Pickup Point</th>
 							<th>Join Date</th>
@@ -978,7 +978,7 @@ $('#confirm_password1').removeAttr('required');
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Scan Id:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Id:</label>
 					<div class="col-sm-8">
 					
 						<input type="text"  maxlength="100" required id="parent_scn" name="parent_id" class="form-control">
@@ -1164,7 +1164,7 @@ $('#confirm_password1').removeAttr('required');
 					</div>
 				</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Scan Id:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parent Id:</label>
 				<div class="col-sm-8">
 					<input type="text" required  maxlength="100" id="parent_id" name="parent_id" class="form-control">
 				</div>
