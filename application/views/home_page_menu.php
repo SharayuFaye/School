@@ -278,7 +278,7 @@ function del($id){
 				<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Page Name :</label>
 				<div class="col-sm-8">
-					<select name="page_name" id="page_name"  required class="form-control">
+					<select name="page_name" id="page_name"  required class="form-control" disabled>
 							<option value="notification" >Notification</option>
 						<option value="fees" >Fees</option>
 						<option value="activity" >Activity</option>
@@ -313,7 +313,7 @@ function del($id){
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School:</label>
 				<div class="col-sm-8">
-					<select  name="school"  id="school1" required  class="form-control">
+					<select  name="school"  id="school1" required  class="form-control" disabled>
 						<?php  foreach ($school_show as $row) { ?>
 							<option value="<?php echo $row->id;?>"><?php echo $row->school_name;?></option> 
 						<?php } ?> 

@@ -1,7 +1,7 @@
 <?php include('include/header.php');?>	
 				<section role="main" class="content-body">
 					<header class="page-header">
-						<h2>PickUp Point</h2>
+						<h2>Route</h2>
 					
 						<div class="right-wrapper text-right">
 							<ol class="breadcrumbs">
@@ -11,7 +11,7 @@
 									</a>
 								</li>
 								<li><span>Forms</span></li>
-								<li><span>Select PickUp Point &nbsp;</span></li> 
+								<li><span>Route &nbsp;</span></li> 
 			</ol> 
 		</div>
 	</header>
@@ -24,7 +24,7 @@
 									<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 								</div>
 						
-								<h2 class="card-title">Select PickUp Point</h2>
+								<h2 class="card-title">Route</h2>
 							</header>
 							<div class="card-body">
 

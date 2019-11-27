@@ -363,7 +363,7 @@ function ValidateEmailE(v)
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Logo:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Logo:</label>
 				<div class="col-sm-8">
 					 <input type="file" accept="image/*" required name="school_logo" class="form-control">
 					 	 ( File accepts only jpg , png , jpeg type image file. )
@@ -440,7 +440,7 @@ function ValidateEmailE(v)
 				</div>
 			</div>
 	        <div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">School Logo:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School Logo:</label>
 				<div class="col-sm-8">
 					 <input type="file" accept="image/*"  name="school_logo" class="form-control">
 					 	 ( File accepts only jpg , png , jpeg type image file. )<br>

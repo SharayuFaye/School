@@ -232,7 +232,7 @@ function del($id){
 										<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 										<div class="col-sm-8"> 
 											
-										<select name="school" id="School" required class="form-control">
+										<select name="school" id="School" required class="form-control" disabled>
 											<?php  foreach ($school_show as $row) { ?>
 												<option value="<?php echo $row->id;?>"><?php echo $row->school_name;?></option> 
 											<?php } ?> 
@@ -241,7 +241,7 @@ function del($id){
 
 							    </div>
 
-
+</div>
 								<footer class="card-footer text-right">
 									<input class="btn btn-primary" type="submit"  name="edit_backgrounds" value="Update">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

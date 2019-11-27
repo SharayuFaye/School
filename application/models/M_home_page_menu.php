@@ -2,8 +2,7 @@
 class m_home_page_menu extends CI_Model { 
 	function home_page_menu_add($menu_name,$page_name,$school){ 
 		$this->db->select("*"); 
-		$this->db->from('home_page_menu'); 
-		$this->db->where(array( 'menu_name' => $menu_name));
+		$this->db->from('home_page_menu');  
 		$this->db->where(array( 'page_name' => $page_name));
 		$this->db->where(array( 'school_id' => $school));
 		$query = $this->db->get(); 
@@ -21,8 +20,7 @@ class m_home_page_menu extends CI_Model {
     }
     function home_page_menu_edit($id,$menu_name,$page_name,$school){ 
         $this->db->select("*");
-        $this->db->from('home_page_menu');
-        $this->db->where(array( 'menu_name' => $menu_name));
+        $this->db->from('home_page_menu'); 
         $this->db->where(array( 'page_name' => $page_name));
         $this->db->where(array( 'school_id' => $school));
         $this->db->where('id!=', $id);

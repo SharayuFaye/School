@@ -212,6 +212,11 @@ $(document).ready(function(){
 	}); 
 });
 
+function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+}
+
 </script>
 <!-- add row -->
 <div class="modal fade" id="addrow" role="dialog"  >
@@ -231,19 +236,19 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username:</label>
 				<div class="col-sm-8">
-					<input type="mail" required  maxlength="100" name="username" class="form-control">
+					<input type="mail" required  maxlength="100" name="username" class="form-control" onkeypress="return AvoidSpace(event)" >
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 				<div class="col-sm-8">
-					<input type="password" required  maxlength="100" id="password1"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" name="password" class="form-control">
+					<input type="password" required  maxlength="100" id="password1"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onkeypress="return AvoidSpace(event)" name="password" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text" required  maxlength="100" id="confirm_password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="confirm_password" class="form-control">
+					<input type="text" required  maxlength="100" id="confirm_password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  onkeypress="return AvoidSpace(event)" name="confirm_password" class="form-control">
 					<span id="msg1" style="color: red"></span>
 				</div>
 			</div>
@@ -294,19 +299,19 @@ $(document).ready(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username:</label>
 				<div class="col-sm-8">
-					<input type="text" required readonly  maxlength="100" name="username" id="username" class="form-control">
+					<input type="text" required readonly  maxlength="100" name="username" id="username" onkeypress="return AvoidSpace(event)" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 				<div class="col-sm-8">
-					<input type="password"   name="password"  maxlength="100" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  class="form-control">
+					<input type="password"   name="password"  maxlength="100" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onkeypress="return AvoidSpace(event)" class="form-control">
 				</div>
 			</div> 
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text"   id="confirm_password2"  maxlength="100" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  name="confirm_password" class="form-control">
+					<input type="text"   id="confirm_password2"  maxlength="100" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onkeypress="return AvoidSpace(event)"  name="confirm_password" class="form-control">
 					<span id="msg2" style="color: red"></span>
 				</div>
 			</div>
@@ -314,7 +319,7 @@ $(document).ready(function(){
 	       <div class="form-group row">
 			<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>School  :</label>
 			<div class="col-sm-8"> 
-				<select name="school" required id="schoolid" class="form-control"> 
+				<select name="school" required id="schoolid" class="form-control" disabled> 
 					<?php  foreach ($school_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->school_name;?></option> 
 					<?php } ?> 

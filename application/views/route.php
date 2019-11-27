@@ -242,6 +242,14 @@ $('#lattitude').change(function(){
 }); 
 
 }); 
+
+
+function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+}
+
+
 </script>
  
 
@@ -263,7 +271,7 @@ $('#lattitude').change(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup point</label>
 				<div class="col-sm-8">
-					<input type="text"  maxlength="100" required name="pickup_point" maxlength="100" class="form-control">
+					<input type="text"  maxlength="100" required name="pickup_point" onkeypress="return AvoidSpace(event)"  maxlength="100" class="form-control">
 				</div>
 			</div>
 	    	<div class="form-group row">
@@ -315,7 +323,7 @@ $('#lattitude').change(function(){
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Pickup Point</label>
 				<div class="col-sm-8">
-					<input type="text" maxlength="100" required name="pickup_point" id="pickup_point" class="form-control">
+					<input type="text" maxlength="100" required name="pickup_point" onkeypress="return AvoidSpace(event)"   id="pickup_point" class="form-control">
 				</div>
 			</div>	
 	    	<div class="form-group row">

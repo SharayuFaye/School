@@ -76,10 +76,14 @@ class m_school extends CI_Model {
 
 
     function school_delete($id){ 
+        
+        
 		$this->db->where(array( 'id' =>$id));
 		$query = $this->db->delete('school');
 		if($query)
-	    {
+	    { 
+	        $this->db->where(array( 'school_id' =>$id));
+	        $query = $this->db->delete('user');
 	        return true;
 	    } 
     } 

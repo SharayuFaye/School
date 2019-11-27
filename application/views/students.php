@@ -97,7 +97,7 @@
 							<th>Parent Id</th> 
 							<th>Bus</th>
 							<th>Pickup Point</th>
-							<th>Join Date</th>
+							<th>Admission Date</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -818,7 +818,16 @@ $('#confirm_password1').removeAttr('required');
 }); 
  
  
- });	 
+ });
+
+
+
+ function AvoidSpace(event) {
+     var k = event ? event.which : window.event.keyCode;
+     if (k == 32) return false;
+ }
+
+ 	 
 </script>  
 
  
@@ -879,13 +888,13 @@ $('#confirm_password1').removeAttr('required');
 					<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password:</label>
 					<div class="col-sm-8"><span id="pw_msg" style="color:red"></span>
-						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd" required name="password" class="form-control">
+						<input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   maxlength="100" id="pwd"  onkeypress="return AvoidSpace(event)"  required name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Confirm Password:</label>
 				<div class="col-sm-8">	<span id="msgp1" style="color: red"></span>
-					<input type="text"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="confirm_password1" required  name="confirm_password" class="form-control">
+					<input type="text"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="confirm_password1" required  onkeypress="return AvoidSpace(event)"  name="confirm_password" class="form-control">
 				
 				</div>
 			</div>
@@ -1014,7 +1023,7 @@ $('#confirm_password1').removeAttr('required');
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 control-label text-sm-right pt-2">Join Date:</label>
+					<label class="col-sm-4 control-label text-sm-right pt-2">Admission Date:</label>
 					<div class="col-sm-8">
 						<input type="Date" name="join_date"  max="<?php echo date('Y-m-d');?>" class="form-control">
 					</div>
@@ -1061,13 +1070,13 @@ $('#confirm_password1').removeAttr('required');
 					<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"> Password:</label>
 					<div class="col-sm-8">
-						<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"  id="password" name="password" class="form-control">
+						<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  maxlength="100"  onkeypress="return AvoidSpace(event)"  id="password" name="password" class="form-control">
 					</div>
 				</div>
 	    	<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> Confirm Password:</label>
 				<div class="col-sm-8">
-					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"    name="confirm_password" class="form-control">
+					<input type="text" id="confirm_password2"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   onkeypress="return AvoidSpace(event)"   name="confirm_password" class="form-control">
 					<span id="msgp2" style="color: red"></span>
 				</div>
 			</div>
@@ -1199,7 +1208,7 @@ $('#confirm_password1').removeAttr('required');
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-4 control-label text-sm-right pt-2">Join Date:</label>
+				<label class="col-sm-4 control-label text-sm-right pt-2">Admission Date:</label>
 				<div class="col-sm-8">
 					<input type="date" id="join_date"  max="<?php echo date('Y-m-d');?>"  name="join_date" class="form-control">
 				</div>

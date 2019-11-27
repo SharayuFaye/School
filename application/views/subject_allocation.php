@@ -454,7 +454,7 @@ $('#section2').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
-					<select  name="class" id="class2" class="form-control">
+					<select  name="class" id="class2" class="form-control" disabled >
 						<?php  foreach ($class_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->class;?></option> 
 					<?php } ?> 
@@ -465,7 +465,7 @@ $('#section2').change(function(){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
-					<select  name="section" id="section2" required class="form-control"> 
+					<select  name="section" id="section2" required class="form-control" disabled > 
 					</select>
 				</div>
 			</div>
@@ -473,7 +473,7 @@ $('#section2').change(function(){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Subject:</label>
 				  
 			<div class="col-sm-8"> 
-					<select  name="subject" id="subject2" required  class="form-control"> 
+					<select  name="subject" id="subject2" required  class="form-control" disabled > 
 				 	<!--	<?php  foreach ($subject_show as $row) { ?>
 						<option value="<?php echo $row->subject;?>"><?php echo $row->subject  ;?></option> 
 					<?php } ?>  --->

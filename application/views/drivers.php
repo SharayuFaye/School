@@ -244,6 +244,13 @@ $(document).ready(function(){
     }); 
 
 }); 
+
+
+function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+}
+
 </script>
  
 
@@ -283,13 +290,13 @@ $(document).ready(function(){
 			 <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text"  name="username" required  maxlength="100" class="form-control">
+					<input type="text"  name="username" required  maxlength="100"  onkeypress="return AvoidSpace(event)"  class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"  name="password"  maxlength="100" required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
+					<input type="password"  name="password"  maxlength="100"  onkeypress="return AvoidSpace(event)"  required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			
@@ -354,13 +361,13 @@ $(document).ready(function(){
 			  <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Username :</label>
 				<div class="col-sm-8">
-					<input type="text" readonly  id="username" required maxlength="100" name="username" class="form-control">
+					<input type="text" readonly  id="username" required maxlength="100"  onkeypress="return AvoidSpace(event)"  name="username" class="form-control">
 				</div>
 			</div>
 	        <div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Password :</label>
 				<div class="col-sm-8">
-					<input type="password"   id="password"   maxlength="100"  name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
+					<input type="password"   id="password"   maxlength="100"  name="password"  onkeypress="return AvoidSpace(event)"  class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  >
 				</div>
 			</div>
 			

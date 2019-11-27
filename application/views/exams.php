@@ -473,7 +473,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
-					<select name="class" id="class2"  class="form-control"> 
+					<select name="class" id="class2"  class="form-control" disabled> 
 						<?php  foreach ($class_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->class;?></option> 
 						<?php } ?> 
@@ -483,7 +483,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
-					<select name="section" id="section2" class="form-control">  
+					<select name="section" id="section2" class="form-control" disabled>  
 					</select>
 				</div>
 			</div>
@@ -491,7 +491,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"> <span class="req" >*</span>Subject:</label>
 				<div class="col-sm-8">
-					 <select name="subject" id="subject2" class="form-control"> 
+					 <select name="subject" id="subject2" class="form-control" disabled> 
 					</select> 
 				</div>
 			</div>
@@ -499,7 +499,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Type:</label>
 				<div class="col-sm-8">
-					<select name="exam_type" id="type"  class="form-control">
+					<select name="exam_type" id="type"  class="form-control" disabled>
 					<option></option>
 						<?php  foreach ($exam_type_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->type;?></option> 

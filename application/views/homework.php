@@ -469,16 +469,14 @@ function del($id){
 				<div class="col-sm-8">
 					<input type="date" id="sdt" name="submission_date" class="form-control">
 				</div>
-			</div>
-
+			</div> 
 	    </div>
 		<footer class="card-footer text-right"> 
 			<span style="margin-left:10px;color:green;" id="success_m"></span>
-		<span style="margin-left:10px;color:red" id="error_m"></span>
+			<span style="margin-left:10px;color:red" id="error_m"></span>
 			<input class="btn btn-primary" type="button" id="add_new"  value="Add new">
 			<input class="btn btn-primary" type="button" id="save"  name="save_homework" value="Save"> 
-			<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:window.location.reload()">Close</button>
-		 
+			<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:window.location.reload()">Close</button> 
 		</footer>
 	</section> 
 	</form>

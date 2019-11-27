@@ -411,7 +411,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Class:</label>
 				<div class="col-sm-8">
-					<select  name="class" id="class1" class="form-control">
+					<select  name="class" id="class1" class="form-control" disabled>
 						<?php  foreach ($class_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->class;?></option> 
 					<?php } ?> 
@@ -422,7 +422,7 @@ function del($id){
 			<div class="form-group row">
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Section:</label>
 				<div class="col-sm-8">
-					<input type="text" required id="section"  onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control">
+					<input type="text" required id="section"  onkeyup="this.value = this.value.toUpperCase();" maxlength="2" name="sections" class="form-control" disabled>
 				</div>
 			</div>
 			
