@@ -345,7 +345,7 @@ $(document).ready(function(){
 	<div class="modal-content" style="width: 155%;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right:  70%;">Add PickUp Point</h3>
+          <h3 class="modal-title" style="margin-right:  70%;">Add Route</h3>
         </div>
 <div class="modal-body">
 <div class="col-lg-12"> 
@@ -405,7 +405,7 @@ $(document).ready(function(){
          <div class="modal-content" style="width: 155%;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" style="margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important;">&times;</button>
-          <h3 class="modal-title" style="margin-right:  70%;">Edit PickUp Point</h3>
+          <h3 class="modal-title" style="margin-right:  70%;">Edit Route</h3>
         </div>
 		<div class="modal-body">         
 		       <div class="col-lg-12"> 
