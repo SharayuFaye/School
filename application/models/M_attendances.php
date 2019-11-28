@@ -218,7 +218,6 @@ class m_attendances extends CI_Model {
         $this->db->select('stud.student_name,stud.roll_number,a.*');
         $this->db->from('attendance a');
         $this->db->join('students stud', 'stud.users_id='.$user_id, 'left');
-        $this->db->where( 'stud.join_date <=', date('Y-m-d')); 
         $query = $this->db->get();
         
         if($query)
@@ -269,7 +268,8 @@ class m_attendances extends CI_Model {
         	$this->db->select('stud.id,stud.student_name,stud.roll_number');
         	$this->db->from('students stud');
         	$this->db->join('sections s', 's.id=stud.sections_id', 'left');
-        	$this->db->where(array( 's.id' =>$section));  
+        	$this->db->where(array( 's.id' =>$section));
+        	$this->db->where( 'stud.join_date <=', $date); 
         	
         	$query = $this->db->get();
         	
