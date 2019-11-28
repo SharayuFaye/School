@@ -141,8 +141,11 @@ class m_route extends CI_Model {
 		$points = $query->result();
 
 		log_message("debug","Students pickup points ::::: " . print_r($points,true));
-		return($this->get_pickup_points($points[0]->pickup_point_id));
-
+		if($this->get_pickup_points($points[0]->pickup_point_id) == null){
+		      return array();
+		}else{
+		      return($this->get_pickup_points($points[0]->pickup_point_id));
+		}
 	}
 
 	function get_bus_location($token){
