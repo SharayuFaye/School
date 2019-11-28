@@ -882,7 +882,7 @@ $('#confirm_password1').removeAttr('required');
 			<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
 					<div class="col-sm-8"><span id="msg" style="color:red"></span><span id="msg1" style="color:red"></span>
-						<input type="text"  maxlength="100" id="mail_id" onchange="ValidateEmail(this.value)" required name="username" class="form-control">
+						<input type="text"  maxlength="100" id="mail_id" onchange="ValidateEmail(this.value)"  onkeypress="return AvoidSpace(event)" required name="username" class="form-control">
 					</div>
 				</div>
 					<div class="form-group row">
@@ -1064,7 +1064,7 @@ $('#confirm_password1').removeAttr('required');
 			<div class="form-group row">
 					<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Parents MailId</label>
 					<div class="col-sm-8"> <span id="msg2" style="color:red"></span>
-						<input type="email" required maxlength="100"  id="username"  onchange="ValidateEmailE(this.value)" name="username" class="form-control">
+						<input type="email" required maxlength="100"  id="username"  onkeypress="return AvoidSpace(event)" onchange="ValidateEmailE(this.value)" name="username" class="form-control">
 					</div>
 				</div>
 					<div class="form-group row">
