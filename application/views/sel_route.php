@@ -89,8 +89,8 @@
 				</section>
 
 <?php include('include/footer.php');?>	 
-<!-- Vendor -->
-<script src="<?php echo base_url(); ?>vendor/jquery/jquery.js"></script>
+<!-- Vendor --> 
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 <script src="<?php echo base_url(); ?>vendor/popper/umd/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>vendor/bootstrap/js/bootstrap.js"></script>
@@ -125,6 +125,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+	
+	
 $('#datatable-tabletools').DataTable( {
 		destroy: true,
        dom: 'Bfrtip',
@@ -203,7 +205,7 @@ function edit($id,$route){
         	        my_html +='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
         	        my_html +='<label class="col-sm-4 text-sm-right"></label>';
         	        my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-        	        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control">';   
+        	        my_html +='<select  name="pickup_point[]" id="pickE'+i+'" class="form-control pickup_edit">';   
         	        my_html +='<?php  foreach ($pickup_show as $row) { ?>';
         	        my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> '; 
         	        my_html +='<?php } ?> ';
@@ -219,7 +221,11 @@ function edit($id,$route){
         			$('#pickE'+i).val(strArray[i]);  
         			console.log(strArray[i])  
         	    }
+
+        	    pickup_edit();
     		 } 
+
+    		 
     		$('#editrow').modal('show'); 
 
 		 }  
@@ -233,8 +239,8 @@ function edit_pickup(){
       var my_html ='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
         my_html +='<label class="col-sm-4 text-sm-right"></label>';
         my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<select  name="pickup_point[]" class="form-control">';
-        my_html +='<option></option>';
+        my_html +='<select  name="pickup_point[]" class="form-control pickup_edit">';
+        my_html +='<option value="-1"></option>';
         my_html +='<?php  foreach ($pickup_show as $row) { ?>';
         my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
         my_html +='<?php } ?> ';
@@ -244,6 +250,9 @@ function edit_pickup(){
         my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove E" >Remove</button>';
         my_html +='</div></div>'; 
       $('#pickupE').append(my_html);  
+
+
+      pickup_edit();
  } 
 
 var i=2; 
@@ -252,8 +261,8 @@ function add_pickup(){
       var my_html ='<div id="row'+i+'"   class="form-group row"  style="padding: 10px;"> '; 
         my_html +='<label class="col-sm-4 text-sm-right"></label>';
         my_html +='	<div  style="padding: 10px;" class="col-sm-4"> ';
-        my_html +='<select  name="pickup_point[]" class="form-control">';
-        my_html +='<option></option>';
+        my_html +='<select  name="pickup_point[]" class="form-control pickup_select">';
+        my_html +='<option value="-1" >Select Pickup Point</option>';
         my_html +='<?php  foreach ($pickup_show as $row) { ?>';
         my_html +='<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> ';
         my_html +='<?php } ?> ';
@@ -263,13 +272,71 @@ function add_pickup(){
         my_html +='<button type="button" id="'+i+'" class="btn btn-danger btn_remove" >Remove</button>';
         my_html +='</div></div>'; 
       $('#pickup').append(my_html);  
+
+      pickup_select();
  }  
+
+$(document).on('change', '.pickup_select', function(evt){  
+		pickup_select(); 
+});
+$(document).on('change', '.pickup_edit', function(evt){  
+	pickup_edit(); 
+});
+
+
+function pickup_select(){
+	  const selectedValue = []; 
+      $(".pickup_select").find(':selected').filter(function(idx, el) {
+          return $(el).attr('value'); 
+      }).each(function(idx, el) {
+          selectedValue.push($(el).attr('value')); 
+      }); 
+      
+      $(".pickup_select").find('option').each(function(idx, option) {  
+          if (selectedValue.indexOf($(option).attr('value')) > -1) { 
+              if ($(option).is(':checked')) {
+                  return;console.log('1');
+              } else {
+                  $(option).attr('disabled', true);console.log('disabled');
+              }
+          } else {
+              $(option).attr('disabled', false);console.log('enabled');
+          }
+      });
+} 
+
+function pickup_edit(){
+	  const selectedValue = []; 
+      $(".pickup_edit").find(':selected').filter(function(idx, el) {
+          return $(el).attr('value'); 
+      }).each(function(idx, el) {
+          selectedValue.push($(el).attr('value')); 
+      }); 
+      
+      $(".pickup_edit").find('option').each(function(idx, option) {  
+          if (selectedValue.indexOf($(option).attr('value')) > -1) { 
+              if ($(option).is(':checked')) {
+                  return;console.log('1');
+              } else {
+                  $(option).attr('disabled', true);console.log('disabled');
+              }
+          } else {
+              $(option).attr('disabled', false);console.log('enabled');
+          }
+      });
+} 
+
+
 $(document).on('click', '.btn_remove', function(){  
    var button_id = $(this).attr("id");   
-   $('#row'+button_id+'').remove();  
+   $('#row'+button_id+'').remove(); 
+   pickup_edit();  
+   pickup_select();
 });  
 
 $(document).ready(function(){
+
+
     $('#ld').change(function(){    
         document.getElementById("save1").disabled = false;
     	var val =  $('#ld').val();  
@@ -383,8 +450,8 @@ function AvoidSpace(event) {
 					<button onclick="add_pickup()" type="button" class="btn btn-primary">Add New </button>
 				</div>	
 				<div  style="padding: 10px;" class="col-sm-4"> 
-					<select  name="pickup_point[]" class="form-control">
-						<option></option>
+					<select  name="pickup_point[]" class="form-control pickup_select">
+						<option  value="-1" >Select Pickup Point</option>
 				 		<?php  foreach ($pickup_show as $row) { ?>
 						<option value="<?php echo $row->id;?>"><?php echo $row->pickup_point;?></option> 
 						<?php } ?> 
