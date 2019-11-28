@@ -83,7 +83,8 @@ class m_school extends CI_Model {
 		if($query)
 	    { 
 	        $this->db->where(array( 'school_id' =>$id));
-	        $query = $this->db->delete('user');
+	        $query = $this->db->delete('users');
+// 	        print_r($query);exit();
 	        return true;
 	    } 
     } 
