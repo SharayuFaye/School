@@ -140,6 +140,12 @@ function del($id){
 	$('#id_del').val($id); 
 	$('#delrow').modal('show'); 
 }
+
+$(document).ready(function() {
+    $('#save2').click(function(){    
+    	 $('#School').attr('disabled',false);
+    });
+});
 </script>
  
 
@@ -243,7 +249,7 @@ function del($id){
 
 </div>
 								<footer class="card-footer text-right">
-									<input class="btn btn-primary" type="submit"  name="edit_backgrounds" value="Update">
+									<input class="btn btn-primary" type="submit" id="save2"  name="edit_backgrounds" value="Update">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								</footer>
 							</section>
