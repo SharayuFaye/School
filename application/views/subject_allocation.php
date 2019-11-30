@@ -336,6 +336,18 @@ $('#section2').change(function(){
 
 
 });
+
+
+
+
+$(document).ready(function() {
+    $('#save2').click(function(){    
+    	 $('#class2').attr('disabled',false);
+    	 $('#subject2').attr('disabled',false);
+    	 $('#section2').attr('disabled',false);
+    });
+});
+
 </script> 
 <!-- add row -->
 <div class="modal fade" id="addrow" role="dialog"  >
@@ -494,7 +506,7 @@ $('#section2').change(function(){
 			</div>
 			</div>
 				<footer class="card-footer text-right">
-					<input class="btn btn-primary" type="submit"  name="edit_subject_allocation" value="Update">
+					<input class="btn btn-primary" type="submit" id="save2" name="edit_subject_allocation" value="Update">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</footer>
 			</section>
