@@ -152,6 +152,10 @@ $(document).ready(function() {
      	]
     } );
 
+	 $('#save2').click(function(){   
+		 $('#page_name').attr('disabled',false);
+		 $('#school1').attr('disabled',false);
+	 });
 } );
 
 var d = document.getElementById("home_page_menu");
@@ -322,7 +326,7 @@ function del($id){
 			</div>
 	    </div>
 			<footer class="card-footer text-right">
-				<input class="btn btn-primary" type="submit"  name="edit_home_page_menu" value="Update">
+				<input class="btn btn-primary" type="submit" id="save2" name="edit_home_page_menu" value="Update">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</footer>
 		</section>
