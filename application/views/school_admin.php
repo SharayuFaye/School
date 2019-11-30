@@ -210,6 +210,10 @@ $(document).ready(function(){
 			document.getElementById("save2").disabled = true;
 		 } 
 	}); 
+
+	 $('#save2').click(function(){   
+		 $('#schoolid').attr('disabled',false);
+	 });
 });
 
 function AvoidSpace(event) {
