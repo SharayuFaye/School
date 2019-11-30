@@ -366,6 +366,19 @@ function del($id){
 	$('#id_del').val($id); 
 	$('#delrow').modal('show'); 
 }
+
+
+
+$(document).ready(function() {
+    $('#save2').click(function(){    
+    	 $('#class2').attr('disabled',false);
+    	 $('#subject2').attr('disabled',false);
+    	 $('#section2').attr('disabled',false);
+    	 $('#type').attr('disabled',false);
+    });
+});
+
+
 </script>
  
 
@@ -522,7 +535,7 @@ function del($id){
 
 	    </div>
 			<footer class="card-footer text-right">
-				<input class="btn btn-primary" type="submit"  name="edit_exams" value="Update">
+				<input class="btn btn-primary" type="submit" id="save2" name="edit_exams" value="Update">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</footer>
 <?php echo form_close(); ?> 
