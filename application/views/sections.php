@@ -213,6 +213,12 @@ function del($id){
 }
 
 
+$(document).ready(function() {
+    $('#save2').click(function(){    
+    	 $('#class1').attr('disabled',false);
+    	 $('#section').attr('disabled',false);
+    });
+});
 </script> 
 <!-- add row -->
 <div class="modal fade" id="addrow" role="dialog"  >
@@ -532,7 +538,7 @@ function del($id){
 			</div>
 			</div>
 				<footer class="card-footer text-right">
-					<input class="btn btn-primary" type="submit"  name="edit_sections" value="Update">
+					<input class="btn btn-primary" type="submit" id="save2"  name="edit_sections" value="Update">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</footer>
 			</section>
