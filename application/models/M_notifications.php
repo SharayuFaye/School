@@ -125,7 +125,6 @@ class m_notifications extends CI_Model {
         	$this->db->select('n.message,n.title,n.datetime,n.school_id')
             	->from('notification n') 
             	->where(array('n.roles_id' => 'student'))
-            	->or_where('n.roles_id = "all"', NULL, FALSE)
             	->where(array( 'n.school_id' => $school_id))
             	->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL or n.sections_id = 0)',NULL, FALSE)
             	->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
@@ -134,16 +133,13 @@ class m_notifications extends CI_Model {
 		}else{
 		    $this->db->select('n.*')
 					->from('notification n') 
-					->join('users u','n.school_id = u.school_id','left')
+					->join('users u','n.roles_id = u.role','left')
 					->join('tokens t','t.user_id = u.id','left')
-					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id),NULL,TRUE)
-					->where('(n.roles_id = u.role or n.roles_id = "all")', NULL, FALSE);
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
-        log_message('debug','query notify');
-        log_message('debug',$this->db->last_query());
-        log_message('debug',$query->result()); 
+       	log_message('debug',$this->db->last_query()); 
         if($query)
         {
             return $query->result();
@@ -160,7 +156,6 @@ class m_notifications extends CI_Model {
         $this->db->join('school s', 'u.school_id=s.id', 'left');
         $this->db->where(array( 'u.token' =>$token));
         $this->db->where(array( 'u.id' =>$user_id));
-        $this->db->or_where('n.roles_id = "all"', NULL, FALSE);
         $this->db->order_by('n.datetime','asc');
         
         $query = $this->db->get();
