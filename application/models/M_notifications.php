@@ -134,7 +134,7 @@ class m_notifications extends CI_Model {
 		}else{
 		    $this->db->select('n.*')
 					->from('notification n') 
-					->join('users u','n.roles_id = u.role','left')
+					->join('users u','n.school_id = u.school_id','left')
 					->join('tokens t','t.user_id = u.id','left')
 					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id),NULL,TRUE)
 					->where('(n.roles_id = u.role or n.roles_id = "all")', NULL, FALSE);
