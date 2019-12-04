@@ -140,6 +140,7 @@ class m_notifications extends CI_Model {
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
+        log_message('debug','Notify Debug');
         log_message('debug',$this->db->last_query());
         log_message('debug', $query->result()); 
         if($query)
