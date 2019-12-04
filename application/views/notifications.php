@@ -409,6 +409,7 @@ function del($id){
 				<div class="col-sm-8">
 					<select name="role" id="role1" class="form-control" required>
 						<option></option>
+						<option value="all">All</option>
 						<option value="teacher">Teachers</option>
 <!-- 						<option value="parent">Parents</option> -->
 						<option value="driver">Drivers</option>
@@ -509,6 +510,7 @@ function del($id){
 				<label class="col-sm-4 control-label text-sm-right pt-2"><span class="req" >*</span>Role:</label>
 				<div class="col-sm-8">
 					<select name="role" id="role2" class="form-control" required> 
+						<option value="all">All</option>
 						<option value="teacher">Teachers</option>
 						<option value="parent">Parents</option>
 						<option value="driver">Drivers</option>

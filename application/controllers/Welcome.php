@@ -2204,6 +2204,8 @@ class Welcome extends CI_Controller {
                         $fcm = $this->m_drivers->get_driver_fcm($school_id);
                     }elseif($role_id == "section"){
                         $fcm = $this->m_students->get_student_fcm($school_id, $sections_id, $class_id);
+                    }elseif($role_id == "All"){
+                        $fcm = $this->m_login->getFCMtokens($school_id);
                     }else{
                         $fcm = $this->m_login->getFCMtokens($school_id);
                     }
