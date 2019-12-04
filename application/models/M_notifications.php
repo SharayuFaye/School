@@ -141,7 +141,9 @@ class m_notifications extends CI_Model {
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
-       	log_message('debug',$this->db->last_query()); 
+        log_message('debug','query notify');
+        log_message('debug',$this->db->last_query());
+        log_message('debug',$query->result()); 
         if($query)
         {
             return $query->result();
@@ -157,7 +159,8 @@ class m_notifications extends CI_Model {
         $this->db->join('users u', 'stud.users_id=u.id', 'left');
         $this->db->join('school s', 'u.school_id=s.id', 'left');
         $this->db->where(array( 'u.token' =>$token));
-        $this->db->where(array( 'u.id' =>$user_id)); 
+        $this->db->where(array( 'u.id' =>$user_id));
+        $this->db->or_where('n.roles_id = "all"', NULL, FALSE);
         $this->db->order_by('n.datetime','asc');
         
         $query = $this->db->get();
