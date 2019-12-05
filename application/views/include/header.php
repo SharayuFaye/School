@@ -324,6 +324,13 @@ html .btn-secondary.active,
 				                                    My Class
 				                                </a>
 				                            </li>
+				                            
+				                             <li id="add_attendance">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/add_attendance">
+				                                   Add Attendance
+				                                </a>
+				                            </li>
+				                            
 				                            <li id="homework">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/homework">
 				                                    Homework

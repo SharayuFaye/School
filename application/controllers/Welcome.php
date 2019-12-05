@@ -2967,4 +2967,91 @@ class Welcome extends CI_Controller {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    public function add_attendance()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{
+            $this->load->model('m_add_attendance');
+            
+            $this->load->model('m_students');
+            $this->load->model('m_class');
+            $this->load->model('m_sections');
+            $this->load->model('m_teachers');
+            
+            $this->data['class'] = '';
+            $this->data['section1'] = '';
+            $this->data['msg'] = '';
+             
+            
+            if($this->input->post('Search')){
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $date = $this->input->post('date') ;
+                $this->data['add_attendance_show'] =$this->m_add_attendance->add_attendance_show_sel($section,$date);
+                $this->data['class'] = $class;
+                $this->data['section1'] = $section;
+                $this->data['date'] = $date;
+                $this->data['msg'] = 'No Records Found!';
+            }
+            
+            if($this->input->post('Save')){
+                
+                //                 add_attendance_add
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $date = $this->input->post('date') ;
+                $attendance =  $this->input->post('attendance') ;
+                $users_id = $this->session->userdata['id'];
+                
+                $teacher_data =  $this->m_teachers->teachers_show_id_user($users_id);
+                $teacher_id = $teacher_data[0]->id; 
+                
+                $attendance_show = $this->m_add_attendance->add_attendance_show_sel($section,$date);  
+                
+               
+                foreach($attendance_show as $data){
+                    
+                    $status ='absent';
+                    if(isset($attendance)){
+                    foreach($attendance as $row){
+                        if($row == $data->id){
+                             $status ='present';
+                        } 
+                    } 
+                    }
+                    $this->m_add_attendance->add_attendance_add($class,$section,$date,$teacher_id,$data->id, $status);
+                } 
+                
+                $this->data['class'] = $class;
+                $this->data['section1'] = $section;
+                $this->data['date'] = $date;
+                $this->data['msg'] = 'Records save successfully!!!';
+            }
+            
+            
+            
+            
+            if($this->session->userdata['role'] =='teacher'){
+                $this->data['class_show'] =$this->m_add_attendance->class_show_teacher($this->session->userdata['id']);
+            }else
+            {
+                $this->data['class_show'] =$this->m_class->class_show_id();
+            }
+            $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
+            $this->data['sections_show'] =$this->m_sections->sections_show_classid();
+            
+            $this->load->view('add_attendance',$this->data);
+        }
+    }
+    
+    
+    
 }
