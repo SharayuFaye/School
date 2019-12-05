@@ -133,36 +133,16 @@ class m_notifications extends CI_Model {
 		}else{
 		    $this->db->select('n.*')
 					->from('notification n') 
-					->join('users u','(n.roles_id = u.role or n.roles_id = "all")','right')
+					->join('users u','n.roles_id = u.role','left')
 					->join('tokens t','t.user_id = u.id','left')
-					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id))
-					->or_where('n.roles_id = "all"');
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
-        log_message('debug',$this->db->last_query());
-        $data = [];
+       	log_message('debug',$this->db->last_query()); 
         if($query)
         {
-//             $this->db->select('n.*')
-//                     ->from('notification n')  
-//                     ->where(array( 'n.school_id' => $school_id, 'n.roles_id'=>'all'));
-//             $this->db->order_by('n.datetime','desc');
-//             $queryNot = $this->db->get();
-            
-            foreach($query->result() as $rec){
-                array_push($data,$rec); 
-            }
-            
-//             foreach($queryNot->result() as $recn){
-//                 array_push($data,$recn);
-//             }
-            
-            
-//             array_push($data,$queryNot->result());
-             
-            
-            return $data;
+            return $query->result();
         }
     } 
     
