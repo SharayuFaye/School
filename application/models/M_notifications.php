@@ -133,9 +133,10 @@ class m_notifications extends CI_Model {
 		}else{
 		    $this->db->select('n.*')
 					->from('notification n') 
-					->join('users u','n.roles_id = u.role','right')
-					->join('tokens t','(t.user_id = u.id or n.roles_id = "all")'  ,'left')
-					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id)) ;
+					->join('users u','(n.roles_id = u.role or n.roles_id = "all")','right')
+					->join('tokens t','t.user_id = u.id','left')
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id))
+					->or_where('n.roles_id = "all"');
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
