@@ -136,7 +136,7 @@ class m_notifications extends CI_Model {
 					->join('users u','n.roles_id = u.role','right')
 					->join('tokens t','t.user_id = u.id','left')
 					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id))
-					->where('(n.roles_id = u.role or n.roles_id = "all")');
+					->or_where('n.roles_id = "all"');
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
