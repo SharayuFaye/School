@@ -133,9 +133,10 @@ class m_notifications extends CI_Model {
 		}else{
 		    $this->db->select('n.*')
 					->from('notification n') 
-					->join('users u','n.roles_id = u.role','left')
+					->join('users u','n.roles_id = u.role','right')
 					->join('tokens t','t.user_id = u.id','left')
-					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id))
+					->where('(n.roles_id = u.role or n.roles_id = "all")');
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
@@ -143,18 +144,19 @@ class m_notifications extends CI_Model {
         $data = [];
         if($query)
         {
-            $this->db->select('n.*')
-                    ->from('notification n')  
-                    ->where(array( 'n.school_id' => $school_id, 'n.roles_id'=>'all'));
-            $queryNot = $this->db->get();
+//             $this->db->select('n.*')
+//                     ->from('notification n')  
+//                     ->where(array( 'n.school_id' => $school_id, 'n.roles_id'=>'all'));
+//             $this->db->order_by('n.datetime','desc');
+//             $queryNot = $this->db->get();
             
             foreach($query->result() as $rec){
                 array_push($data,$rec); 
             }
             
-            foreach($queryNot->result() as $recn){
-                array_push($data,$recn);
-            }
+//             foreach($queryNot->result() as $recn){
+//                 array_push($data,$recn);
+//             }
             
             
 //             array_push($data,$queryNot->result());
