@@ -127,7 +127,7 @@ class m_notifications extends CI_Model {
             ->where(array( 'n.school_id' => $school_id))
             ->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL or n.sections_id = 0)',NULL, FALSE)
             ->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
-            ->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE);
+            ->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE)
             
             ->where('(n.roles_id = "student" or n.roles_id = "all")');
         }else{
