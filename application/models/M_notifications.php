@@ -148,11 +148,16 @@ class m_notifications extends CI_Model {
                     ->where(array( 'n.school_id' => $school_id, 'n.roles_id'=>'all'));
             $queryNot = $this->db->get();
             
-          
+            foreach($query->result() as $rec){
+                array_push($data,$rec); 
+            }
+            
+            foreach($queryNot->result() as $recn){
+                array_push($data,$recn);
+            }
             
             
-            array_push($data,$query->result()); 
-            array_push($data,$queryNot->result());
+//             array_push($data,$queryNot->result());
              
             
             return $data;
