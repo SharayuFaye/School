@@ -117,37 +117,34 @@ class m_notifications extends CI_Model {
     
     //APp functions
     
+    
     function notifications_show_app($user_id, $class_id, $sections_id, $school_id){
         
-        if($class_id != null){
-            
-            $this->db->select('n.message,n.title,n.datetime,n.school_id')
-            ->from('notification n')
-            ->or_where('n.roles_id = "all"', NULL, FALSE)
-            ->where(array( 'n.school_id' => $school_id))
-            ->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL or n.sections_id = 0)',NULL, FALSE)
-            ->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
-            ->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE)
-            
-            ->where('(n.roles_id = "student" or n.roles_id = "all")');
-        }else{
-            $this->db->select('n.*')
-            ->from('notification n')
-            ->join('users u','n.roles_id = u.role','left')
-            ->join('tokens t','t.user_id = u.id','left')
-            ->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id),NULL,TRUE)
-            ->where('(n.roles_id = u.role or n.roles_id = "all")');
-        }
+		if($class_id != null){
+        	
+        	$this->db->select('n.message,n.title,n.datetime,n.school_id')
+            	->from('notification n') 
+            	->where(array('n.roles_id' => 'student'))
+            	->where(array( 'n.school_id' => $school_id))
+            	->where('(n.sections_id =' . $sections_id . ' or n.sections_id IS NULL or n.sections_id = 0)',NULL, FALSE)
+            	->where('(n.class_id =' . $class_id . ' or n.class_id = 0)', NULL, FALSE)
+            	->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE);
+            	
+		}else{
+		    $this->db->select('n.*')
+					->from('notification n') 
+					->join('users u','n.roles_id = u.role','left')
+					->join('tokens t','t.user_id = u.id','left')
+					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
+		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
-        log_message('debug','query notify');
-        log_message('debug',$this->db->last_query());
-        log_message('debug',$query->result());
+       	log_message('debug',$this->db->last_query()); 
         if($query)
         {
             return $query->result();
         }
-    }  
+    } 
     
     
     function notifications_show_id_app($token,$user_id){
