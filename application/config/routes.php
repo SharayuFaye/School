@@ -91,6 +91,7 @@ $route['transportation'] = 'welcome/transportation';
 $route['leaves'] = 'welcome/leaves';
 $route['approve'] = 'welcome/approve';
 $route['my_class'] = 'welcome/my_class';
+$route['add_attendance'] = 'welcome/add_attendance';
 
 
 $route['sections_fetch'] = 'welcome/sections_fetch';
