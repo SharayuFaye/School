@@ -139,10 +139,18 @@ class m_notifications extends CI_Model {
 		}
         $this->db->order_by('n.datetime','desc');
         $query = $this->db->get();
-       	log_message('debug',$this->db->last_query()); 
+        log_message('debug',$this->db->last_query());
+        $data = [];
         if($query)
         {
-            return $query->result();
+            $this->db->select('n.*')
+            ->from('notification n')  
+            ->where(array( 'n.school_id' => $school_id, 'n.roles_id'=>'all'));
+            $queryNot = $this->db->get();
+            
+            array_push($data,$query->result()); 
+            array_push($data,$queryNot->result());
+            return $data;
         }
     } 
     
