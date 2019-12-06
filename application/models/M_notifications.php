@@ -150,13 +150,13 @@ class m_notifications extends CI_Model {
         $this->db->select("n.* ")
                 ->from("notification n")
                 ->where(array( 'n.roles_id' =>  "all", 'n.school_id'=>$school_id));
-        
+                
+//            $this->db->order_by('n.datetime','desc');
         $this->db->get();
         $query2 =  $this->db->last_query();
         
-        $this->db->query($query1." UNION ".$query2);
+        $query1 =  $this->db->query($query1." UNION ".$query2);
         
-        $query1 =  $this->db->order_by('n.datetime','desc');
         
         
         
