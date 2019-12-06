@@ -154,8 +154,9 @@ class m_notifications extends CI_Model {
         $this->db->get();
         $query2 =  $this->db->last_query();
         
-        $query1 = $this->db->query($query1." UNION ".$query2);
+        $this->db->query($query1." UNION ".$query2);
         
+        $query1 =  $this->db->order_by('n.datetime','desc');
         
         
         
