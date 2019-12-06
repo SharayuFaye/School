@@ -342,6 +342,8 @@ class m_attendances extends CI_Model {
 						->where($where, NULL, FALSE)
 						->get()
 						->result();
+		log_message('debug','attendance ------------------ debug');
+		log_message('debug',$this->db->last_query()); 
 		log_message('debug',print_r($data, true));
 		return $data;
 	}
