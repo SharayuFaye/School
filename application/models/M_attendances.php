@@ -328,8 +328,8 @@ class m_attendances extends CI_Model {
 
 	function get_class_leaves($token, $status){
 		$where = "l.status is NOT NULL";
-		
-		$data = $this->db->select('c.class, s.sections, s.id as sec, l.* , st.student_name')
+		log_message('debug','attendance ------------------ debug');
+		$query = $this->db->select('c.class, s.sections, s.id as sec, l.* , st.student_name')
 						->from('sections s')
 						->join('class c','c.id = s.class_id','left')
 						->join('teachers t','s.teachers_id = t.id','left')
@@ -340,10 +340,11 @@ class m_attendances extends CI_Model {
 						->where(array('to.token' => $token))
 						->where('l.id is NOT NULL',NULL, FALSE)
 						->where($where, NULL, FALSE)
-						->get()
-						->result();
-		log_message('debug','attendance ------------------ debug');
+						->get();
+						
+		
 		log_message('debug',$this->db->last_query()); 
+		$data = $query->result();
 		log_message('debug',print_r($data, true));
 		return $data;
 	}
