@@ -151,7 +151,7 @@ class m_notifications extends CI_Model {
 		    
 		    $this->db->select("nt.* ")
 		    ->from("notification nt")
-		    ->where(array( 'nt.roles_id' =>  "all", 'n.school_id'=>$school_id));
+		    ->where(array( 'nt.roles_id' =>  "all", 'nt.school_id'=>$school_id));
 		    
 		    //            $this->db->order_by('n.datetime','desc');
 		    $this->db->get();
