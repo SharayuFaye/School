@@ -131,13 +131,13 @@ class m_notifications extends CI_Model {
             	->where('(n.students_id =' . $user_id . ' or students_id = 0 or n.students_id IS NULL)', NULL, FALSE);
             	
 		}else{
-		    $this->db->select('n.*')
-					->from('notification n') 
-					->join('users u','n.roles_id = u.role','left')
-					->join('tokens t','t.user_id = u.id','left')
-					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
+// 		    $this->db->select('n.*')
+// 					->from('notification n') 
+// 					->join('users u','n.roles_id = u.role','left')
+// 					->join('tokens t','t.user_id = u.id','left')
+// 					->where(array( 'n.school_id' => $school_id, 't.token'=>$user_id));
 		}
-        $this->db->order_by('n.datetime','desc');
+//         $this->db->order_by('n.datetime','desc');
         
         $this->db->select("n.* ")
                 ->from("notification n")
