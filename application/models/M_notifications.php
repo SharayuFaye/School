@@ -140,7 +140,7 @@ class m_notifications extends CI_Model {
         $this->db->order_by('n.datetime','desc');
         
         
-        $query = $this->db->query('SELECT n.* FROM notification n JOIN users u ON n.roles_id = u.role LEFT JOIN tokens t ON t.user_id = u.id WHERE n.school_id = '.$school_id.' AND t.token = '.$user_id.' UNION SELECT n.* FROM notification n WHERE n.roles_id = "all" and n.school_id = '.$school_id);
+        $query = $this->db->query('SELECT n.* FROM notification n JOIN users u ON n.roles_id = u.role LEFT JOIN tokens t ON t.user_id = u.id WHERE n.school_id = '.$school_id.' AND t.token = "'.$user_id.'" UNION SELECT n.* FROM notification n WHERE n.roles_id = "all" and n.school_id = '.$school_id);
        	log_message('debug',$this->db->last_query()); 
         if($query)
         {
