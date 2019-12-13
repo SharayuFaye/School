@@ -86,8 +86,6 @@
 					<input class="btn btn-primary" type="submit"  name="Search" value="Show"> 
 					<input class="btn btn-primary" id="clear" type="submit"  name="Clear All" value="Clear All">
 					<input class="btn btn-primary" id="Save" type="submit"  name="Save" value="Save All">
-					
-					 
 					 
 				</div>
 			</div>

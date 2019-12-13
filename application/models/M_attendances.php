@@ -339,7 +339,7 @@ class m_attendances extends CI_Model {
 						->join('leaves l','l.student_id = st.id','left')
 						->where(array('to.token' => $token))
 						->where('l.id is NOT NULL',NULL, FALSE)
-						->where("l.status is NOT NULL", NULL, FALSE)
+						->where($where, NULL, FALSE)
 						->get();
 						
 		
