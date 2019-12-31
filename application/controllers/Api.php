@@ -188,7 +188,7 @@ class Api extends CI_Controller
             
             $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
             
-            $notifications_count = count($notifications_read) - count($notifications_read);
+            $notifications_count = count($notifications) - count($notifications_read);
             
             
 			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
@@ -263,7 +263,7 @@ class Api extends CI_Controller
             
             $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
             
-            $notifications_count = count($notifications_read) - count($notifications_read);
+            $notifications_count = count($notifications) - count($notifications_read);
             
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
@@ -1129,7 +1129,7 @@ class Api extends CI_Controller
              
             $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
             
-            $notifications_count = count($notifications_read) - count($notifications_read);
+            $notifications_count = count($notifications) - count($notifications_read);
             
 			log_message('debug',print_r($notifications, true));
 			$data = $this->m_attendances->get_class_leaves($token, 'pending');
@@ -1396,7 +1396,7 @@ class Api extends CI_Controller
             
             $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
             
-            $notifications_count = count($notifications_read) - count($notifications_read);
+            $notifications_count = count($notifications) - count($notifications_read);
             
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
