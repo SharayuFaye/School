@@ -209,7 +209,7 @@ class Api extends CI_Controller
                     'students' => $students,
                     'students_all' => $students,
                     'notifications' => $notifications,
-                    '$notifications_count' => $notifications_count, 
+                    'notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
             //        'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
@@ -282,7 +282,7 @@ class Api extends CI_Controller
                     'students_all' => $students_all,
                     'students' => $students,
                     'notifications' => $notifications,
-                    '$notifications_count' => $notifications_count, 
+                    'notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                    // 'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
@@ -1148,7 +1148,7 @@ class Api extends CI_Controller
                     'users' => $users, 
                     'teachers' => $teachers,
                     'notifications' => empty($notifications) ? null : $notifications,
-                    '$notifications_count' => $notifications_count, 
+                    'notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                     'pending' => $cons,
                     'status' => 'live'
@@ -1406,7 +1406,7 @@ class Api extends CI_Controller
                     'users' => $users,
                     'drivers' => $drivers,
                     'notifications' => $notifications,
-                    '$notifications_count' => $notifications_count, 
+                    'notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
