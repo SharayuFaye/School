@@ -189,6 +189,54 @@ class m_notifications extends CI_Model {
     } 
     
     
+    
+    
+    
+    
+    function  notification_app($token,$users_id){
+        
+        
+        $this->db->select('n.message,n.title,n.datetime,s.school_name,u.school_id');
+        $this->db->from('notification n');
+        $this->db->join('read_notification rn','n.id=rn.id_notification', 'left');
+        $this->db->join('students stud', 'n.class_id=stud.class_id', 'left');
+        $this->db->join('users u', 'stud.users_id=u.id', 'left');
+        $this->db->join('school s', 'u.school_id=s.id', 'left');
+        $this->db->where(array( 'u.token' =>$token));
+        $this->db->where(array( 'u.id' =>$user_id));
+        $this->db->where(array( 'rn.status' => '1'));
+        $this->db->order_by('n.datetime','asc');
+        
+        $query = $this->db->get();
+        
+        if($query)
+        {
+            return $query->result();
+        }
+         
+    }
+    
+    
+    
+    function post_society_notification($school_id,$users_id,$id_notification){
+        $this->db->select("*");
+        $this->db->from('read_notification');
+        $this->db->where(array( 'users_id' => $users_id));
+        $this->db->where(array( 'id_notification' => $id_notification));
+        $query = $this->db->get();
+        if($query->num_rows() == 0){
+            $target = array(
+                "school_id"=>$school_id,
+                "users_id"=>$users_id,
+                "id_notification"=>$id_notification,
+                "status"=>'1',
+                "date"=>date('Y-m-d'),
+            );
+            $this->db->insert('read_notification', $target);
+            return true;
+        }
+    }
+    
  
 }
 ?>

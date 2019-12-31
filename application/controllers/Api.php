@@ -184,7 +184,13 @@ class Api extends CI_Controller
             log_message('debug',print_r($users, true)); 
             log_message('debug',print_r($students, true)); 
             $notifications = $this->m_notifications->notifications_show_app($students[0]->id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
-
+            
+            
+            $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
+            
+            $notifications_count = count($notifications_read) - count($notifications_read);
+            
+            
 			$home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             
            // $attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
@@ -203,6 +209,7 @@ class Api extends CI_Controller
                     'students' => $students,
                     'students_all' => $students,
                     'notifications' => $notifications,
+                    '$notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
             //        'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
@@ -252,6 +259,12 @@ class Api extends CI_Controller
             
             $notifications = $this->m_notifications->notifications_show_app($students[0]->id,$students[0]->class_id,$students[0]->sections_id,$users[0]->school_id);
             
+            
+            
+            $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
+            
+            $notifications_count = count($notifications_read) - count($notifications_read);
+            
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->id);
             
             //$attendances = $this->m_attendances->attendances_show_app($users[0]->id, $date);
@@ -269,6 +282,7 @@ class Api extends CI_Controller
                     'students_all' => $students_all,
                     'students' => $students,
                     'notifications' => $notifications,
+                    '$notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                    // 'attendances' => $attendances,
                     'backgrounds' => $backgrounds,
@@ -1112,6 +1126,11 @@ class Api extends CI_Controller
             $teachers = $this->m_teachers->teachers_show_user_app($users[0]->id);
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             $notifications = $this->m_notifications->notifications_show_app($token, null, null, $users[0]->school_id);
+             
+            $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
+            
+            $notifications_count = count($notifications_read) - count($notifications_read);
+            
 			log_message('debug',print_r($notifications, true));
 			$data = $this->m_attendances->get_class_leaves($token, 'pending');
 			$cons = 0;
@@ -1129,6 +1148,7 @@ class Api extends CI_Controller
                     'users' => $users, 
                     'teachers' => $teachers,
                     'notifications' => empty($notifications) ? null : $notifications,
+                    '$notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                     'pending' => $cons,
                     'status' => 'live'
@@ -1373,6 +1393,11 @@ class Api extends CI_Controller
             $home_page_menu = $this->m_home_page_menu->home_page_menu_show_app($users[0]->school_id);
             $notifications = $this->m_notifications->notifications_show_app($token, null, null, $users[0]->school_id);
             
+            
+            $notifications_read = $this->m_notifications->notification_app($token,$users[0]->id);
+            
+            $notifications_count = count($notifications_read) - count($notifications_read);
+            
             $d = explode('_',$token);
             $endDay = strtotime(date('Y/m/d H:i:s', strtotime('+1 day',strtotime($d[1]))));
             
@@ -1381,6 +1406,7 @@ class Api extends CI_Controller
                     'users' => $users,
                     'drivers' => $drivers,
                     'notifications' => $notifications,
+                    '$notifications_count' => $notifications_count, 
                     'home_page_menu' => $home_page_menu,
                     'status' => 'live'
                 ));
@@ -1700,4 +1726,43 @@ class Api extends CI_Controller
 		));
 	}
 
+	
+	
+	
+	public function app_read_notification_post(){
+	    $this->load->model('m_login');
+	    $this->load->model('m_notifications');
+	    
+	    $post_data = file_get_contents("php://input");
+	    $request = json_decode($post_data,true);
+	    
+	    
+	    $token = $request['token'];
+	    $id_notification = $request['id_notification'];
+	    $date = date('Y-m-d');
+	    
+	    $users = $this->m_login->get_users($token);
+	    $school_id = $users[0]->school_id;
+	    
+	    
+	    $datasuccess = $this->m_notifications->post_notification($society_id,$users[0]->id ,$id_notification);
+	    
+	    log_message("debug",print_r('notification', '--------SUCCESS-------'));
+	    
+	    if($datasuccess != 'true'){
+	        
+	        $msg = "Data inserted is Incorrect.Please,try again!11";
+	        $this->response(array(
+	            'msg' => $msg,
+	        ));
+	    }
+	    else {
+	        
+	        $msg = "Data inserted Successfully!";
+	        $this->response(array(
+	            'msg' => $msg,
+	        ),200);
+	    }
+	}
+	
 }
