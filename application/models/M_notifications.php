@@ -203,7 +203,7 @@ class m_notifications extends CI_Model {
         $this->db->join('users u', 'stud.users_id=u.id', 'left');
         $this->db->join('school s', 'u.school_id=s.id', 'left');
         $this->db->where(array( 'u.token' =>$token));
-        $this->db->where(array( 'u.id' =>$user_id));
+        $this->db->where(array( 'u.id' =>$users_id));
         $this->db->where(array( 'rn.status' => '1'));
         $this->db->order_by('n.datetime','asc');
         
