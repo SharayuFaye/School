@@ -92,6 +92,7 @@ $route['leaves'] = 'welcome/leaves';
 $route['approve'] = 'welcome/approve';
 $route['my_class'] = 'welcome/my_class';
 $route['add_attendance'] = 'welcome/add_attendance';
+$route['pramote'] = 'welcome/pramote';
 
 
 $route['sections_fetch'] = 'welcome/sections_fetch';

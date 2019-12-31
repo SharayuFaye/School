@@ -3053,5 +3053,89 @@ class Welcome extends CI_Controller {
     }
     
     
+    public function pramote()
+    {
+        if(!isset($this->session->userdata['username']) ){
+            $this->load->view('login');
+        } else{
+            $this->load->model('m_pramote');
+            
+            $this->load->model('m_students');
+            $this->load->model('m_class');
+            $this->load->model('m_sections');
+            $this->load->model('m_teachers');
+            
+            $this->data['class'] = '';
+            $this->data['section1'] = '';
+            $this->data['msg'] = '';
+            
+            
+            if($this->input->post('Search')){
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $date = $this->input->post('date') ;
+                $this->data['pramote_show'] =$this->m_pramote->pramote_show_sel($section);
+                $this->data['class'] = $class;
+                $this->data['section1'] = $section;
+                $this->data['date'] = $date;
+                $this->data['msg'] = 'No Records Found!';
+            }
+            
+            if($this->input->post('Save')){
+                
+                $class = $this->input->post('class') ;
+                $section = $this->input->post('section') ;
+                $date = $this->input->post('date') ;
+                $status =  $this->input->post('status') ;
+                $users_id = $this->session->userdata['id'];
+                
+               
+                $teacher_data =  $this->m_teachers->teachers_show_id_user($users_id);
+                if($teacher_data){
+                    $teacher_id = $teacher_data[0]->id;
+                }else{
+                    $teacher_id =0;
+                }
+               
+                $pramote_show = $this->m_pramote->pramote_show_sel($section);
+                
+                
+                foreach($pramote_show as $data){
+                    
+                    $pramote ='fail';
+                    if(isset($status)){
+                        foreach($status as $row){
+                            if($row == $data->id){
+                                $pramote ='pramoted';
+                               
+                            }
+                          
+                        }
+                    }
+                    $this->m_pramote->pramote_add($users_id,$section,$teacher_id,$data->id, $pramote);
+                }
+                
+                $this->data['class'] = $class;
+                $this->data['section1'] = $section;
+                $this->data['date'] = $date;
+                $this->data['msg'] = 'Records save successfully!!!';
+            }
+            
+            
+            
+            
+            if($this->session->userdata['role'] =='teacher'){
+                $this->data['class_show'] =$this->m_pramote->class_show_teacher($this->session->userdata['id']);
+            }else
+            {
+                $this->data['class_show'] =$this->m_class->class_show_id();
+            }
+            $this->data['sections_distinct'] =$this->m_sections->sections_distinct();
+            $this->data['sections_show'] =$this->m_sections->sections_show_classid();
+            
+            $this->load->view('pramote',$this->data);
+        }
+    }
+    
     
 }

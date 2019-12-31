@@ -318,6 +318,11 @@ html .btn-secondary.active,
 				                                    Timetable
 				                                </a>
 				                            </li>
+				                            <li id="pramote">
+				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/pramote">
+				                                    Pramote
+				                                </a>
+				                            </li>
   <?php }  if( $this->session->userdata['role'] == 'teacher'){ ?>  
 				                            <li id="my_class">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/my_class">
