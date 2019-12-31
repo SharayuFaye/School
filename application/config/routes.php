@@ -157,7 +157,10 @@ $route['app_attendance_show'] = 'api/app_attendance_show';
 $route['app_dashboard_drivers'] = 'api/app_dashboard_drivers';
 $route['get_alloc_sections'] = 'api/get_alloc_sections';
 $route['get_alloc_subjects'] = 'api/get_alloc_subjects';
- 
+
+
+$route['app_dashboard_count'] = 'api/app_dashboard_count';
+$route['app_read_notification'] = 'api/app_read_notification';
 
 //EMAIL ROUTES----------------------
 $route['send_otp'] = 'email/send_otp';
