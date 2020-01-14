@@ -11,7 +11,7 @@
 					</a>
 				</li>
 				<li><span>Forms</span></li>
-				<li><span>Pramote &nbsp;</span></li> 
+				<li><span>Promote &nbsp;</span></li> 
 			</ol> 
 		</div>
 	</header>
@@ -24,7 +24,7 @@
 					<a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
 				</div>
 		
-				<h2 class="card-title">Pramote</h2>
+				<h2 class="card-title">Promote</h2>
 			</header>
 			<div class="card-body">
 				<?php if(isset($error_msg)){ ?>
@@ -98,7 +98,7 @@
 						<tr>
 							<th>Roll No</th>
 							<th>Student Name</th> 
-							<th>Pramote</th>
+							<th>Promote</th>
 						</tr>
 					</thead>
  					<tbody>    

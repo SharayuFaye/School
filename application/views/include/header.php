@@ -320,7 +320,7 @@ html .btn-secondary.active,
 				                            </li>
 				                            <li id="pramote">
 				                                <a class="nav-link" href="<?php echo base_url(); ?>index.php/pramote">
-				                                    Pramote
+				                                    Promote
 				                                </a>
 				                            </li>
   <?php }  if( $this->session->userdata['role'] == 'teacher'){ ?>  
